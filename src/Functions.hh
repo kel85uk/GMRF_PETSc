@@ -214,7 +214,7 @@ PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, con
                                           // generator.
 
 		x = normal(rand_engine)*sqrt(dx*dy);
-		result = exp(x);
+		result = x;
 		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
 	}
 	ierr = VecAssemblyBegin(Z);CHKERRQ(ierr);

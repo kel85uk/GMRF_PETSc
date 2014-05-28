@@ -59,7 +59,7 @@ int main(int argc,char **argv)
 	ierr = VecDuplicate(U,&res);CHKERRQ(ierr);		
 
 
-	while (Ns < Nsamples){
+	while (Ns < 2){
 		ierr = SetRandSource(N01,NT,dx,dy);CHKERRQ(ierr);
 		ierr = SetGMRFOperator(L,m,n,NGhost,dx,dy,kappa);CHKERRQ(ierr);
 		ierr = KSPCreate(PETSC_COMM_WORLD,&kspGMRF);CHKERRQ(ierr);
@@ -69,7 +69,7 @@ int main(int argc,char **argv)
 		ierr = KSPSolve(kspGMRF,N01,rho);CHKERRQ(ierr);
 		ierr = KSPGetIterationNumber(kspGMRF,&its);CHKERRQ(ierr);
 		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: GMRF solved in %d iterations \n",Ns,its);CHKERRQ(ierr);
-
+		ierr = VecExp(rho);
 		ierr = SetOperator(A,rho,m,n,NGhost,dx,dy);CHKERRQ(ierr);
 		ierr = SetSource(b,rho,m,n,NGhost,dx,dy,UN,US,UE,UW,lamb);CHKERRQ(ierr);
 		ierr = KSPCreate(PETSC_COMM_WORLD,&kspSPDE);CHKERRQ(ierr);
@@ -85,11 +85,11 @@ int main(int argc,char **argv)
 	
 	flg  = PETSC_FALSE;
 	ierr = PetscOptionsGetBool(NULL,"-print_GMRF",&flg,NULL);CHKERRQ(ierr);
-	if (flg) {ierr = PostProcs(Erho,"rho_mean.dat");CHKERRQ(ierr);}	
+	if (flg) {ierr = PostProcs(rho,"rho_mean.dat");CHKERRQ(ierr);}	
 	
 	flg  = PETSC_FALSE;
 	ierr = PetscOptionsGetBool(NULL,"-print_sol",&flg,NULL);CHKERRQ(ierr);
-	if (flg) {ierr = PostProcs(EU,"sol_mean.dat");CHKERRQ(ierr);}
+	if (flg) {ierr = PostProcs(U,"sol_mean.dat");CHKERRQ(ierr);}
 			
 	ierr = KSPDestroy(&kspSPDE);CHKERRQ(ierr);
 	ierr = KSPDestroy(&kspGMRF);CHKERRQ(ierr);
