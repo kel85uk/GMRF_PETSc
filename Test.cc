@@ -8,10 +8,10 @@ Input parameters include:\n\
   -n <mesh_n>       : number of mesh points in y-direction\n\n";
 
 #include <petsc.h>
-/*#include <boost/random/normal_distribution.hpp>
+#include <boost/random/normal_distribution.hpp>
 #include <boost/random/mersenne_twister.hpp>
-#include <boost/random/variate_generator.hpp> */
-#include <random>
+#include <boost/random/variate_generator.hpp>
+//#include <random>
 #include <cmath>
 #include <Functions.hh>
 
@@ -19,13 +19,14 @@ Input parameters include:\n\
 
 int main(int argc,char **argv)
 {
-	Vec U, Um1, EU, VU, b, res, rho, rhom1, Erho, Vrho, N01;
+	Vec U, EUNm1, EUN, VUN, VUNm1, b, res, rho, ErhoNm1, ErhoN, VrhoN, VrhoNm1, N01, U2, EU2, EUm2, rho2, Erho2, Erhom2;
 	Mat A, L;
 	KSP kspSPDE, kspGMRF;
 	PetscReal		norm, x0 = 0, x1 = 1, y0 = 0, y1 = 1, dx, dy;     /* norm of solution error */
 	PetscReal		UN = 1, US = 10, UE = 5, UW = 3;
 	PetscReal		dim = 2, alpha = 2, sigma = 0.3, lamb = 0.1, nu, kappa, tol = 1, TOL = 1e-5;
 	PetscInt		m = 8, n = 7, its, NGhost = 2, NI = 0, NT = 0, Nsamples = 10000, Ns = 1;
+	PetscScalar	result;
 	nu = alpha - dim/2;
 	kappa = sqrt(8*nu)/(lamb);	
 	PetscMPIInt    rank;
@@ -41,69 +42,107 @@ int main(int argc,char **argv)
 	NI = m*n;
 	NT = (m+2*NGhost)*(n+2*NGhost);
 	PetscPrintf(PETSC_COMM_SELF,"NGhost = %d and I am Processor[%d] \n",NGhost,rank);
-
+	/* Create all the vectors and matrices needed for calculation */
 	ierr = VecCreate(PETSC_COMM_WORLD,&rho);CHKERRQ(ierr);
 	ierr = VecSetSizes(rho,PETSC_DECIDE,NT);CHKERRQ(ierr);
 	ierr = VecSetFromOptions(rho);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&rhom1);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&Erho);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&Vrho);CHKERRQ(ierr);
+	ierr = VecDuplicate(rho,&ErhoNm1);CHKERRQ(ierr);
+	ierr = VecDuplicate(rho,&ErhoN);CHKERRQ(ierr);
+	ierr = VecDuplicate(rho,&rho2);CHKERRQ(ierr);
+	ierr = VecDuplicate(rho,&Erho2);CHKERRQ(ierr);
+	ierr = VecDuplicate(rho,&Erhom2);CHKERRQ(ierr);
+	ierr = VecDuplicate(rho,&VrhoN);CHKERRQ(ierr);
+	ierr = VecDuplicate(rho,&VrhoNm1);CHKERRQ(ierr);
 	ierr = VecDuplicate(rho,&N01);CHKERRQ(ierr);
+	ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
+	ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,NT,NT);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
+	ierr = MatSetFromOptions(L);CHKERRQ(ierr);
+	ierr = MatMPIAIJSetPreallocation(L,5,NULL,5,NULL);CHKERRQ(ierr);
+	ierr = MatSeqAIJSetPreallocation(L,5,NULL);CHKERRQ(ierr);
+	ierr = MatSetUp(L);CHKERRQ(ierr);	
+	ierr = KSPCreate(PETSC_COMM_WORLD,&kspGMRF);CHKERRQ(ierr);
+	ierr = KSPSetTolerances(kspGMRF,1.e-3/(NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+	ierr = KSPSetFromOptions(kspGMRF);CHKERRQ(ierr);
 	ierr = VecCreate(PETSC_COMM_WORLD,&U);CHKERRQ(ierr);
 	ierr = VecSetSizes(U,PETSC_DECIDE,NI);CHKERRQ(ierr);
 	ierr = VecSetFromOptions(U);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&Um1);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&EU);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&VU);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&EUNm1);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&EUN);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&U2);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&EU2);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&EUm2);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&VUN);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&VUNm1);CHKERRQ(ierr);
 	ierr = VecDuplicate(U,&b);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&res);CHKERRQ(ierr);		
+	ierr = VecDuplicate(U,&res);CHKERRQ(ierr);
+	ierr = MatCreate(PETSC_COMM_WORLD,&A);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
+	ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,NI,NI);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
+	ierr = MatSetFromOptions(A);CHKERRQ(ierr);
+	ierr = MatMPIAIJSetPreallocation(A,5,NULL,5,NULL);CHKERRQ(ierr);
+	ierr = MatSeqAIJSetPreallocation(A,5,NULL);CHKERRQ(ierr);
+	ierr = MatSetUp(A);CHKERRQ(ierr);			
+	ierr = KSPCreate(PETSC_COMM_WORLD,&kspSPDE);CHKERRQ(ierr);
+	ierr = KSPSetTolerances(kspSPDE,1.e-3/(NI),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+	ierr = KSPSetFromOptions(kspSPDE);CHKERRQ(ierr);
 
 
-	while (Ns < 2){
-		ierr = SetRandSource(N01,NT,dx,dy);CHKERRQ(ierr);
+	for (Ns = 1; (Ns <= Nsamples) && (tol > TOL); ++Ns){
+		ierr = SetRandSource(N01,NT,dx,dy,Ns);CHKERRQ(ierr);
 		ierr = SetGMRFOperator(L,m,n,NGhost,dx,dy,kappa);CHKERRQ(ierr);
-		ierr = KSPCreate(PETSC_COMM_WORLD,&kspGMRF);CHKERRQ(ierr);
-		ierr = KSPSetOperators(kspGMRF,L,L,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
-		ierr = KSPSetTolerances(kspGMRF,1.e-3/(NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
-		ierr = KSPSetFromOptions(kspGMRF);CHKERRQ(ierr);
+		ierr = KSPSetOperators(kspGMRF,L,L,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);			
 		ierr = KSPSolve(kspGMRF,N01,rho);CHKERRQ(ierr);
 		ierr = KSPGetIterationNumber(kspGMRF,&its);CHKERRQ(ierr);
 		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: GMRF solved in %d iterations \n",Ns,its);CHKERRQ(ierr);
 		ierr = VecExp(rho);
 		ierr = SetOperator(A,rho,m,n,NGhost,dx,dy);CHKERRQ(ierr);
 		ierr = SetSource(b,rho,m,n,NGhost,dx,dy,UN,US,UE,UW,lamb);CHKERRQ(ierr);
-		ierr = KSPCreate(PETSC_COMM_WORLD,&kspSPDE);CHKERRQ(ierr);
 		ierr = KSPSetOperators(kspSPDE,A,A,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
-		ierr = KSPSetTolerances(kspSPDE,1.e-3/(NI),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
-		ierr = KSPSetFromOptions(kspSPDE);CHKERRQ(ierr);	
 		ierr = KSPSolve(kspSPDE,b,U);CHKERRQ(ierr);
 		ierr = KSPGetIterationNumber(kspSPDE,&its);CHKERRQ(ierr);
 		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: SPDE solved in %d iterations \n",Ns,its);CHKERRQ(ierr);
-
-		++Ns;		
+		
+		// Start calculations for EUN, and ErhoN
+		
+		ierr = VecAXPBYPCZ(EUN,(PetscScalar)(Ns-1)/(PetscScalar)Ns,1.0/(PetscScalar)Ns,0,EUNm1,U);CHKERRQ(ierr); // Calculate Expectation
+		ierr = VecNorm(EUN,NORM_INFINITY,&norm);CHKERRQ(ierr);
+		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: ||EU|| = %f \n",Ns,norm);CHKERRQ(ierr);	
+		ierr = VecPointwiseMult(EU2,EUN,EUN);CHKERRQ(ierr);
+		ierr = VecPointwiseMult(EUm2,EUNm1,EUNm1);CHKERRQ(ierr);
+		ierr = VecScale(U2,1.0/(PetscScalar)Ns);CHKERRQ(ierr); // Scale: U2 = U2/Ns;
+		ierr = VecWAXPY(VUN,(PetscScalar)(Ns-1)/(PetscScalar)Ns,VUNm1,U2);CHKERRQ(ierr);// VUN = (N-1)/N*VUNm1 + U2;
+		ierr = VecAXPBYPCZ(VUN,-1,(PetscScalar)(Ns-1)/(PetscScalar)Ns,1,EU2,EUm2);CHKERRQ(ierr); // VUN  = -EU2 + (N-1)/N*EUm2 + VUN;
+		ierr = VecWAXPY(res,-1,EUN,EUNm1);CHKERRQ(ierr);
+		ierr = VecCopy(EUN,EUNm1); CHKERRQ(ierr);
+		ierr = VecCopy(VUN,VUNm1); CHKERRQ(ierr);
+		ierr = VecAbs(res);CHKERRQ(ierr);
+		ierr = VecNorm(res,NORM_INFINITY,&tol);CHKERRQ(ierr);
+		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: Tol = %f \n",Ns,tol);CHKERRQ(ierr);
+		
 	}
-	
+
 	flg  = PETSC_FALSE;
 	ierr = PetscOptionsGetBool(NULL,"-print_GMRF",&flg,NULL);CHKERRQ(ierr);
 	if (flg) {ierr = PostProcs(rho,"rho_mean.dat");CHKERRQ(ierr);}	
-	
+
 	flg  = PETSC_FALSE;
 	ierr = PetscOptionsGetBool(NULL,"-print_sol",&flg,NULL);CHKERRQ(ierr);
-	if (flg) {ierr = PostProcs(U,"sol_mean.dat");CHKERRQ(ierr);}
+	if (flg) {ierr = PostProcs(EUN,"sol_mean.dat");CHKERRQ(ierr);}
 			
 	ierr = KSPDestroy(&kspSPDE);CHKERRQ(ierr);
 	ierr = KSPDestroy(&kspGMRF);CHKERRQ(ierr);
 	ierr = VecDestroy(&U);CHKERRQ(ierr);
-	ierr = VecDestroy(&Um1);CHKERRQ(ierr);
-	ierr = VecDestroy(&EU);CHKERRQ(ierr);
-	ierr = VecDestroy(&VU);CHKERRQ(ierr);
+	ierr = VecDestroy(&EUNm1);CHKERRQ(ierr);
+	ierr = VecDestroy(&EUN);CHKERRQ(ierr);
+	ierr = VecDestroy(&VUN);CHKERRQ(ierr);
+	ierr = VecDestroy(&VUNm1);CHKERRQ(ierr);
 	ierr = VecDestroy(&b);CHKERRQ(ierr);
 	ierr = VecDestroy(&res);CHKERRQ(ierr);
 	
 	ierr = VecDestroy(&rho);CHKERRQ(ierr);
-	ierr = VecDestroy(&rhom1);CHKERRQ(ierr);
-	ierr = VecDestroy(&Erho);CHKERRQ(ierr);
-	ierr = VecDestroy(&Vrho);CHKERRQ(ierr);			
+	ierr = VecDestroy(&ErhoNm1);CHKERRQ(ierr);
+	ierr = VecDestroy(&ErhoN);CHKERRQ(ierr);
+	ierr = VecDestroy(&VrhoN);CHKERRQ(ierr);	
+	ierr = VecDestroy(&VrhoNm1);CHKERRQ(ierr);		
 	ierr = VecDestroy(&N01);CHKERRQ(ierr);
 
 	ierr = MatDestroy(&A);CHKERRQ(ierr);

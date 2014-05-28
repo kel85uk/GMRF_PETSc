@@ -3,24 +3,20 @@ PetscErrorCode GetOptions(PetscInt&,PetscInt&,PetscReal&,PetscReal&,PetscReal&,P
 PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetOperator(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
-PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&);
+PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&, const PetscInt&);
 PetscErrorCode SetSource(Vec&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscBool&);
 PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&);
 PetscErrorCode PostProcs(const Vec&, const char*);
 
+PetscErrorCode NormRand_BM(Vec&,Vec&,const PetscInt&);
 void global_local_Nelements(PetscInt&, PetscInt&, PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&);
+
 
 PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa){
 	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
 	PetscReal			dxdy = dx*dy, dxidy = dx/dy, dyidx = dy/dx;
 	PetscScalar		vD, vN = -dxidy, vS = -dxidy, vE = -dyidx, vW = -dyidx;
 	PetscErrorCode ierr;
-	ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
-	ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,M*N,M*N);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
-	ierr = MatSetFromOptions(L);CHKERRQ(ierr);
-	ierr = MatMPIAIJSetPreallocation(L,5,NULL,5,NULL);CHKERRQ(ierr);
-	ierr = MatSeqAIJSetPreallocation(L,5,NULL);CHKERRQ(ierr);
-	ierr = MatSetUp(L);CHKERRQ(ierr);
 	
 	ierr = MatGetOwnershipRange(L,&Istart,&Iend);CHKERRQ(ierr);
 
@@ -56,12 +52,6 @@ PetscErrorCode SetOperator(Mat& A, const PetscInt& m,const PetscInt& n,const Pet
 	PetscReal			idx2, idy2;
 	PetscScalar		vN, vS, vE, vW, vD;
 	PetscErrorCode ierr;
-	ierr = MatCreate(PETSC_COMM_WORLD,&A);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
-	ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,m*n,m*n);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
-	ierr = MatSetFromOptions(A);CHKERRQ(ierr);
-	ierr = MatMPIAIJSetPreallocation(A,5,NULL,5,NULL);CHKERRQ(ierr);
-	ierr = MatSeqAIJSetPreallocation(A,5,NULL);CHKERRQ(ierr);
-	ierr = MatSetUp(A);CHKERRQ(ierr);
 	
 	ierr = MatGetOwnershipRange(A,&Istart,&Iend);CHKERRQ(ierr);
 
@@ -105,12 +95,6 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	PetscScalar*	   rhol_arr;
 	Vec					rhol_vec;
 	PetscErrorCode ierr;
-	ierr = MatCreate(PETSC_COMM_WORLD,&A);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
-	ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,m*n,m*n);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
-	ierr = MatSetFromOptions(A);CHKERRQ(ierr);
-	ierr = MatMPIAIJSetPreallocation(A,5,NULL,5,NULL);CHKERRQ(ierr);
-	ierr = MatSeqAIJSetPreallocation(A,5,NULL);CHKERRQ(ierr);
-	ierr = MatSetUp(A);CHKERRQ(ierr);
 	
 	ierr = MatGetOwnershipRange(A,&Istart,&Iend);CHKERRQ(ierr);
 	
@@ -195,26 +179,34 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 		ierr = VecRestoreArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);	
 		ierr = VecDestroy(&rhol_vec);CHKERRQ(ierr);
+		ierr = VecScatterDestroy(&rho_scatter_ctx);CHKERRQ(ierr);
+		ierr = ISDestroy(&local_indices);CHKERRQ(ierr);
+		ierr = ISDestroy(&global_indices);CHKERRQ(ierr);		
 	ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 	return ierr;
 }
 
-PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, const PetscReal& dy){
+PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, const PetscReal& dy, const PetscInt& Seed){
 	PetscErrorCode ierr;
+	Vec		v1, v2;
 /* Test to check out variable and routines for now: Need to change to parallel */
 	PetscInt Ii = 0, Istart = 0, Iend = 0;
 	PetscScalar x, result;
+	ierr = VecDuplicate(Z,&v1);CHKERRQ(ierr);
+	ierr = VecDuplicate(Z,&v2);CHKERRQ(ierr);
+	ierr = NormRand_BM(v1,v2,Seed);CHKERRQ(ierr);
 	ierr = VecGetOwnershipRange(Z,&Istart,&Iend);CHKERRQ(ierr);
 	for (Ii = Istart; Ii < Iend; ++Ii){
 //		boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(time(0)),boost::normal_distribution<>(0,1));
-		std::uniform_int_distribution<int> unif(-NT+1,NT+1);
+/*		std::uniform_int_distribution<int> unif(-NT+1,NT+1);
 		std::normal_distribution<double> normal(0,1.0);
 		std::mt19937 rnd(Ii);
 		std::mt19937_64 rand_engine(unif(rnd)); // mt19937 is a good pseudo-random number 
                                           // generator.
 
-		x = normal(rand_engine)*sqrt(dx*dy);
-		result = x;
+		x = normal(rand_engine)*sqrt(dx*dy); */
+		ierr = VecGetValues(v1,1,&Ii,&x);CHKERRQ(ierr);
+		result = x*sqrt(dx*dy);
 		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
 	}
 	ierr = VecAssemblyBegin(Z);CHKERRQ(ierr);
@@ -279,7 +271,7 @@ PetscErrorCode SetSource(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt&
 	ihx2 = 1.0/dx/dx;
 	ihy2 = 1.0/dy/dy;
 	ierr = VecGetOwnershipRange(b,&Istart,&Iend);CHKERRQ(ierr);
-	
+	ierr = VecSet(b,0.);CHKERRQ(ierr);
 	global_local_Nelements(Nrhol,ILs,ILe,Istart,Iend,NGhost,m);
 	ierr = VecCreate(PETSC_COMM_SELF,&rhol_vec);CHKERRQ(ierr);
 	ierr = VecSetSizes(rhol_vec,PETSC_DECIDE,Nrhol);CHKERRQ(ierr);
@@ -330,7 +322,10 @@ PetscErrorCode SetSource(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt&
 	}
 	ierr = VecAssemblyBegin(b);CHKERRQ(ierr);
 		ierr = VecRestoreArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);	
-		ierr = VecDestroy(&rhol_vec);CHKERRQ(ierr);	
+		ierr = VecDestroy(&rhol_vec);CHKERRQ(ierr);
+		ierr = VecScatterDestroy(&rho_scatter_ctx);CHKERRQ(ierr);
+		ierr = ISDestroy(&local_indices);CHKERRQ(ierr);
+		ierr = ISDestroy(&global_indices);CHKERRQ(ierr);
 	ierr = VecAssemblyEnd(b);CHKERRQ(ierr);
 	
 	return ierr;
@@ -353,13 +348,47 @@ PetscErrorCode GetOptions(PetscInt& m,PetscInt& n,PetscReal& x0,PetscReal& x1,Pe
 }
 
 PetscErrorCode PostProcs(const Vec& U,const char* filename){
-	PetscViewer solmview, rhomview;
+	PetscViewer solmview;
 	PetscErrorCode ierr;
 	ierr = PetscViewerCreate(PETSC_COMM_WORLD,&solmview);CHKERRQ(ierr);
 	ierr = PetscViewerSetType(solmview,PETSCVIEWERASCII);CHKERRQ(ierr);
 	ierr = PetscViewerSetFormat(solmview,PETSC_VIEWER_DEFAULT);
 	ierr = PetscViewerASCIIOpen(PETSC_COMM_WORLD,filename,&solmview);CHKERRQ(ierr);
 	ierr = VecView(U,solmview);CHKERRQ(ierr);
+	ierr = PetscViewerDestroy(&solmview);CHKERRQ(ierr);
+	return ierr;
+}
+
+PetscErrorCode NormRand_BM(Vec& V1,Vec& V2,const PetscInt& Seed){
+	PetscErrorCode ierr;
+	PetscBool flg;
+	PetscInt	Ii, Istart, Iend;
+	PetscScalar	result, v1, v2;
+	PetscRandom    randomvec;
+	ierr = PetscRandomCreate(PETSC_COMM_WORLD,&randomvec);CHKERRQ(ierr);
+	ierr = PetscRandomSetType(randomvec,PETSCRAND);CHKERRQ(ierr);
+	ierr = PetscRandomSetSeed(randomvec,Seed);CHKERRQ(ierr);
+	ierr = PetscRandomSeed(randomvec);CHKERRQ(ierr);
+	ierr = VecSetRandom(V1,randomvec);CHKERRQ(ierr);
+	ierr = PetscRandomDestroy(&randomvec);CHKERRQ(ierr);	
+	ierr = PetscRandomCreate(PETSC_COMM_WORLD,&randomvec);CHKERRQ(ierr);
+	ierr = PetscRandomSetType(randomvec,PETSCRAND);CHKERRQ(ierr);
+	ierr = PetscRandomSetSeed(randomvec,Seed);CHKERRQ(ierr);
+	ierr = PetscRandomSeed(randomvec);CHKERRQ(ierr);
+	ierr = VecSetRandom(V2,randomvec);CHKERRQ(ierr);
+	ierr = PetscRandomDestroy(&randomvec);CHKERRQ(ierr);
+	VecEqual(V1,V2,&flg);
+	if (!flg) SETERRQ(PETSC_COMM_WORLD,1,"NormRand_BM: V1 == V2!");
+	ierr = PetscRandomDestroy(&randomvec);CHKERRQ(ierr);
+	ierr = VecGetOwnershipRange(V1,&Istart,&Iend);CHKERRQ(ierr);
+	for (Ii = Istart; Ii < Iend; ++Ii){
+		ierr = VecGetValues(V1,1,&Ii,&v1);CHKERRQ(ierr);
+		ierr = VecGetValues(V2,1,&Ii,&v2);CHKERRQ(ierr);
+		result = sqrt(-2.0*log(v1))*cos(2.0*M_PI*v2);
+		ierr = VecSetValue(V1,Ii,result,INSERT_VALUES);CHKERRQ(ierr);
+	}
+	ierr = VecAssemblyBegin(V1);CHKERRQ(ierr);
+	ierr = VecAssemblyEnd(V1);CHKERRQ(ierr);
 	return ierr;
 }
 
