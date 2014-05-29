@@ -3,14 +3,13 @@ PetscErrorCode GetOptions(PetscInt&,PetscInt&,PetscReal&,PetscReal&,PetscReal&,P
 PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetOperator(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
-PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&, const PetscInt&);
+PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&, const PetscInt&, boost::variate_generator<boost::mt19937, boost::normal_distribution<> >&);
 PetscErrorCode SetSource(Vec&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscBool&);
 PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&);
 PetscErrorCode PostProcs(const Vec&, const char*);
 
 PetscErrorCode NormRand_BM(Vec&,Vec&,const PetscInt&);
 void global_local_Nelements(PetscInt&, PetscInt&, PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&);
-
 
 PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa){
 	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
@@ -186,7 +185,7 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	return ierr;
 }
 
-PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, const PetscReal& dy, const PetscInt& Seed){
+PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, const PetscReal& dy, const PetscInt& Seed, boost::variate_generator<boost::mt19937, boost::normal_distribution<> >& generator){
 	PetscErrorCode ierr;
 	Vec		v1, v2;
 /* Test to check out variable and routines for now: Need to change to parallel */
@@ -197,14 +196,14 @@ PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, con
 	ierr = NormRand_BM(v1,v2,Seed);CHKERRQ(ierr);
 	ierr = VecGetOwnershipRange(Z,&Istart,&Iend);CHKERRQ(ierr);
 	for (Ii = Istart; Ii < Iend; ++Ii){
-//		boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(time(0)),boost::normal_distribution<>(0,1));
+
 /*		std::uniform_int_distribution<int> unif(-NT+1,NT+1);
 		std::normal_distribution<double> normal(0,1.0);
-		std::mt19937 rnd(Ii);
+		std::mt19937 rnd(Seed);
 		std::mt19937_64 rand_engine(unif(rnd)); // mt19937 is a good pseudo-random number 
-                                          // generator.
+                                          // generator. */
 
-		x = normal(rand_engine)*sqrt(dx*dy); */
+//		x = generator();//normal(rand_engine);
 		ierr = VecGetValues(v1,1,&Ii,&x);CHKERRQ(ierr);
 		result = x*sqrt(dx*dy);
 		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);

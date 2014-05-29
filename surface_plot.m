@@ -2,7 +2,7 @@
 function surface_plot(m,n,NGhost)
 U_data = dlmread('sol_mean.dat');                       
 data2 = reshape(U_data,m,n);                        
-[X,Y] = meshgrid(linspace(0,1,100),linspace(0,1,200));
+[X,Y] = meshgrid(linspace(0,1,m),linspace(0,1,n));
 figure(1);
 surfc(X,Y,data2');                                    
 view([0 90]);                                         
