@@ -4,7 +4,7 @@ FFLAGS	         =
 CPPFLAGS         =
 FPPFLAGS         =
 LOCDIR           = ./ #src/ksp/ksp/examples/tutorials/
-EXAMPLESC        = ex29.c Test.c
+EXAMPLESC        = ex29.c Test.cc test_serial.cc
 MANSEC           = KSP
 CLEANFILES       = rhs.vtk solution.vtk
 NP               = 1
@@ -15,6 +15,10 @@ include ${PETSC_DIR}/conf/rules
 ex29: ex29.o  chkopts
 	-${CLINKER} -o ex29 ex29.o  ${PETSC_SNES_LIB}
 	${RM} ex29.o
+	
+test_MC: test_serial.o  chkopts
+	-${CLINKER} -o test_MC test_serial.o  ${PETSC_SNES_LIB}
+	${RM} test_serial.o	
 	
 Test: Test.o  chkopts
 	-${CLINKER} -o Test Test.o  ${PETSC_SNES_LIB}
