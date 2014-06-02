@@ -15,11 +15,9 @@ Input parameters include:\n\
 #include <cmath>
 #include <Functions.hh>
 
-#define nint(a) ((a) >= 0.0 ? (PetscInt)((a)+0.5) : (PetscInt)((a)-0.5))
-
 int main(int argc,char **argv)
 {
-	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR;
+	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR, rhoO;
 	Mat A, L;
 	KSP kspSPDE, kspGMRF;
 	PetscReal		normE, normV;
@@ -29,18 +27,15 @@ int main(int argc,char **argv)
 	PetscMPIInt    rank;
 	PetscErrorCode ierr;
 	PetscBool      flg = PETSC_FALSE;
-	boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(time(0)),boost::normal_distribution<>(0.,1.));
+	
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
+	boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(rank),boost::normal_distribution<>(0.,1.));	
 	ierr = GetOptions(users);
-	users.dx = (users.x1 - users.x0)/users.m;
-	users.dy = (users.y1 - users.y0)/users.n;
-	users.nu = users.alpha - users.dim/2.0;
-	users.kappa = sqrt(8.0*users.nu)/(users.lamb);	
-	users.NGhost += PetscMax(PetscMax(nint(0.5*users.lamb/users.dx),nint(0.5*users.lamb/users.dy)),nint(0.5*users.lamb/(sqrt(users.dx*users.dx + users.dy*users.dy))));
-	users.NI = users.m*users.n;
-	users.NT = (users.m+2*users.NGhost)*(users.n+2*users.NGhost);
-	PetscPrintf(PETSC_COMM_SELF,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
+	PetscPrintf(PETSC_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
+	PetscPrintf(PETSC_COMM_WORLD,"tau2 = %f \n",users.tau2);
+	PetscPrintf(PETSC_COMM_WORLD,"kappa = %f \n",users.kappa);
+	PetscPrintf(PETSC_COMM_WORLD,"nu = %f \n",users.nu);
 	/* Create all the vectors and matrices needed for calculation */
 	ierr = VecCreate(PETSC_COMM_WORLD,&rho);CHKERRQ(ierr);
 	ierr = VecSetSizes(rho,PETSC_DECIDE,users.NT);CHKERRQ(ierr);
@@ -51,6 +46,7 @@ int main(int argc,char **argv)
 	ierr = VecDuplicate(rho,&VrhoN);CHKERRQ(ierr);
 	ierr = VecDuplicate(rho,&N01);CHKERRQ(ierr);
 	ierr = VecDuplicate(rho,&resR);CHKERRQ(ierr);
+	ierr = VecDuplicate(rho,&rhoO);CHKERRQ(ierr);
 	ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
 	ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,users.NT,users.NT);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
 	ierr = MatSetFromOptions(L);CHKERRQ(ierr);
@@ -86,6 +82,8 @@ int main(int argc,char **argv)
 		ierr = KSPSetOperators(kspGMRF,L,L,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);			
 		ierr = KSPSolve(kspGMRF,N01,rho);CHKERRQ(ierr);
 		ierr = KSPGetIterationNumber(kspGMRF,&users.its);CHKERRQ(ierr);
+//		ierr = VecCopy(rho,rhoO);CHKERRQ(ierr);
+//		ierr = VecScale(rhoO,1.0/sqrt(users.tau2));CHKERRQ(ierr);
 		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: GMRF solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
 		ierr = VecExp(rho);CHKERRQ(ierr);
 		ierr = SetOperator(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
@@ -94,14 +92,13 @@ int main(int argc,char **argv)
 		ierr = KSPSolve(kspSPDE,b,U);CHKERRQ(ierr);
 		ierr = KSPGetIterationNumber(kspSPDE,&users.its);CHKERRQ(ierr);
 		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: SPDE solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
-		
+//		ierr = VecScale(N01,1.0/sqrt(users.dx*users.dy));CHKERRQ(ierr);
+		// Start calculations for ErhoN	and VrhoN
+		ierr = update_stats(ErhoN,VrhoN,ErhoNm1,M2Nr,users.tolr,rho,Ns);CHKERRQ(ierr);		
 		// Start calculations for EUN	and VUN
 		ierr = update_stats(EUN,VUN,EUNm1,M2N,users.tolU,U,Ns);CHKERRQ(ierr);
-		// Start calculations for ErhoN	and VrhoN
-		ierr = update_stats(ErhoN,VrhoN,ErhoNm1,M2Nr,users.tolr,rho,Ns);CHKERRQ(ierr);
 		users.tol = PetscMax(users.tolU,users.tolr);
 	}
-
 	flg  = PETSC_FALSE;
 	ierr = PetscOptionsGetBool(NULL,"-print_GMRF",&flg,NULL);CHKERRQ(ierr);
 	if (flg) {ierr = PostProcs(ErhoN,"rho_mean.dat");CHKERRQ(ierr);}	
@@ -121,6 +118,7 @@ int main(int argc,char **argv)
 	ierr = VecDestroy(&resU);CHKERRQ(ierr);
 	
 	ierr = VecDestroy(&rho);CHKERRQ(ierr);
+	ierr = VecDestroy(&rhoO);CHKERRQ(ierr);
 	ierr = VecDestroy(&M2Nr);CHKERRQ(ierr);
 	ierr = VecDestroy(&ErhoNm1);CHKERRQ(ierr);
 	ierr = VecDestroy(&ErhoN);CHKERRQ(ierr);

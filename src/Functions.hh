@@ -1,10 +1,11 @@
 typedef struct{
 	PetscReal 	x0 = 0, x1 = 1, y0 = 0, y1 = 1, dx, dy;     /* norm of solution error */
 	PetscReal		UN = 1, US = 10, UE = 5, UW = 3;
-	PetscReal		dim = 2, alpha = 2, sigma = 0.3, lamb = 0.1, nu, kappa, tol = 1, TOL = 1e-4, tolU, tolr;
+	PetscReal		dim = 2, alpha = 2, sigma = 0.3, lamb = 0.1, nu, kappa, tau2, tol = 1, TOL = 1e-4, tolU, tolr;
 	PetscInt		m = 8, n = 7, its, NGhost = 2, NI = 0, NT = 0, Nsamples = 100, Ns = 1;
 } UserCTX;
 
+#define nint(a) ((a) >= 0.0 ? (PetscInt)((a)+0.5) : (PetscInt)((a)-0.5))
 
 PetscErrorCode GetOptions(UserCTX&);
 
@@ -343,7 +344,17 @@ PetscErrorCode GetOptions(UserCTX& users){
 	ierr = PetscOptionsGetReal(NULL,"-US",&users.US,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-UE",&users.UE,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-UW",&users.UW,NULL);CHKERRQ(ierr);
+	ierr = PetscOptionsGetInt(NULL,"-Nsamples",&users.Nsamples,NULL);CHKERRQ(ierr);
+	ierr = PetscOptionsGetReal(NULL,"-TOL",&users.TOL,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-lamb",&users.lamb,NULL);CHKERRQ(ierr);
+	users.dx = (users.x1 - users.x0)/users.m;
+	users.dy = (users.y1 - users.y0)/users.n;
+	users.nu = users.alpha - users.dim/2.0;
+	users.kappa = sqrt(8.0*users.nu)/(users.lamb);
+	users.tau2 = (tgamma(users.nu)/(tgamma(users.nu + 0.5)*pow((4.0*M_PI),(users.dim/2.0))*pow(users.kappa,(2.0*users.nu))*users.sigma*users.sigma));	
+	users.NGhost += PetscMax(PetscMax(nint(0.5*users.lamb/users.dx),nint(0.5*users.lamb/users.dy)),nint(0.5*users.lamb/(sqrt(users.dx*users.dx + users.dy*users.dy))));
+	users.NI = users.m*users.n;
+	users.NT = (users.m+2*users.NGhost)*(users.n+2*users.NGhost);	
 	return ierr;
 }
 
