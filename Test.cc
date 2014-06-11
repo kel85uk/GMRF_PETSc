@@ -31,7 +31,7 @@ int main(int argc,char **argv)
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
 	boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(rank),boost::normal_distribution<>(0.,1.));	
-	ierr = GetOptions(users);
+	ierr = GetOptions(users);CHKERRQ(ierr);
 	PetscPrintf(PETSC_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
 	PetscPrintf(PETSC_COMM_WORLD,"tau2 = %f \n",users.tau2);
 	PetscPrintf(PETSC_COMM_WORLD,"kappa = %f \n",users.kappa);
@@ -101,11 +101,11 @@ int main(int argc,char **argv)
 	}
 	flg  = PETSC_FALSE;
 	ierr = PetscOptionsGetBool(NULL,"-print_GMRF",&flg,NULL);CHKERRQ(ierr);
-	if (flg) {ierr = PostProcs(ErhoN,"rho_mean.dat");CHKERRQ(ierr);}	
+	if (flg) {ierr = VecPostProcs(ErhoN,"rho_mean.dat");CHKERRQ(ierr);}	
 
 	flg  = PETSC_FALSE;
 	ierr = PetscOptionsGetBool(NULL,"-print_sol",&flg,NULL);CHKERRQ(ierr);
-	if (flg) {ierr = PostProcs(EUN,"sol_mean.dat");CHKERRQ(ierr);}
+	if (flg) {ierr = VecPostProcs(EUN,"sol_mean.dat");CHKERRQ(ierr);}
 	ierr = KSPDestroy(&kspSPDE);CHKERRQ(ierr);
 	ierr = KSPDestroy(&kspGMRF);CHKERRQ(ierr);
 

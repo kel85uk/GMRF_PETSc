@@ -15,14 +15,15 @@ PetscErrorCode SetOperator(Mat&, const Vec&, const PetscInt&, const PetscInt&, c
 PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&, const PetscMPIInt&, boost::variate_generator<boost::mt19937, boost::normal_distribution<> >&);
 PetscErrorCode SetSource(Vec&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscBool&);
 PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&);
-PetscErrorCode PostProcs(const Vec&, const char*);
+PetscErrorCode VecPostProcs(const Vec&, const char*);
+PetscErrorCode MatPostProcs(const Mat&, const char*);
 PetscErrorCode update_stats(Vec&,Vec&,Vec&,Vec&,PetscReal&,const Vec&,const PetscInt&);
 void global_local_Nelements(PetscInt&, PetscInt&, PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&);
 
 PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa){
 	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
-	PetscReal			dxdy = dx*dy, dxidy = dx/dy, dyidx = dy/dx;
-	PetscScalar		vD, vN = -dxidy, vS = -dxidy, vE = -dyidx, vW = -dyidx;
+	PetscReal			dxdy = 1.0, dxidy = 1.0/dy/dy, dyidx = 1.0/dx/dx;
+	PetscReal			vD, vN = -dxidy, vS = -dxidy, vE = -dyidx, vW = -dyidx;
 	PetscErrorCode ierr;
 	
 	ierr = MatGetOwnershipRange(L,&Istart,&Iend);CHKERRQ(ierr);
@@ -33,7 +34,7 @@ PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const
 		if (i<M-1) {J = Ii + 1; ierr = MatSetValues(L,1,&Ii,1,&J,&vE,INSERT_VALUES);CHKERRQ(ierr);}
 		if (j>0)   {J = Ii - M; ierr = MatSetValues(L,1,&Ii,1,&J,&vS,INSERT_VALUES);CHKERRQ(ierr);}
 		if (j<N-1) {J = Ii + M; ierr = MatSetValues(L,1,&Ii,1,&J,&vN,INSERT_VALUES);CHKERRQ(ierr);}
-		vD = -(vW + vE + vS + vN) + kappa*dxdy;
+		vD = -(vW + vE + vS + vN) + kappa*kappa;
 		if (j == 0){
       			vD			+=		vS;
 			}
@@ -201,13 +202,13 @@ PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, con
 	ierr = VecGetOwnershipRange(Z,&Istart,&Iend);CHKERRQ(ierr);
 	for (Ii = Istart; Ii < Iend; ++Ii){
 		x = generator();
-		result = x*sqrt(dx*dy);
+		result = x/sqrt(dx*dy);
 		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
 	}
 /*	if (rank == 0)
 	for (Ii = 0; Ii < NT; ++Ii){
 		x = generator();
-		result = x*sqrt(dx*dy);
+		result = x/sqrt(dx*dy);
 		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
 	} */
 	ierr = VecAssemblyBegin(Z);CHKERRQ(ierr);
@@ -347,8 +348,10 @@ PetscErrorCode GetOptions(UserCTX& users){
 	ierr = PetscOptionsGetInt(NULL,"-Nsamples",&users.Nsamples,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-TOL",&users.TOL,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-lamb",&users.lamb,NULL);CHKERRQ(ierr);
-	users.dx = (users.x1 - users.x0)/users.m;
-	users.dy = (users.y1 - users.y0)/users.n;
+	ierr = PetscOptionsGetReal(NULL,"-alpha",&users.alpha,NULL);CHKERRQ(ierr);
+	ierr = PetscOptionsGetReal(NULL,"-dim",&users.dim,NULL);CHKERRQ(ierr);
+	users.dx = (users.x1 - users.x0)/(PetscReal)users.m;
+	users.dy = (users.y1 - users.y0)/(PetscReal)users.n;
 	users.nu = users.alpha - users.dim/2.0;
 	users.kappa = sqrt(8.0*users.nu)/(users.lamb);
 	users.tau2 = (tgamma(users.nu)/(tgamma(users.nu + 0.5)*pow((4.0*M_PI),(users.dim/2.0))*pow(users.kappa,(2.0*users.nu))*users.sigma*users.sigma));	
@@ -358,7 +361,7 @@ PetscErrorCode GetOptions(UserCTX& users){
 	return ierr;
 }
 
-PetscErrorCode PostProcs(const Vec& U,const char* filename){
+PetscErrorCode VecPostProcs(const Vec& U,const char* filename){
 	PetscViewer solmview;
 	PetscErrorCode ierr;
 	ierr = PetscViewerCreate(PETSC_COMM_WORLD,&solmview);CHKERRQ(ierr);
@@ -366,6 +369,18 @@ PetscErrorCode PostProcs(const Vec& U,const char* filename){
 	ierr = PetscViewerSetFormat(solmview,PETSC_VIEWER_DEFAULT);
 	ierr = PetscViewerASCIIOpen(PETSC_COMM_WORLD,filename,&solmview);CHKERRQ(ierr);
 	ierr = VecView(U,solmview);CHKERRQ(ierr);
+	ierr = PetscViewerDestroy(&solmview);CHKERRQ(ierr);
+	return ierr;
+}
+
+PetscErrorCode MatPostProcs(const Mat& U,const char* filename){
+	PetscViewer solmview;
+	PetscErrorCode ierr;
+	ierr = PetscViewerCreate(PETSC_COMM_WORLD,&solmview);CHKERRQ(ierr);
+	ierr = PetscViewerSetType(solmview,PETSCVIEWERASCII);CHKERRQ(ierr);
+	ierr = PetscViewerSetFormat(solmview,PETSC_VIEWER_ASCII_DENSE);
+	ierr = PetscViewerASCIIOpen(PETSC_COMM_WORLD,filename,&solmview);CHKERRQ(ierr);
+	ierr = MatView(U,solmview);CHKERRQ(ierr);
 	ierr = PetscViewerDestroy(&solmview);CHKERRQ(ierr);
 	return ierr;
 }
@@ -401,7 +416,7 @@ PetscErrorCode update_stats(Vec& EUN, Vec& VUN, Vec& EUNm1, Vec& M2N, PetscReal&
 	ierr = VecWAXPY(resU,-1,VUN,VUNm1);CHKERRQ(ierr);
 	ierr = VecAbs(resU);CHKERRQ(ierr);
 	ierr = VecNorm(resU,NORM_INFINITY,&tolV);CHKERRQ(ierr);
-	tol = PetscMax(tolE,tolV);
+	tol  = PetscMax(tolE,tolV);
 	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: Tol = %f, Mean = %f, Var = %f \n",Ns,tol,normE,normV);CHKERRQ(ierr);
 	ierr = VecDestroy(&dUN);CHKERRQ(ierr);
 	ierr = VecDestroy(&M2Nm1);CHKERRQ(ierr);

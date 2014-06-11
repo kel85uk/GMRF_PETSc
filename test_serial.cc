@@ -20,56 +20,74 @@ Input parameters include:\n\
 
 int main(int argc,char **argv)
 {
-	Vec U, EUN, EUNm1, VUN, M2N, testleak;
-
-	PetscReal		x0 = 0, x1 = 1, y0 = 0, y1 = 1, dx, dy;     /* norm of solution error */
-	PetscReal		UN = 1, US = 10, UE = 5, UW = 3;
-	PetscReal		dim = 2, alpha = 2, sigma = 0.3, lamb = 0.1, nu, kappa, tol = 1, TOL = 1e-10, tolE, tolV;
-	PetscInt		m = 200, n = 200, its, NGhost = 2, NI = 0, NT = 0, Nsamples = 20, Ns = 1;
+	Vec U, EUN, EUNm1, VUN, M2N, Z;
+	Mat L;
+	PetscInt Ns;
+	UserCTX users;
+	KSP kspGMRF;
 	PetscScalar	result;
-	nu = alpha - dim/2;
-	kappa = sqrt(8*nu)/(lamb);	
-	dx = (x1 - x0)/m;
-	dy = (y1 - y0)/n;
-	NI = m*n;
 	PetscErrorCode ierr;
 	PetscBool      flg = PETSC_FALSE;
-	boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(time(0)),boost::normal_distribution<>(0.,1.));
 	PetscMPIInt rank;	
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
-
+	srand(rank);
+	boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(rand()),boost::normal_distribution<>(0.,1.));
+	ierr = GetOptions(users);CHKERRQ(ierr);
 	ierr = VecCreate(PETSC_COMM_WORLD,&U);CHKERRQ(ierr);
-	ierr = VecSetSizes(U,PETSC_DECIDE,NI);CHKERRQ(ierr);
+	ierr = VecSetSizes(U,PETSC_DECIDE,users.NT);CHKERRQ(ierr);
 	ierr = VecSetFromOptions(U);CHKERRQ(ierr);
 	ierr = VecSet(U,0.);CHKERRQ(ierr);
 	ierr = VecDuplicate(U,&EUN);CHKERRQ(ierr);
 	ierr = VecDuplicate(U,&VUN);CHKERRQ(ierr);
 	ierr = VecDuplicate(U,&EUNm1);CHKERRQ(ierr);
 	ierr = VecDuplicate(U,&M2N);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&Z);CHKERRQ(ierr);
 	ierr = VecCopy(U,EUN);CHKERRQ(ierr);
 	ierr = VecCopy(U,VUN);CHKERRQ(ierr);
 	ierr = VecCopy(U,EUNm1);CHKERRQ(ierr);
 	ierr = VecCopy(U,M2N);CHKERRQ(ierr);
+	ierr = VecCopy(U,Z);CHKERRQ(ierr);
+	
+	ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
+	ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,users.NT,users.NT);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
+	ierr = MatSetFromOptions(L);CHKERRQ(ierr);
+	ierr = MatMPIAIJSetPreallocation(L,5,NULL,5,NULL);CHKERRQ(ierr);
+	ierr = MatSeqAIJSetPreallocation(L,5,NULL);CHKERRQ(ierr);
+	ierr = MatSetUp(L);CHKERRQ(ierr);	
+	ierr = KSPCreate(PETSC_COMM_WORLD,&kspGMRF);CHKERRQ(ierr);
+	ierr = KSPSetTolerances(kspGMRF,1.e-5/(users.NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+	ierr = KSPSetFromOptions(kspGMRF);CHKERRQ(ierr);	
 
+	PetscPrintf(PETSC_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
+	PetscPrintf(PETSC_COMM_WORLD,"tau2 = %f \n",users.tau2);
+	PetscPrintf(PETSC_COMM_WORLD,"kappa = %f \n",users.kappa);
+	PetscPrintf(PETSC_COMM_WORLD,"nu = %f \n",users.nu);
+	PetscPrintf(PETSC_COMM_WORLD,"dx = %f \n",users.dx);
+	PetscPrintf(PETSC_COMM_WORLD,"dy = %f \n",users.dy);
 
-	for (Ns = 1; (Ns <= Nsamples) && (tol > TOL); ++Ns){
-		ierr = SetRandSource(U,NI,dx,dy,rank,generator);CHKERRQ(ierr);
-//		ierr = VecSetRandom(U,randomvec1);CHKERRQ(ierr);
-		ierr = update_stats(EUN,VUN,EUNm1,M2N,tol,U,Ns);CHKERRQ(ierr);
-		ierr = VecCreate(PETSC_COMM_WORLD,&testleak);CHKERRQ(ierr);
-		ierr = VecSetSizes(testleak,PETSC_DECIDE,NI);CHKERRQ(ierr);
-		ierr = VecSetFromOptions(testleak);CHKERRQ(ierr);
-		ierr = VecSet(testleak,0.);CHKERRQ(ierr);
-		
+	for (Ns = 1; (Ns <= users.Nsamples) && (users.tol > users.TOL); ++Ns){
+		ierr = SetRandSource(Z,users.NT,users.dx,users.dy,rank,generator);CHKERRQ(ierr);
+		ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
+		ierr = KSPSetOperators(kspGMRF,L,L,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);			
+		ierr = KSPSolve(kspGMRF,Z,U);CHKERRQ(ierr);
+		ierr = KSPGetIterationNumber(kspGMRF,&users.its);CHKERRQ(ierr);
+		ierr = VecScale(U,1.0/sqrt(users.tau2));CHKERRQ(ierr);
+		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: GMRF solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
+		ierr = update_stats(EUN,VUN,EUNm1,M2N,users.tol,U,Ns);CHKERRQ(ierr);
 	}
+	
+	ierr = VecPostProcs(VUN,"rho_mean.dat");CHKERRQ(ierr);
 
 	ierr = VecDestroy(&U);CHKERRQ(ierr);
 	ierr = VecDestroy(&M2N);CHKERRQ(ierr);
 	ierr = VecDestroy(&EUN);CHKERRQ(ierr);
 	ierr = VecDestroy(&EUNm1);CHKERRQ(ierr);
 	ierr = VecDestroy(&VUN);CHKERRQ(ierr);
-	ierr = VecDestroy(&testleak);CHKERRQ(ierr);
+	ierr = VecDestroy(&Z);CHKERRQ(ierr);
+	
+	ierr = KSPDestroy(&kspGMRF);CHKERRQ(ierr);
+	ierr = MatDestroy(&L);CHKERRQ(ierr);
 
 	/*
 	  Always call PetscFinalize() before exiting a program.  This routine
