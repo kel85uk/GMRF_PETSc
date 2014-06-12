@@ -13,11 +13,14 @@ PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const Pet
 PetscErrorCode SetOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetOperator(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&, const PetscMPIInt&, boost::variate_generator<boost::mt19937, boost::normal_distribution<> >&);
+PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&, const PetscMPIInt&,std::default_random_engine&);
 PetscErrorCode SetSource(Vec&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscBool&);
 PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&);
 PetscErrorCode VecPostProcs(const Vec&, const char*);
+PetscErrorCode VecPostProcs(const Vec&, const char*,const PetscMPIInt&);
 PetscErrorCode MatPostProcs(const Mat&, const char*);
 PetscErrorCode update_stats(Vec&,Vec&,Vec&,Vec&,PetscReal&,const Vec&,const PetscInt&);
+PetscErrorCode update_stats(Vec&,Vec&,Vec&,Vec&,const Vec&,const PetscInt&);
 void global_local_Nelements(PetscInt&, PetscInt&, PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&);
 
 PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa){
@@ -216,6 +219,28 @@ PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, con
 	return ierr;	
 }
 
+PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, const PetscReal& dy, const PetscMPIInt& rank, std::default_random_engine& generator){
+	PetscErrorCode ierr;
+	PetscInt Ii = 0, Istart = 0, Iend = 0;
+	PetscScalar x, result;
+	std::normal_distribution<PetscReal> distribution(0.0,1.0);
+	ierr = VecGetOwnershipRange(Z,&Istart,&Iend);CHKERRQ(ierr);
+	for (Ii = Istart; Ii < Iend; ++Ii){
+		x = distribution(generator);
+		result = x/sqrt(dx*dy);
+		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
+	}
+/*	if (rank == 0)
+	for (Ii = 0; Ii < NT; ++Ii){
+		x = generator();
+		result = x/sqrt(dx*dy);
+		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
+	} */
+	ierr = VecAssemblyBegin(Z);CHKERRQ(ierr);
+	ierr = VecAssemblyEnd(Z);CHKERRQ(ierr);
+	return ierr;	
+}
+
 PetscErrorCode SetSource(Vec& b,const PetscInt& m,const PetscInt& N,const PetscReal& dx,const PetscReal& dy,const PetscReal& UN,const PetscReal& US,const PetscReal& UE,const PetscReal& UW,const PetscReal& lamb,const PetscBool& flg){
 	PetscErrorCode ierr;
 	PetscInt Ii, Istart, Iend, n, i, j;
@@ -350,6 +375,7 @@ PetscErrorCode GetOptions(UserCTX& users){
 	ierr = PetscOptionsGetReal(NULL,"-lamb",&users.lamb,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-alpha",&users.alpha,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-dim",&users.dim,NULL);CHKERRQ(ierr);
+	ierr = PetscOptionsGetReal(NULL,"-sigma",&users.sigma,NULL);CHKERRQ(ierr);
 	users.dx = (users.x1 - users.x0)/(PetscReal)users.m;
 	users.dy = (users.y1 - users.y0)/(PetscReal)users.n;
 	users.nu = users.alpha - users.dim/2.0;
@@ -373,6 +399,31 @@ PetscErrorCode VecPostProcs(const Vec& U,const char* filename){
 	return ierr;
 }
 
+PetscErrorCode VecPostProcs(const Vec& U,const char* filename,const PetscMPIInt& rank){
+	Vec buffer;
+	PetscScalar* buffer_arr;
+	PetscInt N;
+	VecScatter ctx;
+	PetscErrorCode ierr;
+	ierr = VecScatterCreateToZero(U,&ctx,&buffer); CHKERRQ(ierr);
+	ierr = VecGetSize(U,&N); CHKERRQ(ierr);
+	// scatter as many times as you need
+	ierr = VecScatterBegin(ctx,U,buffer,INSERT_VALUES,SCATTER_FORWARD); CHKERRQ(ierr);
+	ierr = VecScatterEnd(ctx,U,buffer,INSERT_VALUES,SCATTER_FORWARD); CHKERRQ(ierr);
+	if (rank == 0){
+		std::ofstream vecout;
+		vecout.open(filename);
+		ierr = VecGetArray(buffer,&buffer_arr);CHKERRQ(ierr);
+		for (int i = 0; i < N; ++i)
+			vecout << buffer_arr[i] << std::endl;
+		vecout.close();
+	}
+	// destroy scatter context and local vector when no longer needed
+	ierr = VecScatterDestroy(&ctx); CHKERRQ(ierr);
+	ierr = VecDestroy(&buffer); CHKERRQ(ierr);
+	return ierr;
+}
+
 PetscErrorCode MatPostProcs(const Mat& U,const char* filename){
 	PetscViewer solmview;
 	PetscErrorCode ierr;
@@ -387,7 +438,7 @@ PetscErrorCode MatPostProcs(const Mat& U,const char* filename){
 
 PetscErrorCode update_stats(Vec& EUN, Vec& VUN, Vec& EUNm1, Vec& M2N, PetscReal& tol,const Vec& U, const PetscInt& Ns){
 	PetscErrorCode ierr;
-	PetscReal normE, normV, tolE, tolV;
+	PetscReal normE, normV, tolE, tolV, tolrE, tolrV;
 	Vec VUNm1, dUN, dUNm1, resU, M2Nm1;
 
 	ierr = VecDuplicate(U,&M2Nm1);CHKERRQ(ierr);
@@ -416,13 +467,48 @@ PetscErrorCode update_stats(Vec& EUN, Vec& VUN, Vec& EUNm1, Vec& M2N, PetscReal&
 	ierr = VecWAXPY(resU,-1,VUN,VUNm1);CHKERRQ(ierr);
 	ierr = VecAbs(resU);CHKERRQ(ierr);
 	ierr = VecNorm(resU,NORM_INFINITY,&tolV);CHKERRQ(ierr);
+	tolrE = tolE/(normE + 1.e-12); tolrV = tolV/(normV + 1.e-12);
+	tolrV = PetscMax(tolrV,tolrE);
 	tol  = PetscMax(tolE,tolV);
+	tol  = PetscMax(tolrV,tol);
 	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: Tol = %f, Mean = %f, Var = %f \n",Ns,tol,normE,normV);CHKERRQ(ierr);
 	ierr = VecDestroy(&dUN);CHKERRQ(ierr);
 	ierr = VecDestroy(&M2Nm1);CHKERRQ(ierr);
 	ierr = VecDestroy(&dUNm1);CHKERRQ(ierr);	
 	ierr = VecDestroy(&VUNm1);CHKERRQ(ierr);
 	ierr = VecDestroy(&resU);CHKERRQ(ierr);	
+	return ierr;
+}
+
+PetscErrorCode update_stats(Vec& EUN, Vec& VUN, Vec& EUNm1, Vec& M2N, const Vec& U, const PetscInt& Ns){
+	PetscErrorCode ierr;
+	PetscReal normE, normV;
+	Vec VUNm1, dUN, dUNm1, M2Nm1;
+
+	ierr = VecDuplicate(U,&M2Nm1);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&dUNm1);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&dUN);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&VUNm1);CHKERRQ(ierr);
+
+	ierr = VecCopy(VUN,VUNm1); CHKERRQ(ierr); // VUNm1 = VUN;
+	ierr = VecCopy(EUN,EUNm1); CHKERRQ(ierr); // EUNm1 = EUN;
+	ierr = VecCopy(M2N,M2Nm1); CHKERRQ(ierr); // M2Nm1 = M2N;
+	ierr = VecWAXPY(dUNm1,-1,EUNm1,U); CHKERRQ(ierr); // Calculate dUNm1 = Un - mu_n-1
+	ierr = VecWAXPY(EUN,1.0/(PetscScalar)Ns,dUNm1,EUNm1); CHKERRQ(ierr); // mu_n = mu_n-1 + 1/n * dUNm1
+	ierr = VecWAXPY(dUN,-1,EUN,U); CHKERRQ(ierr); // dUN = Un - mu_n
+	ierr = VecPointwiseMult(M2N,dUN,dUNm1);CHKERRQ(ierr); // M2N = dUN * dUNm1;
+	ierr = VecAXPY(M2N,1,M2Nm1); // M2N = M2Nm1 + M2N;
+	ierr = VecCopy(M2N,VUN); // VUN = M2N;
+	ierr = VecScale(VUN,1.0/(PetscScalar)Ns);
+	
+	ierr = VecNorm(EUN,NORM_INFINITY,&normE);CHKERRQ(ierr);
+	ierr = VecNorm(VUN,NORM_INFINITY,&normV);CHKERRQ(ierr);
+	
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: Mean = %f, Var = %f \n",Ns,normE,normV);CHKERRQ(ierr);
+	ierr = VecDestroy(&dUN);CHKERRQ(ierr);
+	ierr = VecDestroy(&M2Nm1);CHKERRQ(ierr);
+	ierr = VecDestroy(&dUNm1);CHKERRQ(ierr);	
+	ierr = VecDestroy(&VUNm1);CHKERRQ(ierr);	
 	return ierr;
 }
 

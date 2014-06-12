@@ -12,6 +12,8 @@ Input parameters include:\n\
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/variate_generator.hpp>
 #include <random>
+#include <fstream>
+#include <iostream>
 #include <cmath>
 #include <Functions.hh>
 
@@ -32,7 +34,8 @@ int main(int argc,char **argv)
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
 	srand(rank);
-	boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(rand()),boost::normal_distribution<>(0.,1.));
+	//boost::variate_generator<boost::mt19937, boost::normal_distribution<> >	generator(boost::mt19937(rand()),boost::normal_distribution<>(0.,1.));
+	std::default_random_engine generator(rand());
 	ierr = GetOptions(users);CHKERRQ(ierr);
 	ierr = VecCreate(PETSC_COMM_WORLD,&U);CHKERRQ(ierr);
 	ierr = VecSetSizes(U,PETSC_DECIDE,users.NT);CHKERRQ(ierr);
@@ -56,28 +59,31 @@ int main(int argc,char **argv)
 	ierr = MatSeqAIJSetPreallocation(L,5,NULL);CHKERRQ(ierr);
 	ierr = MatSetUp(L);CHKERRQ(ierr);	
 	ierr = KSPCreate(PETSC_COMM_WORLD,&kspGMRF);CHKERRQ(ierr);
-	ierr = KSPSetTolerances(kspGMRF,1.e-5/(users.NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+	ierr = KSPSetTolerances(kspGMRF,1.e-7/(users.NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
 	ierr = KSPSetFromOptions(kspGMRF);CHKERRQ(ierr);	
+	
+	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
+	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);		
 
+	for (Ns = 1; (Ns <= users.Nsamples) && (users.tol > users.TOL); ++Ns){
+		ierr = SetRandSource(Z,users.NT,users.dx,users.dy,rank,generator);CHKERRQ(ierr);		
+		ierr = KSPSolve(kspGMRF,Z,U);CHKERRQ(ierr);
+		ierr = KSPGetIterationNumber(kspGMRF,&users.its);CHKERRQ(ierr);
+		ierr = VecScale(U,1.0/sqrt(users.tau2));CHKERRQ(ierr);
+		ierr = VecScale(Z,sqrt(users.dx*users.dy));CHKERRQ(ierr);
+		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: GMRF solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
+		ierr = update_stats(EUN,VUN,EUNm1,M2N,users.tol,U,Ns);CHKERRQ(ierr);
+	}
+	
+	ierr = VecPostProcs(EUN,"rho_mean.dat",rank);CHKERRQ(ierr);
+	ierr = VecPostProcs(VUN,"rho_var.dat",rank);CHKERRQ(ierr);
+	
 	PetscPrintf(PETSC_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
 	PetscPrintf(PETSC_COMM_WORLD,"tau2 = %f \n",users.tau2);
 	PetscPrintf(PETSC_COMM_WORLD,"kappa = %f \n",users.kappa);
 	PetscPrintf(PETSC_COMM_WORLD,"nu = %f \n",users.nu);
 	PetscPrintf(PETSC_COMM_WORLD,"dx = %f \n",users.dx);
-	PetscPrintf(PETSC_COMM_WORLD,"dy = %f \n",users.dy);
-
-	for (Ns = 1; (Ns <= users.Nsamples) && (users.tol > users.TOL); ++Ns){
-		ierr = SetRandSource(Z,users.NT,users.dx,users.dy,rank,generator);CHKERRQ(ierr);
-		ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
-		ierr = KSPSetOperators(kspGMRF,L,L,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);			
-		ierr = KSPSolve(kspGMRF,Z,U);CHKERRQ(ierr);
-		ierr = KSPGetIterationNumber(kspGMRF,&users.its);CHKERRQ(ierr);
-		ierr = VecScale(U,1.0/sqrt(users.tau2));CHKERRQ(ierr);
-		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: GMRF solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
-		ierr = update_stats(EUN,VUN,EUNm1,M2N,users.tol,U,Ns);CHKERRQ(ierr);
-	}
-	
-	ierr = VecPostProcs(VUN,"rho_mean.dat");CHKERRQ(ierr);
+	PetscPrintf(PETSC_COMM_WORLD,"dy = %f \n",users.dy);	
 
 	ierr = VecDestroy(&U);CHKERRQ(ierr);
 	ierr = VecDestroy(&M2N);CHKERRQ(ierr);
