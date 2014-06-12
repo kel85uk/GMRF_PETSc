@@ -1,3 +1,5 @@
 Test
 test_MC
 test_PDE
+*.[oa]
+*.dat

@@ -1,4 +1,4 @@
-/* Test Program for Petsc */
+/* Test Program for entire GMRF + SLMC */
 
 static char help[] = "Solves a linear system in parallel with KSP.\n\
 Input parameters include:\n\
@@ -12,6 +12,8 @@ Input parameters include:\n\
 int main(int argc,char **argv)
 {
 	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR, gmrf, EgmrfN, EgmrfNm1, VgmrfN, M2Ng;
+	Vec* Wrapalla[12] = {&rho, &ErhoNm1, &ErhoN, &VrhoN, &N01, &M2Nr, &resR, &gmrf, &EgmrfN, &EgmrfNm1, &VgmrfN, &M2Ng};
+	Vec* Wrapallb[7] = {&U, &EUNm1, &EUN, &VUN, &b, &M2N, &resU};
 	Mat A, L;
 	KSP kspSPDE, kspGMRF;
 	PetscReal		normE, normV;
@@ -28,20 +30,8 @@ int main(int argc,char **argv)
 	std::default_random_engine generator(rand());	
 	ierr = GetOptions(users);CHKERRQ(ierr);
 	/* Create all the vectors and matrices needed for calculation */
-	ierr = VecCreate(PETSC_COMM_WORLD,&rho);CHKERRQ(ierr);
-	ierr = VecSetSizes(rho,PETSC_DECIDE,users.NT);CHKERRQ(ierr);
-	ierr = VecSetFromOptions(rho);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&ErhoNm1);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&ErhoN);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&M2Nr);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&VrhoN);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&N01);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&resR);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&gmrf);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&EgmrfNm1);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&EgmrfN);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&VgmrfN);CHKERRQ(ierr);
-	ierr = VecDuplicate(rho,&M2Ng);CHKERRQ(ierr);	
+	ierr = CreateVectors(*Wrapalla,12,users.NT);CHKERRQ(ierr);
+	ierr = CreateVectors(*Wrapallb,7,users.NI);CHKERRQ(ierr);
 	ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
 	ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,users.NT,users.NT);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
 	ierr = MatSetFromOptions(L);CHKERRQ(ierr);
@@ -51,15 +41,7 @@ int main(int argc,char **argv)
 	ierr = KSPCreate(PETSC_COMM_WORLD,&kspGMRF);CHKERRQ(ierr);
 	ierr = KSPSetTolerances(kspGMRF,1.e-7/(users.NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
 	ierr = KSPSetFromOptions(kspGMRF);CHKERRQ(ierr);
-	ierr = VecCreate(PETSC_COMM_WORLD,&U);CHKERRQ(ierr);
-	ierr = VecSetSizes(U,PETSC_DECIDE,users.NI);CHKERRQ(ierr);
-	ierr = VecSetFromOptions(U);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&EUNm1);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&EUN);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&M2N);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&VUN);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&b);CHKERRQ(ierr);
-	ierr = VecDuplicate(U,&resU);CHKERRQ(ierr);
+
 	ierr = MatCreate(PETSC_COMM_WORLD,&A);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
 	ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,users.NI,users.NI);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
 	ierr = MatSetFromOptions(A);CHKERRQ(ierr);

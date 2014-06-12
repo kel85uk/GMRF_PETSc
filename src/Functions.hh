@@ -22,6 +22,8 @@ typedef struct{
 #define nint(a) ((a) >= 0.0 ? (PetscInt)((a)+0.5) : (PetscInt)((a)-0.5))
 
 PetscErrorCode GetOptions(UserCTX&);
+PetscErrorCode CreateVectors(Vec*&,const PetscInt&,const PetscInt&);
+
 
 PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&);
 

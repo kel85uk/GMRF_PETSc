@@ -1,4 +1,15 @@
 #include <Functions.hh>
+
+PetscErrorCode CreateVectors(Vec*& Wrapall,const PetscInt& N,const PetscInt& veclen){
+	PetscErrorCode ierr;
+	ierr = VecCreate(PETSC_COMM_WORLD,&Wrapall[0]);CHKERRQ(ierr);
+	ierr = VecSetSizes(Wrapall[0],PETSC_DECIDE,veclen);CHKERRQ(ierr);
+	ierr = VecSetFromOptions(Wrapall[0]);CHKERRQ(ierr);
+	for (int NN = 1; NN < N; ++NN)
+		ierr = VecDuplicate(Wrapall[0],&Wrapall[NN]);CHKERRQ(ierr);
+	return ierr;
+}
+
 PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa){
 	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
 	PetscReal			dxdy = 1.0, dxidy = 1.0/dy/dy, dyidx = 1.0/dx/dx;
