@@ -10,6 +10,30 @@ PetscErrorCode CreateVectors(Vec*& Wrapall,const PetscInt& N,const PetscInt& vec
 	return ierr;
 }
 
+PetscErrorCode CreateSolvers(Mat& L, const PetscInt& NT, KSP& kspGMRF, Mat& A,const PetscInt& NI, KSP& kspSPDE){
+	PetscErrorCode ierr;
+	ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
+	ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,NT,NT);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
+	ierr = MatSetFromOptions(L);CHKERRQ(ierr);
+	ierr = MatMPIAIJSetPreallocation(L,5,NULL,5,NULL);CHKERRQ(ierr);
+	ierr = MatSeqAIJSetPreallocation(L,5,NULL);CHKERRQ(ierr);
+	ierr = MatSetUp(L);CHKERRQ(ierr);	
+	ierr = KSPCreate(PETSC_COMM_WORLD,&kspGMRF);CHKERRQ(ierr);
+	ierr = KSPSetTolerances(kspGMRF,1.e-7/(NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+	ierr = KSPSetFromOptions(kspGMRF);CHKERRQ(ierr);
+
+	ierr = MatCreate(PETSC_COMM_WORLD,&A);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
+	ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,NI,NI);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
+	ierr = MatSetFromOptions(A);CHKERRQ(ierr);
+	ierr = MatMPIAIJSetPreallocation(A,5,NULL,5,NULL);CHKERRQ(ierr);
+	ierr = MatSeqAIJSetPreallocation(A,5,NULL);CHKERRQ(ierr);
+	ierr = MatSetUp(A);CHKERRQ(ierr);			
+	ierr = KSPCreate(PETSC_COMM_WORLD,&kspSPDE);CHKERRQ(ierr);
+	ierr = KSPSetTolerances(kspSPDE,1.e-7/(NI),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+	ierr = KSPSetFromOptions(kspSPDE);CHKERRQ(ierr);
+	return ierr;
+}
+
 PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa){
 	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
 	PetscReal			dxdy = 1.0, dxidy = 1.0/dy/dy, dyidx = 1.0/dx/dx;

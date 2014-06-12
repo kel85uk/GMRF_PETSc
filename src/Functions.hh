@@ -23,6 +23,7 @@ typedef struct{
 
 PetscErrorCode GetOptions(UserCTX&);
 PetscErrorCode CreateVectors(Vec*&,const PetscInt&,const PetscInt&);
+PetscErrorCode CreateSolvers(Mat&,const PetscInt&,KSP&,Mat&,const PetscInt&,KSP&);
 
 
 PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&);

@@ -32,25 +32,9 @@ int main(int argc,char **argv)
 	/* Create all the vectors and matrices needed for calculation */
 	ierr = CreateVectors(*Wrapalla,12,users.NT);CHKERRQ(ierr);
 	ierr = CreateVectors(*Wrapallb,7,users.NI);CHKERRQ(ierr);
-	ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
-	ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,users.NT,users.NT);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
-	ierr = MatSetFromOptions(L);CHKERRQ(ierr);
-	ierr = MatMPIAIJSetPreallocation(L,5,NULL,5,NULL);CHKERRQ(ierr);
-	ierr = MatSeqAIJSetPreallocation(L,5,NULL);CHKERRQ(ierr);
-	ierr = MatSetUp(L);CHKERRQ(ierr);	
-	ierr = KSPCreate(PETSC_COMM_WORLD,&kspGMRF);CHKERRQ(ierr);
-	ierr = KSPSetTolerances(kspGMRF,1.e-7/(users.NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
-	ierr = KSPSetFromOptions(kspGMRF);CHKERRQ(ierr);
-
-	ierr = MatCreate(PETSC_COMM_WORLD,&A);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
-	ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,users.NI,users.NI);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
-	ierr = MatSetFromOptions(A);CHKERRQ(ierr);
-	ierr = MatMPIAIJSetPreallocation(A,5,NULL,5,NULL);CHKERRQ(ierr);
-	ierr = MatSeqAIJSetPreallocation(A,5,NULL);CHKERRQ(ierr);
-	ierr = MatSetUp(A);CHKERRQ(ierr);			
-	ierr = KSPCreate(PETSC_COMM_WORLD,&kspSPDE);CHKERRQ(ierr);
-	ierr = KSPSetTolerances(kspSPDE,1.e-7/(users.NI),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
-	ierr = KSPSetFromOptions(kspSPDE);CHKERRQ(ierr);
+	/* Create Matrices and Solver contexts */
+	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE);CHKERRQ(ierr);
+	
 
 	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);	
