@@ -6,6 +6,7 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/variate_generator.hpp>
 #include <fstream>
+#include <vector>
 #include <iostream>
 #include <random>
 #include <cmath>
@@ -33,6 +34,7 @@ PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const Petsc
 PetscErrorCode SetSource(Vec&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscBool&);
 PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&);
 
+void VecPostProcs(const std::vector<PetscScalar>&, const char*, const PetscMPIInt&);
 PetscErrorCode VecPostProcs(const Vec&, const char*);
 PetscErrorCode VecPostProcs(const Vec&, const char*,const PetscMPIInt&);
 

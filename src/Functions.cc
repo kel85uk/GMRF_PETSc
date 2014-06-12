@@ -400,6 +400,15 @@ PetscErrorCode VecPostProcs(const Vec& U,const char* filename,const PetscMPIInt&
 	return ierr;
 }
 
+void VecPostProcs(const std::vector<PetscScalar>& U,const char* filename,const PetscMPIInt& rank){
+	if (rank == 0){
+		std::ofstream vecout;
+		vecout.open(filename);
+		for_each(U.begin(),U.end(),[&vecout](PetscScalar result){vecout << result << std::endl;});
+		vecout.close();
+	}
+}
+
 PetscErrorCode MatPostProcs(const Mat& U,const char* filename){
 	PetscViewer solmview;
 	PetscErrorCode ierr;
