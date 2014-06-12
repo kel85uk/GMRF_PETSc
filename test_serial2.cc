@@ -1,4 +1,4 @@
-/* Test Program for MC routines */
+/* Test Program for PDE routines */
 
 static char help[] = "Solves a linear system in parallel with KSP.\n\
 Input parameters include:\n\

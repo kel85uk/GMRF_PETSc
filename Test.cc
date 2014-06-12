@@ -7,14 +7,6 @@ Input parameters include:\n\
   -m <mesh_x>       : number of mesh points in x-direction\n\
   -n <mesh_n>       : number of mesh points in y-direction\n\n";
 
-#include <petsc.h>
-#include <boost/random/normal_distribution.hpp>
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/variate_generator.hpp>
-#include <fstream>
-#include <iostream>
-#include <random>
-#include <cmath>
 #include <Functions.hh>
 
 int main(int argc,char **argv)
