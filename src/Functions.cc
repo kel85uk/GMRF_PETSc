@@ -428,7 +428,7 @@ void VecPostProcs(const std::vector<PetscScalar>& U,const char* filename,const P
 	if (rank == 0){
 		std::ofstream vecout;
 		vecout.open(filename);
-		for_each(U.begin(),U.end(),[&vecout](PetscScalar result){vecout << result << std::endl;});
+		std::for_each(U.begin(),U.end(),[&vecout](PetscScalar result){vecout << result << std::endl;});
 		vecout.close();
 	}
 }
