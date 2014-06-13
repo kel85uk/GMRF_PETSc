@@ -16,10 +16,8 @@ int main(int argc,char **argv)
 	Vec* Wrapallb[7] = {&U, &EUNm1, &EUN, &VUN, &b, &M2N, &resU};
 	Mat A, L;
 	KSP kspSPDE, kspGMRF;
-	PetscReal		normE, normV;
 	PetscInt		Ns;
 	UserCTX		users;
-	PetscScalar	result;
 	PetscMPIInt    rank;
 	PetscErrorCode ierr;
 	PetscBool      flg = PETSC_FALSE;
@@ -44,7 +42,7 @@ int main(int argc,char **argv)
 		ierr = KSPSolve(kspGMRF,N01,rho);CHKERRQ(ierr);
 		ierr = KSPGetIterationNumber(kspGMRF,&users.its);CHKERRQ(ierr);
 		ierr = VecScale(rho,1.0/sqrt(users.tau2));CHKERRQ(ierr);
-		ierr = VecCopy(rho,gmrf);CHKERRQ(ierr);
+//		ierr = VecCopy(rho,gmrf);CHKERRQ(ierr);
 		ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: GMRF solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
 		ierr = VecExp(rho);CHKERRQ(ierr);
 		ierr = SetOperator(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
