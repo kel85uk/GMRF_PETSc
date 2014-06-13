@@ -23,6 +23,7 @@ typedef struct{
 
 PetscErrorCode GetOptions(UserCTX&);
 PetscErrorCode CreateVectors(Vec*&,const PetscInt&,const PetscInt&);
+PetscErrorCode DestroyVectors(Vec*&,const PetscInt&);
 PetscErrorCode CreateSolvers(Mat&,const PetscInt&,KSP&,Mat&,const PetscInt&,KSP&);
 
 

@@ -10,6 +10,13 @@ PetscErrorCode CreateVectors(Vec*& Wrapall,const PetscInt& N,const PetscInt& vec
 	return ierr;
 }
 
+PetscErrorCode DestroyVectors(Vec*& Wrapall,const PetscInt& N){
+	PetscErrorCode ierr;
+	for (int NN = 0; NN < N; ++NN)
+		ierr = VecDestroy(&Wrapall[NN]);CHKERRQ(ierr);
+	return ierr;
+}
+
 PetscErrorCode CreateSolvers(Mat& L, const PetscInt& NT, KSP& kspGMRF, Mat& A,const PetscInt& NI, KSP& kspSPDE){
 	PetscErrorCode ierr;
 	ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
@@ -131,7 +138,6 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	// Copy elements from rho to rhol_vec
 	ierr = VecScatterBegin(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
 	ierr = VecScatterEnd(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
-//	PostProcs(rhol_vec,"rhol_vec.dat");
 	ierr = VecGetArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);
 	
 	idx2 = 1.0/(dx*dx);
@@ -140,11 +146,9 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 		vD = 0.; j = (PetscInt) Ii/m; i = Ii - j*m;
 		II = (i + NGhost) + (m+2*NGhost)*(j + NGhost);
 		rhoII = rhol_arr[II-ILs];
-//		if (rhoII == 0) SETERRQ3(PETSC_COMM_WORLD,1,"Something wrong with rhoII in %d out of %d with NR = %d",Ii,Istart,Nrhol);
 		vW = 0.; vE = 0.; vS = 0.; vN = 0.; rhoW = 0.; rhoE = 0.; rhoS = 0.; rhoN = 0.;
 		JJ = II - 1;
 		rhoJJ = rhol_arr[JJ-ILs];
-//		if (rhoJJ == 0) SETERRQ3(PETSC_COMM_WORLD,1,"Something wrong with rhoJJ-1 in %d out of %d with NR = %d",Ii,Istart,Nrhol);
 		rhoW = .5*(rhoII + rhoJJ);
 		if (i>0)   {
 			Ji = Ii - 1;
@@ -153,7 +157,6 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 		}
 		JJ = II + 1;
 		rhoJJ = rhol_arr[JJ-ILs];
-//		if (rhoJJ == 0) SETERRQ3(PETSC_COMM_WORLD,1,"Something wrong with rhoJJ+1 in %d out of %d with NR = %d",Ii,Istart,Nrhol);
 		rhoE = .5*(rhoII + rhoJJ);
 		if (i<m-1) {
 			Ji = Ii + 1; 
@@ -162,7 +165,6 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 		}
 		JJ = II - (m + 2*NGhost);
 		rhoJJ = rhol_arr[JJ-ILs];
-//		if (rhoJJ == 0) SETERRQ3(PETSC_COMM_WORLD,1,"Something wrong with rhoJJ-m in %d out of %d with NR = %d",Ii,Istart,Nrhol);
 		rhoS = .5*(rhoII + rhoJJ);
 		if (j>0)   {
 			Ji = Ii - m;
@@ -171,7 +173,6 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 		}
 		JJ = II + (m + 2*NGhost);
 		rhoJJ = rhol_arr[JJ-ILs];
-//		if (rhoJJ == 0) SETERRQ3(PETSC_COMM_WORLD,1,"Something wrong with rhoJJ+m in %d seeking %d with NR = %d",Ii,JJ-ILs,Nrhol);
 		rhoN = .5*(rhoII + rhoJJ);
 		if (j<n-1) {
 			Ji = Ii + m; 
@@ -219,12 +220,6 @@ PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, con
 		result = x/sqrt(dx*dy);
 		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
 	}
-/*	if (rank == 0)
-	for (Ii = 0; Ii < NT; ++Ii){
-		x = generator();
-		result = x/sqrt(dx*dy);
-		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
-	} */
 	ierr = VecAssemblyBegin(Z);CHKERRQ(ierr);
 	ierr = VecAssemblyEnd(Z);CHKERRQ(ierr);
 	return ierr;	
@@ -241,12 +236,6 @@ PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, con
 		result = x/sqrt(dx*dy);
 		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
 	}
-/*	if (rank == 0)
-	for (Ii = 0; Ii < NT; ++Ii){
-		x = generator();
-		result = x/sqrt(dx*dy);
-		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
-	} */
 	ierr = VecAssemblyBegin(Z);CHKERRQ(ierr);
 	ierr = VecAssemblyEnd(Z);CHKERRQ(ierr);
 	return ierr;	

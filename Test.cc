@@ -92,28 +92,9 @@ int main(int argc,char **argv)
 		
 	ierr = KSPDestroy(&kspSPDE);CHKERRQ(ierr);
 	ierr = KSPDestroy(&kspGMRF);CHKERRQ(ierr);
-
-	ierr = VecDestroy(&U);CHKERRQ(ierr);
-	ierr = VecDestroy(&M2N);CHKERRQ(ierr);
-	ierr = VecDestroy(&EUN);CHKERRQ(ierr);
-	ierr = VecDestroy(&EUNm1);CHKERRQ(ierr);
-	ierr = VecDestroy(&VUN);CHKERRQ(ierr);
-	ierr = VecDestroy(&b);CHKERRQ(ierr);
-	ierr = VecDestroy(&resU);CHKERRQ(ierr);
 	
-	ierr = VecDestroy(&rho);CHKERRQ(ierr);
-	ierr = VecDestroy(&M2Nr);CHKERRQ(ierr);
-	ierr = VecDestroy(&ErhoNm1);CHKERRQ(ierr);
-	ierr = VecDestroy(&ErhoN);CHKERRQ(ierr);
-	ierr = VecDestroy(&VrhoN);CHKERRQ(ierr);	
-	ierr = VecDestroy(&N01);CHKERRQ(ierr);
-	ierr = VecDestroy(&resR);CHKERRQ(ierr);
-	
-	ierr = VecDestroy(&gmrf);CHKERRQ(ierr);
-	ierr = VecDestroy(&M2Ng);CHKERRQ(ierr);
-	ierr = VecDestroy(&EgmrfNm1);CHKERRQ(ierr);
-	ierr = VecDestroy(&EgmrfN);CHKERRQ(ierr);
-	ierr = VecDestroy(&VgmrfN);CHKERRQ(ierr);	
+	ierr = DestroyVectors(*Wrapalla,12);CHKERRQ(ierr);
+	ierr = DestroyVectors(*Wrapallb,7);CHKERRQ(ierr);
 
 	ierr = MatDestroy(&A);CHKERRQ(ierr);
 	ierr = MatDestroy(&L);CHKERRQ(ierr);
