@@ -1,5 +1,5 @@
 
-CFLAGS	         = -std=c++11 -O2 -I./src/
+CFLAGS	         = -std=c++11 -O2 -Wall -Wconversion -Wshadow -I./src/
 FFLAGS	         =
 CPPFLAGS         =
 FPPFLAGS         =
