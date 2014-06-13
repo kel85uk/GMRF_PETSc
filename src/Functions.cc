@@ -523,6 +523,7 @@ PetscErrorCode update_stats(Vec& EUN, Vec& VUN, Vec& EUNm1, Vec& M2N, const Vec&
 
 PetscErrorCode VecSetMean(Vec&,const Vec&){
 	PetscErrorCode ierr;
+	return ierr;
 }
 
 void global_local_Nelements(PetscInt& Nel, PetscInt& ILs, PetscInt& ILe, const PetscInt& Istart, const PetscInt& Iend, const PetscInt& NGhost, const PetscInt& m){
