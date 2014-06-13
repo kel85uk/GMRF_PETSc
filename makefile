@@ -32,4 +32,4 @@ Test: ./src/Functions.o Test.o  chkopts
 
 #mpiexec -np 3 ./test_MC -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 300 -n 300 -pc_type ksp -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-3
 
-#mpiexec -np 3 ./Test -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 300 -n 300 -pc_type ksp -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-3 -print_gmrf_mean -print_gmrf_var -print_sol_mean -print_sol_var -print_rho_mean -print_rho_var
+#mpiexec -np 3 ./Test -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 50 -n 50 -pc_type ksp -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-2 -print_gmrf_mean -print_gmrf_var -print_sol_mean -print_sol_var -print_rho_mean -print_rho_var
