@@ -8,6 +8,7 @@ Input parameters include:\n\
   -n <mesh_n>       : number of mesh points in y-direction\n\n";
 
 #include <Functions.hh>
+#define MPI_WTIME_IS_GLOBAL
 
 int main(int argc,char **argv)
 {
@@ -21,9 +22,11 @@ int main(int argc,char **argv)
 	PetscMPIInt    rank;
 	PetscErrorCode ierr;
 	PetscBool      flg = PETSC_FALSE;
+	PetscReal startTime, endTime;
 	
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
+	startTime = MPI_Wtime();
 	srand(rank);
 	std::default_random_engine generator(rand());	
 	ierr = GetOptions(users);CHKERRQ(ierr);
@@ -59,6 +62,8 @@ int main(int argc,char **argv)
 		ierr = update_stats(EgmrfN,VgmrfN,EgmrfNm1,M2Ng,gmrf,Ns);CHKERRQ(ierr);		
 		users.tol = PetscMax(users.tolU,users.tolr);
 	}
+	endTime = MPI_Wtime();
+	PetscPrintf(PETSC_COMM_WORLD,"Elapsed wall-clock time (sec)= %f \n",endTime - startTime);
 	PetscPrintf(PETSC_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
 	PetscPrintf(PETSC_COMM_WORLD,"tau2 = %f \n",users.tau2);
 	PetscPrintf(PETSC_COMM_WORLD,"kappa = %f \n",users.kappa);
