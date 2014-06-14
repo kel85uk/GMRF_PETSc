@@ -14,12 +14,10 @@ Input parameters include:\n\
 int main(int argc,char **argv)
 {
 	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR, gmrf, EgmrfN, EgmrfNm1, VgmrfN, M2Ng;
-	Mat A, L;
-	KSP kspSPDE, kspGMRF;	
 	Vec* Wrapalla[12] = {&rho, &ErhoNm1, &ErhoN, &VrhoN, &N01, &M2Nr, &resR, &gmrf, &EgmrfN, &EgmrfNm1, &VgmrfN, &M2Ng};
 	Vec* Wrapallb[7] = {&U, &EUNm1, &EUN, &VUN, &b, &M2N, &resU};
-	Mat* WrapMats[2] = {&L, &A};
-	KSP* WrapKSPs[2] = {&kspGMRF, &kspSPDE};
+	Mat A, L;
+	KSP kspSPDE, kspGMRF;
 	PetscInt		Ns;
 	UserCTX		users;
 	PetscMPIInt    rank;
@@ -44,7 +42,7 @@ int main(int argc,char **argv)
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);	
 
 	for (Ns = 1; (Ns <= users.Nsamples) && (users.tol > users.TOL); ++Ns){
-		ierr = UnitSolver(*Wrapalla,*Wrapallb,*WrapMats,*WrapKSPs,users,generator,rank,Ns); CHKERRQ(ierr);
+		UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,rank,Ns);
 		// Start calculations for ErhoN and VrhoN
 		ierr = update_stats(ErhoN,VrhoN,ErhoNm1,M2Nr,users.tolr,rho,Ns);CHKERRQ(ierr);		
 		// Start calculations for EUN and VUN

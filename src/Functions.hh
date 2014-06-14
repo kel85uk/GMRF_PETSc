@@ -47,6 +47,7 @@ PetscErrorCode MatPostProcs(const Mat&, const char*);
 
 PetscErrorCode update_stats(Vec&,Vec&,Vec&,Vec&,PetscReal&,const Vec&,const PetscInt&);
 PetscErrorCode update_stats(Vec&,Vec&,Vec&,Vec&,const Vec&,const PetscInt&);
+void update_stats(PetscScalar&,PetscScalar&,PetscScalar&,PetscScalar&,PetscScalar&,const PetscScalar&,const PetscInt&);
 
 PetscErrorCode VecSetMean(Vec&,const Vec&);
 
