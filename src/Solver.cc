@@ -1,0 +1,19 @@
+#include <Solver.hh>
+
+PetscErrorCode UnitSolver(Vec*& WrapVecA, Vec*& WrapVecB, Mat*& WrapMats, KSP*& WrapKSPs, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns){
+	PetscErrorCode ierr;
+	ierr = SetRandSource(WrapVecA[4],users.NT,users.dx,users.dy,rank,generator);CHKERRQ(ierr);	
+	ierr = KSPSolve(WrapKSPs[0],WrapVecA[4],WrapVecA[0]);CHKERRQ(ierr);
+	ierr = KSPGetIterationNumber(WrapKSPs[0],&users.its);CHKERRQ(ierr);
+	ierr = VecScale(WrapVecA[0],1.0/sqrt(users.tau2));CHKERRQ(ierr);
+	ierr = VecCopy(WrapVecA[0],WrapVecA[7]);CHKERRQ(ierr);
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: GMRF solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
+	ierr = VecExp(WrapVecA[0]);CHKERRQ(ierr);
+	ierr = SetOperator(WrapMats[1],WrapVecA[0],users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
+	ierr = SetSource(WrapVecB[4],WrapVecA[0],users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb);CHKERRQ(ierr);
+	ierr = KSPSetOperators(WrapKSPs[1],WrapMats[1],WrapMats[1],DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
+	ierr = KSPSolve(WrapKSPs[1],WrapVecB[4],WrapVecB[0]);CHKERRQ(ierr);
+	ierr = KSPGetIterationNumber(WrapKSPs[1],&users.its);CHKERRQ(ierr);
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: SPDE solved in %d iterations \n",Ns,users.its);
+	return ierr;
+}
