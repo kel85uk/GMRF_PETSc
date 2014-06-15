@@ -521,15 +521,18 @@ PetscErrorCode update_stats(Vec& EUN, Vec& VUN, Vec& EUNm1, Vec& M2N, const Vec&
 	return ierr;
 }
 
-void update_stats(PetscScalar& EUN,PetscScalar& VUN,PetscScalar& EUNm1,PetscScalar& M2N,PetscScalar& tol,const PetscScalar& U,const PetscInt& Ns){
+PetscErrorCode update_stats(PetscScalar& EUN,PetscScalar& VUN,PetscScalar& EUNm1,PetscScalar& M2N,PetscScalar& tol,const PetscScalar& U,const PetscInt& Ns){
 	PetscScalar tolrE;
+	PetscErrorCode ierr;
 	EUNm1 = EUN;
 	EUN = EUNm1 + (U - EUNm1)/(PetscScalar) Ns;
 	M2N += (U - EUNm1)*(U - EUN);
 	VUN = M2N/(PetscScalar) Ns;
 	tol = std::abs(EUN - EUNm1);
 	tolrE = tol/(U + 1.e-12);
-	tol  = PetscMax(tolrE,tol);	
+	tol  = PetscMax(tolrE,tol);
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: Expectation = %3.8E\tVariance = %3.8E\tTol = %3.8E \n",Ns,EUN,VUN,tol);
+	return ierr;
 }
 
 PetscErrorCode VecSetMean(Vec&,const Vec&){
