@@ -32,6 +32,10 @@ TestV2: ./src/Functions.o ./src/Solver.o Test2.o  chkopts
 	-${CLINKER} -o Test2 ./src/Functions.o ./src/Solver.o Test2.o  ${PETSC_SNES_LIB}
 	${RM} Test2.o	 ./src/Functions.o	 ./src/Solver.o
 	
+TestV3: ./src/Functions.o ./src/Solver.o Test3.o  chkopts
+	-${CLINKER} -o Test3 ./src/Functions.o ./src/Solver.o Test3.o  ${PETSC_SNES_LIB}
+	${RM} Test3.o	 ./src/Functions.o	 ./src/Solver.o	
+	
 #mpiexec -np 4 ./test_PDE -mat_type mpiaij -vec_type mpi -ksp_monitor_short -pc_type gamg -ksp_type fgmres -ksp_gmres_modifiedgramschmidt -m 100 -n 100
 
 #mpiexec -np 3 ./test_MC -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 300 -n 300 -pc_type ksp -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-3

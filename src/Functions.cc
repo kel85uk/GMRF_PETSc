@@ -358,7 +358,7 @@ PetscErrorCode SetSource(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt&
 	return ierr;
 }
 
-PetscErrorCode GetOptions(UserCTX& users){
+PetscErrorCode GetOptions(UserCTX& users){ // Not sure if it's also affecting MPI_COMM_WORLD. See if errors
 	PetscErrorCode ierr;
 	ierr = PetscOptionsGetInt(NULL,"-m",&users.m,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetInt(NULL,"-n",&users.n,NULL);CHKERRQ(ierr);

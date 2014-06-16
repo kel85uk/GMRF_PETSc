@@ -10,6 +10,7 @@ Input parameters include:\n\
 #include <Functions.hh>
 #include <Solver.hh>
 #define MPI_WTIME_IS_GLOBAL
+//#define VEC_OUTPUT
 
 int main(int argc,char **argv)
 {
@@ -26,7 +27,8 @@ int main(int argc,char **argv)
 	PetscReal startTime, endTime;
 	
 	PetscInitialize(&argc,&argv,(char*)0,help);
-	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
+	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
+	
 	startTime = MPI_Wtime();
 	srand(rank);
 	std::default_random_engine generator(rand());	
@@ -42,8 +44,8 @@ int main(int argc,char **argv)
 	
 	PetscScalar normU,EnormUN,VnormUN,EnormUNm1,M2NnU,tol = 1.0;
 	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
-	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);	
-
+	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
+	
 	for (Ns = 1; (Ns <= users.Nsamples) && (tol > users.TOL); ++Ns){
 		ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,rank,Ns,normU); CHKERRQ(ierr);
 		update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,Ns);
@@ -106,6 +108,6 @@ int main(int argc,char **argv)
 		 - provides summary and diagnostic information if certain runtime
 		   options are chosen (e.g., -log_summary).
 	*/
-	ierr = PetscFinalize();	
+	ierr = PetscFinalize();
 	return 0;
 }
