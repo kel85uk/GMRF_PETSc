@@ -86,7 +86,9 @@ int main(int argc,char **argv)
 	PetscPrintf(MPI_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,lrank);
 	PetscPrintf(MPI_COMM_WORLD,"tau2 = %f \n",users.tau2);
 	PetscPrintf(MPI_COMM_WORLD,"kappa = %f \n",users.kappa);
-	PetscPrintf(MPI_COMM_WORLD,"nu = %f \n",users.nu);	
+	PetscPrintf(MPI_COMM_WORLD,"nu = %f \n",users.nu);
+	
+	MPI_Barrier(MPI_COMM_WORLD);
 		
 	ierr = KSPDestroy(&kspSPDE);CHKERRQ(ierr);
 	ierr = KSPDestroy(&kspGMRF);CHKERRQ(ierr);
