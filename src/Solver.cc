@@ -11,7 +11,7 @@ PetscErrorCode UnitSolver(Vec*& WrapVecA, Vec*& WrapVecB, Mat*& WrapMats, KSP*& 
 	ierr = VecExp(WrapVecA[0]);CHKERRQ(ierr);
 	ierr = SetOperator(WrapMats[1],WrapVecA[0],users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
 	ierr = SetSource(WrapVecB[4],WrapVecA[0],users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb);CHKERRQ(ierr);
-	ierr = KSPSetOperators(WrapKSPs[1],WrapMats[1],WrapMats[1],DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
+	ierr = KSPSetOperators(WrapKSPs[1],WrapMats[1],WrapMats[1]);CHKERRQ(ierr);
 	ierr = KSPSolve(WrapKSPs[1],WrapVecB[4],WrapVecB[0]);CHKERRQ(ierr);
 	ierr = KSPGetIterationNumber(WrapKSPs[1],&users.its);CHKERRQ(ierr);
 /*	ierr = VecNorm(WrapVecB[0],NORM_2,&normU);CHKERRQ(ierr);
@@ -32,7 +32,7 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 	ierr = VecExp(rho);CHKERRQ(ierr);
 	ierr = SetOperator(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
 	ierr = SetSource(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb);CHKERRQ(ierr);
-	ierr = KSPSetOperators(kspSPDE,A,A,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
+	ierr = KSPSetOperators(kspSPDE,A,A);CHKERRQ(ierr);
 	ierr = KSPSolve(kspSPDE,b,U);CHKERRQ(ierr);
 	ierr = KSPGetIterationNumber(kspSPDE,&users.its);CHKERRQ(ierr);
 	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: SPDE solved in %d iterations \n",Ns,users.its);
@@ -49,7 +49,7 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 	ierr = VecExp(rho);CHKERRQ(ierr);
 	ierr = SetOperator(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
 	ierr = SetSource(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb);CHKERRQ(ierr);
-	ierr = KSPSetOperators(kspSPDE,A,A,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
+	ierr = KSPSetOperators(kspSPDE,A,A);CHKERRQ(ierr);
 	ierr = KSPSolve(kspSPDE,b,U);CHKERRQ(ierr);
 	ierr = KSPGetIterationNumber(kspSPDE,&users.its);CHKERRQ(ierr);
 	ierr = VecNorm(U,NORM_2,&normU);CHKERRQ(ierr);

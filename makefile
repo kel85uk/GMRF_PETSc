@@ -1,12 +1,12 @@
 
-CFLAGS	         = -std=c++11 -O -Wall -Wconversion -Wshadow -I./src/ -D VEC_OUTPUT
+CCFLAGS	         = -std=c++11 -O -Wall -Wconversion -Wshadow -I./src/ -D VEC_OUTPUT
 FFLAGS	         =
-CPPFLAGS         =
+CPPFLAGS         = -std=c++11 -O -I./src/ -D VEC_OUTPUT
 FPPFLAGS         =
-LOCDIR           = ./
-EXAMPLESC        = ex29.c Test.cc test_serial.cc test_serial2.cc Functions.cc
-MANSEC           = KSP
-CLEANFILES       = rhs.vtk solution.vtk
+#LOCDIR           = ./
+#EXAMPLESC        = ex29.c Test.cc test_serial.cc test_serial2.cc Functions.cc
+#MANSEC           = KSP
+#CLEANFILES       = rhs.vtk solution.vtk
 NP               = 1
 ALL: test_MC test_PDE Test TestV2
 include ${PETSC_DIR}/conf/variables
