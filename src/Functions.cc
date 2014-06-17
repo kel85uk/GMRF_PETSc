@@ -209,22 +209,6 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	return ierr;
 }
 
-PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, const PetscReal& dy, const PetscMPIInt& rank, boost::variate_generator<boost::mt19937, boost::normal_distribution<> >& generator){
-	PetscErrorCode ierr;
-	PetscInt Ii = 0, Istart = 0, Iend = 0;
-	PetscScalar x, result;
-
-	ierr = VecGetOwnershipRange(Z,&Istart,&Iend);CHKERRQ(ierr);
-	for (Ii = Istart; Ii < Iend; ++Ii){
-		x = generator();
-		result = x/sqrt(dx*dy);
-		ierr = VecSetValues(Z,1,&Ii,&result,INSERT_VALUES);CHKERRQ(ierr);
-	}
-	ierr = VecAssemblyBegin(Z);CHKERRQ(ierr);
-	ierr = VecAssemblyEnd(Z);CHKERRQ(ierr);
-	return ierr;	
-}
-
 PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, const PetscReal& dy, const PetscMPIInt& rank, std::default_random_engine& generator){
 	PetscErrorCode ierr;
 	PetscInt Ii = 0, Istart = 0, Iend = 0;
