@@ -64,7 +64,7 @@ int main(int argc,char **argv)
 
 	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
-	for (Ns = 1; (Ns <= Nspc) && (tol > users.TOL); ++Ns){
+	for (Ns = 1; (Ns <= Nspc); ++Ns){// && (tol > users.TOL); ++Ns){
 		ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,normU); CHKERRQ(ierr);
 		update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,Ns);
 	}
