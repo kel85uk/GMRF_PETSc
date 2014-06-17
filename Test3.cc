@@ -106,5 +106,6 @@ int main(int argc,char **argv)
 		   options are chosen (e.g., -log_summary).
 	*/
 	ierr = PetscFinalize();
+	MPI_Finalize();
 	return 0;
 }
