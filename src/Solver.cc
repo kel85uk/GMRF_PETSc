@@ -49,7 +49,7 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 	ierr = VecExp(rho);CHKERRQ(ierr);
 	ierr = SetOperator(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
 	ierr = SetSource(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb);CHKERRQ(ierr);
-	ierr = KSPSetOperators(kspSPDE,A,A);CHKERRQ(ierr);
+	ierr = KSPSetOperators(kspSPDE,A,A,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
 	ierr = KSPSolve(kspSPDE,b,U);CHKERRQ(ierr);
 	ierr = KSPGetIterationNumber(kspSPDE,&users.its);CHKERRQ(ierr);
 	ierr = VecNorm(U,NORM_2,&normU);CHKERRQ(ierr);
