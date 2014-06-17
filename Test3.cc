@@ -47,7 +47,7 @@ int main(int argc,char **argv)
 	
 	MPI_Comm_rank(PETSC_COMM_WORLD,&lrank); // Get the processor local rank
 
-	PetscPrintf(PETSC_COMM_WORLD,"I am processor %d \n",lrank);	
+	PetscPrintf(PETSC_COMM_WORLD,"I am processor %d \n",grank);	
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
