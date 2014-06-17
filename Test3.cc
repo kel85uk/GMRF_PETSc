@@ -35,18 +35,12 @@ int main(int argc,char **argv)
 	MPI_Status status;
 	int ranks[] = {0};
 
-	MPI_Group worldgroup, slavegroup;
 	MPI_Comm petsc_comm_slaves;
 
 	MPI_Init(&argc,&argv);
 	MPI_Comm_rank(MPI_COMM_WORLD,&grank); // Get the processor global rank
 	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
-	MPI_Comm_group(MPI_COMM_WORLD,&worldgroup);
-	
-	MPI_Group_excl(worldgroup,1,ranks,&slavegroup); // Exclude the root process
-	MPI_Comm_create(MPI_COMM_WORLD,slavegroup,&petsc_comm_slaves);
-	PETSC_COMM_WORLD = petsc_comm_slaves; // PETSC_COMM_WORLD does not have root process now
-	/* To further split the PETSC communicator */
+	/* Split the communicator into PETSC_COMM_WORLD */
 	int ncolors = (numprocs-1)/procpercolor;
 	int color = grank/procpercolor;
 	if ((color+1) > ncolors)
