@@ -11,12 +11,6 @@ Input parameters include:\n\
 #include <Solver.hh>
 #define MPI_WTIME_IS_GLOBAL
 
-#define WORKTAG 1
-#define DIETAG 2
-
-void Masterprocess(int&);
-void Slaveprocess(Vec&,Vec&,Vec&,KSP&,Vec&,Vec&,Mat&,Vec&,UserCTX&,std::default_random_engine&,const PetscMPIInt&, const PetscInt&, PetscScalar&);
-
 int main(int argc,char **argv)
 {
 	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR, gmrf, EgmrfN, EgmrfNm1, VgmrfN, M2Ng;
@@ -41,11 +35,11 @@ int main(int argc,char **argv)
 	MPI_Comm_rank(MPI_COMM_WORLD,&grank); // Get the processor global rank
 	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
 	/* Split the communicator into PETSC_COMM_WORLD */
-	int ncolors = (numprocs-1)/procpercolor;
+	int ncolors = (numprocs)/procpercolor;
 	int color = grank/procpercolor;
 	if ((color+1) > ncolors)
      color--;
-	MPI_Comm_split(PETSC_COMM_WORLD, color, grank, &petsc_comm_slaves);
+	MPI_Comm_split(MPI_COMM_WORLD, color, grank, &petsc_comm_slaves);
 	
 	PETSC_COMM_WORLD = petsc_comm_slaves;
 
@@ -65,16 +59,26 @@ int main(int argc,char **argv)
 	/* Create Matrices and Solver contexts */
 	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE);CHKERRQ(ierr);
 	
-	PetscScalar normU,EnormUN,VnormUN,EnormUNm1,M2NnU,tol = 1.0;
+	PetscScalar normU = 0.,EnormUN,VnormUN,EnormUNm1,M2NnU,tol = 1.0;
+	PetscInt Nspc = users.Nsamples/ncolors + users.Nsamples%ncolors;
 
 	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
-	if(grank == 0){
-		Masterprocess();
+	for (Ns = 1; (Ns <= Nspc) && (tol > users.TOL); ++Ns){
+		ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,normU); CHKERRQ(ierr);
+		update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,Ns);
 	}
-	else{
-		Slaveprocess(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,normU);
+	--Ns;
+	if (lrank != 0){
+		EnormUN = 0.;
+		Ns = 0.;
 	}
+	PetscInt sendint = Ns; PetscScalar sendreal = EnormUN*Ns;
+	MPI_Reduce(&sendreal,&normU,1,MPI_REAL,MPI_SUM,0,MPI_COMM_WORLD);
+	MPI_Reduce(&sendint,&Ns,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
+	PetscPrintf(MPI_COMM_WORLD,"Total colors = %d \n",ncolors);
+	PetscPrintf(MPI_COMM_WORLD,"Total samples = %d \n",Ns);
+	PetscPrintf(MPI_COMM_WORLD,"Expectation of ||U|| = %4.7E \n",normU/Ns);
 	endTime = MPI_Wtime();
 	PetscPrintf(MPI_COMM_WORLD,"Elapsed wall-clock time (sec)= %f \n",endTime - startTime);
 	PetscPrintf(MPI_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,lrank);
@@ -99,24 +103,4 @@ int main(int argc,char **argv)
 	*/
 	ierr = PetscFinalize();
 	return 0;
-}
-
-void Masterprocess(int& numprocs){
-	MPI_Request request;
-	int ii = 0;
-	// Send task to slaves
-	int whomax = numprocs - 1;
-	if (whomax > users.Nsamples)
-		whomax = users.Nsamples;
-	for (int who = 1; who <= whomax; ++who, ++ii){
-		MPI_Send(&ii,1,MPI_INT,who,WORKTAG,MPI_COMM_WORLD);
-	}
-	for (Ns = 1; (Ns <= users.Nsamples) && (tol > users.TOL); ++Ns){
-		
-		update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,Ns);
-	}
-}
-
-void Slaveprocess(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, Vec& b, Mat& A, Vec& kspSPDE, UserCTX& users, std::default_random_engine& generator,const PetscMPIInt& lrank, const PetscInt& Ns, PetscScalar& normU){
-	ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,normU); CHKERRQ(ierr);
 }
