@@ -64,17 +64,19 @@ int main(int argc,char **argv)
 
 	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
-	for (Ns = 1; (Ns <= Nspc); ++Ns){// && (tol > users.TOL); ++Ns){
+	for (Ns = 1; (Ns <= Nspc) && (tol > users.TOL); ++Ns){
 		ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,normU); CHKERRQ(ierr);
 		update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,Ns);
 	}
+	MPI_Barrier(MPI_COMM_WORLD);
 	--Ns;
 	if (lrank != 0){
 		EnormUN = 0.;
 		Ns = 0.;
 	}
+	PetscPrintf(PETSC_COMM_WORLD,"I did %d samples \n",Ns);
 	PetscInt sendint = Ns; PetscScalar sendreal = EnormUN*Ns;
-	MPI_Reduce(&sendreal,&normU,1,MPI_REAL,MPI_SUM,0,MPI_COMM_WORLD);
+	MPI_Reduce(&sendreal,&normU,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD);
 	MPI_Reduce(&sendint,&Ns,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
 	PetscPrintf(MPI_COMM_WORLD,"Total colors = %d \n",ncolors);
 	PetscPrintf(MPI_COMM_WORLD,"Total samples = %d \n",Ns);
