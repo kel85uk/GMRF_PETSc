@@ -53,7 +53,7 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 	ierr = KSPSolve(kspSPDE,b,U);CHKERRQ(ierr);
 	ierr = KSPGetIterationNumber(kspSPDE,&users.its);CHKERRQ(ierr);
 	ierr = VecNorm(U,NORM_2,&normU);CHKERRQ(ierr);
-	normU /= users.NI;
+	normU /= sqrt(users.NI);
 //	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d] from Processor %d: 2-Norm = %f \n",Ns,rank,normU);
 	return ierr;
 }
