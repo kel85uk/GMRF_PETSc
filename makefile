@@ -1,6 +1,6 @@
 
-CCFLAGS	         = -std=c++11 -O -Wall -Wconversion -Wshadow -I./src/ -D VEC_OUTPUT
-FFLAGS	         =
+CCFLAGS	         = -std=c++11 -O -I./src/ -D VEC_OUTPUT
+FFLAGS	         = -Wall -Wconversion -Wshadow
 CPPFLAGS         = -std=c++11 -O -I./src/ -D VEC_OUTPUT
 FPPFLAGS         =
 #LOCDIR           = ./
@@ -35,6 +35,14 @@ TestV2: ./src/Functions.o ./src/Solver.o Test2.o  chkopts
 TestV3: ./src/Functions.o ./src/Solver.o Test3.o  chkopts
 	-${CLINKER} -o Test3 ./src/Functions.o ./src/Solver.o Test3.o  ${PETSC_SNES_LIB}
 	${RM} Test3.o	 ./src/Functions.o	 ./src/Solver.o	
+	
+TestV4: ./src/Functions.o ./src/Solver.o Test4.o  chkopts
+	-${CLINKER} -o Test4 ./src/Functions.o ./src/Solver.o Test4.o  ${PETSC_SNES_LIB}
+	${RM} Test4.o	 ./src/Functions.o	 ./src/Solver.o	
+	
+TestV5: ./src/Functions.o ./src/Solver.o Test5.o  chkopts
+	-${CLINKER} -o Test5 ./src/Functions.o ./src/Solver.o Test5.o  ${PETSC_SNES_LIB}
+	${RM} Test5.o	 ./src/Functions.o	 ./src/Solver.o			
 	
 #mpiexec -np 4 ./test_PDE -mat_type mpiaij -vec_type mpi -ksp_monitor_short -pc_type gamg -ksp_type fgmres -ksp_gmres_modifiedgramschmidt -m 100 -n 100
 
