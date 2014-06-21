@@ -10,6 +10,7 @@ Input parameters include:\n\
 #include <Functions.hh>
 #include <Solver.hh>
 #include <climits>
+#define DEBUG 0
 #define MPI_WTIME_IS_GLOBAL 1
 #define WORKTAG 1
 #define DIETAG 2
@@ -44,7 +45,9 @@ int main(int argc,char **argv)
 	if(grank == 0) color = std::numeric_limits<PetscInt>::max();
 	if ((color+1) > ncolors)
 		color--;
-	printf("I am processor %d with color %d \n",grank,color);	
+	#if DEBUG
+		printf("I am processor %d with color %d \n",grank,color);
+	#endif
 	MPI_Comm_split(MPI_COMM_WORLD, color, grank, &petsc_comm_slaves);
 	
 	PETSC_COMM_WORLD = petsc_comm_slaves;
@@ -88,14 +91,18 @@ int main(int argc,char **argv)
 		if(whomax > total_work)
 			whomax = total_work;
 		bufferBool = true;
-		PetscPrintf(MPI_COMM_WORLD,"I am processor %d in world, %d in petsc \n",grank,lrank);
+		#if DEBUG
+			PetscPrintf(MPI_COMM_WORLD,"I am processor %d in world, %d in petsc \n",grank,lrank);
+		#endif
 		for(who = 1; who <= whomax; ++who){
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
 		}
 		while ((received_answers <= total_work) && (tol > users.TOL)){
 			MPI_Recv(&bufferNormU,1,MPI_DOUBLE,MPI_ANY_SOURCE,WORKTAG,MPI_COMM_WORLD,&status);
 			who = status.MPI_SOURCE;
-			PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Received norm from processor %d \n",grank,who);
+			#if 1
+				PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Received norm from processor %d \n",grank,who);
+			#endif
 			normU = bufferNormU;
 			update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,received_answers);
 			++received_answers;
@@ -117,29 +124,42 @@ int main(int argc,char **argv)
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 			work_status = status.MPI_TAG;
 			MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
-			PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates\n",grank);
+			#if DEBUG
+				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates\n",grank);
+			#endif
 		}
 		else {
 			MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
-			PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast\n",grank);
+			#if DEBUG
+				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast\n",grank);
+			#endif
 		}
 		if(work_status != DIETAG){
-			while(true){		
+			while(true){
 				ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar); CHKERRQ(ierr);
+				++Ns;				
 				if(lrank == 0){
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
+					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: Waiting for work\n",grank);
+					#endif
 					MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 					work_status = status.MPI_TAG;
 					MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates with tag = %d\n",grank,work_status);
+					#endif
 				}
 				else{
 					MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast with tag = %d\n",grank,work_status);
+					#endif
 				}
 				if(work_status == DIETAG){
+					#if DEBUG
 					PetscPrintf(PETSC_COMM_WORLD,"Proc[%d]: We finished all work \n",grank);	
+					#endif
 					break;
 				}
 			}
@@ -148,6 +168,7 @@ int main(int argc,char **argv)
 
 	endTime = MPI_Wtime();
 	PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: All done! \n",grank);
+	if (grank != 0) PetscPrintf(PETSC_COMM_WORLD,"Proc[%d]: We did %d samples \n",grank,(Ns-1));
 	PetscPrintf(MPI_COMM_WORLD,"Elapsed wall-clock time (sec)= %f \n",endTime - startTime);
 	PetscPrintf(MPI_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,lrank);
 	PetscPrintf(MPI_COMM_WORLD,"tau2 = %f \n",users.tau2);

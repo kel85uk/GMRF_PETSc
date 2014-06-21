@@ -50,4 +50,6 @@ TestV5: ./src/Functions.o ./src/Solver.o Test5.o  chkopts
 
 #mpiexec -np 3 ./Test -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 50 -n 50 -pc_type ksp -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-2 -print_gmrf_mean -print_gmrf_var -print_sol_mean -print_sol_var -print_rho_mean -print_rho_var
 
-#mpiexec -np 3 ./Test2 -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 50 -n 50 -pc_type ksp -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-2 -log_summary   
+#mpiexec -np 3 ./Test2 -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 50 -n 50 -pc_type ksp -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-2 -log_summary  
+
+#mpiexec -np 3 ./Test5 -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 50 -n 50 -pc_type hypre -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-6 
