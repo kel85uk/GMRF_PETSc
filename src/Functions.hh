@@ -24,6 +24,7 @@ PetscErrorCode CreateVectors(Vec*&,const PetscInt&,const PetscInt&);
 PetscErrorCode DestroyVectors(Vec*&,const PetscInt&);
 PetscErrorCode CreateSolvers(Mat&,const PetscInt&,KSP&,Mat&,const PetscInt&,KSP&);
 
+PetscErrorCode Interp2D(Vec&,const Vec&);
 
 PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&);
 

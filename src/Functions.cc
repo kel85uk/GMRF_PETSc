@@ -41,6 +41,47 @@ PetscErrorCode CreateSolvers(Mat& L, const PetscInt& NT, KSP& kspGMRF, Mat& A,co
 	return ierr;
 }
 
+PetscErrorCode Interp2D(Vec&,const Vec&)
+{
+	PetscErrorCode ierr;
+/*   if ( newWidth == size_[0]  && newHeight == size_[1] )
+      return *this;
+
+
+   GrayScaleImage resizedImage;
+
+   resizedImage.size_[0] = newWidth;
+   resizedImage.size_[1] = newHeight;
+
+   resizedImage.image_.resize( newWidth * newHeight );
+
+   real scaleX = real( size_[0] ) / real( newWidth );
+   real scaleY = real( size_[1] ) / real( newHeight);
+
+   for( int y = 0; y <  newHeight; ++y )
+      for( int x = 0; x <  newWidth; ++x )
+      {
+         real oldX = x * scaleX;
+         real oldY = y * scaleY;
+         int oldXi = static_cast<int>( oldX );
+         int oldYi = static_cast<int>( oldY );
+         real xDiff = oldX - oldXi;
+         real yDiff = oldY - oldYi;
+
+         // bilinear interpolation
+
+         resizedImage.getElement( x, y ) =
+                  static_cast<unsigned char> (
+                  (1 - xDiff) * (1 - yDiff ) * getElement( oldXi    , oldYi    ) +
+                       xDiff  * (1 - yDiff ) * getElement( oldXi + 1, oldYi    ) +
+                  (1 - xDiff) *      yDiff   * getElement( oldXi    , oldYi + 1) +
+                       xDiff  *      yDiff   * getElement( oldXi + 1, oldYi + 1) );
+      }
+
+   return resizedImage; */
+   return ierr;
+}
+
 PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa){
 	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
 	PetscReal			dxdy = 1.0, dxidy = 1.0/dy/dy, dyidx = 1.0/dx/dx;
