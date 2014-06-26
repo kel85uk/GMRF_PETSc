@@ -53,7 +53,7 @@ int main(int argc,char **argv)
 	std::vector<PetscScalar>		XR,YR; // Physical Coordinates reside in all processors
 	UserCTX users;
 	KSP kspPDE;
-	PetscScalar	result;
+	PetscScalar	result, normU;
 	PetscErrorCode ierr;
 	PetscBool      flg = PETSC_FALSE;
 	PetscMPIInt rank;	
@@ -100,12 +100,15 @@ int main(int argc,char **argv)
 	ierr = KSPSolve(kspPDE,Z,U);CHKERRQ(ierr);
 	ierr = KSPGetIterationNumber(kspPDE,&users.its);CHKERRQ(ierr);
 	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: SPDE solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
-	
+	ierr = VecNorm(U,NORM_2,&normU);CHKERRQ(ierr);
+	normU /= sqrt(users.NI);
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Norm-2 of U = %4.8E \n",normU);CHKERRQ(ierr);
+	if(false){
 	ierr = VecPostProcs(U,"sol_mean.dat",rank);CHKERRQ(ierr);
 	ierr = VecPostProcs(rho,"rho_mean.dat",rank);CHKERRQ(ierr);
 	VecPostProcs(XR,"XR.dat",rank);
 	VecPostProcs(YR,"YR.dat",rank);
-	
+	}
 	PetscPrintf(PETSC_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
 	PetscPrintf(PETSC_COMM_WORLD,"tau2 = %f \n",users.tau2);
 	PetscPrintf(PETSC_COMM_WORLD,"kappa = %f \n",users.kappa);
