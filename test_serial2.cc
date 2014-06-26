@@ -79,7 +79,7 @@ int main(int argc,char **argv)
 	ierr = VecGetOwnershipRange(rho,&Istart,&Iend);CHKERRQ(ierr);
 	for (int II = Istart; II < Iend; ++II){
 		radius = std::sqrt((XR[II] - 0.5)*(XR[II] - 0.5) + (YR[II] - 0.5)*(YR[II] - 0.5));
-		rho_mean = rho_calculate(radius,RE);
+		rho_mean = 1.0;//rho_calculate(radius,RE);
 		ierr = VecSetValues(rho,1,&II,&rho_mean,INSERT_VALUES);CHKERRQ(ierr);
 	}
 	ierr = VecAssemblyBegin(rho);CHKERRQ(ierr);
