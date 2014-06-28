@@ -553,9 +553,10 @@ PetscErrorCode update_stats(PetscScalar& EUN,PetscScalar& VUN,PetscScalar& EUNm1
 	EUN = EUNm1 + (U - EUNm1)/(PetscScalar) Ns;
 	M2N += (U - EUNm1)*(U - EUN);
 	VUN = M2N/(PetscScalar) Ns;
-	tol = std::abs(EUN - EUNm1);
-	tolrE = tol/(U + 1.e-12);
-	tol  = PetscMax(tolrE,tol);
+//	tol = std::abs(EUN - EUNm1);
+//	tolrE = tol/(EUN + 1.e-12);
+//	tol  = PetscMax(tolrE,tol);
+	tol  = sqrt(VUN/(PetscScalar) Ns);
 	ierr = PetscPrintf(MPI_COMM_WORLD,"Sample[%d]: Expectation = %3.8E\tVariance = %3.8E\tTol = %3.8E \n",Ns,EUN,VUN,tol);
 	return ierr;
 }
