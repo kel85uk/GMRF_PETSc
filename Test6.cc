@@ -60,8 +60,8 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
   ierr = MatCreate(PETSC_COMM_WORLD,&V);CHKERRQ(ierr); // Create matrix V residing in PETSC_COMM_WORLD
   ierr = MatSetSizes(V,PETSC_DECIDE,PETSC_DECIDE,An,nconv);CHKERRQ(ierr); // Set the size of the matrix V, and let PETSC decide the decomposition
   ierr = MatSetFromOptions(V);CHKERRQ(ierr);
-  IdxU = new PetscInt*[Am];
-  IdxV = new PetscInt*[An];
+  IdxU = std::new PetscInt [Am];
+  IdxV = std::new PetscInt [An];
   for (int ii = 0; ii < Am; ++ii) IdxU[ii] = ii;
   for (int ii = 0; ii < An; ++ii) IdxV[ii] = ii;
   for (int i=0;i<nconv;i++) {
