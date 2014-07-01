@@ -71,8 +71,8 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
     ierr = VecGetArray(u,&utemp); CHKERRQ(ierr);
     ierr = VecGetArray(v,&vtemp); CHKERRQ(ierr);
     PetscPrintf(PETSC_COMM_WORLD,"All good %d\n",i+10);
-    ierr = MatSetValues(U,1,&i,Am,IdxU,utemp,INSERT_VALUES); CHKERRQ(ierr);
-    ierr = MatSetValues(V,1,&i,An,IdxV,vtemp,INSERT_VALUES); CHKERRQ(ierr);
+//    ierr = MatSetValues(U,1,&i,Am,IdxU,utemp,INSERT_VALUES); CHKERRQ(ierr);
+//    ierr = MatSetValues(V,1,&i,An,IdxV,vtemp,INSERT_VALUES); CHKERRQ(ierr);
     ierr = VecRestoreArray(u,&utemp); CHKERRQ(ierr);
     ierr = VecRestoreArray(v,&vtemp); CHKERRQ(ierr);
   }
