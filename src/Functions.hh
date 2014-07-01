@@ -1,9 +1,11 @@
 #ifndef FUNCTION_S
 #define FUNCTION_S
 
+#include <slepc.h>
 #include <petsc.h>
 #include <fstream>
 #include <vector>
+#include <new>
 #include <iostream>
 #include <random>
 #include <algorithm>
@@ -47,6 +49,9 @@ PetscErrorCode update_stats(Vec&,Vec&,Vec&,Vec&,const Vec&,const PetscInt&);
 PetscErrorCode update_stats(PetscScalar&,PetscScalar&,PetscScalar&,PetscScalar&,PetscScalar&,const PetscScalar&,const PetscInt&);
 
 PetscErrorCode VecSetMean(Vec&,const Vec&);
+
+/** Function which generates the SVD decomposition into orthogonal basis vector matrices U, and V, and diagonal matrix of singular values (Requires Slepc) **/
+PetscErrorCode SVD_Decomp(Mat&,Mat&,Mat&,const Mat&);
 
 void global_local_Nelements(PetscInt&, PetscInt&, PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&);
 

@@ -6,5 +6,6 @@ Test5
 Test6
 test_MC
 test_PDE
+test_SVD
 *.[oa]
 *.dat

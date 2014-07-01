@@ -568,6 +568,66 @@ PetscErrorCode VecSetMean(Vec&,const Vec&){
 	return ierr;
 }
 
+PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
+	PetscErrorCode ierr;
+	Vec            u,v;             /* left and right singular vectors */
+  	SVD            svd;             /* singular value problem solver context */
+  	PetscScalar    sigma;
+  PetscInt       nconv,Am,An;
+  PetscInt       *IdxU, *IdxV;
+  PetscScalar    *utemp, *vtemp;
+  	ierr = MatGetVecs(A,&v,&u);CHKERRQ(ierr);
+  	ierr = VecGetSize(v,&An); CHKERRQ(ierr);
+  	ierr = VecGetSize(u,&Am); CHKERRQ(ierr);
+  ierr = SVDCreate(PETSC_COMM_WORLD,&svd);CHKERRQ(ierr);
+  ierr = SVDSetOperator(svd,A);CHKERRQ(ierr);
+  ierr = SVDSetType(svd,SVDTRLANCZOS);CHKERRQ(ierr);
+  ierr = SVDSetFromOptions(svd);CHKERRQ(ierr);
+  ierr = SVDSolve(svd);CHKERRQ(ierr);  	
+  ierr = SVDGetConverged(svd,&nconv);CHKERRQ(ierr);
+  ierr = MatCreate(PETSC_COMM_WORLD,&S);CHKERRQ(ierr); // Create matrix S residing in PETSC_COMM_WORLD
+  ierr = MatSetSizes(S,PETSC_DECIDE,PETSC_DECIDE,nconv,nconv);CHKERRQ(ierr); // Set the size of the matrix S, and let PETSC decide the decomposition
+  ierr = MatSetFromOptions(S);CHKERRQ(ierr);
+  ierr = MatMPIAIJSetPreallocation(S,1,NULL,1,NULL);CHKERRQ(ierr);
+  ierr = MatSeqAIJSetPreallocation(S,1,NULL);CHKERRQ(ierr);
+  ierr = MatSetUp(S);CHKERRQ(ierr);	
+  ierr = MatCreate(PETSC_COMM_WORLD,&U);CHKERRQ(ierr); // Create matrix U residing in PETSC_COMM_WORLD
+  ierr = MatSetSizes(U,PETSC_DECIDE,PETSC_DECIDE,Am,nconv);CHKERRQ(ierr); // Set the size of the matrix U, and let PETSC decide the decomposition
+  ierr = MatSetType(U,MATDENSE);
+  ierr = MatSetFromOptions(U);CHKERRQ(ierr);
+  ierr = MatSetUp(U);CHKERRQ(ierr);
+  ierr = MatCreate(PETSC_COMM_WORLD,&V);CHKERRQ(ierr); // Create matrix V residing in PETSC_COMM_WORLD
+  ierr = MatSetSizes(V,PETSC_DECIDE,PETSC_DECIDE,An,nconv);CHKERRQ(ierr); // Set the size of the matrix V, and let PETSC decide the decomposition
+  ierr = MatSetFromOptions(V);CHKERRQ(ierr);
+  ierr = MatSetType(V,MATDENSE);
+  ierr = MatSetFromOptions(V);CHKERRQ(ierr);
+  ierr = MatSetUp(V);CHKERRQ(ierr);
+  IdxU = new PetscInt [Am];
+  IdxV = new PetscInt [An];
+  for (int ii = 0; ii < Am; ++ii) IdxU[ii] = ii;
+  for (int ii = 0; ii < An; ++ii) IdxV[ii] = ii;
+  for (int i=0;i<nconv;i++) {
+    ierr = SVDGetSingularTriplet(svd,i,&sigma,u,v);CHKERRQ(ierr);
+    ierr = MatSetValue(S,i,i,sigma,INSERT_VALUES);CHKERRQ(ierr);
+    ierr = VecGetArray(u,&utemp); CHKERRQ(ierr);
+    ierr = VecGetArray(v,&vtemp); CHKERRQ(ierr);
+    ierr = MatSetValues(U,Am,IdxU,1,&i,utemp,INSERT_VALUES); CHKERRQ(ierr);
+    ierr = MatSetValues(V,An,IdxV,1,&i,vtemp,INSERT_VALUES); CHKERRQ(ierr);
+    ierr = VecRestoreArray(u,&utemp); CHKERRQ(ierr);
+    ierr = VecRestoreArray(v,&vtemp); CHKERRQ(ierr);
+  }
+  ierr = MatAssemblyBegin(U,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyBegin(V,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyBegin(S,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = SVDDestroy(&svd);CHKERRQ(ierr);
+  ierr = VecDestroy(&u);CHKERRQ(ierr);
+  ierr = VecDestroy(&v);CHKERRQ(ierr);
+  ierr = MatAssemblyEnd(U,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyEnd(V,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyEnd(S,MAT_FINAL_ASSEMBLY);
+  return ierr;
+}
+
 void global_local_Nelements(PetscInt& Nel, PetscInt& ILs, PetscInt& ILe, const PetscInt& Istart, const PetscInt& Iend, const PetscInt& NGhost, const PetscInt& m){
 	PetscInt j_start, i_start, j_end, i_end, Iendm1 = Iend-1, IIe, IIs;
 	j_start = (PetscInt) Istart/m; i_start = Istart - j_start*m;
