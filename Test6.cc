@@ -64,11 +64,13 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
   IdxV = new PetscInt [An];
   for (int ii = 0; ii < Am; ++ii) IdxU[ii] = ii;
   for (int ii = 0; ii < An; ++ii) IdxV[ii] = ii;
+  PetscPrintf(PETSC_COMM_WORLD,"All good 2\n");
   for (int i=0;i<nconv;i++) {
     ierr = SVDGetSingularTriplet(svd,i,&sigma,u,v);CHKERRQ(ierr);
     ierr = MatSetValue(S,i,i,sigma,INSERT_VALUES);CHKERRQ(ierr);
     ierr = VecGetArray(u,&utemp); CHKERRQ(ierr);
     ierr = VecGetArray(v,&vtemp); CHKERRQ(ierr);
+    PetscPrintf(PETSC_COMM_WORLD,"All good %d\n",i+10);
     ierr = MatSetValues(U,1,&i,Am,IdxU,utemp,INSERT_VALUES); CHKERRQ(ierr);
     ierr = MatSetValues(V,1,&i,An,IdxV,vtemp,INSERT_VALUES); CHKERRQ(ierr);
     ierr = VecRestoreArray(u,&utemp); CHKERRQ(ierr);
