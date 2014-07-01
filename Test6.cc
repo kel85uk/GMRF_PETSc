@@ -132,7 +132,7 @@ int main(int argc,char **argv)
          Get converged singular triplets: i-th singular value is stored in sigma
       */
       ierr = SVDGetSingularTriplet(svd,i,&sigma,u,v);CHKERRQ(ierr);
-
+		VecView(u,PETSC_VIEWER_STDOUT_WORLD);
       /*
          Compute the error associated to each singular triplet
       */
