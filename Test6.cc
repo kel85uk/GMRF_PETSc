@@ -37,8 +37,8 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
   	SVD            svd;             /* singular value problem solver context */
   	PetscScalar    sigma;
   PetscInt       nconv,Am,An;
-  PetscInt*      IdxU, IdxV;
-  PetscScalar*   utemp, vtemp;
+  PetscInt       *IdxU, *IdxV;
+  PetscScalar    *utemp, *vtemp;
   	ierr = MatGetVecs(A,&v,&u);CHKERRQ(ierr);
   	ierr = VecGetSize(v,&An); CHKERRQ(ierr);
   	ierr = VecGetSize(u,&Am); CHKERRQ(ierr);
@@ -60,8 +60,8 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
   ierr = MatCreate(PETSC_COMM_WORLD,&V);CHKERRQ(ierr); // Create matrix V residing in PETSC_COMM_WORLD
   ierr = MatSetSizes(V,PETSC_DECIDE,PETSC_DECIDE,An,nconv);CHKERRQ(ierr); // Set the size of the matrix V, and let PETSC decide the decomposition
   ierr = MatSetFromOptions(V);CHKERRQ(ierr);
-  IdxU = std::new PetscInt [Am];
-  IdxV = std::new PetscInt [An];
+  IdxU = new PetscInt [Am];
+  IdxV = new PetscInt [An];
   for (int ii = 0; ii < Am; ++ii) IdxU[ii] = ii;
   for (int ii = 0; ii < An; ++ii) IdxV[ii] = ii;
   for (int i=0;i<nconv;i++) {
@@ -69,8 +69,8 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
     ierr = MatSetValue(S,i,i,sigma,INSERT_VALUES);CHKERRQ(ierr);
     ierr = VecGetArray(u,&utemp); CHKERRQ(ierr);
     ierr = VecGetArray(v,&vtemp); CHKERRQ(ierr);
-    ierr = MatSetValues(U,Am,IdxU,1,&i,&utemp,INSERT_VALUES); CHKERRQ(ierr);
-    ierr = MatSetValues(V,An,IdxV,1,&i,&vtemp,INSERT_VALUES); CHKERRQ(ierr);
+    ierr = MatSetValues(U,Am,IdxU,1,&i,utemp,INSERT_VALUES); CHKERRQ(ierr);
+    ierr = MatSetValues(V,An,IdxV,1,&i,vtemp,INSERT_VALUES); CHKERRQ(ierr);
     ierr = VecRestoreArray(u,&utemp); CHKERRQ(ierr);
     ierr = VecRestoreArray(v,&vtemp); CHKERRQ(ierr);
   }
