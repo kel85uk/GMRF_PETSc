@@ -35,6 +35,7 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
 	PetscErrorCode ierr;
 	Vec            u,v;             /* left and right singular vectors */
   	SVD            svd;             /* singular value problem solver context */
+  	PetscScalar    sigma;
   PetscInt       nconv,Am,An;
   PetscInt*      IdxU, IdxV;
   PetscScalar*   utemp, vtemp;
@@ -59,11 +60,11 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
   ierr = MatCreate(PETSC_COMM_WORLD,&V);CHKERRQ(ierr); // Create matrix V residing in PETSC_COMM_WORLD
   ierr = MatSetSizes(V,PETSC_DECIDE,PETSC_DECIDE,An,nconv);CHKERRQ(ierr); // Set the size of the matrix V, and let PETSC decide the decomposition
   ierr = MatSetFromOptions(V);CHKERRQ(ierr);
-  IdxU = new PetscInt[Am];
-  IdxV = new PetscInt[An];
+  IdxU = new PetscInt*[Am];
+  IdxV = new PetscInt*[An];
   for (int ii = 0; ii < Am; ++ii) IdxU[ii] = ii;
   for (int ii = 0; ii < An; ++ii) IdxV[ii] = ii;
-  for (i=0;i<nconv;i++) {
+  for (int i=0;i<nconv;i++) {
     ierr = SVDGetSingularTriplet(svd,i,&sigma,u,v);CHKERRQ(ierr);
     ierr = MatSetValue(S,i,i,sigma,INSERT_VALUES);CHKERRQ(ierr);
     ierr = VecGetArray(u,&utemp); CHKERRQ(ierr);
@@ -124,7 +125,7 @@ int main(int argc,char **argv)
   ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
   ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
   
-  ierr = SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A);CHKERRQ(ierr);
+  ierr = SVD_Decomp(U,V,S,A);CHKERRQ(ierr);
 
   ierr = MatDestroy(&A);CHKERRQ(ierr);
   ierr = MatDestroy(&U);CHKERRQ(ierr);
