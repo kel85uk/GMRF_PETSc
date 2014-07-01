@@ -11,6 +11,7 @@ NP               = 1
 ALL: test_MC test_PDE Test TestV2
 include ${PETSC_DIR}/conf/variables
 include ${PETSC_DIR}/conf/rules
+include ${SLEPC_DIR}/conf/slepc_common
 
 ex29: ex29.o  chkopts
 	-${CLINKER} -o ex29 ex29.o  ${PETSC_SNES_LIB}
@@ -22,7 +23,11 @@ test_MC: ./src/Functions.o test_serial.o  chkopts
 	
 test_PDE: ./src/Functions.o test_serial2.o  chkopts
 	-${CLINKER} -o test_PDE ./src/Functions.o test_serial2.o  ${PETSC_SNES_LIB}
-	${RM} test_serial2.o ./src/Functions.o	
+	${RM} test_serial2.o ./src/Functions.o
+
+test_MLMC: ./src/Functions.o test_serial3.o  chkopts
+	-${CLINKER} -o test_MLMC ./src/Functions.o test_serial3.o  ${PETSC_SNES_LIB}
+	${RM} test_serial3.o ./src/Functions.o	
 	
 Test: ./src/Functions.o Test.o  chkopts
 	-${CLINKER} -o Test ./src/Functions.o Test.o  ${PETSC_SNES_LIB}
@@ -42,7 +47,11 @@ TestV4: ./src/Functions.o ./src/Solver.o Test4.o  chkopts
 	
 TestV5: ./src/Functions.o ./src/Solver.o Test5.o  chkopts
 	-${CLINKER} -o Test5 ./src/Functions.o ./src/Solver.o Test5.o  ${PETSC_SNES_LIB}
-	${RM} Test5.o	 ./src/Functions.o	 ./src/Solver.o			
+	${RM} Test5.o	 ./src/Functions.o	 ./src/Solver.o
+	
+TestV6: ./src/Functions.o ./src/Solver.o Test6.o  chkopts
+	-${CLINKER} -o Test6 ./src/Functions.o ./src/Solver.o Test6.o  ${PETSC_SNES_LIB} ${SLEPC_LIB}
+	${RM} Test6.o	 ./src/Functions.o	 ./src/Solver.o	
 	
 #mpiexec -np 4 ./test_PDE -mat_type mpiaij -vec_type mpi -ksp_monitor_short -pc_type gamg -ksp_type fgmres -ksp_gmres_modifiedgramschmidt -m 100 -n 100
 
