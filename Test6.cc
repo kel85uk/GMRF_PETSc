@@ -1,99 +1,156 @@
-/* Test Program for entire GMRF + MLMC (Domain Decomposition only) */
+/*
+   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   SLEPc - Scalable Library for Eigenvalue Problem Computations
+   Copyright (c) 2002-2013, Universitat Politecnica de Valencia, Spain
 
-static char help[] = "Solves a linear system in parallel with KSP.\n\
-Input parameters include:\n\
-  -random_exact_sol : use a random exact solution vector\n\
-  -view_exact_sol   : write exact solution vector to stdout\n\
-  -m <mesh_x>       : number of mesh points in x-direction\n\
-  -n <mesh_n>       : number of mesh points in y-direction\n\n";
+   This file is part of SLEPc.
 
-#include <Functions.hh>
-#include <Solver.hh>
-#define MPI_WTIME_IS_GLOBAL 1
+   SLEPc is free software: you can redistribute it and/or modify it under  the
+   terms of version 3 of the GNU Lesser General Public License as published by
+   the Free Software Foundation.
 
+   SLEPc  is  distributed in the hope that it will be useful, but WITHOUT  ANY
+   WARRANTY;  without even the implied warranty of MERCHANTABILITY or  FITNESS
+   FOR  A  PARTICULAR PURPOSE. See the GNU Lesser General Public  License  for
+   more details.
+
+   You  should have received a copy of the GNU Lesser General  Public  License
+   along with SLEPc. If not, see <http://www.gnu.org/licenses/>.
+   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+
+static char help[] = "Singular value decomposition of the Lauchli matrix.\n"
+  "The command line options are:\n"
+  "  -n <n>, where <n> = matrix dimension.\n"
+  "  -mu <mu>, where <mu> = subdiagonal value.\n\n";
+
+#include <slepcsvd.h>
+
+#undef __FUNCT__
+#define __FUNCT__ "main"
 int main(int argc,char **argv)
 {
-	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR, gmrf, EgmrfN, EgmrfNm1, VgmrfN, M2Ng;
-	Vec* Wrapalla[12] = {&rho, &ErhoNm1, &ErhoN, &VrhoN, &N01, &M2Nr, &resR, &gmrf, &EgmrfN, &EgmrfNm1, &VgmrfN, &M2Ng};
-	Vec* Wrapallb[7] = {&U, &EUNm1, &EUN, &VUN, &b, &M2N, &resU};
-	Mat A, L;
-	KSP kspSPDE, kspGMRF;
-	PetscInt		Ns;
-	UserCTX		users;
-	PetscMPIInt    rank;
-	PetscErrorCode ierr;
-	PetscBool      flg = PETSC_FALSE;
-	PetscReal startTime, endTime;
-	
-	PetscInitialize(&argc,&argv,(char*)0,help);
-	MPI_Comm_rank(MPI_COMM_WORLD,&rank);
-	
-	startTime = MPI_Wtime();
-	srand(rank);
-	std::default_random_engine generator(rand());	
-	ierr = GetOptions(users);CHKERRQ(ierr);
-	/* Create all the vectors and matrices needed for calculation */
-	ierr = CreateVectors(*Wrapalla,12,users.NT);CHKERRQ(ierr);
-	ierr = CreateVectors(*Wrapallb,7,users.NI);CHKERRQ(ierr);
-	/* Create Matrices and Solver contexts */
-	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE);CHKERRQ(ierr);
-	
-	PetscScalar normU,EnormUN,VnormUN,EnormUNm1,M2NnU,tol = 1.0;
-	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
-	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
-	
-	for (Ns = 1; (Ns <= users.Nsamples) && (tol > users.TOL); ++Ns){
-		ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,rank,Ns,normU); CHKERRQ(ierr);
-		update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,Ns);
-	}
-	endTime = MPI_Wtime();
-	PetscPrintf(PETSC_COMM_WORLD,"Elapsed wall-clock time (sec)= %f \n",endTime - startTime);
-	PetscPrintf(PETSC_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
-	PetscPrintf(PETSC_COMM_WORLD,"tau2 = %f \n",users.tau2);
-	PetscPrintf(PETSC_COMM_WORLD,"kappa = %f \n",users.kappa);
-	PetscPrintf(PETSC_COMM_WORLD,"nu = %f \n",users.nu);	
-	
-	#ifdef VEC_OUTPUT
-		flg  = PETSC_FALSE;
-		ierr = PetscOptionsGetBool(NULL,"-print_rho_mean",&flg,NULL);CHKERRQ(ierr);
-		if (flg) {ierr = VecPostProcs(ErhoN,"rho_mean.dat",rank);CHKERRQ(ierr);}	
-	
-		flg  = PETSC_FALSE;
-		ierr = PetscOptionsGetBool(NULL,"-print_rho_var",&flg,NULL);CHKERRQ(ierr);
-		if (flg) {ierr = VecPostProcs(VrhoN,"rho_var.dat",rank);CHKERRQ(ierr);}
+  Mat            A;               /* operator matrix */
+  Vec            u,v;             /* left and right singular vectors */
+  SVD            svd;             /* singular value problem solver context */
+  SVDType        type;
+  PetscReal      error,tol,sigma,mu=PETSC_SQRT_MACHINE_EPSILON;
+  PetscInt       n=100,i,j,Istart,Iend,nsv,maxit,its,nconv;
+  PetscErrorCode ierr;
 
-		flg  = PETSC_FALSE;
-		ierr = PetscOptionsGetBool(NULL,"-print_sol_mean",&flg,NULL);CHKERRQ(ierr);
-		if (flg) {ierr = VecPostProcs(EUN,"sol_mean.dat",rank);CHKERRQ(ierr);}
-	
-		flg  = PETSC_FALSE;
-		ierr = PetscOptionsGetBool(NULL,"-print_sol_var",&flg,NULL);CHKERRQ(ierr);
-		if (flg) {ierr = VecPostProcs(VUN,"sol_var.dat",rank);CHKERRQ(ierr);}
-	
-		flg  = PETSC_FALSE;
-		ierr = PetscOptionsGetBool(NULL,"-print_gmrf_mean",&flg,NULL);CHKERRQ(ierr);
-		if (flg) {ierr = VecPostProcs(EgmrfN,"gmrf_mean.dat",rank);CHKERRQ(ierr);}
-	
-		flg  = PETSC_FALSE;
-		ierr = PetscOptionsGetBool(NULL,"-print_gmrf_var",&flg,NULL);CHKERRQ(ierr);
-		if (flg) {ierr = VecPostProcs(VgmrfN,"gmrf_var.dat",rank);CHKERRQ(ierr);}
-	#endif
-		
-	ierr = KSPDestroy(&kspSPDE);CHKERRQ(ierr);
-	ierr = KSPDestroy(&kspGMRF);CHKERRQ(ierr);
-	
-	ierr = DestroyVectors(*Wrapalla,12);CHKERRQ(ierr);
-	ierr = DestroyVectors(*Wrapallb,7);CHKERRQ(ierr);
+  SlepcInitialize(&argc,&argv,(char*)0,help);
 
-	ierr = MatDestroy(&A);CHKERRQ(ierr);
-	ierr = MatDestroy(&L);CHKERRQ(ierr);
+  ierr = PetscOptionsGetInt(NULL,"-n",&n,NULL);CHKERRQ(ierr);
+  ierr = PetscOptionsGetReal(NULL,"-mu",&mu,NULL);CHKERRQ(ierr);
+  ierr = PetscPrintf(PETSC_COMM_WORLD,"\nLauchli singular value decomposition, (%D x %D) mu=%G\n\n",n+1,n,mu);CHKERRQ(ierr);
 
-	/*
-	  Always call PetscFinalize() before exiting a program.  This routine
-		 - finalizes the PETSc libraries as well as MPI
-		 - provides summary and diagnostic information if certain runtime
-		   options are chosen (e.g., -log_summary).
-	*/
-	ierr = PetscFinalize();
-	return 0;
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                          Build the Lauchli matrix
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  ierr = MatCreate(PETSC_COMM_WORLD,&A);CHKERRQ(ierr);
+  ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,n+1,n);CHKERRQ(ierr);
+  ierr = MatSetFromOptions(A);CHKERRQ(ierr);
+  ierr = MatSetUp(A);CHKERRQ(ierr);
+
+  ierr = MatGetOwnershipRange(A,&Istart,&Iend);CHKERRQ(ierr);
+  for (i=Istart;i<Iend;i++) {
+    if (i == 0) {
+      for (j=0;j<n;j++) {
+        ierr = MatSetValue(A,0,j,1.0,INSERT_VALUES);CHKERRQ(ierr);
+      }
+    } else {
+      ierr = MatSetValue(A,i,i-1,mu,INSERT_VALUES);CHKERRQ(ierr);
+    }
+  }
+
+  ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
+  ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
+  ierr = MatGetVecs(A,&v,&u);CHKERRQ(ierr);
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+          Create the singular value solver and set various options
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  /*
+     Create singular value solver context
+  */
+  ierr = SVDCreate(PETSC_COMM_WORLD,&svd);CHKERRQ(ierr);
+
+  /*
+     Set operator
+  */
+  ierr = SVDSetOperator(svd,A);CHKERRQ(ierr);
+
+  /*
+     Use thick-restart Lanczos as default solver
+  */
+  ierr = SVDSetType(svd,SVDTRLANCZOS);CHKERRQ(ierr);
+
+  /*
+     Set solver parameters at runtime
+  */
+  ierr = SVDSetFromOptions(svd);CHKERRQ(ierr);
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                      Solve the singular value system
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  ierr = SVDSolve(svd);CHKERRQ(ierr);
+  ierr = SVDGetIterationNumber(svd,&its);CHKERRQ(ierr);
+  ierr = PetscPrintf(PETSC_COMM_WORLD," Number of iterations of the method: %D\n",its);CHKERRQ(ierr);
+
+  /*
+     Optional: Get some information from the solver and display it
+  */
+  ierr = SVDGetType(svd,&type);CHKERRQ(ierr);
+  ierr = PetscPrintf(PETSC_COMM_WORLD," Solution method: %s\n\n",type);CHKERRQ(ierr);
+  ierr = SVDGetDimensions(svd,&nsv,NULL,NULL);CHKERRQ(ierr);
+  ierr = PetscPrintf(PETSC_COMM_WORLD," Number of requested singular values: %D\n",nsv);CHKERRQ(ierr);
+  ierr = SVDGetTolerances(svd,&tol,&maxit);CHKERRQ(ierr);
+  ierr = PetscPrintf(PETSC_COMM_WORLD," Stopping condition: tol=%.4G, maxit=%D\n",tol,maxit);CHKERRQ(ierr);
+
+  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                    Display solution and clean up
+     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+  /*
+     Get number of converged singular triplets
+  */
+  ierr = SVDGetConverged(svd,&nconv);CHKERRQ(ierr);
+  ierr = PetscPrintf(PETSC_COMM_WORLD," Number of converged approximate singular triplets: %D\n\n",nconv);CHKERRQ(ierr);
+
+  if (nconv>0) {
+    /*
+       Display singular values and relative errors
+    */
+    ierr = PetscPrintf(PETSC_COMM_WORLD,
+         "          sigma           relative error\n"
+         "  --------------------- ------------------\n");CHKERRQ(ierr);
+    for (i=0;i<nconv;i++) {
+      /*
+         Get converged singular triplets: i-th singular value is stored in sigma
+      */
+      ierr = SVDGetSingularTriplet(svd,i,&sigma,u,v);CHKERRQ(ierr);
+
+      /*
+         Compute the error associated to each singular triplet
+      */
+      ierr = SVDComputeRelativeError(svd,i,&error);CHKERRQ(ierr);
+
+      ierr = PetscPrintf(PETSC_COMM_WORLD,"       % 6F      ",sigma);CHKERRQ(ierr);
+      ierr = PetscPrintf(PETSC_COMM_WORLD," % 12G\n",error);CHKERRQ(ierr);
+    }
+    ierr = PetscPrintf(PETSC_COMM_WORLD,"\n");CHKERRQ(ierr);
+  }
+
+  /*
+     Free work space
+  */
+  ierr = SVDDestroy(&svd);CHKERRQ(ierr);
+  ierr = MatDestroy(&A);CHKERRQ(ierr);
+  ierr = VecDestroy(&u);CHKERRQ(ierr);
+  ierr = VecDestroy(&v);CHKERRQ(ierr);
+  ierr = SlepcFinalize();
+  return 0;
 }
