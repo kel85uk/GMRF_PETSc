@@ -109,6 +109,7 @@ int main(int argc,char **argv)
   ierr = PetscPrintf(PETSC_COMM_WORLD," Number of requested singular values: %D\n",nsv);CHKERRQ(ierr);
   ierr = SVDGetTolerances(svd,&tol,&maxit);CHKERRQ(ierr);
   ierr = PetscPrintf(PETSC_COMM_WORLD," Stopping condition: tol=%.4G, maxit=%D\n",tol,maxit);CHKERRQ(ierr);
+  nsv = 10;
 
   /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                     Display solution and clean up
@@ -132,7 +133,7 @@ int main(int argc,char **argv)
          Get converged singular triplets: i-th singular value is stored in sigma
       */
       ierr = SVDGetSingularTriplet(svd,i,&sigma,u,v);CHKERRQ(ierr);
-		VecView(u,PETSC_VIEWER_STDOUT_WORLD);
+		//VecView(u,PETSC_VIEWER_STDOUT_WORLD);
       /*
          Compute the error associated to each singular triplet
       */
