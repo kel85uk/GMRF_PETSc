@@ -95,7 +95,7 @@ int main(int argc,char **argv)
   //std::vector<PetscScalar>		XR,YR;
   PetscInt       i,j,Istart,Iend,n;
   PetscErrorCode ierr;
-  PetscScalar    mu;
+  PetscScalar    mu = 0.1;
   SlepcInitialize(&argc,&argv,(char*)0,help);
   //ierr = GetOptions(users);CHKERRQ(ierr);
   //set_coordinates(XR,YR,users);
@@ -124,7 +124,7 @@ int main(int argc,char **argv)
 
   ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
   ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
-  
+  PetscPrintf(PETSC_COMM_WORLD,"All good\n");
   ierr = SVD_Decomp(U,V,S,A);CHKERRQ(ierr);
 
   ierr = MatDestroy(&A);CHKERRQ(ierr);
