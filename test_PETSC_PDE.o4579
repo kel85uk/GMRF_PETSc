@@ -1,0 +1,51 @@
+Finished user prologue on all sister nodes...
+Starting user prologue on mother superior node i10hpc11...
+Exiting user prologue on mother superior node i10hpc11...
+Starting job script on mother superior node i10hpc11...
+  0 KSP Residual norm 2.32362e+11 
+  1 KSP Residual norm 8.92272e+08 
+  2 KSP Residual norm 1.58839e+07 
+  3 KSP Residual norm 775950 
+  4 KSP Residual norm 127421 
+  5 KSP Residual norm 17260.4 
+  6 KSP Residual norm 2276.86 
+  7 KSP Residual norm 276.489 
+  8 KSP Residual norm 33.8624 
+  9 KSP Residual norm 4.28407 
+ 10 KSP Residual norm 0.581735 
+ 11 KSP Residual norm 0.0915708 
+ 12 KSP Residual norm 0.0496282 
+ 13 KSP Residual norm 0.0488318 
+ 14 KSP Residual norm 0.0488238 
+ 15 KSP Residual norm 0.0488237 
+ 16 KSP Residual norm 0.0488237 
+ 17 KSP Residual norm 0.0488237 
+ 18 KSP Residual norm 0.0488237 
+ 19 KSP Residual norm 0.0488237 
+ 20 KSP Residual norm 0.0488237 
+ 21 KSP Residual norm 0.0488237 
+ 22 KSP Residual norm 0.0488237 
+ 23 KSP Residual norm 0.0488236 
+ 24 KSP Residual norm 0.0488217 
+ 25 KSP Residual norm 0.0486839 
+ 26 KSP Residual norm 0.0411412 
+ 27 KSP Residual norm 0.0158988 
+ 28 KSP Residual norm 0.0140912 
+ 29 KSP Residual norm 0.0140678 
+ 30 KSP Residual norm 5.8877 
+ 31 KSP Residual norm 0.0270708 
+ 32 KSP Residual norm 0.00177581 
+ 33 KSP Residual norm 0.000269489 
+ 34 KSP Residual norm 3.28948e-05 
+Sample[0]: SPDE solved in 34 iterations 
+Norm-2 of U = 5.22904572E+00 
+NGhost = 502 and I am Processor[0] 
+tau2 = 0.001247 
+kappa = 28.284271 
+nu = 1.000000 
+dx = 0.000100 
+dy = 0.000100 
+Finished job script on mother superior node i10hpc11...
+Finished user epilogue on all sister nodes...
+Starting user epilogue on mother superior node i10hpc11...
+Exiting user epilogue on mother superior node i10hpc11...

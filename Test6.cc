@@ -76,14 +76,14 @@ PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
     ierr = VecRestoreArray(u,&utemp); CHKERRQ(ierr);
     ierr = VecRestoreArray(v,&vtemp); CHKERRQ(ierr);
   }
-  ierr = MatAssemblyBegin(U,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
-  ierr = MatAssemblyBegin(V,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  //ierr = MatAssemblyBegin(U,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  //ierr = MatAssemblyBegin(V,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatAssemblyBegin(S,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = SVDDestroy(&svd);CHKERRQ(ierr);
   ierr = VecDestroy(&u);CHKERRQ(ierr);
   ierr = VecDestroy(&v);CHKERRQ(ierr);
-  ierr = MatAssemblyEnd(U,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
-  ierr = MatAssemblyEnd(V,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  //ierr = MatAssemblyEnd(U,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  //ierr = MatAssemblyEnd(V,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatAssemblyEnd(S,MAT_FINAL_ASSEMBLY);
   return ierr;
 }
@@ -128,7 +128,7 @@ int main(int argc,char **argv)
   ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
   PetscPrintf(PETSC_COMM_WORLD,"All good\n");
   ierr = SVD_Decomp(U,V,S,A);CHKERRQ(ierr);
-
+  PetscPrintf(PETSC_COMM_WORLD,"All good 2\n");
   ierr = MatDestroy(&A);CHKERRQ(ierr);
   ierr = MatDestroy(&U);CHKERRQ(ierr);
   ierr = MatDestroy(&S);CHKERRQ(ierr);
