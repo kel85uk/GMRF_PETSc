@@ -69,14 +69,11 @@ int main(int argc,char **argv)
   ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
   PetscPrintf(PETSC_COMM_WORLD,"All good\n");
   ierr = SVD_Decomp(U,V,S,A);CHKERRQ(ierr);
-  MatView(S,PETSC_VIEWER_STDOUT_WORLD);
   PetscPrintf(PETSC_COMM_WORLD,"All good 2\n");
-  MatView(U,PETSC_VIEWER_STDOUT_WORLD);
-  MatView(V,PETSC_VIEWER_STDOUT_WORLD);
   MatTranspose(V,MAT_INITIAL_MATRIX,&Vt);
   MatMatMult(S,Vt,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&result);
   MatMatMult(U,result,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&resultf);
-  MatView(resultf,PETSC_VIEWER_STDOUT_WORLD);
+  MatView(resultf,PETSC_VIEWER_STDOUT_SELF);
   MatView(A,PETSC_VIEWER_STDOUT_WORLD);
   ierr = MatDestroy(&A);CHKERRQ(ierr);
   ierr = MatDestroy(&U);CHKERRQ(ierr);
