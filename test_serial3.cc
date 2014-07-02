@@ -33,7 +33,7 @@ static char help[] = "Singular value decomposition of the Lauchli matrix.\n"
 #define __FUNCT__ "main"
 int main(int argc,char **argv)
 {
-  Mat            A, U, S, V, Vt, result, resultf;               /* operator matrix */
+  Mat            A, S, Vt, Ut, U, result, resultf;               /* operator matrix */
   //UserCTX        users;
   //std::vector<PetscScalar>		XR,YR;
   PetscInt       i,j,Istart,Iend,n;
@@ -67,18 +67,32 @@ int main(int argc,char **argv)
 
   ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
   ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
-  PetscPrintf(PETSC_COMM_WORLD,"All good\n");
-  ierr = SVD_Decomp(U,V,S,A);CHKERRQ(ierr);
-  PetscPrintf(PETSC_COMM_WORLD,"All good 2\n");
-  MatTranspose(V,MAT_INITIAL_MATRIX,&Vt);
+  //PetscPrintf(PETSC_COMM_WORLD,"All good\n");
+  ierr = SVD_Decomp(Ut,Vt,S,A);CHKERRQ(ierr);
+  //PetscPrintf(PETSC_COMM_WORLD,"All good 2\n");
+  //MatView(S,PETSC_VIEWER_STDOUT_WORLD);
+  PetscPrintf(PETSC_COMM_WORLD,"All good 3\n");
+  //MatView(Ut,PETSC_VIEWER_STDOUT_WORLD);
+  //PetscPrintf(PETSC_COMM_WORLD,"All good 4\n");
+  //MatView(V,PETSC_VIEWER_STDOUT_WORLD);
+  //PetscPrintf(PETSC_COMM_WORLD,"All good 5\n");
+  //MatTranspose(V,MAT_INITIAL_MATRIX,&Vt);
+  //MatView(Vt,PETSC_VIEWER_STDOUT_WORLD);
+  //PetscPrintf(PETSC_COMM_WORLD,"All good 6\n");
   MatMatMult(S,Vt,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&result);
-  MatMatMult(U,result,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&resultf);
-  MatView(resultf,PETSC_VIEWER_STDOUT_SELF);
+  MatTransposeMatMult(Ut,result,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&resultf);
+  MatView(resultf,PETSC_VIEWER_STDOUT_WORLD);
+  PetscPrintf(PETSC_COMM_WORLD,"All good 7\n");
   MatView(A,PETSC_VIEWER_STDOUT_WORLD);
+  MatType a,b;
+  MatGetType(A,&a);
+  MatGetType(resultf,&b);
+  if(a != b)
+    PetscPrintf(PETSC_COMM_WORLD,"All good! Finally!\n");
   ierr = MatDestroy(&A);CHKERRQ(ierr);
-  ierr = MatDestroy(&U);CHKERRQ(ierr);
+ // ierr = MatDestroy(&U);CHKERRQ(ierr);
   ierr = MatDestroy(&S);CHKERRQ(ierr);
-  ierr = MatDestroy(&V);CHKERRQ(ierr);
+  ierr = MatDestroy(&Ut);CHKERRQ(ierr);
   ierr = MatDestroy(&Vt);CHKERRQ(ierr);
   ierr = SlepcFinalize();
   return 0;

@@ -568,64 +568,65 @@ PetscErrorCode VecSetMean(Vec&,const Vec&){
 	return ierr;
 }
 
-PetscErrorCode SVD_Decomp(Mat& U, Mat& V, Mat& S, const Mat& A){
+PetscErrorCode SVD_Decomp(Mat& Ut, Mat& Vt, Mat& S, const Mat& A){
 	PetscErrorCode ierr;
 	Vec            u,v;             /* left and right singular vectors */
   	SVD            svd;             /* singular value problem solver context */
   	PetscScalar    sigma;
-  PetscInt       nconv,Am,An;
-  PetscInt       *IdxU, *IdxV;
+  PetscInt       nconv,Am,An, Istart, Iend;
   PetscScalar    *utemp, *vtemp;
   	ierr = MatGetVecs(A,&v,&u);CHKERRQ(ierr);
-  	ierr = VecGetSize(v,&An); CHKERRQ(ierr);
-  	ierr = VecGetSize(u,&Am); CHKERRQ(ierr);
+  	ierr = MatGetSize(A,&Am,&An); CHKERRQ(ierr);
   ierr = SVDCreate(PETSC_COMM_WORLD,&svd);CHKERRQ(ierr);
   ierr = SVDSetOperator(svd,A);CHKERRQ(ierr);
   ierr = SVDSetType(svd,SVDTRLANCZOS);CHKERRQ(ierr);
   ierr = SVDSetFromOptions(svd);CHKERRQ(ierr);
   ierr = SVDSolve(svd);CHKERRQ(ierr);  	
   ierr = SVDGetConverged(svd,&nconv);CHKERRQ(ierr);
-  ierr = MatCreate(PETSC_COMM_SELF,&S);CHKERRQ(ierr); // Create matrix S residing in PETSC_COMM_WORLD
+  ierr = MatCreate(PETSC_COMM_WORLD,&S);CHKERRQ(ierr); // Create matrix S residing in PETSC_COMM_WORLD
   ierr = MatSetSizes(S,PETSC_DECIDE,PETSC_DECIDE,nconv,nconv);CHKERRQ(ierr); // Set the size of the matrix S, and let PETSC decide the decomposition
-  ierr = MatSetType(S,MATSEQAIJ);
   ierr = MatSetFromOptions(S);CHKERRQ(ierr);
   ierr = MatMPIAIJSetPreallocation(S,1,NULL,1,NULL);CHKERRQ(ierr);
   ierr = MatSeqAIJSetPreallocation(S,1,NULL);CHKERRQ(ierr);
   ierr = MatSetUp(S);CHKERRQ(ierr);	
-  ierr = MatCreate(PETSC_COMM_SELF,&U);CHKERRQ(ierr); // Create matrix U residing in PETSC_COMM_WORLD
-  ierr = MatSetSizes(U,PETSC_DECIDE,PETSC_DECIDE,Am,nconv);CHKERRQ(ierr); // Set the size of the matrix U, and let PETSC decide the decomposition
-  ierr = MatSetType(U,MATSEQDENSE);
-  ierr = MatSetFromOptions(U);CHKERRQ(ierr);
-  ierr = MatSetUp(U);CHKERRQ(ierr);
-  ierr = MatCreate(PETSC_COMM_SELF,&V);CHKERRQ(ierr); // Create matrix V residing in PETSC_COMM_WORLD
-  ierr = MatSetSizes(V,PETSC_DECIDE,PETSC_DECIDE,An,nconv);CHKERRQ(ierr); // Set the size of the matrix V, and let PETSC decide the decomposition
-  ierr = MatSetFromOptions(V);CHKERRQ(ierr);
-  ierr = MatSetType(V,MATSEQDENSE);
-  ierr = MatSetFromOptions(V);CHKERRQ(ierr);
-  ierr = MatSetUp(V);CHKERRQ(ierr);
-  IdxU = new PetscInt [Am];
-  IdxV = new PetscInt [An];
-  for (int ii = 0; ii < Am; ++ii) IdxU[ii] = ii;
-  for (int ii = 0; ii < An; ++ii) IdxV[ii] = ii;
+  ierr = MatCreate(PETSC_COMM_WORLD,&Ut);CHKERRQ(ierr); // Create matrix Ut residing in PETSC_COMM_WORLD
+  ierr = MatSetSizes(Ut,PETSC_DECIDE,PETSC_DECIDE,nconv,Am);CHKERRQ(ierr); // Set the size of the matrix U, and let PETSC decide the decomposition
+  ierr = MatSetFromOptions(Ut);CHKERRQ(ierr);
+  ierr = MatMPIAIJSetPreallocation(Ut,Am,NULL,Am,NULL);CHKERRQ(ierr);
+  ierr = MatSeqAIJSetPreallocation(Ut,Am,NULL);CHKERRQ(ierr);  
+  ierr = MatSetUp(Ut);CHKERRQ(ierr);
+  ierr = MatCreate(PETSC_COMM_WORLD,&Vt);CHKERRQ(ierr); // Create matrix Vt residing in PETSC_COMM_WORLD
+  ierr = MatSetSizes(Vt,PETSC_DECIDE,PETSC_DECIDE,nconv,An);CHKERRQ(ierr); // Set the size of the matrix V, and let PETSC decide the decomposition
+  ierr = MatSetFromOptions(Vt);CHKERRQ(ierr);
+  ierr = MatMPIAIJSetPreallocation(Vt,An,NULL,An,NULL);CHKERRQ(ierr);
+  ierr = MatSeqAIJSetPreallocation(Vt,An,NULL);CHKERRQ(ierr);   
+  ierr = MatSetUp(Vt);CHKERRQ(ierr);
+  //for (int ii = 0; ii < Am; ++ii) IdxU[ii] = ii;
+  //for (int ii = 0; ii < An; ++ii) IdxV[ii] = ii;
+  
   for (int i=0;i<nconv;i++) {
     ierr = SVDGetSingularTriplet(svd,i,&sigma,u,v);CHKERRQ(ierr);
     ierr = MatSetValue(S,i,i,sigma,INSERT_VALUES);CHKERRQ(ierr);
     ierr = VecGetArray(u,&utemp); CHKERRQ(ierr);
     ierr = VecGetArray(v,&vtemp); CHKERRQ(ierr);
-    ierr = MatSetValues(U,Am,IdxU,1,&i,utemp,INSERT_VALUES); CHKERRQ(ierr);
-    ierr = MatSetValues(V,An,IdxV,1,&i,vtemp,INSERT_VALUES); CHKERRQ(ierr);
+    ierr = VecGetOwnershipRange(u,&Istart,&Iend);
+    for (int j=Istart; j < Iend; ++j)
+      ierr = MatSetValue(Ut,i,j,utemp[j-Istart],INSERT_VALUES); CHKERRQ(ierr);
+    ierr = VecGetOwnershipRange(v,&Istart,&Iend);
+    for (int j=Istart; j < Iend; ++j)
+      ierr = MatSetValue(Vt,i,j,vtemp[j-Istart],INSERT_VALUES); CHKERRQ(ierr);
     ierr = VecRestoreArray(u,&utemp); CHKERRQ(ierr);
     ierr = VecRestoreArray(v,&vtemp); CHKERRQ(ierr);
   }
-  ierr = MatAssemblyBegin(U,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
-  ierr = MatAssemblyBegin(V,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyBegin(Ut,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyBegin(Vt,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatAssemblyBegin(S,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyEnd(Ut,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyEnd(Vt,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatAssemblyEnd(S,MAT_FINAL_ASSEMBLY);
   ierr = SVDDestroy(&svd);CHKERRQ(ierr);
   ierr = VecDestroy(&u);CHKERRQ(ierr);
-  ierr = VecDestroy(&v);CHKERRQ(ierr);
-  ierr = MatAssemblyEnd(U,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
-  ierr = MatAssemblyEnd(V,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
-  ierr = MatAssemblyEnd(S,MAT_FINAL_ASSEMBLY);
+  ierr = VecDestroy(&v);CHKERRQ(ierr);  
   return ierr;
 }
 
