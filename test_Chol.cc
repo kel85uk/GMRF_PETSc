@@ -225,6 +225,7 @@ int main(int argc,char **argv)
 
 PetscErrorCode CovarMatCreate(Mat& Covar,const UserCTX& users){
   PetscErrorCode ierr;
+  PetscBool flg;
   PetscInt Istart, Iend, Ii, Ij;
   PetscScalar cov, radius;
   std::vector<PetscScalar> XR,YR;
@@ -244,6 +245,9 @@ PetscErrorCode CovarMatCreate(Mat& Covar,const UserCTX& users){
     }
   ierr = MatAssemblyBegin(Covar,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatAssemblyEnd(Covar,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
+  ierr = MatIsSymmetric(Covar,1e-3,&flg); CHKERRQ(ierr);
+  if (flg) PetscPrintf(PETSC_COMM_WORLD,"Covar matrix is symmetric \n");
+//  MatPostProcs(Covar,"Chol_covar.dat");
   return ierr;
 }
 
