@@ -10,7 +10,7 @@ Input parameters include:\n\
 #include <Functions.hh>
 #include <Solver.hh>
 #include <climits>
-#include <boost/math/special_functions/bessel.hpp>
+//#include <boost/math/special_functions/bessel.hpp>
 #define DEBUG 0
 #define MPI_WTIME_IS_GLOBAL 1
 #define WORKTAG 1
@@ -261,10 +261,11 @@ PetscErrorCode GetCholFactor(Mat& Chol_fac,const Mat& Covar){
 
 PetscScalar matern_cov(const UserCTX& users,const PetscScalar& rad_d){
   PetscScalar res;
-  if (rad_d <= 0)
+/*  if (rad_d <= 0)
     res = users.sigma*users.sigma;
   else
 //    res = boost::math::cyl_bessel_k(users.nu,users.kappa*rad_d);
-    res = users.sigma*users.sigma/(std::pow(2.0,(users.nu-1.0))*tgamma(users.nu))*std::pow(users.kappa*rad_d,users.nu)*boost::math::cyl_bessel_k(users.nu,users.kappa*rad_d);
+    res = users.sigma*users.sigma/(std::pow(2.0,(users.nu-1.0))*tgamma(users.nu))*std::pow(users.kappa*rad_d,users.nu)*boost::math::cyl_bessel_k(users.nu,users.kappa*rad_d); */
+  res = exp(-rad_d/users.lamb);
 	return res;
 }
