@@ -17,7 +17,7 @@ Input parameters include:\n\
 #define DIETAG 2
 
 PetscErrorCode CovarMatCreate(Mat&, const UserCTX&);
-PetscErrorCode GetCholFactor(Mat&,const Mat&);
+PetscErrorCode GetCholFactor(PC&,const Mat&);
 PetscScalar matern_cov(const UserCTX&,const PetscScalar&);
 void set_coordinates(std::vector<PetscScalar>& XR,std::vector<PetscScalar>& YR,const UserCTX& users){
 	PetscScalar yr,xr;
@@ -143,7 +143,7 @@ int main(int argc,char **argv)
 	if (grank != 0){
 		int work_status = DIETAG;
 		Vec normrnds;
-		Mat Covar, Chol_fac;
+		Mat Covar; PC Chol_fac;
 		ierr = VecDuplicate(rho,&normrnds); CHKERRQ(ierr);
 		// Create the covariance matrix here
 		ierr = CovarMatCreate(Covar,users); CHKERRQ(ierr);
@@ -245,21 +245,22 @@ PetscErrorCode CovarMatCreate(Mat& Covar,const UserCTX& users){
     }
   ierr = MatAssemblyBegin(Covar,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatAssemblyEnd(Covar,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
-  ierr = MatIsSymmetric(Covar,1e-3,&flg); CHKERRQ(ierr);
+  ierr = MatIsSymmetric(Covar,1e-6,&flg); CHKERRQ(ierr);
   if (flg) PetscPrintf(PETSC_COMM_WORLD,"Covar matrix is symmetric \n");
 //  MatPostProcs(Covar,"Chol_covar.dat");
   return ierr;
 }
 
-PetscErrorCode GetCholFactor(Mat& Chol_fac,const Mat& Covar){
+PetscErrorCode GetCholFactor(PC& Chol_fac,const Mat& Covar){
   PetscErrorCode ierr;
-  PC pcchol;
+  //PC pcchol;
+  PC& pcchol = Chol_fac;
   ierr = PCCreate(PETSC_COMM_WORLD,&pcchol);CHKERRQ(ierr);
   ierr = PCSetType(pcchol,PCCHOLESKY);CHKERRQ(ierr);
   ierr = PCSetOperators(pcchol,Covar,Covar,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
   ierr = PCSetUp(pcchol); CHKERRQ(ierr);
-  ierr = PCFactorGetMatrix(pcchol,&Chol_fac);CHKERRQ(ierr);
-  ierr = MatSetUnfactored(Chol_fac);CHKERRQ(ierr);
+  //ierr = PCFactorGetMatrix(pcchol,&Chol_fac);CHKERRQ(ierr);
+  //ierr = MatSetUnfactored(Chol_fac);CHKERRQ(ierr);
   return ierr;
 }
 

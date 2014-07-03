@@ -58,7 +58,7 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 	return ierr;
 }
 
-PetscErrorCode UnitSolverChol(Vec& rho, Vec& normrnds,const Mat& Chol_fac, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU){
+PetscErrorCode UnitSolverChol(Vec& rho, Vec& normrnds,const PC& Chol_fac, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU){
 	PetscErrorCode ierr;
 	PetscScalar x;
 	PetscInt Ii = 0, Istart = 0, Iend = 0;
@@ -70,7 +70,8 @@ PetscErrorCode UnitSolverChol(Vec& rho, Vec& normrnds,const Mat& Chol_fac, Vec& 
 	}
 	ierr = VecAssemblyBegin(normrnds);CHKERRQ(ierr);
 	ierr = VecAssemblyEnd(normrnds);CHKERRQ(ierr);
-	ierr = MatMult(Chol_fac,normrnds,rho);CHKERRQ(ierr); // rho = Chol_fac*normrnds => y = Lx
+	//ierr = MatMult(Chol_fac,normrnds,rho);CHKERRQ(ierr); // rho = Chol_fac*normrnds => y = Lx
+	ierr = PCApply(Chol_fac,normrnds,rho);CHKERRQ(ierr);
 	ierr = VecExp(rho);CHKERRQ(ierr);
 	ierr = SetOperator(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
 	ierr = SetSource(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb);CHKERRQ(ierr);
