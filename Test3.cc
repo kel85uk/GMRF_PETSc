@@ -25,7 +25,7 @@ int main(int argc,char **argv)
 	PetscBool      flg = PETSC_FALSE;
 	PetscReal startTime, endTime;
 	int numprocs;
-	int procpercolor = 2;
+	int procpercolor = 1;
 	MPI_Status status;
 	int ranks[] = {0};
 

@@ -18,6 +18,7 @@ Input parameters include:\n\
 
 PetscErrorCode CovarMatCreate(Mat&, const UserCTX&);
 PetscErrorCode GetCholFactor(PC&,const Mat&);
+PetscErrorCode GetCholFactor(Mat&,const Mat&);
 PetscScalar matern_cov(const UserCTX&,const PetscScalar&);
 void set_coordinates(std::vector<PetscScalar>& XR,std::vector<PetscScalar>& YR,const UserCTX& users){
 	PetscScalar yr,xr;
@@ -143,7 +144,7 @@ int main(int argc,char **argv)
 	if (grank != 0){
 		int work_status = DIETAG;
 		Vec normrnds;
-		Mat Covar; PC Chol_fac;
+		Mat Covar;Mat Chol_fac;
 		ierr = VecDuplicate(rho,&normrnds); CHKERRQ(ierr);
 		// Create the covariance matrix here
 		ierr = CovarMatCreate(Covar,users); CHKERRQ(ierr);
@@ -189,6 +190,9 @@ int main(int argc,char **argv)
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_WORLD,"Proc[%d]: We finished all work \n",grank);	
 					#endif
+					ierr = VecDestroy(&normrnds); CHKERRQ(ierr);
+					ierr = MatDestroy(&Covar); CHKERRQ(ierr);
+					ierr = MatDestroy(&Chol_fac); CHKERRQ(ierr);
 					break;
 				}
 			}
@@ -251,16 +255,20 @@ PetscErrorCode CovarMatCreate(Mat& Covar,const UserCTX& users){
   return ierr;
 }
 
-PetscErrorCode GetCholFactor(PC& Chol_fac,const Mat& Covar){
+PetscErrorCode GetCholFactor(Mat& Chol_fac,const Mat& Covar){
   PetscErrorCode ierr;
-  //PC pcchol;
-  PC& pcchol = Chol_fac;
+  PC pcchol;
+  //PC& pcchol = Chol_fac;
+  MatCreate(PETSC_COMM_WORLD,&Chol_fac);
+  MatSetType(Chol_fac,MATDENSE);
   ierr = PCCreate(PETSC_COMM_WORLD,&pcchol);CHKERRQ(ierr);
   ierr = PCSetType(pcchol,PCCHOLESKY);CHKERRQ(ierr);
   ierr = PCSetOperators(pcchol,Covar,Covar,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
+//  ierr = PCFactorSetMatSolverPackage(pcchol,MATSOLVERMUMPS);CHKERRQ(ierr);
   ierr = PCSetUp(pcchol); CHKERRQ(ierr);
-  //ierr = PCFactorGetMatrix(pcchol,&Chol_fac);CHKERRQ(ierr);
+  ierr = PCFactorGetMatrix(pcchol,&Chol_fac);CHKERRQ(ierr);
   //ierr = MatSetUnfactored(Chol_fac);CHKERRQ(ierr);
+  MatPostProcs(Chol_fac,"Chol_fac.dat");
   return ierr;
 }
 
@@ -271,6 +279,6 @@ PetscScalar matern_cov(const UserCTX& users,const PetscScalar& rad_d){
   else
 //    res = boost::math::cyl_bessel_k(users.nu,users.kappa*rad_d);
     res = users.sigma*users.sigma/(std::pow(2.0,(users.nu-1.0))*tgamma(users.nu))*std::pow(users.kappa*rad_d,users.nu)*boost::math::cyl_bessel_k(users.nu,users.kappa*rad_d); */
-  res = exp(-rad_d/users.lamb);
+  res = users.sigma*users.sigma*exp(-rad_d/users.lamb);
 	return res;
 }
