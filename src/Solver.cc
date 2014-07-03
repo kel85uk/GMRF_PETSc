@@ -66,12 +66,12 @@ PetscErrorCode UnitSolverChol(Vec& rho, Vec& normrnds,const PC& Chol_fac, Vec& U
 	ierr = VecGetOwnershipRange(normrnds,&Istart,&Iend);CHKERRQ(ierr);
 	for (Ii = Istart; Ii < Iend; ++Ii){
 	  x = distribution(generator);
-	  ierr = VecSetValues(normrnds,1,&Ii,&x,INSERT_VALUES);CHKERRQ(ierr);
+	  ierr = VecSetValues(rho,1,&Ii,&x,INSERT_VALUES);CHKERRQ(ierr);
 	}
-	ierr = VecAssemblyBegin(normrnds);CHKERRQ(ierr);
-	ierr = VecAssemblyEnd(normrnds);CHKERRQ(ierr);
+	ierr = VecAssemblyBegin(rho);CHKERRQ(ierr);
+	ierr = VecAssemblyEnd(rho);CHKERRQ(ierr);
 	//ierr = MatMult(Chol_fac,normrnds,rho);CHKERRQ(ierr); // rho = Chol_fac*normrnds => y = Lx
-	ierr = PCApply(Chol_fac,normrnds,rho);CHKERRQ(ierr);
+	//ierr = PCApply(Chol_fac,normrnds,rho);CHKERRQ(ierr);
 	ierr = VecExp(rho);CHKERRQ(ierr);
 	ierr = SetOperator(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
 	ierr = SetSource(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb);CHKERRQ(ierr);
