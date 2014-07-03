@@ -8,6 +8,6 @@ PetscErrorCode UnitSolver(Vec&,Vec&,Vec&,KSP&,Vec&,Vec&,Mat&,KSP&,UserCTX&,std::
 
 PetscErrorCode UnitSolver(Vec&,Vec&,Vec&,KSP&,Vec&,Vec&,Mat&,KSP&,UserCTX&,std::default_random_engine&,const PetscMPIInt&,const PetscInt&);
 
-PetscErrorCode UnitSolverMLMC(Vec&,Vec&,Vec&,KSP&,Vec&,Vec&,Mat&,KSP&,UserCTX&,std::default_random_engine&,const PetscMPIInt&,const PetscInt&);
+PetscErrorCode UnitSolverChol(Vec&,Vec&,const Mat&,Vec&,Vec&,Mat&,KSP&,UserCTX&,std::default_random_engine&,const PetscMPIInt&,const PetscInt&,PetscScalar&);
 
 #endif

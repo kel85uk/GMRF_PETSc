@@ -254,7 +254,7 @@ PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, con
 	PetscErrorCode ierr;
 	PetscInt Ii = 0, Istart = 0, Iend = 0;
 	PetscScalar x, result;
-	std::normal_distribution<PetscReal> distribution(0.0,1.0);
+	std::normal_distribution<PetscScalar> distribution(0.0,1.0);
 	ierr = VecGetOwnershipRange(Z,&Istart,&Iend);CHKERRQ(ierr);
 	for (Ii = Istart; Ii < Iend; ++Ii){
 		x = distribution(generator);
@@ -574,7 +574,7 @@ PetscErrorCode SVD_Decomp(Mat& Ut, Mat& Vt, Mat& S, const Mat& A){
   	SVD            svd;             /* singular value problem solver context */
   	PetscScalar    sigma;
   PetscInt       nconv,Am,An, Istart, Iend;
-  PetscScalar    *utemp, *vtemp;
+  const PetscScalar    *utemp, *vtemp;
   	ierr = MatGetVecs(A,&v,&u);CHKERRQ(ierr);
   	ierr = MatGetSize(A,&Am,&An); CHKERRQ(ierr);
   ierr = SVDCreate(PETSC_COMM_WORLD,&svd);CHKERRQ(ierr);
@@ -607,16 +607,16 @@ PetscErrorCode SVD_Decomp(Mat& Ut, Mat& Vt, Mat& S, const Mat& A){
   for (int i=0;i<nconv;i++) {
     ierr = SVDGetSingularTriplet(svd,i,&sigma,u,v);CHKERRQ(ierr);
     ierr = MatSetValue(S,i,i,sigma,INSERT_VALUES);CHKERRQ(ierr);
-    ierr = VecGetArray(u,&utemp); CHKERRQ(ierr);
-    ierr = VecGetArray(v,&vtemp); CHKERRQ(ierr);
+    ierr = VecGetArrayRead(u,&utemp); CHKERRQ(ierr);
+    ierr = VecGetArrayRead(v,&vtemp); CHKERRQ(ierr);
     ierr = VecGetOwnershipRange(u,&Istart,&Iend);
     for (int j=Istart; j < Iend; ++j)
       ierr = MatSetValue(Ut,i,j,utemp[j-Istart],INSERT_VALUES); CHKERRQ(ierr);
     ierr = VecGetOwnershipRange(v,&Istart,&Iend);
     for (int j=Istart; j < Iend; ++j)
       ierr = MatSetValue(Vt,i,j,vtemp[j-Istart],INSERT_VALUES); CHKERRQ(ierr);
-    ierr = VecRestoreArray(u,&utemp); CHKERRQ(ierr);
-    ierr = VecRestoreArray(v,&vtemp); CHKERRQ(ierr);
+    ierr = VecRestoreArrayRead(u,&utemp); CHKERRQ(ierr);
+    ierr = VecRestoreArrayRead(v,&vtemp); CHKERRQ(ierr);
   }
   ierr = MatAssemblyBegin(Ut,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatAssemblyBegin(Vt,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
@@ -624,6 +624,7 @@ PetscErrorCode SVD_Decomp(Mat& Ut, Mat& Vt, Mat& S, const Mat& A){
   ierr = MatAssemblyEnd(Ut,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatAssemblyEnd(Vt,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatAssemblyEnd(S,MAT_FINAL_ASSEMBLY);
+  SVDView(svd,PETSC_VIEWER_STDOUT_WORLD	);
   ierr = SVDDestroy(&svd);CHKERRQ(ierr);
   ierr = VecDestroy(&u);CHKERRQ(ierr);
   ierr = VecDestroy(&v);CHKERRQ(ierr);  

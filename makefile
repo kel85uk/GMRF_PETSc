@@ -24,6 +24,10 @@ test_MC: ./src/Functions.o test_serial.o  chkopts
 test_PDE: ./src/Functions.o test_serial2.o  chkopts
 	-${CLINKER} -o test_PDE ./src/Functions.o test_serial2.o  ${PETSC_SNES_LIB}
 	${RM} test_serial2.o ./src/Functions.o
+	
+test_Chol: ./src/Functions.o ./src/Solver.o test_Chol.o  chkopts
+	-${CLINKER} -o test_Chol ./src/Functions.o ./src/Solver.o test_Chol.o  ${PETSC_SNES_LIB} ${SLEPC_LIB}
+	${RM} test_Chol.o	 ./src/Functions.o	 ./src/Solver.o
 
 test_SVD: ./src/Functions.o ./src/Solver.o test_serial3.o  chkopts
 	-${CLINKER} -o test_SVD ./src/Functions.o ./src/Solver.o test_serial3.o  ${PETSC_SNES_LIB} ${SLEPC_LIB}

@@ -67,18 +67,8 @@ int main(int argc,char **argv)
 
   ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
   ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
-  //PetscPrintf(PETSC_COMM_WORLD,"All good\n");
   ierr = SVD_Decomp(Ut,Vt,S,A);CHKERRQ(ierr);
-  //PetscPrintf(PETSC_COMM_WORLD,"All good 2\n");
-  //MatView(S,PETSC_VIEWER_STDOUT_WORLD);
   PetscPrintf(PETSC_COMM_WORLD,"All good 3\n");
-  //MatView(Ut,PETSC_VIEWER_STDOUT_WORLD);
-  //PetscPrintf(PETSC_COMM_WORLD,"All good 4\n");
-  //MatView(V,PETSC_VIEWER_STDOUT_WORLD);
-  //PetscPrintf(PETSC_COMM_WORLD,"All good 5\n");
-  //MatTranspose(V,MAT_INITIAL_MATRIX,&Vt);
-  //MatView(Vt,PETSC_VIEWER_STDOUT_WORLD);
-  //PetscPrintf(PETSC_COMM_WORLD,"All good 6\n");
   MatMatMult(S,Vt,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&result);
   MatTransposeMatMult(Ut,result,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&resultf);
   MatView(resultf,PETSC_VIEWER_STDOUT_WORLD);
