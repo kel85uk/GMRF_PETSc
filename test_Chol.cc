@@ -252,7 +252,7 @@ PetscErrorCode GetCholFactor(Mat& Chol_fac,const Mat& Covar){
   PC pcchol;
   ierr = PCCreate(PETSC_COMM_WORLD,&pcchol);CHKERRQ(ierr);
   ierr = PCSetType(pcchol,PCCHOLESKY);CHKERRQ(ierr);
-  ierr = PCSetOperators(pcchol,Covar,Covar,SAME_NONZERO_PATTERN);CHKERRQ(ierr);
+  ierr = PCSetOperators(pcchol,Covar,Covar,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
   ierr = PCSetUp(pcchol); CHKERRQ(ierr);
   ierr = PCFactorGetMatrix(pcchol,&Chol_fac);CHKERRQ(ierr);
   ierr = MatSetUnfactored(Chol_fac);CHKERRQ(ierr);
