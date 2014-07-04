@@ -33,7 +33,7 @@ int main(int argc,char **argv)
 	int procpercolor = 2;
 	MPI_Status status;MPI_Request request;
 	int ranks[] = {0};
-
+  PetscLogStage stage;
 	MPI_Comm petsc_comm_slaves;
 
 	MPI_Init(&argc,&argv);
@@ -58,19 +58,23 @@ int main(int argc,char **argv)
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
-	std::default_random_engine generator(rand());	
+	std::default_random_engine generator(rand());
+	ierr = PetscLogStageRegister("Get options and create all vectors", &stage);CHKERRQ(ierr);
+	ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 	ierr = GetOptions(users);CHKERRQ(ierr);
 	/* Create all the vectors and matrices needed for calculation */
 	ierr = CreateVectors(*Wrapalla,12,users.NT);CHKERRQ(ierr);
 	ierr = CreateVectors(*Wrapallb,7,users.NI);CHKERRQ(ierr);
 	/* Create Matrices and Solver contexts */
 	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE);CHKERRQ(ierr);
-
+  ierr = PetscLogStagePop();CHKERRQ(ierr);
 	PetscScalar normU = 0.,EnormUN = 0.,VnormUN = 0.,EnormUNm1 = 0.,M2NnU = 0.,tol = 1.0;
-
+  
+  ierr = PetscLogStageRegister("Set GMRF operator", &stage);CHKERRQ(ierr);
+	ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
-
+  ierr = PetscLogStagePop();CHKERRQ(ierr);
 	// Managers report duty to the root processor
 	if(lrank == 0) MPI_Isend(&grank,1,MPI_INT,0,lrank,MPI_COMM_WORLD,&request);
 	// Start the ball rolling
