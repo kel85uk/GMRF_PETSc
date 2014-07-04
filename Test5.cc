@@ -98,6 +98,8 @@ int main(int argc,char **argv)
 		#if DEBUG
 			PetscPrintf(MPI_COMM_WORLD,"I am processor %d in world, %d in petsc \n",grank,lrank);
 		#endif
+    ierr = PetscLogStageRegister("Start distributing work", &stage);CHKERRQ(ierr);
+    ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 		for(who = 1; who <= whomax; ++who){
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
 		}
@@ -120,10 +122,13 @@ int main(int argc,char **argv)
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],DIETAG,MPI_COMM_WORLD,&request);
 			PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Sending kill signal to proc %d\n",grank,masters[who]);
 		}
+		ierr = PetscLogStagePop();CHKERRQ(ierr);
 		PetscPrintf(MPI_COMM_WORLD,"Expectation of ||U|| = %4.8E\n",EnormUN);
 	}
 	if (grank != 0){
 		int work_status = DIETAG;
+		ierr = PetscLogStageRegister("Receive and work on jobs", &stage);CHKERRQ(ierr);
+    ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 		if(lrank == 0) {
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 			work_status = status.MPI_TAG;
@@ -167,6 +172,7 @@ int main(int argc,char **argv)
 					break;
 				}
 			}
+		  ierr = PetscLogStagePop();CHKERRQ(ierr);
 		}
 	}
 
