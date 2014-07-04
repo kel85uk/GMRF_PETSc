@@ -53,13 +53,13 @@ int main(int argc,char **argv)
 	std::vector<PetscScalar>		XR,YR; // Physical Coordinates reside in all processors
 	UserCTX users;
 	KSP kspPDE;
-	PetscScalar	result, normU;
+	PetscScalar	result, normU, startTime, endTime;
 	PetscErrorCode ierr;
 	PetscBool      flg = PETSC_FALSE;
 	PetscMPIInt rank;	
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
-
+  startTime = MPI_Wtime();
 
 	ierr = GetOptions(users);CHKERRQ(ierr);
 	set_coordinates(XR,YR,users);
@@ -102,7 +102,10 @@ int main(int argc,char **argv)
 	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: SPDE solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
 	ierr = VecNorm(U,NORM_2,&normU);CHKERRQ(ierr);
 	normU /= sqrt(users.NI);
+	endTime = MPI_Wtime();
 	ierr = PetscPrintf(PETSC_COMM_WORLD,"Norm-2 of U = %4.8E \n",normU);CHKERRQ(ierr);
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Time taken = %4.8E \n",endTime - startTime);CHKERRQ(ierr);
+	
 	if(false){
 	ierr = VecPostProcs(U,"sol_mean.dat",rank);CHKERRQ(ierr);
 	ierr = VecPostProcs(rho,"rho_mean.dat",rank);CHKERRQ(ierr);
