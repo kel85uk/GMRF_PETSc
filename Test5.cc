@@ -33,7 +33,7 @@ int main(int argc,char **argv)
 	int procpercolor = 2;
 	MPI_Status status;MPI_Request request;
 	int ranks[] = {0};
-  PetscLogStage stage;
+
 	MPI_Comm petsc_comm_slaves;
 
 	MPI_Init(&argc,&argv);
@@ -58,23 +58,19 @@ int main(int argc,char **argv)
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
-	std::default_random_engine generator(rand());
-	ierr = PetscLogStageRegister("Get options and create all vectors", &stage);CHKERRQ(ierr);
-	ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
+	std::default_random_engine generator(rand());	
 	ierr = GetOptions(users);CHKERRQ(ierr);
 	/* Create all the vectors and matrices needed for calculation */
 	ierr = CreateVectors(*Wrapalla,12,users.NT);CHKERRQ(ierr);
 	ierr = CreateVectors(*Wrapallb,7,users.NI);CHKERRQ(ierr);
 	/* Create Matrices and Solver contexts */
 	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE);CHKERRQ(ierr);
-  ierr = PetscLogStagePop();CHKERRQ(ierr);
+
 	PetscScalar normU = 0.,EnormUN = 0.,VnormUN = 0.,EnormUNm1 = 0.,M2NnU = 0.,tol = 1.0;
-  
-  ierr = PetscLogStageRegister("Set GMRF operator", &stage);CHKERRQ(ierr);
-	ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
+
 	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
-  ierr = PetscLogStagePop();CHKERRQ(ierr);
+
 	// Managers report duty to the root processor
 	if(lrank == 0) MPI_Isend(&grank,1,MPI_INT,0,lrank,MPI_COMM_WORLD,&request);
 	// Start the ball rolling
@@ -98,8 +94,6 @@ int main(int argc,char **argv)
 		#if DEBUG
 			PetscPrintf(MPI_COMM_WORLD,"I am processor %d in world, %d in petsc \n",grank,lrank);
 		#endif
-    ierr = PetscLogStageRegister("Start distributing work", &stage);CHKERRQ(ierr);
-    ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 		for(who = 1; who <= whomax; ++who){
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
 		}
@@ -122,13 +116,10 @@ int main(int argc,char **argv)
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],DIETAG,MPI_COMM_WORLD,&request);
 			PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Sending kill signal to proc %d\n",grank,masters[who]);
 		}
-		ierr = PetscLogStagePop();CHKERRQ(ierr);
 		PetscPrintf(MPI_COMM_WORLD,"Expectation of ||U|| = %4.8E\n",EnormUN);
 	}
 	if (grank != 0){
 		int work_status = DIETAG;
-		ierr = PetscLogStageRegister("Receive and work on jobs", &stage);CHKERRQ(ierr);
-    ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 		if(lrank == 0) {
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 			work_status = status.MPI_TAG;
@@ -145,7 +136,7 @@ int main(int argc,char **argv)
 		}
 		if(work_status != DIETAG){
 			while(true){
-        ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar); CHKERRQ(ierr);
+				ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar); CHKERRQ(ierr);
 				++Ns;				
 				if(lrank == 0){
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
@@ -172,7 +163,6 @@ int main(int argc,char **argv)
 					break;
 				}
 			}
-		  ierr = PetscLogStagePop();CHKERRQ(ierr);
 		}
 	}
 

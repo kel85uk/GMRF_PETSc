@@ -58,6 +58,39 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 	return ierr;
 }
 
+PetscErrorCode UnitSolverTimings(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU,PetscScalar*& timings){
+	PetscErrorCode ierr;
+	// timings = {comm_gmrf,setup_gmrf,solve_gmrf,comm_spde,setup_spde,solve_spde};
+	PetscScalar startTime1;
+  startTime1 = MPI_Wtime();
+	ierr = SetRandSource(N01,users.NT,users.dx,users.dy,rank,generator);CHKERRQ(ierr);
+	startTime1 = MPI_Wtime() - startTime1;
+	timings[1] += startTime1;
+	startTime1 = MPI_Wtime();
+	ierr = KSPSolve(kspGMRF,N01,rho);CHKERRQ(ierr);
+	startTime1 = MPI_Wtime() - startTime1;
+	timings[2] += startTime1;
+	ierr = KSPGetIterationNumber(kspGMRF,&users.its);CHKERRQ(ierr);
+	startTime1 = MPI_Wtime();
+	ierr = VecScale(rho,1.0/sqrt(users.tau2));CHKERRQ(ierr);
+	ierr = VecCopy(rho,gmrf);CHKERRQ(ierr);
+	ierr = VecExp(rho);CHKERRQ(ierr);
+	ierr = SetOperatorT(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy,timings[3]);CHKERRQ(ierr);
+	ierr = SetSourceT(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb,timings[3]);CHKERRQ(ierr);
+	ierr = KSPSetOperators(kspSPDE,A,A,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
+	startTime1 = MPI_Wtime() - startTime1;
+	timings[4] += startTime1;
+	startTime1 = MPI_Wtime();
+	ierr = KSPSolve(kspSPDE,b,U);CHKERRQ(ierr);
+	ierr = KSPGetIterationNumber(kspSPDE,&users.its);CHKERRQ(ierr);
+	ierr = VecNorm(U,NORM_2,&normU);CHKERRQ(ierr);
+	normU /= sqrt(users.NI);
+	startTime1 = MPI_Wtime() - startTime1;
+	timings[5] += startTime1;
+//	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d] from Processor %d: 2-Norm = %f \n",Ns,rank,normU);
+	return ierr;
+}
+
 PetscErrorCode UnitSolverChol(Vec& rho, Vec& normrnds,const PC& Chol_fac,const Mat& Covar, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU){
 	PetscErrorCode ierr;
 	PetscScalar x;
