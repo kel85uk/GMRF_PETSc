@@ -18,11 +18,11 @@ ex29: ex29.o  chkopts
 	${RM} ex29.o
 	
 test_MC: ./src/Functions.o test_serial.o  chkopts
-	-${CLINKER} -o test_MC ./src/Functions.o test_serial.o  ${PETSC_SNES_LIB}
+	-${CLINKER} -o test_MC ./src/Functions.o test_serial.o  ${PETSC_SNES_LIB} ${SLEPC_LIB}
 	${RM} test_serial.o ./src/Functions.o
 	
 test_PDE: ./src/Functions.o test_serial2.o  chkopts
-	-${CLINKER} -o test_PDE ./src/Functions.o test_serial2.o  ${PETSC_SNES_LIB}
+	-${CLINKER} -o test_PDE ./src/Functions.o test_serial2.o  ${PETSC_SNES_LIB} ${SLEPC_LIB}
 	${RM} test_serial2.o ./src/Functions.o
 	
 test_Chol: ./src/Functions.o ./src/Solver.o test_Chol.o  chkopts

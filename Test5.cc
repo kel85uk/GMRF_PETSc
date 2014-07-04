@@ -145,10 +145,7 @@ int main(int argc,char **argv)
 		}
 		if(work_status != DIETAG){
 			while(true){
-        ierr = PetscLogStageRegister("Unit Work", &stage);CHKERRQ(ierr);
-        ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
         ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar); CHKERRQ(ierr);
-        ierr = PetscLogStagePop();CHKERRQ(ierr);
 				++Ns;				
 				if(lrank == 0){
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
