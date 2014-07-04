@@ -30,7 +30,7 @@ int main(int argc,char **argv)
 	bool bufferBool = false;
 	PetscScalar startTime, endTime, bufferScalar;
 	int numprocs;
-	int procpercolor = 1;
+	int procpercolor = 2;
 	MPI_Status status;MPI_Request request;
 	int ranks[] = {0};
 
