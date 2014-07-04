@@ -18,7 +18,6 @@ Input parameters include:\n\
 
 PetscErrorCode CovarMatCreate(Mat&, const UserCTX&);
 PetscErrorCode GetCholFactor(PC&,const Mat&);
-PetscErrorCode GetCholFactor(Mat&,const Mat&);
 PetscScalar matern_cov(const UserCTX&,const PetscScalar&);
 void set_coordinates(std::vector<PetscScalar>& XR,std::vector<PetscScalar>& YR,const UserCTX& users){
 	PetscScalar yr,xr;
@@ -144,12 +143,14 @@ int main(int argc,char **argv)
 	if (grank != 0){
 		int work_status = DIETAG;
 		Vec normrnds;
-		Mat Covar;Mat Chol_fac;
+		Mat Covar;PC Chol_fac;
 		ierr = VecDuplicate(rho,&normrnds); CHKERRQ(ierr);
 		// Create the covariance matrix here
 		ierr = CovarMatCreate(Covar,users); CHKERRQ(ierr);
+		std::cout << "All ok! covar" << std::endl;
 		// Add the Cholesky factorization routines here
 		ierr = GetCholFactor(Chol_fac,Covar);CHKERRQ(ierr);
+		std::cout << "All ok! cholfac" << std::endl;
 		if(lrank == 0) {
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 			work_status = status.MPI_TAG;
@@ -166,7 +167,7 @@ int main(int argc,char **argv)
 		}
 		if(work_status != DIETAG){
 			while(true){
-				ierr = UnitSolverChol(rho,normrnds,Chol_fac,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar); CHKERRQ(ierr);
+				ierr = UnitSolverChol(rho,normrnds,Chol_fac,Covar,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar); CHKERRQ(ierr);
 				++Ns;				
 				if(lrank == 0){
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
@@ -192,7 +193,7 @@ int main(int argc,char **argv)
 					#endif
 					ierr = VecDestroy(&normrnds); CHKERRQ(ierr);
 					ierr = MatDestroy(&Covar); CHKERRQ(ierr);
-					ierr = MatDestroy(&Chol_fac); CHKERRQ(ierr);
+					ierr = PCDestroy(&Chol_fac); CHKERRQ(ierr);
 					break;
 				}
 			}
@@ -251,24 +252,18 @@ PetscErrorCode CovarMatCreate(Mat& Covar,const UserCTX& users){
   ierr = MatAssemblyEnd(Covar,MAT_FINAL_ASSEMBLY); CHKERRQ(ierr);
   ierr = MatIsSymmetric(Covar,1e-6,&flg); CHKERRQ(ierr);
   if (flg) PetscPrintf(PETSC_COMM_WORLD,"Covar matrix is symmetric \n");
-//  MatPostProcs(Covar,"Chol_covar.dat");
+
   return ierr;
 }
 
-PetscErrorCode GetCholFactor(Mat& Chol_fac,const Mat& Covar){
+PetscErrorCode GetCholFactor(PC& Chol_fac,const Mat& Covar){
   PetscErrorCode ierr;
-  PC pcchol;
-  //PC& pcchol = Chol_fac;
-  MatCreate(PETSC_COMM_WORLD,&Chol_fac);
-  MatSetType(Chol_fac,MATDENSE);
+  PC& pcchol = Chol_fac;
   ierr = PCCreate(PETSC_COMM_WORLD,&pcchol);CHKERRQ(ierr);
   ierr = PCSetType(pcchol,PCCHOLESKY);CHKERRQ(ierr);
   ierr = PCSetOperators(pcchol,Covar,Covar,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
-//  ierr = PCFactorSetMatSolverPackage(pcchol,MATSOLVERMUMPS);CHKERRQ(ierr);
+  ierr = PCFactorSetMatSolverPackage(pcchol,MATSOLVERMUMPS);CHKERRQ(ierr);
   ierr = PCSetUp(pcchol); CHKERRQ(ierr);
-  ierr = PCFactorGetMatrix(pcchol,&Chol_fac);CHKERRQ(ierr);
-  //ierr = MatSetUnfactored(Chol_fac);CHKERRQ(ierr);
-  MatPostProcs(Chol_fac,"Chol_fac.dat");
   return ierr;
 }
 
