@@ -1,0 +1,1214 @@
+0
+1
+2
+3
+4
+5
+6
+7
+Proc[0]: Received norm from processor 1 
+Sample[1]: Expectation = 5.21947138E+00	Variance = 0.00000000E+00	Tol = 5.21947138E+00 
+Proc[0]: Received norm from processor 2 
+Sample[2]: Expectation = 5.21887792E+00	Variance = 3.52196337E-07	Tol = 4.19640523E-04 
+Proc[0]: Received norm from processor 7 
+Sample[3]: Expectation = 5.23911442E+00	Variance = 8.19266357E-04	Tol = 1.65253982E-02 
+Proc[0]: Received norm from processor 3 
+Sample[4]: Expectation = 5.25033429E+00	Variance = 9.92106739E-04	Tol = 1.57488630E-02 
+Proc[0]: Received norm from processor 5 
+Sample[5]: Expectation = 5.23735104E+00	Variance = 1.46794477E-03	Tol = 1.71344377E-02 
+Proc[0]: Received norm from processor 4 
+Sample[6]: Expectation = 5.23415660E+00	Variance = 1.27430968E-03	Tol = 1.45734329E-02 
+Proc[0]: Received norm from processor 6 
+Sample[7]: Expectation = 5.23287629E+00	Variance = 1.10210055E-03	Tol = 1.25476267E-02 
+Proc[0]: Received norm from processor 2 
+Sample[8]: Expectation = 5.23784596E+00	Variance = 1.13722127E-03	Tol = 1.19227790E-02 
+Proc[0]: Received norm from processor 3 
+Sample[9]: Expectation = 5.23624233E+00	Variance = 1.03143645E-03	Tol = 1.07053281E-02 
+Proc[0]: Received norm from processor 7 
+Sample[10]: Expectation = 5.23984044E+00	Variance = 1.04481067E-03	Tol = 1.02215981E-02 
+Proc[0]: Received norm from processor 5 
+Sample[11]: Expectation = 5.22691774E+00	Variance = 2.61979006E-03	Tol = 1.54325219E-02 
+Proc[0]: Received norm from processor 1 
+Sample[12]: Expectation = 5.22867413E+00	Variance = 2.43540831E-03	Tol = 1.42460764E-02 
+Proc[0]: Received norm from processor 5 
+Sample[13]: Expectation = 5.22360842E+00	Variance = 2.55600633E-03	Tol = 1.40219781E-02 
+Proc[0]: Received norm from processor 7 
+Sample[14]: Expectation = 5.21439162E+00	Variance = 3.47777636E-03	Tol = 1.57611103E-02 
+Proc[0]: Received norm from processor 3 
+Sample[15]: Expectation = 5.21506363E+00	Variance = 3.25224697E-03	Tol = 1.47246889E-02 
+Proc[0]: Received norm from processor 2 
+Sample[16]: Expectation = 5.21836795E+00	Variance = 3.21275873E-03	Tol = 1.41703006E-02 
+Proc[0]: Received norm from processor 1 
+Sample[17]: Expectation = 5.21872789E+00	Variance = 3.02584585E-03	Tol = 1.33413242E-02 
+Proc[0]: Received norm from processor 4 
+Sample[18]: Expectation = 5.22485002E+00	Variance = 3.49491226E-03	Tol = 1.39341951E-02 
+Proc[0]: Received norm from processor 6 
+Sample[19]: Expectation = 5.22014986E+00	Variance = 3.70861634E-03	Tol = 1.39710534E-02 
+Proc[0]: Received norm from processor 7 
+Sample[20]: Expectation = 5.22127210E+00	Variance = 3.54711429E-03	Tol = 1.33174965E-02 
+Proc[0]: Received norm from processor 3 
+Sample[21]: Expectation = 5.21764365E+00	Variance = 3.64151599E-03	Tol = 1.31683531E-02 
+Proc[0]: Received norm from processor 2 
+Sample[22]: Expectation = 5.21395034E+00	Variance = 3.76244515E-03	Tol = 1.30774705E-02 
+Proc[0]: Received norm from processor 5 
+Sample[23]: Expectation = 5.21785154E+00	Variance = 3.93368655E-03	Tol = 1.30778381E-02 
+Proc[0]: Received norm from processor 1 
+Sample[24]: Expectation = 5.21860109E+00	Variance = 3.78270510E-03	Tol = 1.25543902E-02 
+Proc[0]: Received norm from processor 7 
+Sample[25]: Expectation = 5.22006394E+00	Variance = 3.68275530E-03	Tol = 1.21371418E-02 
+Proc[0]: Received norm from processor 2 
+Sample[26]: Expectation = 5.21740523E+00	Variance = 3.71782959E-03	Tol = 1.19579867E-02 
+Proc[0]: Received norm from processor 3 
+Sample[27]: Expectation = 5.21920907E+00	Variance = 3.66473203E-03	Tol = 1.16503569E-02 
+Proc[0]: Received norm from processor 5 
+Sample[28]: Expectation = 5.22056499E+00	Variance = 3.58348869E-03	Tol = 1.13129014E-02 
+Proc[0]: Received norm from processor 1 
+Sample[29]: Expectation = 5.21865765E+00	Variance = 3.56178219E-03	Tol = 1.10824219E-02 
+Proc[0]: Received norm from processor 4 
+Sample[30]: Expectation = 5.21721936E+00	Variance = 3.50304840E-03	Tol = 1.08059373E-02 
+Proc[0]: Received norm from processor 6 
+Sample[31]: Expectation = 5.21714073E+00	Variance = 3.39023230E-03	Tol = 1.04576447E-02 
+Proc[0]: Received norm from processor 2 
+Sample[32]: Expectation = 5.21462166E+00	Variance = 3.48100488E-03	Tol = 1.04298323E-02 
+Proc[0]: Received norm from processor 7 
+Sample[33]: Expectation = 5.21450289E+00	Variance = 3.37597127E-03	Tol = 1.01144530E-02 
+Proc[0]: Received norm from processor 3 
+Sample[34]: Expectation = 5.21483682E+00	Variance = 3.28035775E-03	Tol = 9.82247985E-03 
+Proc[0]: Received norm from processor 5 
+Sample[35]: Expectation = 5.21524315E+00	Variance = 3.19224695E-03	Tol = 9.55023851E-03 
+Proc[0]: Received norm from processor 1 
+Sample[36]: Expectation = 5.21448564E+00	Variance = 3.12365742E-03	Tol = 9.31494829E-03 
+Proc[0]: Received norm from processor 4 
+Sample[37]: Expectation = 5.21473111E+00	Variance = 3.04140338E-03	Tol = 9.06642660E-03 
+Proc[0]: Received norm from processor 6 
+Sample[38]: Expectation = 5.21436986E+00	Variance = 2.96619493E-03	Tol = 8.83503035E-03 
+Proc[0]: Received norm from processor 7 
+Sample[39]: Expectation = 5.21399904E+00	Variance = 2.89536395E-03	Tol = 8.61626957E-03 
+Proc[0]: Received norm from processor 2 
+Sample[40]: Expectation = 5.21502505E+00	Variance = 2.86403500E-03	Tol = 8.46173002E-03 
+Proc[0]: Received norm from processor 3 
+Sample[41]: Expectation = 5.21363698E+00	Variance = 2.87124995E-03	Tol = 8.36842199E-03 
+Proc[0]: Received norm from processor 5 
+Sample[42]: Expectation = 5.21253585E+00	Variance = 2.85259849E-03	Tol = 8.24129916E-03 
+Proc[0]: Received norm from processor 1 
+Sample[43]: Expectation = 5.21283571E+00	Variance = 2.79003542E-03	Tol = 8.05509433E-03 
+Proc[0]: Received norm from processor 3 
+Sample[44]: Expectation = 5.21548962E+00	Variance = 3.02948540E-03	Tol = 8.29770696E-03 
+Proc[0]: Received norm from processor 2 
+Sample[45]: Expectation = 5.21553806E+00	Variance = 2.96226675E-03	Tol = 8.11345487E-03 
+Proc[0]: Received norm from processor 7 
+Sample[46]: Expectation = 5.21696679E+00	Variance = 2.98972582E-03	Tol = 8.06188808E-03 
+Proc[0]: Received norm from processor 5 
+Sample[47]: Expectation = 5.21747456E+00	Variance = 2.93797509E-03	Tol = 7.90633342E-03 
+Proc[0]: Received norm from processor 1 
+Sample[48]: Expectation = 5.21630991E+00	Variance = 2.94051835E-03	Tol = 7.82692781E-03 
+Proc[0]: Received norm from processor 4 
+Sample[49]: Expectation = 5.21481274E+00	Variance = 2.98810183E-03	Tol = 7.80907613E-03 
+Proc[0]: Received norm from processor 6 
+Sample[50]: Expectation = 5.21443196E+00	Variance = 2.93544444E-03	Tol = 7.66217259E-03 
+Proc[0]: Received norm from processor 2 
+Sample[51]: Expectation = 5.21424342E+00	Variance = 2.87966408E-03	Tol = 7.51425323E-03 
+Proc[0]: Received norm from processor 3 
+Sample[52]: Expectation = 5.21340801E+00	Variance = 2.85987871E-03	Tol = 7.41604123E-03 
+Proc[0]: Received norm from processor 7 
+Sample[53]: Expectation = 5.21344800E+00	Variance = 2.80600187E-03	Tol = 7.27622372E-03 
+Proc[0]: Received norm from processor 5 
+Sample[54]: Expectation = 5.21575965E+00	Variance = 3.03725674E-03	Tol = 7.49969967E-03 
+Proc[0]: Received norm from processor 1 
+Sample[55]: Expectation = 5.21662237E+00	Variance = 3.02222524E-03	Tol = 7.41279635E-03 
+Proc[0]: Received norm from processor 4 
+Sample[56]: Expectation = 5.21726012E+00	Variance = 2.99062695E-03	Tol = 7.30780765E-03 
+Proc[0]: Received norm from processor 6 
+Sample[57]: Expectation = 5.21790701E+00	Variance = 2.96159390E-03	Tol = 7.20817507E-03 
+Proc[0]: Received norm from processor 2 
+Sample[58]: Expectation = 5.21681166E+00	Variance = 2.97892048E-03	Tol = 7.16663784E-03 
+Proc[0]: Received norm from processor 3 
+Sample[59]: Expectation = 5.21677803E+00	Variance = 2.92849590E-03	Tol = 7.04524830E-03 
+Proc[0]: Received norm from processor 7 
+Sample[60]: Expectation = 5.21539080E+00	Variance = 2.99322756E-03	Tol = 7.06308190E-03 
+Proc[0]: Received norm from processor 5 
+Sample[61]: Expectation = 5.21486682E+00	Variance = 2.96063179E-03	Tol = 6.96670276E-03 
+Proc[0]: Received norm from processor 1 
+Sample[62]: Expectation = 5.21404762E+00	Variance = 2.95381526E-03	Tol = 6.90233160E-03 
+Proc[0]: Received norm from processor 4 
+Sample[63]: Expectation = 5.21284061E+00	Variance = 2.99725555E-03	Tol = 6.89749846E-03 
+Proc[0]: Received norm from processor 6 
+Sample[64]: Expectation = 5.21346651E+00	Variance = 2.97510383E-03	Tol = 6.81806405E-03 
+Proc[0]: Received norm from processor 2 
+Sample[65]: Expectation = 5.21351243E+00	Variance = 2.92946791E-03	Tol = 6.71332533E-03 
+Proc[0]: Received norm from processor 3 
+Sample[66]: Expectation = 5.21212847E+00	Variance = 3.00957785E-03	Tol = 6.75275235E-03 
+Proc[0]: Received norm from processor 7 
+Sample[67]: Expectation = 5.21263531E+00	Variance = 2.98161309E-03	Tol = 6.67095854E-03 
+Proc[0]: Received norm from processor 5 
+Sample[68]: Expectation = 5.21346211E+00	Variance = 2.98356698E-03	Tol = 6.62389501E-03 
+Proc[0]: Received norm from processor 1 
+Sample[69]: Expectation = 5.21411041E+00	Variance = 2.96890677E-03	Tol = 6.55954528E-03 
+Proc[0]: Received norm from processor 4 
+Sample[70]: Expectation = 5.21307039E+00	Variance = 3.00112752E-03	Tol = 6.54776682E-03 
+Proc[0]: Received norm from processor 6 
+Sample[71]: Expectation = 5.21071071E+00	Variance = 3.34862344E-03	Tol = 6.86758403E-03 
+Proc[0]: Received norm from processor 2 
+Sample[72]: Expectation = 5.20955599E+00	Variance = 3.39678568E-03	Tol = 6.86859366E-03 
+Proc[0]: Received norm from processor 3 
+Sample[73]: Expectation = 5.21002761E+00	Variance = 3.36626933E-03	Tol = 6.79067585E-03 
+Proc[0]: Received norm from processor 7 
+Sample[74]: Expectation = 5.21030269E+00	Variance = 3.32630283E-03	Tol = 6.70447897E-03 
+Proc[0]: Received norm from processor 5 
+Sample[75]: Expectation = 5.21100552E+00	Variance = 3.31850603E-03	Tol = 6.65182283E-03 
+Proc[0]: Received norm from processor 1 
+Sample[76]: Expectation = 5.20975487E+00	Variance = 3.39215018E-03	Tol = 6.68083490E-03 
+Proc[0]: Received norm from processor 4 
+Sample[77]: Expectation = 5.20959090E+00	Variance = 3.35013963E-03	Tol = 6.59608269E-03 
+Proc[0]: Received norm from processor 6 
+Sample[78]: Expectation = 5.20975900E+00	Variance = 3.30936494E-03	Tol = 6.51365916E-03 
+Proc[0]: Received norm from processor 2 
+Sample[79]: Expectation = 5.21026317E+00	Variance = 3.28730093E-03	Tol = 6.45069021E-03 
+Proc[0]: Received norm from processor 3 
+Sample[80]: Expectation = 5.21072354E+00	Variance = 3.26295271E-03	Tol = 6.38646294E-03 
+Proc[0]: Received norm from processor 7 
+Sample[81]: Expectation = 5.21196557E+00	Variance = 3.34608208E-03	Tol = 6.42725877E-03 
+Proc[0]: Received norm from processor 5 
+Sample[82]: Expectation = 5.21255879E+00	Variance = 3.33378040E-03	Tol = 6.37619468E-03 
+Proc[0]: Received norm from processor 1 
+Sample[83]: Expectation = 5.21241441E+00	Variance = 3.29532376E-03	Tol = 6.30100753E-03 
+Proc[0]: Received norm from processor 4 
+Sample[84]: Expectation = 5.21235817E+00	Variance = 3.25635621E-03	Tol = 6.22624649E-03 
+Proc[0]: Received norm from processor 6 
+Sample[85]: Expectation = 5.21345475E+00	Variance = 3.31905489E-03	Tol = 6.24881626E-03 
+Proc[0]: Received norm from processor 2 
+Sample[86]: Expectation = 5.21304837E+00	Variance = 3.29449882E-03	Tol = 6.18935585E-03 
+Proc[0]: Received norm from processor 3 
+Sample[87]: Expectation = 5.21269402E+00	Variance = 3.26742917E-03	Tol = 6.12834865E-03 
+Proc[0]: Received norm from processor 7 
+Sample[88]: Expectation = 5.21293139E+00	Variance = 3.23520104E-03	Tol = 6.06330341E-03 
+Proc[0]: Received norm from processor 5 
+Sample[89]: Expectation = 5.21182581E+00	Variance = 3.30641275E-03	Tol = 6.09513782E-03 
+Proc[0]: Received norm from processor 1 
+Sample[90]: Expectation = 5.21213681E+00	Variance = 3.27828319E-03	Tol = 6.03534330E-03 
+Proc[0]: Received norm from processor 4 
+Sample[91]: Expectation = 5.21279489E+00	Variance = 3.28123437E-03	Tol = 6.00479147E-03 
+Proc[0]: Received norm from processor 6 
+Sample[92]: Expectation = 5.21355933E+00	Variance = 3.29874570E-03	Tol = 5.98798226E-03 
+Proc[0]: Received norm from processor 3 
+Sample[93]: Expectation = 5.21397265E+00	Variance = 3.27899233E-03	Tol = 5.93784322E-03 
+Proc[0]: Received norm from processor 2 
+Sample[94]: Expectation = 5.21315415E+00	Variance = 3.30641480E-03	Tol = 5.93081997E-03 
+Proc[0]: Received norm from processor 7 
+Sample[95]: Expectation = 5.21337253E+00	Variance = 3.27609350E-03	Tol = 5.87240962E-03 
+Proc[0]: Received norm from processor 1 
+Sample[96]: Expectation = 5.21312973E+00	Variance = 3.24756796E-03	Tol = 5.81625592E-03 
+Proc[0]: Received norm from processor 5 
+Sample[97]: Expectation = 5.21363267E+00	Variance = 3.23837017E-03	Tol = 5.77799788E-03 
+Proc[0]: Received norm from processor 4 
+Sample[98]: Expectation = 5.21388809E+00	Variance = 3.21165386E-03	Tol = 5.72468149E-03 
+Proc[0]: Received norm from processor 6 
+Sample[99]: Expectation = 5.21354810E+00	Variance = 3.19054093E-03	Tol = 5.67694339E-03 
+Proc[0]: Received norm from processor 3 
+Sample[100]: Expectation = 5.21284524E+00	Variance = 3.20754286E-03	Tol = 5.66351733E-03 
+Proc[0]: Received norm from processor 2 
+Sample[101]: Expectation = 5.21367329E+00	Variance = 3.24435279E-03	Tol = 5.66765426E-03 
+Proc[0]: Sending kill signal to proc 1
+Proc[0]: Sending kill signal to proc 2
+Proc[0]: Sending kill signal to proc 3
+Proc[0]: Sending kill signal to proc 4
+Proc[0]: Sending kill signal to proc 5
+Proc[0]: Sending kill signal to proc 6
+Proc[0]: Sending kill signal to proc 7
+Expectation of ||U|| = 5.21367329E+00
+Proc[0]: All done! 
+Elapsed wall-clock time (sec)= 0.215970 
+NGhost = 5 and I am Processor[0] 
+tau2 = 0.001247 
+kappa = 28.284271 
+nu = 1.000000 
+Proc[7]: We did 15 samples 
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+./Test5 on a linux_gnu_all_cluster named i10hpc2 with 1 processor, by ug30owag Fri Jul  4 11:34:53 2014
+Using Petsc Release Version 3.4.4, unknown 
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           2.166e-01      1.00000   2.166e-01
+Objects:              3.500e+01      1.00000   3.500e+01
+Flops:                0.000e+00      0.00000   0.000e+00  0.000e+00
+Flops/sec:            0.000e+00      0.00000   0.000e+00  0.000e+00
+MPI Messages:         1.125e+02      1.00000   1.125e+02  1.125e+02
+MPI Message Lengths:  4.795e+02      1.00000   4.262e+00  4.795e+02
+MPI Reductions:       2.100e+01      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 2.1662e-01 100.0%  0.0000e+00   0.0%  1.125e+02 100.0%  4.262e+00      100.0%  2.000e+01  95.2% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %f - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %f %M %L %R  %T %f %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+VecSet                 1 1.0 3.0994e-06 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatAssemblyBegin       1 1.0 1.0014e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 2.0e+00  0  0  0  0 10   0  0  0  0 10     0
+MatAssemblyEnd         1 1.0 3.0112e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 4.0e+00  0  0  0  0 19   0  0  0  0 20     0
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+              Vector    21             21       518128     0
+      Vector Scatter     1              1          644     0
+              Matrix     6              6       922788     0
+       Krylov Solver     2              2         2704     0
+      Preconditioner     2              2         2144     0
+           Index Set     2              2         1528     0
+              Viewer     1              0            0     0
+========================================================================================================================
+Average time to get PetscTime(): 9.53674e-08
+#PETSc Option Table entries:
+-Nsamples 100
+-TOL 1e-6
+-alpha 2
+-dim 2
+-ksp_type fgmres
+-lamb 0.1
+-log_summary
+-m 50
+-mat_type mpiaij
+-n 50
+-pc_type hypre
+-sigma 0.3
+Proc[1]: We did 15 samples 
+-vec_type mpi
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure run at: Thu Jul  3 16:28:43 2014
+Configure options: PETSC_ARCH=linux_gnu_all_cluster --download-f-blas-lapack --download-hypre --download-superlu_dist --download-parmetis --download-metis --download-suitesparse --download-fftw --download-scalapack --download-mumps --with-clanguage=cxx --with-mpi-dir=/software/sles/openmpi/1.6.5-ib/ --with-debugging=no --with-shared-libraries=0************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+-----------------------------------------
+Libraries compiled on Thu Jul  3 16:28:43 2014 on i10hpc2 
+Machine characteristics: Linux-3.0.101-0.31-default-x86_64-with-SuSE-11-x86_64
+Using PETSc directory: /auto-home/stud/ug30owag/petsc
+Using PETSc arch: linux_gnu_all_cluster
+-----------------------------------------
+
+Using C compiler: /software/sles/openmpi/1.6.5-ib/bin/mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -O     ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: /software/sles/openmpi/1.6.5-ib/bin/mpif90  -Wall -Wno-unused-variable -Wno-unused-dummy-argument -O   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/software/sles/openmpi/1.6.5-ib/include
+-----------------------------------------
+
+Using C linker: /software/sles/openmpi/1.6.5-ib/bin/mpicxx
+Using Fortran linker: /software/sles/openmpi/1.6.5-ib/bin/mpif90
+Using libraries: -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lpetsc -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lsuperlu_dist_3.3 -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -lHYPRE -lflapack -lfblas -lX11 -lparmetis -lmetis -lfftw3_mpi -lfftw3 -lpthread -L/software/sles/openmpi/1.6.5-ib/lib -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc/x86_64-unknown-linux-gnu/4.9.0 -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc -L/auto-home/central-software/sles/gcc/4.9.0/lib64 -L/auto-home/central-software/sles/gcc/4.9.0/lib -lmpi_f90 -lmpi_f77 -lgfortran -lm -lgfortran -lm -lgfortran -lm -lgfortran -lm -lm -lm -lquadmath -lm -lmpi_cxx -lstdc++ -ldl -lmpi -lrt -lnsl -lutil -lgcc_s -lpthread -ldl 
+-----------------------------------------
+
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+./Test5 on a linux_gnu_all_cluster named i10hpc2 with 1 processor, by ug30owag Fri Jul  4 11:34:53 2014
+Using Petsc Release Version 3.4.4, unknown 
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           2.172e-01      1.00000   2.172e-01
+Objects:              2.320e+02      1.00000   2.320e+02
+Flops:                1.476e+07      1.00000   1.476e+07  1.476e+07
+Flops/sec:            6.794e+07      1.00000   6.794e+07  6.794e+07
+MPI Messages:         1.700e+01      1.00000   1.700e+01  1.700e+01
+MPI Message Lengths:  7.450e+01      1.00000   4.382e+00  7.450e+01
+MPI Reductions:       6.570e+02      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 2.1720e-01 100.0%  1.4756e+07 100.0%  1.700e+01 100.0%  4.382e+00      100.0%  6.560e+02  99.8% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %f - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %f %M %L %R  %T %f %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+VecMDot              176 1.0 1.3423e-03 1.0 3.41e+06 1.0 0.0e+00 0.0e+00 1.8e+02  1 23  0  0 27   1 23  0  0 27  2539
+Proc[5]: We did 15 samples 
+VecNorm              224 1.0 9.1434e-04 1.0 1.33e+06 1.0 0.0e+00 0.0e+00 2.2e+02  0  9  0  0 34   0  9  0  0 34  1456
+VecScale             224 1.0 6.4707e-04 1.0 6.83e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  5  0  0  0   0  5  0  0  0  1056
+VecCopy               48 1.0 2.0504e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSet               262 1.0 6.9761e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecAXPY               32 1.0 1.2636e-04 1.0 1.95e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  1  0  0  0   0  1  0  0  0  1545
+VecMAXPY             208 1.0 2.2802e-03 1.0 4.46e+06 1.0 0.0e+00 0.0e+00 0.0e+00  1 30  0  0  0   1 30  0  0  0  1958
+VecAssemblyBegin      32 1.0 9.5129e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 9.6e+01  0  0  0  0 15   0  0  0  0 15     0
+VecAssemblyEnd        32 1.0 1.9550e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecScatterBegin      208 1.0 1.3185e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatMult              176 1.0 6.7668e-03 1.0 4.68e+06 1.0 0.0e+00 0.0e+00 0.0e+00  3 32  0  0  0   3 32  0  0  0   691
+MatConvert            17 1.0 1.5233e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0     0
+MatAssemblyBegin      17 1.0 6.9141e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 3.4e+01  0  0  0  0  5   0  0  0  0  5     0
+MatAssemblyEnd        17 1.0 1.2155e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  1   1  0  0  0  1     0
+MatGetRowIJ           34 1.0 8.1062e-06 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPGMRESOrthog       176 1.0 3.1693e-03 1.0 6.82e+06 1.0 0.0e+00 0.0e+00 1.8e+02  1 46  0  0 27   1 46  0  0 27  2150
+KSPSetUp              17 1.0 3.7575e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPSolve              32 1.0 1.8561e-01 1.0 1.46e+07 1.0 0.0e+00 0.0e+00 3.9e+02 85 99  0  0 60  85 99  0  0 60    79
+PCSetUp               17 1.0 6.8798e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00 32  0  0  0  1  32  0  0  0  1     0
+PCApply              176 1.0 1.0298e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00 47  0  0  0  0  47  0  0  0  0     0
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+              Vector   119            119      3027664     0
+      Vector Scatter    34             34        21896     0
+              Matrix     6              6       942792     0
+       Krylov Solver     2              2        37904     0
+      Preconditioner     2              2         2144     0
+           Index Set    68             68        51696     0
+              Viewer     1              0            0     0
+========================================================================================================================
+Average time to get PetscTime(): 9.53674e-08
+#PETSc Option Table entries:
+-Nsamples 100
+-TOL 1e-6
+-alpha 2
+-dim 2
+-ksp_type fgmres
+-lamb 0.1
+-log_summary
+-m 50
+-mat_type mpiaij
+-n 50
+-pc_type hypre
+-sigma 0.3
+-vec_type mpi
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure run at: Thu Jul  3 16:28:43 2014
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+Configure options: PETSC_ARCH=linux_gnu_all_cluster --download-f-blas-lapack --download-hypre --download-superlu_dist --download-parmetis --download-metis --download-suitesparse --download-fftw --download-scalapack --download-mumps --with-clanguage=cxx --with-mpi-dir=/software/sles/openmpi/1.6.5-ib/ --with-debugging=no --with-shared-libraries=0
+-----------------------------------------
+Libraries compiled on Thu Jul  3 16:28:43 2014 on i10hpc2 
+Machine characteristics: Linux-3.0.101-0.31-default-x86_64-with-SuSE-11-x86_64
+Using PETSc directory: /auto-home/stud/ug30owag/petsc
+Using PETSc arch: linux_gnu_all_cluster
+-----------------------------------------
+
+Using C compiler: /software/sles/openmpi/1.6.5-ib/bin/mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -O     ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: /software/sles/openmpi/1.6.5-ib/bin/mpif90  -Wall -Wno-unused-variable -Wno-unused-dummy-argument -O   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/software/sles/openmpi/1.6.5-ib/include
+-----------------------------------------
+
+Using C linker: /software/sles/openmpi/1.6.5-ib/bin/mpicxx
+Using Fortran linker: /software/sles/openmpi/1.6.5-ib/bin/mpif90
+Using libraries: -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lpetsc -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lsuperlu_dist_3.3 -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -lHYPRE -lflapack -lfblas -lX11 -lparmetis -lmetis -lfftw3_mpi -lfftw3 -lpthread -L/software/sles/openmpi/1.6.5-ib/lib -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc/x86_64-unknown-linux-gnu/4.9.0 -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc -L/auto-home/central-software/sles/gcc/4.9.0/lib64 -L/auto-home/central-software/sles/gcc/4.9.0/lib -lmpi_f90 -lmpi_f77 -lgfortran -lm -lgfortran -lm -lgfortran -lm -lgfortran -lm -lm -lm -lquadmath -lm -lmpi_cxx -lstdc++ -ldl -lmpi -lrt -lnsl -lutil -lgcc_s -lpthread -ldl 
+-----------------------------------------
+
+./Test5 on a linux_gnu_all_cluster named i10hpc2 with 1 processor, by ug30owag Fri Jul  4 11:34:53 2014
+Using Petsc Release Version 3.4.4, unknown 
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           2.177e-01      1.00000   2.177e-01
+Objects:              2.320e+02      1.00000   2.320e+02
+Flops:                1.486e+07      1.00000   1.486e+07  1.486e+07
+Flops/sec:            6.826e+07      1.00000   6.826e+07  6.826e+07
+MPI Messages:         1.700e+01      1.00000   1.700e+01  1.700e+01
+MPI Message Lengths:  7.450e+01      1.00000   4.382e+00  7.450e+01
+MPI Reductions:       6.590e+02      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 2.1771e-01 100.0%  1.4861e+07 100.0%  1.700e+01 100.0%  4.382e+00      100.0%  6.580e+02  99.8% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %f - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %f %M %L %R  %T %f %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+VecMDot              177 1.0 1.3428e-03 1.0 3.44e+06 1.0 0.0e+00 0.0e+00 1.8e+02  1 23  0  0 27   1 23  0  0 27  2564
+VecNorm              225 1.0 9.4271e-04 1.0 1.34e+06 1.0 0.0e+00 0.0e+00 2.2e+02  0  9  0  0 34   0  9  0  0 34  1417
+VecScale             225 1.0 6.4754e-04 1.0 6.86e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  5  0  0  0   0  5  0  0  0  1059
+VecCopy               48 1.0 4.3416e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSet               263 1.0 6.9261e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+./Test5 on a linux_gnu_all_cluster named i10hpc2 with 1 processor, by ug30owag Fri Jul  4 11:34:53 2014
+Using Petsc Release Version 3.4.4, unknown 
+
+                         Max       Max/Min        Avg      Total 
+VecAXPY               32 1.0 1.3232e-04 1.0 1.95e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  1  0  0  0   0  1  0  0  0  1475
+VecMAXPY             209 1.0 2.3637e-03 1.0 4.50e+06 1.0 0.0e+00 0.0e+00 0.0e+00  1 30  0  0  0   1 30  0  0  0  1906
+VecAssemblyBegin      32 1.0 9.4652e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 9.6e+01  0  0  0  0 15   0  0  0  0 15     0
+VecAssemblyEnd        32 1.0 1.9073e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+Time (sec):           2.180e-01      1.00000   2.180e-01
+Objects:              2.320e+02      1.00000   2.320e+02
+VecScatterBegin      209 1.0 1.1730e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatMult              177 1.0 6.7289e-03 1.0 4.70e+06 1.0 0.0e+00 0.0e+00 0.0e+00  3 32  0  0  0   3 32  0  0  0   698
+Flops:                1.476e+07      1.00000   1.476e+07  1.476e+07
+Flops/sec:            6.769e+07      1.00000   6.769e+07  6.769e+07
+MPI Messages:         1.700e+01      1.00000   1.700e+01  1.700e+01
+MatConvert            17 1.0 1.5676e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0     0
+MatAssemblyBegin      17 1.0 6.6519e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 3.4e+01  0  0  0  0  5   0  0  0  0  5     0
+MPI Message Lengths:  7.450e+01      1.00000   4.382e+00  7.450e+01
+MPI Reductions:       6.570e+02      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+MatAssemblyEnd        17 1.0 1.2000e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  1   1  0  0  0  1     0
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+MatGetRowIJ           34 1.0 6.1989e-06 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPGMRESOrthog       177 1.0 3.2628e-03 1.0 6.89e+06 1.0 0.0e+00 0.0e+00 1.8e+02  1 46  0  0 27   1 46  0  0 27  2110
+KSPSetUp              17 1.0 3.7336e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPSolve              32 1.0 1.8640e-01 1.0 1.47e+07 1.0 0.0e+00 0.0e+00 3.9e+02 86 99  0  0 60  86 99  0  0 60    79
+PCSetUp               17 1.0 6.8932e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00 32  0  0  0  1  32  0  0  0  1     0
+PCApply              177 1.0 1.0329e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00 47  0  0  0  0  47  0  0  0  0     0
+------------------------------------------------------------------------------------------------------------------------
+ 0:      Main Stage: 2.1801e-01 100.0%  1.4756e+07 100.0%  1.700e+01 100.0%  4.382e+00      100.0%  6.560e+02  99.8% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %f - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %f %M %L %R  %T %f %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+VecMDot              176 1.0 1.3511e-03 1.0 3.41e+06 1.0 0.0e+00 0.0e+00 1.8e+02  1 23  0  0 27   1 23  0  0 27  2522
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+              Vector   119            119      3027664     0
+      Vector Scatter    34             34        21896     0
+VecNorm              224 1.0 9.4891e-04 1.0 1.33e+06 1.0 0.0e+00 0.0e+00 2.2e+02  0  9  0  0 34   0  9  0  0 34  1403
+              Matrix     6              6       942792     0
+       Krylov Solver     2              2        37904     0
+      Preconditioner     2              2         2144     0
+           Index Set    68             68        51696     0
+VecScale             224 1.0 6.3944e-04 1.0 6.83e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  5  0  0  0   0  5  0  0  0  1068
+VecCopy               48 1.0 1.7095e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+              Viewer     1              0            0     0
+========================================================================================================================
+Average time to get PetscTime(): 0
+#PETSc Option Table entries:
+VecSet               262 1.0 6.8283e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+-Nsamples 100
+-TOL 1e-6
+-alpha 2
+-dim 2
+VecAXPY               32 1.0 1.2684e-04 1.0 1.95e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  1  0  0  0   0  1  0  0  0  1539
+-ksp_type fgmres
+-lamb 0.1
+-log_summary
+-m 50
+VecMAXPY             208 1.0 2.2924e-03 1.0 4.46e+06 1.0 0.0e+00 0.0e+00 0.0e+00  1 30  0  0  0   1 30  0  0  0  1947
+VecAssemblyBegin      32 1.0 9.1791e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 9.6e+01  0  0  0  0 15   0  0  0  0 15     0
+-mat_type mpiaij
+-n 50
+-pc_type hypre
+-sigma 0.3
+-vec_type mpi
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+VecAssemblyEnd        32 1.0 2.4080e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecScatterBegin      208 1.0 1.3781e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure run at: Thu Jul  3 16:28:43 2014
+Configure options: PETSC_ARCH=linux_gnu_all_cluster --download-f-blas-lapack --download-hypre --download-superlu_dist --download-parmetis --download-metis --download-suitesparse --download-fftw --download-scalapack --download-mumps --with-clanguage=cxx --with-mpi-dir=/software/sles/openmpi/1.6.5-ib/ --with-debugging=no --with-shared-libraries=0
+-----------------------------------------
+Libraries compiled on Thu Jul  3 16:28:43 2014 on i10hpc2 
+Machine characteristics: Linux-3.0.101-0.31-default-x86_64-with-SuSE-11-x86_64
+Using PETSc directory: /auto-home/stud/ug30owag/petsc
+Using PETSc arch: linux_gnu_all_cluster
+-----------------------------------------
+
+Using C compiler: /software/sles/openmpi/1.6.5-ib/bin/mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -O     ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: /software/sles/openmpi/1.6.5-ib/bin/mpif90  -Wall -Wno-unused-variable -Wno-unused-dummy-argument -O   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/software/sles/openmpi/1.6.5-ib/include
+-----------------------------------------
+MatMult              176 1.0 6.7730e-03 1.0 4.68e+06 1.0 0.0e+00 0.0e+00 0.0e+00  3 32  0  0  0   3 32  0  0  0   690
+MatConvert            17 1.0 1.5306e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0     0
+
+Using C linker: /software/sles/openmpi/1.6.5-ib/bin/mpicxx
+Using Fortran linker: /software/sles/openmpi/1.6.5-ib/bin/mpif90
+Using libraries: -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lpetsc -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lsuperlu_dist_3.3 -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -lHYPRE -lflapack -lfblas -lX11 -lparmetis -lmetis -lfftw3_mpi -lfftw3 -lpthread -L/software/sles/openmpi/1.6.5-ib/lib -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc/x86_64-unknown-linux-gnu/4.9.0 -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc -L/auto-home/central-software/sles/gcc/4.9.0/lib64 -L/auto-home/central-software/sles/gcc/4.9.0/lib -lmpi_f90 -lmpi_f77 -lgfortran -lm -lgfortran -lm -lgfortran -lm -lgfortran -lm -lm -lm -lquadmath -lm -lmpi_cxx -lstdc++ -ldl -lmpi -lrt -lnsl -lutil -lgcc_s -lpthread -ldl 
+-----------------------------------------
+
+MatAssemblyBegin      17 1.0 6.6280e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 3.4e+01  0  0  0  0  5   0  0  0  0  5     0
+MatAssemblyEnd        17 1.0 1.2398e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  1   1  0  0  0  1     0
+MatGetRowIJ           34 1.0 7.3910e-06 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPGMRESOrthog       176 1.0 3.1860e-03 1.0 6.82e+06 1.0 0.0e+00 0.0e+00 1.8e+02  1 46  0  0 27   1 46  0  0 27  2139
+KSPSetUp              17 1.0 3.6240e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPSolve              32 1.0 1.8633e-01 1.0 1.46e+07 1.0 0.0e+00 0.0e+00 3.9e+02 85 99  0  0 60  85 99  0  0 60    78
+PCSetUp               17 1.0 6.9097e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00 32  0  0  0  1  32  0  0  0  1     0
+PCApply              176 1.0 1.0339e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00 47  0  0  0  0  47  0  0  0  0     0
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+              Vector   119            119      3027664     0
+      Vector Scatter    34             34        21896     0
+              Matrix     6              6       942792     0
+       Krylov Solver     2              2        37904     0
+      Preconditioner     2              2         2144     0
+           Index Set    68             68        51696     0
+              Viewer     1              0            0     0
+========================================================================================================================
+Average time to get PetscTime(): 0
+#PETSc Option Table entries:
+-Nsamples 100
+-TOL 1e-6
+-alpha 2
+-dim 2
+-ksp_type fgmres
+-lamb 0.1
+-log_summary
+-m 50
+-mat_type mpiaij
+-n 50
+-pc_type hypre
+-sigma 0.3
+-vec_type mpi
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure run at: Thu Jul  3 16:28:43 2014
+Configure options: PETSC_ARCH=linux_gnu_all_cluster --download-f-blas-lapack --download-hypre --download-superlu_dist --download-parmetis --download-metis --download-suitesparse --download-fftw --download-scalapack --download-mumps --with-clanguage=cxx --with-mpi-dir=/software/sles/openmpi/1.6.5-ib/ --with-debugging=no --with-shared-libraries=0
+-----------------------------------------
+Libraries compiled on Thu Jul  3 16:28:43 2014 on i10hpc2 
+Machine characteristics: Linux-3.0.101-0.31-default-x86_64-with-SuSE-11-x86_64
+Using PETSc directory: /auto-home/stud/ug30owag/petsc
+Using PETSc arch: linux_gnu_all_cluster
+-----------------------------------------
+
+Using C compiler: /software/sles/openmpi/1.6.5-ib/bin/mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -O     ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: /software/sles/openmpi/1.6.5-ib/bin/mpif90  -Wall -Wno-unused-variable -Wno-unused-dummy-argument -O   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/software/sles/openmpi/1.6.5-ib/include
+-----------------------------------------
+
+Using C linker: /software/sles/openmpi/1.6.5-ib/bin/mpicxx
+Using Fortran linker: /software/sles/openmpi/1.6.5-ib/bin/mpif90
+Using libraries: -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lpetsc -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lsuperlu_dist_3.3 -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -lHYPRE -lflapack -lfblas -lX11 -lparmetis -lmetis -lfftw3_mpi -lfftw3 -lpthread -L/software/sles/openmpi/1.6.5-ib/lib -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc/x86_64-unknown-linux-gnu/4.9.0 -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc -L/auto-home/central-software/sles/gcc/4.9.0/lib64 -L/auto-home/central-software/sles/gcc/4.9.0/lib -lmpi_f90 -lmpi_f77 -lgfortran -lm -lgfortran -lm -lgfortran -lm -lgfortran -lm -lm -lm -lquadmath -lm -lmpi_cxx -lstdc++ -ldl -lmpi -lrt -lnsl -lutil -lgcc_s -lpthread -ldl 
+-----------------------------------------
+
+Proc[6]: We did 12 samples 
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+./Test5 on a linux_gnu_all_cluster named i10hpc2 with 1 processor, by ug30owag Fri Jul  4 11:34:53 2014
+Using Petsc Release Version 3.4.4, unknown 
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           2.263e-01      1.00000   2.263e-01
+Objects:              2.080e+02      1.00000   2.080e+02
+Flops:                1.199e+07      1.00000   1.199e+07  1.199e+07
+Flops/sec:            5.299e+07      1.00000   5.299e+07  5.299e+07
+MPI Messages:         1.400e+01      1.00000   1.400e+01  1.400e+01
+Proc[4]: We did 12 samples 
+MPI Message Lengths:  6.100e+01      1.00000   4.357e+00  6.100e+01
+MPI Reductions:       5.400e+02      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 2.2627e-01 100.0%  1.1989e+07 100.0%  1.400e+01 100.0%  4.357e+00      100.0%  5.390e+02  99.8% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %f - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %f %M %L %R  %T %f %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+VecMDot              143 1.0 1.5452e-03 1.0 2.77e+06 1.0 0.0e+00 0.0e+00 1.4e+02  1 23  0  0 26   1 23  0  0 27  1792
+VecNorm              182 1.0 8.1515e-04 1.0 1.08e+06 1.0 0.0e+00 0.0e+00 1.8e+02  0  9  0  0 34   0  9  0  0 34  1327
+VecScale             182 1.0 7.0333e-04 1.0 5.55e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  5  0  0  0   0  5  0  0  0   789
+VecCopy               39 1.0 1.7381e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSet               214 1.0 6.3133e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecAXPY               26 1.0 1.3304e-04 1.0 1.59e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  1  0  0  0   0  1  0  0  0  1192
+VecMAXPY             169 1.0 2.6224e-03 1.0 3.63e+06 1.0 0.0e+00 0.0e+00 0.0e+00  1 30  0  0  0   1 30  0  0  0  1383
+VecAssemblyBegin      26 1.0 9.1076e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 7.8e+01  0  0  0  0 14   0  0  0  0 14     0
+VecAssemblyEnd        26 1.0 1.8358e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecScatterBegin      169 1.0 1.2732e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatMult              143 1.0 6.9096e-03 1.0 3.80e+06 1.0 0.0e+00 0.0e+00 0.0e+00  3 32  0  0  0   3 32  0  0  0   550
+MatConvert            14 1.0 1.6575e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0     0
+MatAssemblyBegin      14 1.0 7.2956e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 2.8e+01  0  0  0  0  5   0  0  0  0  5     0
+MatAssemblyEnd        14 1.0 1.6720e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  1   1  0  0  0  1     0
+MatGetRowIJ           28 1.0 9.7752e-06 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPGMRESOrthog       143 1.0 3.6559e-03 1.0 5.54e+06 1.0 0.0e+00 0.0e+00 1.4e+02  2 46  0  0 26   2 46  0  0 27  1515
+KSPSetUp              14 1.0 5.0330e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPSolve              26 1.0 1.9333e-01 1.0 1.19e+07 1.0 0.0e+00 0.0e+00 3.2e+02 85 99  0  0 59  85 99  0  0 59    61
+PCSetUp               14 1.0 6.9485e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00 31  0  0  0  1  31  0  0  0  1     0
+PCApply              143 1.0 1.0895e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00 48  0  0  0  0  48  0  0  0  0     0
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+              Vector   113            113      2869072     0
+      Vector Scatter    28             28        18032     0
+              Matrix     6              6       942792     0
+       Krylov Solver     2              2        37904     0
+      Preconditioner     2              2         2144     0
+           Index Set    56             56        42576     0
+              Viewer     1              0            0     0
+========================================================================================================================
+Average time to get PetscTime(): 0
+#PETSc Option Table entries:
+-Nsamples 100
+-TOL 1e-6
+-alpha 2
+-dim 2
+-ksp_type fgmres
+Proc[3]: We did 16 samples 
+-lamb 0.1
+-log_summary
+-m 50
+-mat_type mpiaij
+Proc[2]: We did 16 samples 
+-n 50
+-pc_type hypre
+-sigma 0.3
+-vec_type mpi
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure run at: Thu Jul  3 16:28:43 2014
+Configure options: PETSC_ARCH=linux_gnu_all_cluster --download-f-blas-lapack --download-hypre --download-superlu_dist --download-parmetis --download-metis --download-suitesparse --download-fftw --download-scalapack --download-mumps --with-clanguage=cxx --with-mpi-dir=/software/sles/openmpi/1.6.5-ib/ --with-debugging=no --with-shared-libraries=0
+-----------------------------------------
+Libraries compiled on Thu Jul  3 16:28:43 2014 on i10hpc2 
+Machine characteristics: Linux-3.0.101-0.31-default-x86_64-with-SuSE-11-x86_64
+Using PETSc directory: /auto-home/stud/ug30owag/petsc
+Using PETSc arch: linux_gnu_all_cluster
+-----------------------------------------
+
+Using C compiler: /software/sles/openmpi/1.6.5-ib/bin/mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -O     ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: /software/sles/openmpi/1.6.5-ib/bin/mpif90  -Wall -Wno-unused-variable -Wno-unused-dummy-argument -O   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/software/sles/openmpi/1.6.5-ib/include
+-----------------------------------------
+
+Using C linker: /software/sles/openmpi/1.6.5-ib/bin/mpicxx
+Using Fortran linker: /software/sles/openmpi/1.6.5-ib/bin/mpif90
+Using libraries: -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lpetsc -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lsuperlu_dist_3.3 -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -lHYPRE -lflapack -lfblas -lX11 -lparmetis -lmetis -lfftw3_mpi -lfftw3 -lpthread -L/software/sles/openmpi/1.6.5-ib/lib -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc/x86_64-unknown-linux-gnu/4.9.0 -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc -L/auto-home/central-software/sles/gcc/4.9.0/lib64 -L/auto-home/central-software/sles/gcc/4.9.0/lib -lmpi_f90 -lmpi_f77 -lgfortran -lm -lgfortran -lm -lgfortran -lm -lgfortran -lm -lm -lm -lquadmath -lm -lmpi_cxx -lstdc++ -ldl -lmpi -lrt -lnsl -lutil -lgcc_s -lpthread -ldl 
+-----------------------------------------
+
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+./Test5 on a linux_gnu_all_cluster named i10hpc2 with 1 processor, by ug30owag Fri Jul  4 11:34:53 2014
+Using Petsc Release Version 3.4.4, unknown 
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           2.269e-01      1.00000   2.269e-01
+Objects:              2.080e+02      1.00000   2.080e+02
+Flops:                1.209e+07      1.00000   1.209e+07  1.209e+07
+Flops/sec:            5.329e+07      1.00000   5.329e+07  5.329e+07
+MPI Messages:         1.400e+01      1.00000   1.400e+01  1.400e+01
+MPI Message Lengths:  6.100e+01      1.00000   4.357e+00  6.100e+01
+MPI Reductions:       5.420e+02      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 2.2693e-01 100.0%  1.2094e+07 100.0%  1.400e+01 100.0%  4.357e+00      100.0%  5.410e+02  99.8% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %f - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %f %M %L %R  %T %f %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+VecMDot              144 1.0 1.4870e-03 1.0 2.80e+06 1.0 0.0e+00 0.0e+00 1.4e+02  1 23  0  0 27   1 23  0  0 27  1885
+VecNorm              183 1.0 8.3184e-04 1.0 1.09e+06 1.0 0.0e+00 0.0e+00 1.8e+02  0  9  0  0 34   0  9  0  0 34  1306
+VecScale             183 1.0 7.1716e-04 1.0 5.58e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  5  0  0  0   0  5  0  0  0   778
+VecCopy               39 1.0 1.9336e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSet               215 1.0 6.5947e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecAXPY               26 1.0 1.3733e-04 1.0 1.59e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  1  0  0  0   0  1  0  0  0  1155
+VecMAXPY             170 1.0 2.6410e-03 1.0 3.67e+06 1.0 0.0e+00 0.0e+00 0.0e+00  1 30  0  0  0   1 30  0  0  0  1389
+VecAssemblyBegin      26 1.0 9.4891e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 7.8e+01  0  0  0  0 14   0  0  0  0 14     0
+VecAssemblyEnd        26 1.0 1.7405e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecScatterBegin      170 1.0 1.3590e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatMult              144 1.0 6.9563e-03 1.0 3.82e+06 1.0 0.0e+00 0.0e+00 0.0e+00  3 32  0  0  0   3 32  0  0  0   549
+MatConvert            14 1.0 1.7033e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0     0
+MatAssemblyBegin      14 1.0 6.6757e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 2.8e+01  0  0  0  0  5   0  0  0  0  5     0
+MatAssemblyEnd        14 1.0 1.6692e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  1   1  0  0  0  1     0
+MatGetRowIJ           28 1.0 6.6757e-06 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPGMRESOrthog       144 1.0 3.6118e-03 1.0 5.61e+06 1.0 0.0e+00 0.0e+00 1.4e+02  2 46  0  0 27   2 46  0  0 27  1553
+KSPSetUp              14 1.0 5.2142e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPSolve              26 1.0 1.9384e-01 1.0 1.20e+07 1.0 0.0e+00 0.0e+00 3.2e+02 85 99  0  0 59  85 99  0  0 60    62
+PCSetUp               14 1.0 6.8869e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00 30  0  0  0  1  30  0  0  0  1     0
+PCApply              144 1.0 1.1000e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00 48  0  0  0  0  48  0  0  0  0     0
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+              Vector   113            113      2869072     0
+      Vector Scatter    28             28        18032     0
+              Matrix     6              6       942792     0
+       Krylov Solver     2              2        37904     0
+      Preconditioner     2              2         2144     0
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+           Index Set    56             56        42576     0
+              Viewer     1              0            0     0
+./Test5 on a linux_gnu_all_cluster named i10hpc2 with 1 processor, by ug30owag Fri Jul  4 11:34:53 2014
+Using Petsc Release Version 3.4.4, unknown 
+
+                         Max       Max/Min        Avg      Total 
+./Test5 on a linux_gnu_all_cluster named i10hpc2 with 1 processor, by ug30owag Fri Jul  4 11:34:53 2014
+Using Petsc Release Version 3.4.4, unknown 
+========================================================================================================================
+Average time to get PetscTime(): 9.53674e-08
+#PETSc Option Table entries:
+-Nsamples 100
+-TOL 1e-6
+-alpha 2
+-dim 2
+-ksp_type fgmres
+-lamb 0.1
+-log_summary
+-m 50
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           2.276e-01      1.00000   2.276e-01
+Objects:              2.400e+02      1.00000   2.400e+02
+Time (sec):           2.276e-01      1.00000   2.276e-01
+Objects:              2.400e+02      1.00000   2.400e+02
+Flops:                1.568e+07      1.00000   1.568e+07  1.568e+07
+-mat_type mpiaij
+-n 50
+-pc_type hypre
+-sigma 0.3
+-vec_type mpi
+#End of PETSc Option Table entries
+Flops:                1.568e+07      1.00000   1.568e+07  1.568e+07
+Flops/sec:            6.890e+07      1.00000   6.890e+07  6.890e+07
+Flops/sec:            6.890e+07      1.00000   6.890e+07  6.890e+07
+MPI Messages:         1.800e+01      1.00000   1.800e+01  1.800e+01
+MPI Message Lengths:  7.900e+01      1.00000   4.389e+00  7.900e+01
+MPI Reductions:       6.960e+02      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+MPI Messages:         1.800e+01      1.00000   1.800e+01  1.800e+01
+MPI Message Lengths:  7.900e+01      1.00000   4.389e+00  7.900e+01
+MPI Reductions:       6.960e+02      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure run at: Thu Jul  3 16:28:43 2014
+Configure options: PETSC_ARCH=linux_gnu_all_cluster --download-f-blas-lapack --download-hypre --download-superlu_dist --download-parmetis --download-metis --download-suitesparse --download-fftw --download-scalapack --download-mumps --with-clanguage=cxx --with-mpi-dir=/software/sles/openmpi/1.6.5-ib/ --with-debugging=no --with-shared-libraries=0
+-----------------------------------------
+Libraries compiled on Thu Jul  3 16:28:43 2014 on i10hpc2 
+Machine characteristics: Linux-3.0.101-0.31-default-x86_64-with-SuSE-11-x86_64
+Using PETSc directory: /auto-home/stud/ug30owag/petsc
+Using PETSc arch: linux_gnu_all_cluster
+-----------------------------------------
+
+Using C compiler: /software/sles/openmpi/1.6.5-ib/bin/mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -O     ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: /software/sles/openmpi/1.6.5-ib/bin/mpif90  -Wall -Wno-unused-variable -Wno-unused-dummy-argument -O   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/software/sles/openmpi/1.6.5-ib/include
+-----------------------------------------
+
+Using C linker: /software/sles/openmpi/1.6.5-ib/bin/mpicxx
+Using Fortran linker: /software/sles/openmpi/1.6.5-ib/bin/mpif90
+Using libraries: -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lpetsc -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lsuperlu_dist_3.3 -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -lHYPRE -lflapack -lfblas -lX11 -lparmetis -lmetis -lfftw3_mpi -lfftw3 -lpthread -L/software/sles/openmpi/1.6.5-ib/lib -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc/x86_64-unknown-linux-gnu/4.9.0 -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc -L/auto-home/central-software/sles/gcc/4.9.0/lib64 -L/auto-home/central-software/sles/gcc/4.9.0/lib -lmpi_f90 -lmpi_f77 -lgfortran -lm -lgfortran -lm -lgfortran -lm -lgfortran -lm -lm -lm -lquadmath -lm -lmpi_cxx -lstdc++ -ldl -lmpi -lrt -lnsl -lutil -lgcc_s -lpthread -ldl 
+-----------------------------------------
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 2.2756e-01 100.0%  1.5678e+07 100.0%  1.800e+01 100.0%  4.389e+00      100.0%  6.950e+02  99.9% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 2.2755e-01 100.0%  1.5678e+07 100.0%  1.800e+01 100.0%  4.389e+00      100.0%  6.950e+02  99.9% 
+
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %f - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+      %T - percent time in this phase         %f - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %f %M %L %R  %T %f %M %L %R Mflop/s
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %f %M %L %R  %T %f %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+VecMDot              187 1.0 1.4193e-03 1.0 3.62e+06 1.0 0.0e+00 0.0e+00 1.9e+02  1 23  0  0 27   1 23  0  0 27  2551
+VecNorm              238 1.0 9.7370e-04 1.0 1.41e+06 1.0 0.0e+00 0.0e+00 2.4e+02  0  9  0  0 34   0  9  0  0 34  1453
+VecMDot              187 1.0 1.4091e-03 1.0 3.62e+06 1.0 0.0e+00 0.0e+00 1.9e+02  1 23  0  0 27   1 23  0  0 27  2569
+VecNorm              238 1.0 1.0026e-03 1.0 1.41e+06 1.0 0.0e+00 0.0e+00 2.4e+02  0  9  0  0 34   0  9  0  0 34  1411
+VecScale             238 1.0 6.7472e-04 1.0 7.26e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  5  0  0  0   0  5  0  0  0  1076
+VecCopy               51 1.0 1.8334e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSet               278 1.0 6.8569e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecScale             238 1.0 6.9308e-04 1.0 7.26e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  5  0  0  0   0  5  0  0  0  1047
+VecCopy               51 1.0 1.6832e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSet               278 1.0 6.7782e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecAXPY               34 1.0 1.3113e-04 1.0 2.07e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  1  0  0  0   0  1  0  0  0  1582
+VecMAXPY             221 1.0 2.4114e-03 1.0 4.74e+06 1.0 0.0e+00 0.0e+00 0.0e+00  1 30  0  0  0   1 30  0  0  0  1967
+VecAXPY               34 1.0 1.3757e-04 1.0 2.07e+05 1.0 0.0e+00 0.0e+00 0.0e+00  0  1  0  0  0   0  1  0  0  0  1508
+VecAssemblyBegin      34 1.0 8.9645e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 1.0e+02  0  0  0  0 15   0  0  0  0 15     0
+VecMAXPY             221 1.0 2.3992e-03 1.0 4.74e+06 1.0 0.0e+00 0.0e+00 0.0e+00  1 30  0  0  0   1 30  0  0  0  1977
+VecAssemblyBegin      34 1.0 9.7275e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 1.0e+02  0  0  0  0 15   0  0  0  0 15     0
+VecAssemblyEnd        34 1.0 2.4319e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecScatterBegin      221 1.0 1.3375e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecAssemblyEnd        34 1.0 2.4796e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecScatterBegin      221 1.0 1.3614e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatMult              187 1.0 7.0970e-03 1.0 4.97e+06 1.0 0.0e+00 0.0e+00 0.0e+00  3 32  0  0  0   3 32  0  0  0   700
+MatMult              187 1.0 7.0677e-03 1.0 4.97e+06 1.0 0.0e+00 0.0e+00 0.0e+00  3 32  0  0  0   3 32  0  0  0   703
+MatConvert            18 1.0 1.6005e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0     0
+MatConvert            18 1.0 1.5750e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   1  0  0  0  0     0
+MatAssemblyBegin      18 1.0 7.3195e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 3.6e+01  0  0  0  0  5   0  0  0  0  5     0
+MatAssemblyEnd        18 1.0 1.2727e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  1   1  0  0  0  1     0
+MatAssemblyBegin      18 1.0 7.0333e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 3.6e+01  0  0  0  0  5   0  0  0  0  5     0
+MatAssemblyEnd        18 1.0 1.2643e-03 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  1   1  0  0  0  1     0
+MatGetRowIJ           36 1.0 1.1444e-05 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatGetRowIJ           36 1.0 5.2452e-06 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPGMRESOrthog       187 1.0 3.3660e-03 1.0 7.24e+06 1.0 0.0e+00 0.0e+00 1.9e+02  1 46  0  0 27   1 46  0  0 27  2151
+KSPSetUp              18 1.0 3.7217e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPGMRESOrthog       187 1.0 3.3391e-03 1.0 7.24e+06 1.0 0.0e+00 0.0e+00 1.9e+02  1 46  0  0 27   1 46  0  0 27  2169
+KSPSetUp              18 1.0 3.6502e-04 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPSolve              34 1.0 1.9484e-01 1.0 1.55e+07 1.0 0.0e+00 0.0e+00 4.2e+02 86 99  0  0 60  86 99  0  0 60    80
+PCSetUp               18 1.0 7.1991e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00 32  0  0  0  1  32  0  0  0  1     0
+KSPSolve              34 1.0 1.9486e-01 1.0 1.55e+07 1.0 0.0e+00 0.0e+00 4.2e+02 86 99  0  0 60  86 99  0  0 60    80
+PCSetUp               18 1.0 7.1839e-02 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00 32  0  0  0  1  32  0  0  0  1     0
+PCApply              187 1.0 1.0839e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00 48  0  0  0  0  48  0  0  0  0     0
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+PCApply              187 1.0 1.0857e-01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00 48  0  0  0  0  48  0  0  0  0     0
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+              Vector   121            121      3080528     0
+      Vector Scatter    36             36        23184     0
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+              Matrix     6              6       942792     0
+       Krylov Solver     2              2        37904     0
+              Vector   121            121      3080528     0
+      Vector Scatter    36             36        23184     0
+              Matrix     6              6       942792     0
+       Krylov Solver     2              2        37904     0
+      Preconditioner     2              2         2144     0
+           Index Set    72             72        54736     0
+              Viewer     1              0            0     0
+      Preconditioner     2              2         2144     0
+           Index Set    72             72        54736     0
+              Viewer     1              0            0     0
+========================================================================================================================
+========================================================================================================================
+Average time to get PetscTime(): 0
+#PETSc Option Table entries:
+-Nsamples 100
+-TOL 1e-6
+-alpha 2
+-dim 2
+-ksp_type fgmres
+-lamb 0.1
+-log_summary
+Average time to get PetscTime(): 9.53674e-08
+#PETSc Option Table entries:
+-Nsamples 100
+-TOL 1e-6
+-alpha 2
+-dim 2
+-m 50
+-mat_type mpiaij
+-n 50
+-pc_type hypre
+-ksp_type fgmres
+-lamb 0.1
+-log_summary
+-m 50
+-sigma 0.3
+-vec_type mpi
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+-mat_type mpiaij
+-n 50
+-pc_type hypre
+-sigma 0.3
+-vec_type mpi
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure run at: Thu Jul  3 16:28:43 2014
+Configure options: PETSC_ARCH=linux_gnu_all_cluster --download-f-blas-lapack --download-hypre --download-superlu_dist --download-parmetis --download-metis --download-suitesparse --download-fftw --download-scalapack --download-mumps --with-clanguage=cxx --with-mpi-dir=/software/sles/openmpi/1.6.5-ib/ --with-debugging=no --with-shared-libraries=0sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure run at: Thu Jul  3 16:28:43 2014
+Configure options: PETSC_ARCH=linux_gnu_all_cluster --download-f-blas-lapack --download-hypre --download-superlu_dist --download-parmetis --download-metis --download-suitesparse --download-fftw --download-scalapack --download-mumps --with-clanguage=cxx --with-mpi-dir=/software/sles/openmpi/1.6.5-ib/ --with-debugging=no --with-shared-libraries=0
+-----------------------------------------
+Libraries compiled on Thu Jul  3 16:28:43 2014 on i10hpc2 
+Machine characteristics: Linux-3.0.101-0.31-default-x86_64-with-SuSE-11-x86_64
+Using PETSc directory: /auto-home/stud/ug30owag/petsc
+Using PETSc arch: linux_gnu_all_cluster
+-----------------------------------------
+
+Using C compiler: /software/sles/openmpi/1.6.5-ib/bin/mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -O     ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: /software/sles/openmpi/1.6.5-ib/bin/mpif90  -Wall -Wno-unused-variable -Wno-unused-dummy-argument -O   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/software/sles/openmpi/1.6.5-ib/include
+-----------------------------------------
+
+Using C linker: /software/sles/openmpi/1.6.5-ib/bin/mpicxx
+Using Fortran linker: /software/sles/openmpi/1.6.5-ib/bin/mpif90
+Using libraries: -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lpetsc -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lsuperlu_dist_3.3 -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -lHYPRE -lflapack -lfblas -lX11 -lparmetis -lmetis -lfftw3_mpi -lfftw3 -lpthread -L/software/sles/openmpi/1.6.5-ib/lib -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc/x86_64-unknown-linux-gnu/4.9.0 -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc -L/auto-home/central-software/sles/gcc/4.9.0/lib64 -L/auto-home/central-software/sles/gcc/4.9.0/lib -lmpi_f90 -lmpi_f77 -lgfortran -lm -lgfortran -lm -lgfortran -lm -lgfortran -lm -lm -lm -lquadmath -lm -lmpi_cxx -lstdc++ -ldl -lmpi -lrt -lnsl -lutil -lgcc_s -lpthread -ldl 
+-----------------------------------------
+
+
+-----------------------------------------
+Libraries compiled on Thu Jul  3 16:28:43 2014 on i10hpc2 
+Machine characteristics: Linux-3.0.101-0.31-default-x86_64-with-SuSE-11-x86_64
+Using PETSc directory: /auto-home/stud/ug30owag/petsc
+Using PETSc arch: linux_gnu_all_cluster
+-----------------------------------------
+
+Using C compiler: /software/sles/openmpi/1.6.5-ib/bin/mpicxx  -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -O     ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: /software/sles/openmpi/1.6.5-ib/bin/mpif90  -Wall -Wno-unused-variable -Wno-unused-dummy-argument -O   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/include -I/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/include -I/software/sles/openmpi/1.6.5-ib/include
+-----------------------------------------
+
+Using C linker: /software/sles/openmpi/1.6.5-ib/bin/mpicxx
+Using Fortran linker: /software/sles/openmpi/1.6.5-ib/bin/mpif90
+Using libraries: -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lpetsc -Wl,-rpath,/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -L/auto-home/stud/ug30owag/petsc/linux_gnu_all_cluster/lib -lsuperlu_dist_3.3 -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -lHYPRE -lflapack -lfblas -lX11 -lparmetis -lmetis -lfftw3_mpi -lfftw3 -lpthread -L/software/sles/openmpi/1.6.5-ib/lib -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc/x86_64-unknown-linux-gnu/4.9.0 -L/auto-home/central-software/sles/gcc/4.9.0/lib/gcc -L/auto-home/central-software/sles/gcc/4.9.0/lib64 -L/auto-home/central-software/sles/gcc/4.9.0/lib -lmpi_f90 -lmpi_f77 -lgfortran -lm -lgfortran -lm -lgfortran -lm -lgfortran -lm -lm -lm -lquadmath -lm -lmpi_cxx -lstdc++ -ldl -lmpi -lrt -lnsl -lutil -lgcc_s -lpthread -ldl 
+-----------------------------------------
+
