@@ -147,7 +147,7 @@ int main(int argc,char **argv)
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],DIETAG,MPI_COMM_WORLD,&request);
 			PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Sending kill signal to proc %d\n",grank,masters[who]);
 		}
-		MPI_Reduce(timings,buffer_timings,6,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
+		MPI_Reduce(timings,buffer_timings,7,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
 		temp_time = MPI_Wtime() - temp_time;
 	  root_times[0] += temp_time;
 		ierr = PetscLogStagePop();CHKERRQ(ierr);
@@ -193,19 +193,31 @@ int main(int argc,char **argv)
         ierr = UnitSolverTimings(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,timings,petsc_comm_slaves); CHKERRQ(ierr);
 				++Ns;				
 				if(lrank == 0){
+				  temp_time = MPI_Wtime();
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
+					temp_time = MPI_Wtime() - temp_time;
+			    timings[7] += temp_time;
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: Waiting for work\n",grank);
 					#endif
+					temp_time = MPI_Wtime();
 					MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
+					temp_time = MPI_Wtime() - temp_time;
+			    timings[7] += temp_time;
 					work_status = status.MPI_TAG;
+					temp_time = MPI_Wtime();
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
+					temp_time = MPI_Wtime() - temp_time;
+			    timings[7] += temp_time;
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates with tag = %d\n",grank,work_status);
 					#endif
 				}
 				else{
+					temp_time = MPI_Wtime();
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
+					temp_time = MPI_Wtime() - temp_time;
+			    timings[7] += temp_time;
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast with tag = %d\n",grank,work_status);
 					#endif
@@ -214,7 +226,7 @@ int main(int argc,char **argv)
 					#if DEBUG
 					PetscPrintf(petsc_comm_slaves,"Proc[%d]: We finished all work \n",grank);	
 					#endif
-					MPI_Reduce(timings,buffer_timings,6,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
+					MPI_Reduce(timings,buffer_timings,7,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
 					break;
 				}
 			}
