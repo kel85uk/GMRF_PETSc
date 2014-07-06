@@ -1,0 +1,153 @@
+Finished user prologue on all sister nodes...
+Starting user prologue on mother superior node i10hpc6...
+Exiting user prologue on mother superior node i10hpc6...
+Starting job script on mother superior node i10hpc6...
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+Sample[1]: Expectation = 5.19773057E+00	Variance = 6.95329491E-310	Tol = 5.19773057E+00 
+Sample[2]: Expectation = 5.19219566E+00	Variance = 3.06352893E-05	Tol = 3.91377626E-03 
+Sample[3]: Expectation = 5.20495009E+00	Variance = 3.45774547E-04	Tol = 1.07358364E-02 
+Sample[4]: Expectation = 5.20826339E+00	Variance = 2.92264773E-04	Tol = 8.54787654E-03 
+Sample[5]: Expectation = 5.21399329E+00	Variance = 3.65139021E-04	Tol = 8.54563071E-03 
+Sample[6]: Expectation = 5.22333326E+00	Variance = 7.40457526E-04	Tol = 1.11089868E-02 
+Sample[7]: Expectation = 5.23262260E+00	Variance = 1.15242915E-03	Tol = 1.28309289E-02 
+Sample[8]: Expectation = 5.22824243E+00	Variance = 1.14267673E-03	Tol = 1.19513427E-02 
+Sample[9]: Expectation = 5.23303750E+00	Variance = 1.19965412E-03	Tol = 1.15453411E-02 
+Sample[10]: Expectation = 5.22922233E+00	Variance = 1.21068858E-03	Tol = 1.10031295E-02 
+Sample[11]: Expectation = 5.23477829E+00	Variance = 1.40931254E-03	Tol = 1.13189806E-02 
+Sample[12]: Expectation = 5.22939963E+00	Variance = 1.61009894E-03	Tol = 1.15833895E-02 
+Sample[13]: Expectation = 5.22530642E+00	Variance = 1.68729757E-03	Tol = 1.13926345E-02 
+Sample[14]: Expectation = 5.22951729E+00	Variance = 1.79728413E-03	Tol = 1.13303768E-02 
+Sample[15]: Expectation = 5.23288855E+00	Variance = 1.83658110E-03	Tol = 1.10652040E-02 
+Sample[16]: Expectation = 5.23779370E+00	Variance = 2.08270259E-03	Tol = 1.14091591E-02 
+Sample[17]: Expectation = 5.23646702E+00	Variance = 1.98835211E-03	Tol = 1.08148920E-02 
+Sample[18]: Expectation = 5.23715228E+00	Variance = 1.88587092E-03	Tol = 1.02357514E-02 
+Sample[19]: Expectation = 5.23720100E+00	Variance = 1.78665729E-03	Tol = 9.69714362E-03 
+Sample[20]: Expectation = 5.23758686E+00	Variance = 1.70015323E-03	Tol = 9.21995994E-03 
+Sample[21]: Expectation = 5.23416205E+00	Variance = 1.85377956E-03	Tol = 9.39548918E-03 
+Sample[22]: Expectation = 5.23635939E+00	Variance = 1.87091098E-03	Tol = 9.22178986E-03 
+Sample[23]: Expectation = 5.23425660E+00	Variance = 1.88684482E-03	Tol = 9.05741306E-03 
+Sample[24]: Expectation = 5.23006340E+00	Variance = 2.21263405E-03	Tol = 9.60172305E-03 
+Sample[25]: Expectation = 5.23121440E+00	Variance = 2.15592395E-03	Tol = 9.28638563E-03 
+Sample[26]: Expectation = 5.23102339E+00	Variance = 2.07391593E-03	Tol = 8.93118117E-03 
+Sample[27]: Expectation = 5.23265341E+00	Variance = 2.06618517E-03	Tol = 8.74787840E-03 
+Sample[28]: Expectation = 5.23317692E+00	Variance = 1.99979257E-03	Tol = 8.45110426E-03 
+Sample[29]: Expectation = 5.23188304E+00	Variance = 1.97770937E-03	Tol = 8.25813992E-03 
+Sample[30]: Expectation = 5.23073408E+00	Variance = 1.95006915E-03	Tol = 8.06240069E-03 
+Sample[31]: Expectation = 5.23374422E+00	Variance = 2.15899235E-03	Tol = 8.34535286E-03 
+Sample[32]: Expectation = 5.23606452E+00	Variance = 2.25842115E-03	Tol = 8.40093215E-03 
+Sample[33]: Expectation = 5.23455387E+00	Variance = 2.26301013E-03	Tol = 8.28106663E-03 
+Sample[34]: Expectation = 5.23425306E+00	Variance = 2.19943716E-03	Tol = 8.04296763E-03 
+Sample[35]: Expectation = 5.23261369E+00	Variance = 2.22797183E-03	Tol = 7.97849222E-03 
+Sample[36]: Expectation = 5.23099307E+00	Variance = 2.25800847E-03	Tol = 7.91975111E-03 
+Sample[37]: Expectation = 5.23217894E+00	Variance = 2.24760767E-03	Tol = 7.79398186E-03 
+Sample[38]: Expectation = 5.23071107E+00	Variance = 2.26818171E-03	Tol = 7.72586515E-03 
+Sample[39]: Expectation = 5.23064516E+00	Variance = 2.21018826E-03	Tol = 7.52804714E-03 
+Sample[40]: Expectation = 5.22955389E+00	Variance = 2.20137763E-03	Tol = 7.41852012E-03 
+Sample[41]: Expectation = 5.22924919E+00	Variance = 2.15139909E-03	Tol = 7.24383522E-03 
+Sample[42]: Expectation = 5.22793121E+00	Variance = 2.17139621E-03	Tol = 7.19026494E-03 
+Sample[43]: Expectation = 5.22761913E+00	Variance = 2.12498905E-03	Tol = 7.02981863E-03 
+Sample[44]: Expectation = 5.22974794E+00	Variance = 2.27156175E-03	Tol = 7.18515159E-03 
+Sample[45]: Expectation = 5.22970846E+00	Variance = 2.22115117E-03	Tol = 7.02559000E-03 
+Sample[46]: Expectation = 5.23028639E+00	Variance = 2.18789570E-03	Tol = 6.89658974E-03 
+Sample[47]: Expectation = 5.23153905E+00	Variance = 2.21352533E-03	Tol = 6.86267321E-03 
+Sample[48]: Expectation = 5.23365127E+00	Variance = 2.37709914E-03	Tol = 7.03725079E-03 
+Sample[49]: Expectation = 5.23410851E+00	Variance = 2.33862229E-03	Tol = 6.90847201E-03 
+Sample[50]: Expectation = 5.23476330E+00	Variance = 2.31285888E-03	Tol = 6.80126295E-03 
+Sample[51]: Expectation = 5.23342468E+00	Variance = 2.35710455E-03	Tol = 6.79836276E-03 
+Sample[52]: Expectation = 5.23457466E+00	Variance = 2.37922113E-03	Tol = 6.76418897E-03 
+Sample[53]: Expectation = 5.23625484E+00	Variance = 2.48112557E-03	Tol = 6.84205305E-03 
+Sample[54]: Expectation = 5.23557518E+00	Variance = 2.45966112E-03	Tol = 6.74902067E-03 
+Sample[55]: Expectation = 5.23539550E+00	Variance = 2.41668336E-03	Tol = 6.62870255E-03 
+Sample[56]: Expectation = 5.23581922E+00	Variance = 2.38340284E-03	Tol = 6.52386120E-03 
+Sample[57]: Expectation = 5.23619043E+00	Variance = 2.34930516E-03	Tol = 6.41995950E-03 
+Sample[58]: Expectation = 5.23594316E+00	Variance = 2.31228496E-03	Tol = 6.31403058E-03 
+Sample[59]: Expectation = 5.23457060E+00	Variance = 2.38236039E-03	Tol = 6.35444645E-03 
+Sample[60]: Expectation = 5.23389134E+00	Variance = 2.36987728E-03	Tol = 6.28473982E-03 
+Sample[61]: Expectation = 5.23405648E+00	Variance = 2.33266325E-03	Tol = 6.18388076E-03 
+Sample[62]: Expectation = 5.23314442E+00	Variance = 2.34578352E-03	Tol = 6.15103391E-03 
+Sample[63]: Expectation = 5.23160996E+00	Variance = 2.45453052E-03	Tol = 6.24185885E-03 
+Sample[64]: Expectation = 5.23044799E+00	Variance = 2.50124012E-03	Tol = 6.25154996E-03 
+Sample[65]: Expectation = 5.23063607E+00	Variance = 2.46502336E-03	Tol = 6.15820073E-03 
+Sample[66]: Expectation = 5.23049589E+00	Variance = 2.42895175E-03	Tol = 6.06648987E-03 
+Sample[67]: Expectation = 5.22949896E+00	Variance = 2.45829342E-03	Tol = 6.05730522E-03 
+Sample[68]: Expectation = 5.22966843E+00	Variance = 2.42406624E-03	Tol = 5.97059737E-03 
+Sample[69]: Expectation = 5.23106391E+00	Variance = 2.52135616E-03	Tol = 6.04494778E-03 
+Sample[70]: Expectation = 5.23116941E+00	Variance = 2.48610468E-03	Tol = 5.95951182E-03 
+Sample[71]: Expectation = 5.23104987E+00	Variance = 2.45208930E-03	Tol = 5.87677370E-03 
+Sample[72]: Expectation = 5.23091931E+00	Variance = 2.41924282E-03	Tol = 5.79660200E-03 
+Sample[73]: Expectation = 5.23036413E+00	Variance = 2.40829490E-03	Tol = 5.74372188E-03 
+Sample[74]: Expectation = 5.23034260E+00	Variance = 2.37578419E-03	Tol = 5.66614435E-03 
+Sample[75]: Expectation = 5.23024396E+00	Variance = 2.34482711E-03	Tol = 5.59145433E-03 
+Sample[76]: Expectation = 5.23023151E+00	Variance = 2.31398574E-03	Tol = 5.51789642E-03 
+Sample[77]: Expectation = 5.22945788E+00	Variance = 2.32942042E-03	Tol = 5.50020121E-03 
+Sample[78]: Expectation = 5.22984920E+00	Variance = 2.31134681E-03	Tol = 5.44358810E-03 
+Sample[79]: Expectation = 5.22891206E+00	Variance = 2.35059072E-03	Tol = 5.45475141E-03 
+Sample[80]: Expectation = 5.22867957E+00	Variance = 2.32547828E-03	Tol = 5.39151913E-03 
+Sample[81]: Expectation = 5.22931390E+00	Variance = 2.32895857E-03	Tol = 5.36214276E-03 
+Sample[82]: Expectation = 5.22946120E+00	Variance = 2.30231402E-03	Tol = 5.29877347E-03 
+Sample[83]: Expectation = 5.22941044E+00	Variance = 2.27478654E-03	Tol = 5.23517591E-03 
+Sample[84]: Expectation = 5.22929920E+00	Variance = 2.24873283E-03	Tol = 5.17403411E-03 
+Sample[85]: Expectation = 5.22965003E+00	Variance = 2.23261582E-03	Tol = 5.12504326E-03 
+Sample[86]: Expectation = 5.22907496E+00	Variance = 2.23476482E-03	Tol = 5.09761096E-03 
+Sample[87]: Expectation = 5.22825595E+00	Variance = 2.26676458E-03	Tol = 5.10438687E-03 
+Sample[88]: Expectation = 5.22868946E+00	Variance = 2.25735570E-03	Tol = 5.06475758E-03 
+Sample[89]: Expectation = 5.22859242E+00	Variance = 2.23282092E-03	Tol = 5.00877984E-03 
+Sample[90]: Expectation = 5.22774059E+00	Variance = 2.27259014E-03	Tol = 5.02503747E-03 
+Sample[91]: Expectation = 5.22769710E+00	Variance = 2.24778688E-03	Tol = 4.97000551E-03 
+Sample[92]: Expectation = 5.22746352E+00	Variance = 2.22831920E-03	Tol = 4.92146938E-03 
+Sample[93]: Expectation = 5.22760159E+00	Variance = 2.20611258E-03	Tol = 4.87048669E-03 
+Sample[94]: Expectation = 5.22696945E+00	Variance = 2.21980694E-03	Tol = 4.85952338E-03 
+Sample[95]: Expectation = 5.22635990E+00	Variance = 2.23136638E-03	Tol = 4.84644892E-03 
+Sample[96]: Expectation = 5.22543565E+00	Variance = 2.28927529E-03	Tol = 4.88329986E-03 
+Sample[97]: Expectation = 5.22535448E+00	Variance = 2.26630704E-03	Tol = 4.83363115E-03 
+Sample[98]: Expectation = 5.22580132E+00	Variance = 2.26254930E-03	Tol = 4.80491808E-03 
+Sample[99]: Expectation = 5.22571071E+00	Variance = 2.24049984E-03	Tol = 4.75723780E-03 
+Sample[100]: Expectation = 5.22556076E+00	Variance = 2.22032084E-03	Tol = 4.71202806E-03 
+Sample[101]: Expectation = 5.22600505E+00	Variance = 2.21807636E-03	Tol = 4.68627272E-03 
+Sample[102]: Expectation = 5.22611967E+00	Variance = 2.19765757E-03	Tol = 4.64173054E-03 
+Sample[103]: Expectation = 5.22571274E+00	Variance = 2.19321128E-03	Tol = 4.61446784E-03 
+Sample[104]: Expectation = 5.22572828E+00	Variance = 2.17214757E-03	Tol = 4.57012410E-03 
+Sample[105]: Expectation = 5.22563757E+00	Variance = 2.15231607E-03	Tol = 4.52749912E-03 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+I did 105 samples 
+Total colors = 16 
+Total samples = 1680 
+Expectation of ||U|| = 5.2312477E+00 
+Elapsed wall-clock time (sec)= 227.255345 
+NGhost = 27 and I am Processor[0] 
+tau2 = 0.001247 
+kappa = 28.284271 
+nu = 1.000000 
+Finished job script on mother superior node i10hpc6...
+Finished user epilogue on all sister nodes...
+Starting user epilogue on mother superior node i10hpc6...
+Exiting user epilogue on mother superior node i10hpc6...

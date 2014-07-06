@@ -57,7 +57,7 @@ int main(int argc,char **argv)
 	
 	PETSC_COMM_WORLD = petsc_comm_slaves;
 	PetscInitialize(&argc,&argv,(char*)0,help);
-
+	PetscLogBegin();
 	MPI_Comm_rank(PETSC_COMM_WORLD,&lrank); // Get the processor local rank
 	
 	/* Split the different communicators between root and workers */

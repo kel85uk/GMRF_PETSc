@@ -104,7 +104,7 @@ int main(int argc,char **argv)
 	normU /= sqrt(users.NI);
 	endTime = MPI_Wtime();
 	ierr = PetscPrintf(PETSC_COMM_WORLD,"Norm-2 of U = %4.8E \n",normU);CHKERRQ(ierr);
-	ierr = PetscPrintf(PETSC_COMM_WORLD,"Time taken = %4.8E \n",endTime - startTime);CHKERRQ(ierr);
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Time taken = %4.8E s\n",endTime - startTime);CHKERRQ(ierr);
 	
 	if(false){
 	ierr = VecPostProcs(U,"sol_mean.dat",rank);CHKERRQ(ierr);

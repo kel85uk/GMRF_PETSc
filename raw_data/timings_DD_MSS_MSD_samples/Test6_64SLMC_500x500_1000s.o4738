@@ -1,0 +1,2119 @@
+Finished user prologue on all sister nodes...
+Starting user prologue on mother superior node i10hpc5...
+Exiting user prologue on mother superior node i10hpc5...
+Starting job script on mother superior node i10hpc5...
+0
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+21
+23
+25
+27
+29
+31
+33
+35
+37
+39
+41
+43
+45
+47
+49
+51
+53
+55
+57
+59
+61
+Proc[0]: Received norm from processor 61 
+Sample[1]: Expectation = 5.23099755E+00	Variance = 0.00000000E+00	Tol = 5.23099755E+00 
+Proc[0]: Received norm from processor 5 
+Sample[2]: Expectation = 5.20846377E+00	Variance = 5.07771261E-04	Tol = 1.59337890E-02 
+Proc[0]: Received norm from processor 57 
+Sample[3]: Expectation = 5.24312862E+00	Variance = 2.74181771E-03	Tol = 3.02314280E-02 
+Proc[0]: Received norm from processor 9 
+Sample[4]: Expectation = 5.22369710E+00	Variance = 3.18911544E-03	Tol = 2.82361269E-02 
+Proc[0]: Received norm from processor 7 
+Sample[5]: Expectation = 5.23801441E+00	Variance = 3.37123486E-03	Tol = 2.59662660E-02 
+Proc[0]: Received norm from processor 53 
+Sample[6]: Expectation = 5.23543595E+00	Variance = 2.84260479E-03	Tol = 2.17662001E-02 
+Proc[0]: Received norm from processor 49 
+Sample[7]: Expectation = 5.22740055E+00	Variance = 2.82392387E-03	Tol = 2.00852607E-02 
+Proc[0]: Received norm from processor 17 
+Sample[8]: Expectation = 5.23370779E+00	Variance = 2.74940235E-03	Tol = 1.85384814E-02 
+Proc[0]: Received norm from processor 23 
+Sample[9]: Expectation = 5.22280157E+00	Variance = 3.39547953E-03	Tol = 1.94235811E-02 
+Proc[0]: Received norm from processor 1 
+Sample[10]: Expectation = 5.22155949E+00	Variance = 3.06981640E-03	Tol = 1.75208915E-02 
+Proc[0]: Received norm from processor 47 
+Sample[11]: Expectation = 5.22212392E+00	Variance = 2.79392798E-03	Tol = 1.59371720E-02 
+Proc[0]: Received norm from processor 43 
+Sample[12]: Expectation = 5.23131980E+00	Variance = 3.49130789E-03	Tol = 1.70570315E-02 
+Proc[0]: Received norm from processor 39 
+Sample[13]: Expectation = 5.22392694E+00	Variance = 3.87859889E-03	Tol = 1.72729199E-02 
+Proc[0]: Received norm from processor 41 
+Sample[14]: Expectation = 5.22142081E+00	Variance = 3.68320483E-03	Tol = 1.62199279E-02 
+Proc[0]: Received norm from processor 51 
+Sample[15]: Expectation = 5.22327016E+00	Variance = 3.48553924E-03	Tol = 1.52436637E-02 
+Proc[0]: Received norm from processor 45 
+Sample[16]: Expectation = 5.22388751E+00	Variance = 3.27340972E-03	Tol = 1.43034299E-02 
+Proc[0]: Received norm from processor 3 
+Sample[17]: Expectation = 5.21911012E+00	Variance = 3.44603015E-03	Tol = 1.42375439E-02 
+Proc[0]: Received norm from processor 25 
+Sample[18]: Expectation = 5.21612343E+00	Variance = 3.40622970E-03	Tol = 1.37562707E-02 
+Proc[0]: Received norm from processor 27 
+Sample[19]: Expectation = 5.21669809E+00	Variance = 3.23289869E-03	Tol = 1.30442540E-02 
+Proc[0]: Received norm from processor 15 
+Sample[20]: Expectation = 5.21842842E+00	Variance = 3.12814056E-03	Tol = 1.25062795E-02 
+Proc[0]: Received norm from processor 31 
+Sample[21]: Expectation = 5.21921977E+00	Variance = 2.99170615E-03	Tol = 1.19357529E-02 
+Proc[0]: Received norm from processor 37 
+Sample[22]: Expectation = 5.22024364E+00	Variance = 2.87773410E-03	Tol = 1.14370492E-02 
+Proc[0]: Received norm from processor 55 
+Sample[23]: Expectation = 5.22023537E+00	Variance = 2.75261673E-03	Tol = 1.09397892E-02 
+Proc[0]: Received norm from processor 59 
+Sample[24]: Expectation = 5.22280559E+00	Variance = 2.78986293E-03	Tol = 1.07816645E-02 
+Proc[0]: Received norm from processor 13 
+Sample[25]: Expectation = 5.22613683E+00	Variance = 2.94460057E-03	Tol = 1.08528348E-02 
+Proc[0]: Received norm from processor 11 
+Sample[26]: Expectation = 5.22928939E+00	Variance = 3.07981275E-03	Tol = 1.08836729E-02 
+Proc[0]: Received norm from processor 19 
+Sample[27]: Expectation = 5.22987039E+00	Variance = 2.97452219E-03	Tol = 1.04960702E-02 
+Proc[0]: Received norm from processor 35 
+Sample[28]: Expectation = 5.23256319E+00	Variance = 3.06407009E-03	Tol = 1.04609309E-02 
+Proc[0]: Received norm from processor 33 
+Sample[29]: Expectation = 5.22768068E+00	Variance = 3.62590167E-03	Tol = 1.11817303E-02 
+Proc[0]: Received norm from processor 29 
+Sample[30]: Expectation = 5.22956621E+00	Variance = 3.60813954E-03	Tol = 1.09668281E-02 
+Proc[0]: Received norm from processor 21 
+Sample[31]: Expectation = 5.23092659E+00	Variance = 3.54726676E-03	Tol = 1.06971005E-02 
+Proc[0]: Received norm from processor 61 
+Sample[32]: Expectation = 5.23265225E+00	Variance = 3.52873063E-03	Tol = 1.05010872E-02 
+Proc[0]: Received norm from processor 61 
+Sample[33]: Expectation = 5.23390951E+00	Variance = 3.47238121E-03	Tol = 1.02578591E-02 
+Proc[0]: Received norm from processor 5 
+Sample[34]: Expectation = 5.23327507E+00	Variance = 3.38353534E-03	Tol = 9.97575788E-03 
+Proc[0]: Received norm from processor 57 
+Sample[35]: Expectation = 5.23352447E+00	Variance = 3.28897776E-03	Tol = 9.69385338E-03 
+Proc[0]: Received norm from processor 17 
+Sample[36]: Expectation = 5.22985360E+00	Variance = 3.66925259E-03	Tol = 1.00957260E-02 
+Proc[0]: Received norm from processor 9 
+Sample[37]: Expectation = 5.23073991E+00	Variance = 3.59836339E-03	Tol = 9.86169684E-03 
+Proc[0]: Received norm from processor 53 
+Sample[38]: Expectation = 5.22906554E+00	Variance = 3.60740003E-03	Tol = 9.74328383E-03 
+Proc[0]: Received norm from processor 49 
+Sample[39]: Expectation = 5.22938310E+00	Variance = 3.51873465E-03	Tol = 9.49862965E-03 
+Proc[0]: Received norm from processor 25 
+Sample[40]: Expectation = 5.22856856E+00	Variance = 3.45664172E-03	Tol = 9.29602297E-03 
+Proc[0]: Received norm from processor 7 
+Sample[41]: Expectation = 5.22989294E+00	Variance = 3.44249333E-03	Tol = 9.16314640E-03 
+Proc[0]: Received norm from processor 39 
+Sample[42]: Expectation = 5.23261839E+00	Variance = 3.66508007E-03	Tol = 9.34151011E-03 
+Proc[0]: Received norm from processor 41 
+Sample[43]: Expectation = 5.23387209E+00	Variance = 3.64586002E-03	Tol = 9.20800968E-03 
+Proc[0]: Received norm from processor 27 
+Sample[44]: Expectation = 5.23387763E+00	Variance = 3.56300088E-03	Tol = 8.99873840E-03 
+Proc[0]: Received norm from processor 1 
+Sample[45]: Expectation = 5.23245476E+00	Variance = 3.57290395E-03	Tol = 8.91054799E-03 
+Proc[0]: Received norm from processor 23 
+Sample[46]: Expectation = 5.23314709E+00	Variance = 3.51680172E-03	Tol = 8.74369551E-03 
+Proc[0]: Received norm from processor 45 
+Sample[47]: Expectation = 5.23237097E+00	Variance = 3.46968503E-03	Tol = 8.59203618E-03 
+Proc[0]: Received norm from processor 11 
+Sample[48]: Expectation = 5.23194099E+00	Variance = 3.40608951E-03	Tol = 8.42378763E-03 
+Proc[0]: Received norm from processor 37 
+Sample[49]: Expectation = 5.23338761E+00	Variance = 3.43702779E-03	Tol = 8.37516712E-03 
+Proc[0]: Received norm from processor 3 
+Sample[50]: Expectation = 5.23260357E+00	Variance = 3.39840871E-03	Tol = 8.24428131E-03 
+Proc[0]: Received norm from processor 31 
+Sample[51]: Expectation = 5.23299934E+00	Variance = 3.33960521E-03	Tol = 8.09212303E-03 
+Proc[0]: Received norm from processor 15 
+Sample[52]: Expectation = 5.23324308E+00	Variance = 3.27841172E-03	Tol = 7.94017501E-03 
+Proc[0]: Received norm from processor 43 
+Sample[53]: Expectation = 5.23300001E+00	Variance = 3.21962719E-03	Tol = 7.79407999E-03 
+Proc[0]: Received norm from processor 51 
+Sample[54]: Expectation = 5.23254091E+00	Variance = 3.17117539E-03	Tol = 7.66325454E-03 
+Proc[0]: Received norm from processor 47 
+Sample[55]: Expectation = 5.23229570E+00	Variance = 3.11676441E-03	Tol = 7.52784457E-03 
+Proc[0]: Received norm from processor 13 
+Sample[56]: Expectation = 5.23229356E+00	Variance = 3.06110816E-03	Tol = 7.39341908E-03 
+Proc[0]: Received norm from processor 33 
+Sample[57]: Expectation = 5.23205325E+00	Variance = 3.01063854E-03	Tol = 7.26761446E-03 
+Proc[0]: Received norm from processor 55 
+Sample[58]: Expectation = 5.23111617E+00	Variance = 3.00878322E-03	Tol = 7.20246990E-03 
+Proc[0]: Received norm from processor 59 
+Sample[59]: Expectation = 5.23102293E+00	Variance = 2.95829117E-03	Tol = 7.08099769E-03 
+Proc[0]: Received norm from processor 19 
+Sample[60]: Expectation = 5.23153463E+00	Variance = 2.92443468E-03	Tol = 6.98144527E-03 
+Proc[0]: Received norm from processor 21 
+Sample[61]: Expectation = 5.23162216E+00	Variance = 2.87695277E-03	Tol = 6.86754396E-03 
+Proc[0]: Received norm from processor 35 
+Sample[62]: Expectation = 5.23177455E+00	Variance = 2.83196693E-03	Tol = 6.75846772E-03 
+Proc[0]: Received norm from processor 29 
+Sample[63]: Expectation = 5.23147409E+00	Variance = 2.79261222E-03	Tol = 6.65786588E-03 
+Proc[0]: Received norm from processor 61 
+Sample[64]: Expectation = 5.23140722E+00	Variance = 2.74925939E-03	Tol = 6.55417256E-03 
+Proc[0]: Received norm from processor 57 
+Sample[65]: Expectation = 5.23251355E+00	Variance = 2.78529789E-03	Tol = 6.54604741E-03 
+Proc[0]: Received norm from processor 5 
+Sample[66]: Expectation = 5.23099381E+00	Variance = 2.89322063E-03	Tol = 6.62092714E-03 
+Proc[0]: Received norm from processor 17 
+Sample[67]: Expectation = 5.23116510E+00	Variance = 2.85197449E-03	Tol = 6.52432245E-03 
+Proc[0]: Received norm from processor 9 
+Sample[68]: Expectation = 5.22941751E+00	Variance = 3.01465474E-03	Tol = 6.65831495E-03 
+Proc[0]: Received norm from processor 53 
+Sample[69]: Expectation = 5.23110940E+00	Variance = 3.16561351E-03	Tol = 6.77336376E-03 
+Proc[0]: Received norm from processor 7 
+Sample[70]: Expectation = 5.23149356E+00	Variance = 3.13057340E-03	Tol = 6.68748661E-03 
+Proc[0]: Received norm from processor 49 
+Sample[71]: Expectation = 5.23254596E+00	Variance = 3.16400860E-03	Tol = 6.67558997E-03 
+Proc[0]: Received norm from processor 1 
+Sample[72]: Expectation = 5.23343268E+00	Variance = 3.17588987E-03	Tol = 6.64150446E-03 
+Proc[0]: Received norm from processor 3 
+Sample[73]: Expectation = 5.23434756E+00	Variance = 3.19264914E-03	Tol = 6.61323822E-03 
+Proc[0]: Received norm from processor 27 
+Sample[74]: Expectation = 5.23484528E+00	Variance = 3.16758856E-03	Tol = 6.54257218E-03 
+Proc[0]: Received norm from processor 45 
+Sample[75]: Expectation = 5.23570464E+00	Variance = 3.18000308E-03	Tol = 6.51153140E-03 
+Proc[0]: Received norm from processor 25 
+Sample[76]: Expectation = 5.23629176E+00	Variance = 3.16401406E-03	Tol = 6.45226812E-03 
+Proc[0]: Received norm from processor 37 
+Sample[77]: Expectation = 5.23580063E+00	Variance = 3.14125434E-03	Tol = 6.38713636E-03 
+Proc[0]: Received norm from processor 51 
+Sample[78]: Expectation = 5.23614288E+00	Variance = 3.11000139E-03	Tol = 6.31441309E-03 
+Proc[0]: Received norm from processor 39 
+Sample[79]: Expectation = 5.23674727E+00	Variance = 3.09912655E-03	Tol = 6.26334176E-03 
+Proc[0]: Received norm from processor 31 
+Sample[80]: Expectation = 5.23654963E+00	Variance = 3.06347348E-03	Tol = 6.18816762E-03 
+Proc[0]: Received norm from processor 15 
+Sample[81]: Expectation = 5.23707435E+00	Variance = 3.04767949E-03	Tol = 6.13397691E-03 
+Proc[0]: Received norm from processor 55 
+Sample[82]: Expectation = 5.23638849E+00	Variance = 3.04861559E-03	Tol = 6.09739608E-03 
+Proc[0]: Received norm from processor 43 
+Sample[83]: Expectation = 5.23605697E+00	Variance = 3.02089764E-03	Tol = 6.03293934E-03 
+Proc[0]: Received norm from processor 11 
+Sample[84]: Expectation = 5.23607700E+00	Variance = 2.98496789E-03	Tol = 5.96115190E-03 
+Proc[0]: Received norm from processor 23 
+Sample[85]: Expectation = 5.23575114E+00	Variance = 2.95877003E-03	Tol = 5.89992026E-03 
+Proc[0]: Received norm from processor 41 
+Sample[86]: Expectation = 5.23585482E+00	Variance = 2.92527934E-03	Tol = 5.83222736E-03 
+Proc[0]: Received norm from processor 33 
+Sample[87]: Expectation = 5.23668250E+00	Variance = 2.95056968E-03	Tol = 5.82362379E-03 
+Proc[0]: Received norm from processor 13 
+Sample[88]: Expectation = 5.23652251E+00	Variance = 2.91926732E-03	Tol = 5.75964342E-03 
+Proc[0]: Received norm from processor 19 
+Sample[89]: Expectation = 5.23650982E+00	Variance = 2.88648072E-03	Tol = 5.69494229E-03 
+Proc[0]: Received norm from processor 21 
+Sample[90]: Expectation = 5.23602955E+00	Variance = 2.87493782E-03	Tol = 5.65188053E-03 
+Proc[0]: Received norm from processor 59 
+Sample[91]: Expectation = 5.23617918E+00	Variance = 2.84536022E-03	Tol = 5.59175238E-03 
+Proc[0]: Received norm from processor 47 
+Sample[92]: Expectation = 5.23546323E+00	Variance = 2.86107760E-03	Tol = 5.57661811E-03 
+Proc[0]: Received norm from processor 29 
+Sample[93]: Expectation = 5.23639076E+00	Variance = 2.90946255E-03	Tol = 5.59325875E-03 
+Proc[0]: Received norm from processor 35 
+Sample[94]: Expectation = 5.23656516E+00	Variance = 2.88133917E-03	Tol = 5.53647400E-03 
+Proc[0]: Received norm from processor 61 
+Sample[95]: Expectation = 5.23633535E+00	Variance = 2.85597331E-03	Tol = 5.48296243E-03 
+Proc[0]: Received norm from processor 57 
+Sample[96]: Expectation = 5.23707027E+00	Variance = 2.87753351E-03	Tol = 5.47487967E-03 
+Proc[0]: Received norm from processor 5 
+Sample[97]: Expectation = 5.23569195E+00	Variance = 3.03024604E-03	Tol = 5.58924412E-03 
+Proc[0]: Received norm from processor 9 
+Sample[98]: Expectation = 5.23581144E+00	Variance = 3.00071009E-03	Tol = 5.53348811E-03 
+Proc[0]: Received norm from processor 53 
+Sample[99]: Expectation = 5.23531839E+00	Variance = 2.99422370E-03	Tol = 5.49951669E-03 
+Proc[0]: Received norm from processor 17 
+Sample[100]: Expectation = 5.23400626E+00	Variance = 3.13472835E-03	Tol = 5.59886448E-03 
+Proc[0]: Received norm from processor 61 
+Sample[101]: Expectation = 5.23464455E+00	Variance = 3.14443288E-03	Tol = 5.57969522E-03 
+Proc[0]: Received norm from processor 7 
+Sample[102]: Expectation = 5.23507506E+00	Variance = 3.13232424E-03	Tol = 5.54157569E-03 
+Proc[0]: Received norm from processor 49 
+Sample[103]: Expectation = 5.23435545E+00	Variance = 3.15473207E-03	Tol = 5.53429912E-03 
+Proc[0]: Received norm from processor 3 
+Sample[104]: Expectation = 5.23414745E+00	Variance = 3.12885452E-03	Tol = 5.48499221E-03 
+Proc[0]: Received norm from processor 51 
+Sample[105]: Expectation = 5.23406317E+00	Variance = 3.09979467E-03	Tol = 5.43340169E-03 
+Proc[0]: Received norm from processor 25 
+Sample[106]: Expectation = 5.23359825E+00	Variance = 3.09324632E-03	Tol = 5.40199676E-03 
+Proc[0]: Received norm from processor 1 
+Sample[107]: Expectation = 5.23313348E+00	Variance = 3.08723542E-03	Tol = 5.37146791E-03 
+Proc[0]: Received norm from processor 11 
+Sample[108]: Expectation = 5.23332704E+00	Variance = 3.06265900E-03	Tol = 5.32521865E-03 
+Proc[0]: Received norm from processor 37 
+Sample[109]: Expectation = 5.23369639E+00	Variance = 3.04929388E-03	Tol = 5.28915619E-03 
+Proc[0]: Received norm from processor 13 
+Sample[110]: Expectation = 5.23318295E+00	Variance = 3.05030742E-03	Tol = 5.26593462E-03 
+Proc[0]: Received norm from processor 23 
+Sample[111]: Expectation = 5.23331545E+00	Variance = 3.02475841E-03	Tol = 5.22016051E-03 
+Proc[0]: Received norm from processor 27 
+Sample[112]: Expectation = 5.23298482E+00	Variance = 3.00988586E-03	Tol = 5.18401205E-03 
+Proc[0]: Received norm from processor 15 
+Sample[113]: Expectation = 5.23261523E+00	Variance = 2.99854859E-03	Tol = 5.15129384E-03 
+Proc[0]: Received norm from processor 41 
+Sample[114]: Expectation = 5.23255657E+00	Variance = 2.97263436E-03	Tol = 5.10644103E-03 
+Proc[0]: Received norm from processor 45 
+Sample[115]: Expectation = 5.23258021E+00	Variance = 2.94684907E-03	Tol = 5.06209191E-03 
+Proc[0]: Received norm from processor 31 
+Sample[116]: Expectation = 5.23228754E+00	Variance = 2.93129521E-03	Tol = 5.02690623E-03 
+Proc[0]: Received norm from processor 19 
+Sample[117]: Expectation = 5.23221088E+00	Variance = 2.90692320E-03	Tol = 4.98452580E-03 
+Proc[0]: Received norm from processor 33 
+Sample[118]: Expectation = 5.23170690E+00	Variance = 2.91200579E-03	Tol = 4.96769717E-03 
+Proc[0]: Received norm from processor 39 
+Sample[119]: Expectation = 5.23143427E+00	Variance = 2.89630532E-03	Tol = 4.93342682E-03 
+Proc[0]: Received norm from processor 21 
+Sample[120]: Expectation = 5.23086220E+00	Variance = 2.91111362E-03	Tol = 4.92537107E-03 
+Proc[0]: Received norm from processor 59 
+Sample[121]: Expectation = 5.23106202E+00	Variance = 2.89184618E-03	Tol = 4.88871714E-03 
+Proc[0]: Received norm from processor 55 
+Sample[122]: Expectation = 5.23061710E+00	Variance = 2.89209550E-03	Tol = 4.86885005E-03 
+Proc[0]: Received norm from processor 29 
+Sample[123]: Expectation = 5.23063463E+00	Variance = 2.86862002E-03	Tol = 4.82929746E-03 
+Proc[0]: Received norm from processor 43 
+Sample[124]: Expectation = 5.23090885E+00	Variance = 2.85473510E-03	Tol = 4.79813060E-03 
+Proc[0]: Received norm from processor 35 
+Sample[125]: Expectation = 5.23108834E+00	Variance = 2.83589224E-03	Tol = 4.76310171E-03 
+Proc[0]: Received norm from processor 47 
+Sample[126]: Expectation = 5.23145251E+00	Variance = 2.82996217E-03	Tol = 4.73920006E-03 
+Proc[0]: Received norm from processor 61 
+Sample[127]: Expectation = 5.23129735E+00	Variance = 2.81071219E-03	Tol = 4.70442260E-03 
+Proc[0]: Received norm from processor 57 
+Sample[128]: Expectation = 5.23153659E+00	Variance = 2.79602224E-03	Tol = 4.67374836E-03 
+Proc[0]: Received norm from processor 17 
+Sample[129]: Expectation = 5.23172762E+00	Variance = 2.77901890E-03	Tol = 4.64142027E-03 
+Proc[0]: Received norm from processor 5 
+Sample[130]: Expectation = 5.23137539E+00	Variance = 2.77364643E-03	Tol = 4.61906286E-03 
+Proc[0]: Received norm from processor 9 
+Sample[131]: Expectation = 5.23107976E+00	Variance = 2.76383517E-03	Tol = 4.59325358E-03 
+Proc[0]: Received norm from processor 53 
+Sample[132]: Expectation = 5.23070257E+00	Variance = 2.76153501E-03	Tol = 4.57391734E-03 
+Proc[0]: Received norm from processor 7 
+Sample[133]: Expectation = 5.23070701E+00	Variance = 2.74077420E-03	Tol = 4.53952914E-03 
+Proc[0]: Received norm from processor 3 
+Sample[134]: Expectation = 5.23070405E+00	Variance = 2.72032183E-03	Tol = 4.50565302E-03 
+Proc[0]: Received norm from processor 49 
+Sample[135]: Expectation = 5.23032983E+00	Variance = 2.71893702E-03	Tol = 4.48779169E-03 
+Proc[0]: Received norm from processor 25 
+Sample[136]: Expectation = 5.23035715E+00	Variance = 2.69904559E-03	Tol = 4.45487637E-03 
+Proc[0]: Received norm from processor 11 
+Sample[137]: Expectation = 5.23023940E+00	Variance = 2.68123008E-03	Tol = 4.42391483E-03 
+Proc[0]: Received norm from processor 13 
+Sample[138]: Expectation = 5.22949763E+00	Variance = 2.73718129E-03	Tol = 4.45361056E-03 
+Proc[0]: Received norm from processor 37 
+Sample[139]: Expectation = 5.22907430E+00	Variance = 2.74222087E-03	Tol = 4.44164470E-03 
+Proc[0]: Received norm from processor 51 
+Sample[140]: Expectation = 5.22933501E+00	Variance = 2.73208123E-03	Tol = 4.41756335E-03 
+Proc[0]: Received norm from processor 1 
+Sample[141]: Expectation = 5.22945512E+00	Variance = 2.71472472E-03	Tol = 4.38786586E-03 
+Proc[0]: Received norm from processor 59 
+Sample[142]: Expectation = 5.22955615E+00	Variance = 2.69704590E-03	Tol = 4.35812815E-03 
+Proc[0]: Received norm from processor 55 
+Sample[143]: Expectation = 5.22942168E+00	Variance = 2.68075310E-03	Tol = 4.32972577E-03 
+Proc[0]: Received norm from processor 27 
+Sample[144]: Expectation = 5.23023405E+00	Variance = 2.75650889E-03	Tol = 4.37520547E-03 
+Proc[0]: Received norm from processor 41 
+Sample[145]: Expectation = 5.23017108E+00	Variance = 2.73806944E-03	Tol = 4.34548473E-03 
+Proc[0]: Received norm from processor 19 
+Sample[146]: Expectation = 5.23022221E+00	Variance = 2.71969466E-03	Tol = 4.31602197E-03 
+Proc[0]: Received norm from processor 15 
+Sample[147]: Expectation = 5.23046264E+00	Variance = 2.70963304E-03	Tol = 4.29335275E-03 
+Proc[0]: Received norm from processor 21 
+Sample[148]: Expectation = 5.23035235E+00	Variance = 2.69311292E-03	Tol = 4.26576006E-03 
+Proc[0]: Received norm from processor 23 
+Sample[149]: Expectation = 5.23006609E+00	Variance = 2.68716576E-03	Tol = 4.24672457E-03 
+Proc[0]: Received norm from processor 33 
+Sample[150]: Expectation = 5.23012530E+00	Variance = 2.66977360E-03	Tol = 4.21882575E-03 
+Proc[0]: Received norm from processor 29 
+Sample[151]: Expectation = 5.22967899E+00	Variance = 2.68197187E-03	Tol = 4.21442797E-03 
+Proc[0]: Received norm from processor 45 
+Sample[152]: Expectation = 5.22966384E+00	Variance = 2.66436194E-03	Tol = 4.18672867E-03 
+Proc[0]: Received norm from processor 39 
+Sample[153]: Expectation = 5.22955390E+00	Variance = 2.64878531E-03	Tol = 4.16080789E-03 
+Proc[0]: Received norm from processor 31 
+Sample[154]: Expectation = 5.22938653E+00	Variance = 2.63587099E-03	Tol = 4.13715426E-03 
+Proc[0]: Received norm from processor 43 
+Sample[155]: Expectation = 5.22916241E+00	Variance = 2.62660108E-03	Tol = 4.11652929E-03 
+Proc[0]: Received norm from processor 35 
+Sample[156]: Expectation = 5.22887126E+00	Variance = 2.62290302E-03	Tol = 4.10042448E-03 
+Proc[0]: Received norm from processor 47 
+Sample[157]: Expectation = 5.22956307E+00	Variance = 2.68085814E-03	Tol = 4.13225478E-03 
+Proc[0]: Received norm from processor 61 
+Sample[158]: Expectation = 5.22919748E+00	Variance = 2.68487430E-03	Tol = 4.12224154E-03 
+Proc[0]: Received norm from processor 57 
+Sample[159]: Expectation = 5.22951484E+00	Variance = 2.68390220E-03	Tol = 4.10851409E-03 
+Proc[0]: Received norm from processor 17 
+Sample[160]: Expectation = 5.22943313E+00	Variance = 2.66818956E-03	Tol = 4.08364846E-03 
+Proc[0]: Received norm from processor 5 
+Sample[161]: Expectation = 5.22951238E+00	Variance = 2.65262185E-03	Tol = 4.05905311E-03 
+Proc[0]: Received norm from processor 9 
+Sample[162]: Expectation = 5.22882020E+00	Variance = 2.71338454E-03	Tol = 4.09258931E-03 
+Proc[0]: Received norm from processor 53 
+Sample[163]: Expectation = 5.22892317E+00	Variance = 2.69845577E-03	Tol = 4.06877664E-03 
+Proc[0]: Received norm from processor 3 
+Sample[164]: Expectation = 5.22939636E+00	Variance = 2.71849845E-03	Tol = 4.07138921E-03 
+Proc[0]: Received norm from processor 49 
+Sample[165]: Expectation = 5.22935091E+00	Variance = 2.70236143E-03	Tol = 4.04696776E-03 
+Proc[0]: Received norm from processor 7 
+Sample[166]: Expectation = 5.22898451E+00	Variance = 2.70823353E-03	Tol = 4.03914098E-03 
+Proc[0]: Received norm from processor 37 
+Sample[167]: Expectation = 5.22855669E+00	Variance = 2.72239963E-03	Tol = 4.03754804E-03 
+Proc[0]: Received norm from processor 25 
+Sample[168]: Expectation = 5.22897400E+00	Variance = 2.73527715E-03	Tol = 4.03502313E-03 
+Proc[0]: Received norm from processor 11 
+Sample[169]: Expectation = 5.22902067E+00	Variance = 2.71945810E-03	Tol = 4.01141721E-03 
+Proc[0]: Received norm from processor 13 
+Sample[170]: Expectation = 5.22954300E+00	Variance = 2.74956826E-03	Tol = 4.02168260E-03 
+Proc[0]: Received norm from processor 61 
+Sample[171]: Expectation = 5.22958697E+00	Variance = 2.73381762E-03	Tol = 3.99840437E-03 
+Proc[0]: Received norm from processor 51 
+Sample[172]: Expectation = 5.22987278E+00	Variance = 2.73189181E-03	Tol = 3.98535970E-03 
+Proc[0]: Received norm from processor 1 
+Sample[173]: Expectation = 5.22978388E+00	Variance = 2.71745985E-03	Tol = 3.96331432E-03 
+Proc[0]: Received norm from processor 59 
+Sample[174]: Expectation = 5.22981738E+00	Variance = 2.70203645E-03	Tol = 3.94067826E-03 
+Proc[0]: Received norm from processor 19 
+Sample[175]: Expectation = 5.22919348E+00	Variance = 2.75432747E-03	Tol = 3.96724263E-03 
+Proc[0]: Received norm from processor 55 
+Sample[176]: Expectation = 5.22861384E+00	Variance = 2.79747384E-03	Tol = 3.98682051E-03 
+Proc[0]: Received norm from processor 21 
+Sample[177]: Expectation = 5.22863884E+00	Variance = 2.78177892E-03	Tol = 3.96437449E-03 
+Proc[0]: Received norm from processor 23 
+Sample[178]: Expectation = 5.22835876E+00	Variance = 2.78003551E-03	Tol = 3.95198393E-03 
+Proc[0]: Received norm from processor 15 
+Sample[179]: Expectation = 5.22862852E+00	Variance = 2.77745760E-03	Tol = 3.93910179E-03 
+Proc[0]: Received norm from processor 41 
+Sample[180]: Expectation = 5.22904320E+00	Variance = 2.79280762E-03	Tol = 3.93898437E-03 
+Proc[0]: Received norm from processor 27 
+Sample[181]: Expectation = 5.22921353E+00	Variance = 2.78259974E-03	Tol = 3.92090286E-03 
+Proc[0]: Received norm from processor 45 
+Sample[182]: Expectation = 5.22918324E+00	Variance = 2.76747678E-03	Tol = 3.89947642E-03 
+Proc[0]: Received norm from processor 33 
+Sample[183]: Expectation = 5.22941090E+00	Variance = 2.76178730E-03	Tol = 3.88480809E-03 
+Proc[0]: Received norm from processor 39 
+Sample[184]: Expectation = 5.22914565E+00	Variance = 2.75965364E-03	Tol = 3.87274032E-03 
+Proc[0]: Received norm from processor 29 
+Sample[185]: Expectation = 5.22928563E+00	Variance = 2.74834193E-03	Tol = 3.85433552E-03 
+Proc[0]: Received norm from processor 43 
+Sample[186]: Expectation = 5.22922551E+00	Variance = 2.73423450E-03	Tol = 3.83408209E-03 
+Proc[0]: Received norm from processor 31 
+Sample[187]: Expectation = 5.22939970E+00	Variance = 2.72525651E-03	Tol = 3.81753379E-03 
+Proc[0]: Received norm from processor 47 
+Sample[188]: Expectation = 5.22964697E+00	Variance = 2.72219414E-03	Tol = 3.80522747E-03 
+Proc[0]: Received norm from processor 35 
+Sample[189]: Expectation = 5.22883764E+00	Variance = 2.83093481E-03	Tol = 3.87020556E-03 
+Proc[0]: Received norm from processor 57 
+Sample[190]: Expectation = 5.22899382E+00	Variance = 2.82064539E-03	Tol = 3.85298612E-03 
+Proc[0]: Received norm from processor 61 
+Sample[191]: Expectation = 5.22901412E+00	Variance = 2.80595590E-03	Tol = 3.83286689E-03 
+Proc[0]: Received norm from processor 17 
+Sample[192]: Expectation = 5.22917518E+00	Variance = 2.79629666E-03	Tol = 3.81628682E-03 
+Proc[0]: Received norm from processor 5 
+Sample[193]: Expectation = 5.22868703E+00	Variance = 2.82756075E-03	Tol = 3.82760680E-03 
+Proc[0]: Received norm from processor 9 
+Sample[194]: Expectation = 5.22882841E+00	Variance = 2.81684345E-03	Tol = 3.81048706E-03 
+Proc[0]: Received norm from processor 53 
+Sample[195]: Expectation = 5.22903198E+00	Variance = 2.81043769E-03	Tol = 3.79637998E-03 
+Proc[0]: Received norm from processor 3 
+Sample[196]: Expectation = 5.22938271E+00	Variance = 2.82008563E-03	Tol = 3.79317703E-03 
+Proc[0]: Received norm from processor 49 
+Sample[197]: Expectation = 5.22969761E+00	Variance = 2.82520593E-03	Tol = 3.78697067E-03 
+Proc[0]: Received norm from processor 37 
+Sample[198]: Expectation = 5.22967385E+00	Variance = 2.81104839E-03	Tol = 3.76791907E-03 
+Proc[0]: Received norm from processor 7 
+Sample[199]: Expectation = 5.22921272E+00	Variance = 2.83902601E-03	Tol = 3.77709708E-03 
+Proc[0]: Received norm from processor 25 
+Sample[200]: Expectation = 5.22906192E+00	Variance = 2.82935601E-03	Tol = 3.76122055E-03 
+Proc[0]: Received norm from processor 11 
+Sample[201]: Expectation = 5.22903521E+00	Variance = 2.81542230E-03	Tol = 3.74260286E-03 
+Proc[0]: Received norm from processor 13 
+Sample[202]: Expectation = 5.22916682E+00	Variance = 2.80496623E-03	Tol = 3.72638852E-03 
+Proc[0]: Received norm from processor 1 
+Sample[203]: Expectation = 5.22915938E+00	Variance = 2.79115984E-03	Tol = 3.70803936E-03 
+Proc[0]: Received norm from processor 51 
+Sample[204]: Expectation = 5.22920962E+00	Variance = 2.77798998E-03	Tol = 3.69020297E-03 
+Proc[0]: Received norm from processor 59 
+Sample[205]: Expectation = 5.22898167E+00	Variance = 2.77503841E-03	Tol = 3.67923534E-03 
+Proc[0]: Received norm from processor 55 
+Sample[206]: Expectation = 5.22905072E+00	Variance = 2.76254471E-03	Tol = 3.66202283E-03 
+Proc[0]: Received norm from processor 21 
+Sample[207]: Expectation = 5.22936023E+00	Variance = 2.76893318E-03	Tol = 3.65738825E-03 
+Proc[0]: Received norm from processor 19 
+Sample[208]: Expectation = 5.22965275E+00	Variance = 2.77333335E-03	Tol = 3.65148372E-03 
+Proc[0]: Received norm from processor 27 
+Sample[209]: Expectation = 5.23012660E+00	Variance = 2.80676681E-03	Tol = 3.66462908E-03 
+Proc[0]: Received norm from processor 23 
+Sample[210]: Expectation = 5.23008280E+00	Variance = 2.79380224E-03	Tol = 3.64744023E-03 
+Proc[0]: Received norm from processor 29 
+Sample[211]: Expectation = 5.22982551E+00	Variance = 2.79446261E-03	Tol = 3.63921676E-03 
+Proc[0]: Received norm from processor 33 
+Sample[212]: Expectation = 5.22996991E+00	Variance = 2.78568069E-03	Tol = 3.62491424E-03 
+Proc[0]: Received norm from processor 41 
+Sample[213]: Expectation = 5.22996846E+00	Variance = 2.77260282E-03	Tol = 3.60789615E-03 
+Proc[0]: Received norm from processor 43 
+Sample[214]: Expectation = 5.22971824E+00	Variance = 2.77298283E-03	Tol = 3.59970328E-03 
+Proc[0]: Received norm from processor 47 
+Sample[215]: Expectation = 5.22979441E+00	Variance = 2.76132700E-03	Tol = 3.58376637E-03 
+Proc[0]: Received norm from processor 15 
+Sample[216]: Expectation = 5.22944421E+00	Variance = 2.77491209E-03	Tol = 3.58424542E-03 
+Proc[0]: Received norm from processor 45 
+Sample[217]: Expectation = 5.22938341E+00	Variance = 2.76292293E-03	Tol = 3.56824379E-03 
+Proc[0]: Received norm from processor 39 
+Sample[218]: Expectation = 5.22930874E+00	Variance = 2.75145888E-03	Tol = 3.55265690E-03 
+Proc[0]: Received norm from processor 31 
+Sample[219]: Expectation = 5.22894736E+00	Variance = 2.76736399E-03	Tol = 3.55476655E-03 
+Proc[0]: Received norm from processor 35 
+Sample[220]: Expectation = 5.22916317E+00	Variance = 2.76498413E-03	Tol = 3.54515299E-03 
+Proc[0]: Received norm from processor 61 
+Sample[221]: Expectation = 5.22919023E+00	Variance = 2.75263401E-03	Tol = 3.52921486E-03 
+Proc[0]: Received norm from processor 57 
+Sample[222]: Expectation = 5.22940984E+00	Variance = 2.75089348E-03	Tol = 3.52014376E-03 
+Proc[0]: Received norm from processor 17 
+Sample[223]: Expectation = 5.22963841E+00	Variance = 2.75015640E-03	Tol = 3.51177162E-03 
+Proc[0]: Received norm from processor 9 
+Sample[224]: Expectation = 5.22952889E+00	Variance = 2.74055409E-03	Tol = 3.49780166E-03 
+Proc[0]: Received norm from processor 5 
+Sample[225]: Expectation = 5.22978658E+00	Variance = 2.74324854E-03	Tol = 3.49173535E-03 
+Proc[0]: Received norm from processor 53 
+Sample[226]: Expectation = 5.22965240E+00	Variance = 2.73516129E-03	Tol = 3.47886240E-03 
+Proc[0]: Received norm from processor 37 
+Sample[227]: Expectation = 5.22944219E+00	Variance = 2.73309834E-03	Tol = 3.46988196E-03 
+Proc[0]: Received norm from processor 49 
+Sample[228]: Expectation = 5.22923650E+00	Variance = 2.73071538E-03	Tol = 3.46075452E-03 
+Proc[0]: Received norm from processor 3 
+Sample[229]: Expectation = 5.22894830E+00	Variance = 2.73772791E-03	Tol = 3.45762110E-03 
+Proc[0]: Received norm from processor 25 
+Sample[230]: Expectation = 5.22905333E+00	Variance = 2.72835100E-03	Tol = 3.44418287E-03 
+Proc[0]: Received norm from processor 7 
+Sample[231]: Expectation = 5.22919916E+00	Variance = 2.72143122E-03	Tol = 3.43235889E-03 
+Proc[0]: Received norm from processor 11 
+Sample[232]: Expectation = 5.22933605E+00	Variance = 2.71402941E-03	Tol = 3.42029277E-03 
+Proc[0]: Received norm from processor 13 
+Sample[233]: Expectation = 5.22931232E+00	Variance = 2.70251187E-03	Tol = 3.40569573E-03 
+Proc[0]: Received norm from processor 1 
+Sample[234]: Expectation = 5.22919115E+00	Variance = 2.69438350E-03	Tol = 3.39329624E-03 
+Proc[0]: Received norm from processor 59 
+Sample[235]: Expectation = 5.22957230E+00	Variance = 2.71691285E-03	Tol = 3.40019577E-03 
+Proc[0]: Received norm from processor 55 
+Sample[236]: Expectation = 5.22993217E+00	Variance = 2.73583335E-03	Tol = 3.40477814E-03 
+Proc[0]: Received norm from processor 51 
+Sample[237]: Expectation = 5.23011948E+00	Variance = 2.73256999E-03	Tol = 3.39556051E-03 
+Proc[0]: Received norm from processor 61 
+Sample[238]: Expectation = 5.23003877E+00	Variance = 2.72263232E-03	Tol = 3.38225245E-03 
+Proc[0]: Received norm from processor 21 
+Sample[239]: Expectation = 5.23013156E+00	Variance = 2.71328968E-03	Tol = 3.36937331E-03 
+Proc[0]: Received norm from processor 23 
+Sample[240]: Expectation = 5.23031398E+00	Variance = 2.70993726E-03	Tol = 3.36026863E-03 
+Proc[0]: Received norm from processor 19 
+Sample[241]: Expectation = 5.23018482E+00	Variance = 2.70269650E-03	Tol = 3.34880700E-03 
+Proc[0]: Received norm from processor 27 
+Sample[242]: Expectation = 5.23013952E+00	Variance = 2.69202279E-03	Tol = 3.33527527E-03 
+Proc[0]: Received norm from processor 33 
+Sample[243]: Expectation = 5.23016058E+00	Variance = 2.68105184E-03	Tol = 3.32161635E-03 
+Proc[0]: Received norm from processor 43 
+Sample[244]: Expectation = 5.22998742E+00	Variance = 2.67734981E-03	Tol = 3.31251341E-03 
+Proc[0]: Received norm from processor 29 
+Sample[245]: Expectation = 5.22998826E+00	Variance = 2.66642202E-03	Tol = 3.29899306E-03 
+Proc[0]: Received norm from processor 15 
+Sample[246]: Expectation = 5.22988855E+00	Variance = 2.65801901E-03	Tol = 3.28708919E-03 
+Proc[0]: Received norm from processor 45 
+Sample[247]: Expectation = 5.22981719E+00	Variance = 2.64851049E-03	Tol = 3.27455562E-03 
+Proc[0]: Received norm from processor 41 
+Sample[248]: Expectation = 5.22951500E+00	Variance = 2.66038702E-03	Tol = 3.27526595E-03 
+Proc[0]: Received norm from processor 47 
+Sample[249]: Expectation = 5.22932072E+00	Variance = 2.65906307E-03	Tol = 3.26786905E-03 
+Proc[0]: Received norm from processor 39 
+Sample[250]: Expectation = 5.22975456E+00	Variance = 2.69529291E-03	Tol = 3.28346945E-03 
+Proc[0]: Received norm from processor 35 
+Sample[251]: Expectation = 5.22982596E+00	Variance = 2.68582930E-03	Tol = 3.27116419E-03 
+Proc[0]: Received norm from processor 31 
+Sample[252]: Expectation = 5.22972237E+00	Variance = 2.67786494E-03	Tol = 3.25982334E-03 
+Proc[0]: Received norm from processor 57 
+Sample[253]: Expectation = 5.22956167E+00	Variance = 2.67378822E-03	Tol = 3.25089724E-03 
+Proc[0]: Received norm from processor 9 
+Sample[254]: Expectation = 5.22938825E+00	Variance = 2.67086991E-03	Tol = 3.24272045E-03 
+Proc[0]: Received norm from processor 5 
+Sample[255]: Expectation = 5.22944008E+00	Variance = 2.66107806E-03	Tol = 3.23041797E-03 
+Proc[0]: Received norm from processor 17 
+Sample[256]: Expectation = 5.22924438E+00	Variance = 2.66044874E-03	Tol = 3.22372113E-03 
+Proc[0]: Received norm from processor 61 
+Sample[257]: Expectation = 5.22910735E+00	Variance = 2.65490417E-03	Tol = 3.21408874E-03 
+Proc[0]: Received norm from processor 53 
+Sample[258]: Expectation = 5.22920237E+00	Variance = 2.64693456E-03	Tol = 3.20303548E-03 
+Proc[0]: Received norm from processor 37 
+Sample[259]: Expectation = 5.22922276E+00	Variance = 2.63682193E-03	Tol = 3.19073340E-03 
+Proc[0]: Received norm from processor 3 
+Sample[260]: Expectation = 5.22939706E+00	Variance = 2.63454920E-03	Tol = 3.18321874E-03 
+Proc[0]: Received norm from processor 49 
+Sample[261]: Expectation = 5.22970714E+00	Variance = 2.64945316E-03	Tol = 3.18608875E-03 
+Proc[0]: Received norm from processor 25 
+Sample[262]: Expectation = 5.23007284E+00	Variance = 2.67424724E-03	Tol = 3.19484750E-03 
+Proc[0]: Received norm from processor 7 
+Sample[263]: Expectation = 5.23017889E+00	Variance = 2.66702562E-03	Tol = 3.18445943E-03 
+Proc[0]: Received norm from processor 1 
+Sample[264]: Expectation = 5.23032404E+00	Variance = 2.66246417E-03	Tol = 3.17570331E-03 
+Proc[0]: Received norm from processor 13 
+Sample[265]: Expectation = 5.23036042E+00	Variance = 2.65276655E-03	Tol = 3.16392791E-03 
+Proc[0]: Received norm from processor 11 
+Sample[266]: Expectation = 5.23004582E+00	Variance = 2.66902116E-03	Tol = 3.16763542E-03 
+Proc[0]: Received norm from processor 59 
+Sample[267]: Expectation = 5.23044040E+00	Variance = 2.70043926E-03	Tol = 3.18025230E-03 
+Proc[0]: Received norm from processor 55 
+Sample[268]: Expectation = 5.23021503E+00	Variance = 2.70392498E-03	Tol = 3.17636149E-03 
+Proc[0]: Received norm from processor 21 
+Sample[269]: Expectation = 5.23032450E+00	Variance = 2.69708482E-03	Tol = 3.16643926E-03 
+Proc[0]: Received norm from processor 51 
+Sample[270]: Expectation = 5.23034260E+00	Variance = 2.68718379E-03	Tol = 3.15476347E-03 
+Proc[0]: Received norm from processor 23 
+Sample[271]: Expectation = 5.23031730E+00	Variance = 2.67744083E-03	Tol = 3.14322374E-03 
+Proc[0]: Received norm from processor 43 
+Sample[272]: Expectation = 5.23002204E+00	Variance = 2.69122290E-03	Tol = 3.14550502E-03 
+Proc[0]: Received norm from processor 29 
+Sample[273]: Expectation = 5.22968537E+00	Variance = 2.71219511E-03	Tol = 3.15194870E-03 
+Proc[0]: Received norm from processor 33 
+Sample[274]: Expectation = 5.22975544E+00	Variance = 2.70363687E-03	Tol = 3.14122394E-03 
+Proc[0]: Received norm from processor 19 
+Sample[275]: Expectation = 5.22984378E+00	Variance = 2.69594360E-03	Tol = 3.13104316E-03 
+Proc[0]: Received norm from processor 15 
+Sample[276]: Expectation = 5.22966573E+00	Variance = 2.69489327E-03	Tol = 3.12475696E-03 
+Proc[0]: Received norm from processor 27 
+Sample[277]: Expectation = 5.22990722E+00	Variance = 2.70126038E-03	Tol = 3.12279402E-03 
+Proc[0]: Received norm from processor 47 
+Sample[278]: Expectation = 5.22990813E+00	Variance = 2.69154384E-03	Tol = 3.11156108E-03 
+Proc[0]: Received norm from processor 45 
+Sample[279]: Expectation = 5.22995455E+00	Variance = 2.68249571E-03	Tol = 3.10075474E-03 
+Proc[0]: Received norm from processor 41 
+Sample[280]: Expectation = 5.23008287E+00	Variance = 2.67751000E-03	Tol = 3.09233500E-03 
+Proc[0]: Received norm from processor 39 
+Sample[281]: Expectation = 5.23020110E+00	Variance = 2.67189501E-03	Tol = 3.08358933E-03 
+Proc[0]: Received norm from processor 35 
+Sample[282]: Expectation = 5.23039474E+00	Variance = 2.67295643E-03	Tol = 3.07872845E-03 
+Proc[0]: Received norm from processor 31 
+Sample[283]: Expectation = 5.23010760E+00	Variance = 2.68676079E-03	Tol = 3.08120989E-03 
+Proc[0]: Received norm from processor 61 
+Sample[284]: Expectation = 5.23034286E+00	Variance = 2.69296354E-03	Tol = 3.07932882E-03 
+Proc[0]: Received norm from processor 57 
+Sample[285]: Expectation = 5.23013016E+00	Variance = 2.69636365E-03	Tol = 3.07586168E-03 
+Proc[0]: Received norm from processor 9 
+Sample[286]: Expectation = 5.22989882E+00	Variance = 2.70218887E-03	Tol = 3.07379453E-03 
+Proc[0]: Received norm from processor 5 
+Sample[287]: Expectation = 5.22982554E+00	Variance = 2.69430899E-03	Tol = 3.06395760E-03 
+Proc[0]: Received norm from processor 17 
+Sample[288]: Expectation = 5.22957595E+00	Variance = 2.70283305E-03	Tol = 3.06346813E-03 
+Proc[0]: Received norm from processor 53 
+Sample[289]: Expectation = 5.22986258E+00	Variance = 2.71714234E-03	Tol = 3.06624797E-03 
+Proc[0]: Received norm from processor 3 
+Sample[290]: Expectation = 5.22998225E+00	Variance = 2.71191118E-03	Tol = 3.05800881E-03 
+Proc[0]: Received norm from processor 37 
+Sample[291]: Expectation = 5.22985799E+00	Variance = 2.70706936E-03	Tol = 3.05002358E-03 
+Proc[0]: Received norm from processor 25 
+Sample[292]: Expectation = 5.22993615E+00	Variance = 2.69957621E-03	Tol = 3.04057955E-03 
+Proc[0]: Received norm from processor 49 
+Sample[293]: Expectation = 5.22965906E+00	Variance = 2.71278190E-03	Tol = 3.04280156E-03 
+Proc[0]: Received norm from processor 59 
+Sample[294]: Expectation = 5.22968479E+00	Variance = 2.70374875E-03	Tol = 3.03256069E-03 
+Proc[0]: Received norm from processor 11 
+Sample[295]: Expectation = 5.22979278E+00	Variance = 2.69801219E-03	Tol = 3.02420304E-03 
+Proc[0]: Received norm from processor 1 
+Sample[296]: Expectation = 5.22967677E+00	Variance = 2.69286763E-03	Tol = 3.01621050E-03 
+Proc[0]: Received norm from processor 7 
+Sample[297]: Expectation = 5.22953248E+00	Variance = 2.68996351E-03	Tol = 3.00950431E-03 
+Proc[0]: Received norm from processor 55 
+Sample[298]: Expectation = 5.22959391E+00	Variance = 2.68205753E-03	Tol = 3.00003217E-03 
+Proc[0]: Received norm from processor 13 
+Sample[299]: Expectation = 5.22954665E+00	Variance = 2.67375308E-03	Tol = 2.99037088E-03 
+Proc[0]: Received norm from processor 21 
+Sample[300]: Expectation = 5.22974182E+00	Variance = 2.67622990E-03	Tol = 2.98676519E-03 
+Proc[0]: Received norm from processor 51 
+Sample[301]: Expectation = 5.22971355E+00	Variance = 2.66757846E-03	Tol = 2.97697614E-03 
+Proc[0]: Received norm from processor 23 
+Sample[302]: Expectation = 5.22978382E+00	Variance = 2.66023189E-03	Tol = 2.96794792E-03 
+Proc[0]: Received norm from processor 61 
+Sample[303]: Expectation = 5.22975502E+00	Variance = 2.65170279E-03	Tol = 2.95829248E-03 
+Proc[0]: Received norm from processor 43 
+Sample[304]: Expectation = 5.22972463E+00	Variance = 2.64326002E-03	Tol = 2.94871739E-03 
+Proc[0]: Received norm from processor 29 
+Sample[305]: Expectation = 5.22976811E+00	Variance = 2.63516834E-03	Tol = 2.93937003E-03 
+Proc[0]: Received norm from processor 33 
+Sample[306]: Expectation = 5.22992517E+00	Variance = 2.63408052E-03	Tol = 2.93395744E-03 
+Proc[0]: Received norm from processor 15 
+Sample[307]: Expectation = 5.22985118E+00	Variance = 2.62717570E-03	Tol = 2.92533341E-03 
+Proc[0]: Received norm from processor 47 
+Sample[308]: Expectation = 5.23000136E+00	Variance = 2.62557027E-03	Tol = 2.91968814E-03 
+Proc[0]: Received norm from processor 19 
+Sample[309]: Expectation = 5.22993360E+00	Variance = 2.61848756E-03	Tol = 2.91102556E-03 
+Proc[0]: Received norm from processor 45 
+Sample[310]: Expectation = 5.23012153E+00	Variance = 2.62095423E-03	Tol = 2.90769515E-03 
+Proc[0]: Received norm from processor 27 
+Sample[311]: Expectation = 5.23012125E+00	Variance = 2.61252675E-03	Tol = 2.89834566E-03 
+Proc[0]: Received norm from processor 41 
+Sample[312]: Expectation = 5.22976010E+00	Variance = 2.64471704E-03	Tol = 2.91146994E-03 
+Proc[0]: Received norm from processor 39 
+Sample[313]: Expectation = 5.22954324E+00	Variance = 2.65093991E-03	Tol = 2.91023308E-03 
+Proc[0]: Received norm from processor 35 
+Sample[314]: Expectation = 5.22954548E+00	Variance = 2.64249899E-03	Tol = 2.90096568E-03 
+Proc[0]: Received norm from processor 31 
+Sample[315]: Expectation = 5.22962140E+00	Variance = 2.63591983E-03	Tol = 2.89274947E-03 
+Proc[0]: Received norm from processor 57 
+Sample[316]: Expectation = 5.22942938E+00	Variance = 2.63919269E-03	Tol = 2.88996118E-03 
+Proc[0]: Received norm from processor 9 
+Sample[317]: Expectation = 5.22914230E+00	Variance = 2.65691114E-03	Tol = 2.89506877E-03 
+Proc[0]: Received norm from processor 5 
+Sample[318]: Expectation = 5.22898767E+00	Variance = 2.65613518E-03	Tol = 2.89009106E-03 
+Proc[0]: Received norm from processor 17 
+Sample[319]: Expectation = 5.22897853E+00	Variance = 2.64783531E-03	Tol = 2.88104567E-03 
+Proc[0]: Received norm from processor 53 
+Sample[320]: Expectation = 5.22912683E+00	Variance = 2.64657596E-03	Tol = 2.87585637E-03 
+Proc[0]: Received norm from processor 3 
+Sample[321]: Expectation = 5.22926047E+00	Variance = 2.64404641E-03	Tol = 2.87000082E-03 
+Proc[0]: Received norm from processor 37 
+Sample[322]: Expectation = 5.22941345E+00	Variance = 2.64334764E-03	Tol = 2.86516215E-03 
+Proc[0]: Received norm from processor 25 
+Sample[323]: Expectation = 5.22948330E+00	Variance = 2.63673480E-03	Tol = 2.85714292E-03 
+Proc[0]: Received norm from processor 61 
+Sample[324]: Expectation = 5.22967493E+00	Variance = 2.64045890E-03	Tol = 2.85474421E-03 
+Proc[0]: Received norm from processor 49 
+Sample[325]: Expectation = 5.22956279E+00	Variance = 2.63640877E-03	Tol = 2.84816204E-03 
+Proc[0]: Received norm from processor 11 
+Sample[326]: Expectation = 5.22974335E+00	Variance = 2.63891637E-03	Tol = 2.84514244E-03 
+Proc[0]: Received norm from processor 1 
+Sample[327]: Expectation = 5.22989567E+00	Variance = 2.63841034E-03	Tol = 2.84051635E-03 
+Proc[0]: Received norm from processor 7 
+Sample[328]: Expectation = 5.22982421E+00	Variance = 2.63203628E-03	Tol = 2.83275500E-03 
+Proc[0]: Received norm from processor 59 
+Sample[329]: Expectation = 5.22970328E+00	Variance = 2.62883306E-03	Tol = 2.82672497E-03 
+Proc[0]: Received norm from processor 55 
+Sample[330]: Expectation = 5.22974691E+00	Variance = 2.62149310E-03	Tol = 2.81849579E-03 
+Proc[0]: Received norm from processor 21 
+Sample[331]: Expectation = 5.22964970E+00	Variance = 2.61669121E-03	Tol = 2.81165636E-03 
+Proc[0]: Received norm from processor 13 
+Sample[332]: Expectation = 5.22946342E+00	Variance = 2.62029586E-03	Tol = 2.80935178E-03 
+Proc[0]: Received norm from processor 51 
+Sample[333]: Expectation = 5.22968866E+00	Variance = 2.62927048E-03	Tol = 2.80993009E-03 
+Proc[0]: Received norm from processor 23 
+Sample[334]: Expectation = 5.22975331E+00	Variance = 2.62279031E-03	Tol = 2.80226080E-03 
+Proc[0]: Received norm from processor 33 
+Sample[335]: Expectation = 5.22989507E+00	Variance = 2.62167263E-03	Tol = 2.79747894E-03 
+Proc[0]: Received norm from processor 43 
+Sample[336]: Expectation = 5.22991100E+00	Variance = 2.61395506E-03	Tol = 2.78919848E-03 
+Proc[0]: Received norm from processor 29 
+Sample[337]: Expectation = 5.22995821E+00	Variance = 2.60694740E-03	Tol = 2.78132144E-03 
+Proc[0]: Received norm from processor 19 
+Sample[338]: Expectation = 5.22987216E+00	Variance = 2.60172970E-03	Tol = 2.77442339E-03 
+Proc[0]: Received norm from processor 47 
+Sample[339]: Expectation = 5.22980544E+00	Variance = 2.59555971E-03	Tol = 2.76704144E-03 
+Proc[0]: Received norm from processor 45 
+Sample[340]: Expectation = 5.22990214E+00	Variance = 2.59109577E-03	Tol = 2.76059231E-03 
+Proc[0]: Received norm from processor 15 
+Sample[341]: Expectation = 5.23003006E+00	Variance = 2.58906077E-03	Tol = 2.75545887E-03 
+Proc[0]: Received norm from processor 41 
+Sample[342]: Expectation = 5.23010444E+00	Variance = 2.58337714E-03	Tol = 2.74840578E-03 
+Proc[0]: Received norm from processor 27 
+Sample[343]: Expectation = 5.23018881E+00	Variance = 2.57827979E-03	Tol = 2.74168756E-03 
+Proc[0]: Received norm from processor 35 
+Sample[344]: Expectation = 5.23026231E+00	Variance = 2.57263755E-03	Tol = 2.73470246E-03 
+Proc[0]: Received norm from processor 39 
+Sample[345]: Expectation = 5.23053516E+00	Variance = 2.59079200E-03	Tol = 2.74035436E-03 
+Proc[0]: Received norm from processor 31 
+Sample[346]: Expectation = 5.23043967E+00	Variance = 2.58645004E-03	Tol = 2.73409750E-03 
+Proc[0]: Received norm from processor 9 
+Sample[347]: Expectation = 5.23067118E+00	Variance = 2.59753964E-03	Tol = 2.73600165E-03 
+Proc[0]: Received norm from processor 57 
+Sample[348]: Expectation = 5.23067816E+00	Variance = 2.59009236E-03	Tol = 2.72814848E-03 
+Proc[0]: Received norm from processor 5 
+Sample[349]: Expectation = 5.23091068E+00	Variance = 2.60148580E-03	Tol = 2.73022234E-03 
+Proc[0]: Received norm from processor 61 
+Sample[350]: Expectation = 5.23098278E+00	Variance = 2.59586738E-03	Tol = 2.72337363E-03 
+Proc[0]: Received norm from processor 17 
+Sample[351]: Expectation = 5.23091356E+00	Variance = 2.59014880E-03	Tol = 2.71649430E-03 
+Proc[0]: Received norm from processor 53 
+Sample[352]: Expectation = 5.23095676E+00	Variance = 2.58344535E-03	Tol = 2.70912041E-03 
+Proc[0]: Received norm from processor 3 
+Sample[353]: Expectation = 5.23076071E+00	Variance = 2.58965506E-03	Tol = 2.70852973E-03 
+Proc[0]: Received norm from processor 25 
+Sample[354]: Expectation = 5.23076381E+00	Variance = 2.58234304E-03	Tol = 2.70088029E-03 
+Proc[0]: Received norm from processor 37 
+Sample[355]: Expectation = 5.23065111E+00	Variance = 2.57956539E-03	Tol = 2.69562263E-03 
+Proc[0]: Received norm from processor 49 
+Sample[356]: Expectation = 5.23048736E+00	Variance = 2.58183891E-03	Tol = 2.69301996E-03 
+Proc[0]: Received norm from processor 59 
+Sample[357]: Expectation = 5.23046389E+00	Variance = 2.57480296E-03	Tol = 2.68557875E-03 
+Proc[0]: Received norm from processor 11 
+Sample[358]: Expectation = 5.23033818E+00	Variance = 2.57325188E-03	Tol = 2.68101742E-03 
+Proc[0]: Received norm from processor 1 
+Sample[359]: Expectation = 5.23022520E+00	Variance = 2.57065394E-03	Tol = 2.67592899E-03 
+Proc[0]: Received norm from processor 7 
+Sample[360]: Expectation = 5.22999757E+00	Variance = 2.58211508E-03	Tol = 2.67816017E-03 
+Proc[0]: Received norm from processor 21 
+Sample[361]: Expectation = 5.23000374E+00	Variance = 2.57497612E-03	Tol = 2.67074855E-03 
+Proc[0]: Received norm from processor 55 
+Sample[362]: Expectation = 5.23016965E+00	Variance = 2.57779961E-03	Tol = 2.66851895E-03 
+Proc[0]: Received norm from processor 13 
+Sample[363]: Expectation = 5.23016469E+00	Variance = 2.57070712E-03	Tol = 2.66117226E-03 
+Proc[0]: Received norm from processor 51 
+Sample[364]: Expectation = 5.23015071E+00	Variance = 2.56371570E-03	Tol = 2.65389808E-03 
+Proc[0]: Received norm from processor 23 
+Sample[365]: Expectation = 5.23017000E+00	Variance = 2.55682728E-03	Tol = 2.64669723E-03 
+Proc[0]: Received norm from processor 33 
+Sample[366]: Expectation = 5.23011293E+00	Variance = 2.55103015E-03	Tol = 2.64008101E-03 
+Proc[0]: Received norm from processor 43 
+Sample[367]: Expectation = 5.23023590E+00	Variance = 2.54961358E-03	Tol = 2.63574960E-03 
+Proc[0]: Received norm from processor 19 
+Sample[368]: Expectation = 5.23004888E+00	Variance = 2.55552173E-03	Tol = 2.63521394E-03 
+Proc[0]: Received norm from processor 61 
+Sample[369]: Expectation = 5.23027957E+00	Variance = 2.56818008E-03	Tol = 2.63815041E-03 
+Proc[0]: Received norm from processor 47 
+Sample[370]: Expectation = 5.23022373E+00	Variance = 2.56238963E-03	Tol = 2.63161117E-03 
+Proc[0]: Received norm from processor 29 
+Sample[371]: Expectation = 5.23033114E+00	Variance = 2.55975132E-03	Tol = 2.62670882E-03 
+Proc[0]: Received norm from processor 45 
+Sample[372]: Expectation = 5.23039032E+00	Variance = 2.55416986E-03	Tol = 2.62031449E-03 
+Proc[0]: Received norm from processor 27 
+Sample[373]: Expectation = 5.23031040E+00	Variance = 2.54969841E-03	Tol = 2.61450809E-03 
+Proc[0]: Received norm from processor 41 
+Sample[374]: Expectation = 5.23016107E+00	Variance = 2.55119893E-03	Tol = 2.61177861E-03 
+Proc[0]: Received norm from processor 35 
+Sample[375]: Expectation = 5.22994489E+00	Variance = 2.56187326E-03	Tol = 2.61374483E-03 
+Proc[0]: Received norm from processor 15 
+Sample[376]: Expectation = 5.22989921E+00	Variance = 2.55584256E-03	Tol = 2.60719267E-03 
+Proc[0]: Received norm from processor 39 
+Sample[377]: Expectation = 5.23007690E+00	Variance = 2.56093533E-03	Tol = 2.60632537E-03 
+Proc[0]: Received norm from processor 9 
+Sample[378]: Expectation = 5.23006914E+00	Variance = 2.55418305E-03	Tol = 2.59944187E-03 
+Proc[0]: Received norm from processor 57 
+Sample[379]: Expectation = 5.23002091E+00	Variance = 2.54832301E-03	Tol = 2.59303055E-03 
+Proc[0]: Received norm from processor 31 
+Sample[380]: Expectation = 5.23008087E+00	Variance = 2.54297905E-03	Tol = 2.58689971E-03 
+Proc[0]: Received norm from processor 5 
+Sample[381]: Expectation = 5.22985699E+00	Variance = 2.55534968E-03	Tol = 2.58977886E-03 
+Proc[0]: Received norm from processor 17 
+Sample[382]: Expectation = 5.22987354E+00	Variance = 2.54876462E-03	Tol = 2.58305220E-03 
+Proc[0]: Received norm from processor 53 
+Sample[383]: Expectation = 5.23002888E+00	Variance = 2.55132782E-03	Tol = 2.58097469E-03 
+Proc[0]: Received norm from processor 3 
+Sample[384]: Expectation = 5.23000570E+00	Variance = 2.54488960E-03	Tol = 2.57435753E-03 
+Proc[0]: Received norm from processor 25 
+Sample[385]: Expectation = 5.22964853E+00	Variance = 2.58726531E-03	Tol = 2.59232900E-03 
+Proc[0]: Received norm from processor 37 
+Sample[386]: Expectation = 5.22984284E+00	Variance = 2.59509863E-03	Tol = 2.59288516E-03 
+Proc[0]: Received norm from processor 49 
+Sample[387]: Expectation = 5.22992479E+00	Variance = 2.59098533E-03	Tol = 2.58747996E-03 
+Proc[0]: Received norm from processor 59 
+Sample[388]: Expectation = 5.22995705E+00	Variance = 2.58471018E-03	Tol = 2.58101224E-03 
+Proc[0]: Received norm from processor 1 
+Sample[389]: Expectation = 5.22990863E+00	Variance = 2.57897518E-03	Tol = 2.57483130E-03 
+Proc[0]: Received norm from processor 61 
+Sample[390]: Expectation = 5.22977572E+00	Variance = 2.57923468E-03	Tol = 2.57165749E-03 
+Proc[0]: Received norm from processor 7 
+Sample[391]: Expectation = 5.22974965E+00	Variance = 2.57290328E-03	Tol = 2.56521253E-03 
+Proc[0]: Received norm from processor 11 
+Sample[392]: Expectation = 5.22974729E+00	Variance = 2.56634192E-03	Tol = 2.55866969E-03 
+Proc[0]: Received norm from processor 13 
+Sample[393]: Expectation = 5.22982875E+00	Variance = 2.56241279E-03	Tol = 2.55345537E-03 
+Proc[0]: Received norm from processor 21 
+Sample[394]: Expectation = 5.22991417E+00	Variance = 2.55877680E-03	Tol = 2.54840291E-03 
+Proc[0]: Received norm from processor 55 
+Sample[395]: Expectation = 5.22962790E+00	Variance = 2.58458785E-03	Tol = 2.55797974E-03 
+Proc[0]: Received norm from processor 51 
+Sample[396]: Expectation = 5.22966418E+00	Variance = 2.57858117E-03	Tol = 2.55177754E-03 
+Proc[0]: Received norm from processor 23 
+Sample[397]: Expectation = 5.22951640E+00	Variance = 2.58073442E-03	Tol = 2.54962556E-03 
+Proc[0]: Received norm from processor 33 
+Sample[398]: Expectation = 5.22958035E+00	Variance = 2.57587334E-03	Tol = 2.54402114E-03 
+Proc[0]: Received norm from processor 19 
+Sample[399]: Expectation = 5.22960634E+00	Variance = 2.56968639E-03	Tol = 2.53777792E-03 
+Proc[0]: Received norm from processor 43 
+Sample[400]: Expectation = 5.22917121E+00	Variance = 2.63880692E-03	Tol = 2.56846594E-03 
+Proc[0]: Received norm from processor 29 
+Sample[401]: Expectation = 5.22932271E+00	Variance = 2.64140736E-03	Tol = 2.56652504E-03 
+Proc[0]: Received norm from processor 47 
+Sample[402]: Expectation = 5.22943897E+00	Variance = 2.64025621E-03	Tol = 2.56277223E-03 
+Proc[0]: Received norm from processor 27 
+Sample[403]: Expectation = 5.22935090E+00	Variance = 2.63682221E-03	Tol = 2.55792556E-03 
+Proc[0]: Received norm from processor 45 
+Sample[404]: Expectation = 5.22937165E+00	Variance = 2.63046882E-03	Tol = 2.55167816E-03 
+Proc[0]: Received norm from processor 35 
+Sample[405]: Expectation = 5.22944815E+00	Variance = 2.62633843E-03	Tol = 2.54652435E-03 
+Proc[0]: Received norm from processor 41 
+Sample[406]: Expectation = 5.22922332E+00	Variance = 2.64034246E-03	Tol = 2.55015814E-03 
+Proc[0]: Received norm from processor 15 
+Sample[407]: Expectation = 5.22935174E+00	Variance = 2.64055165E-03	Tol = 2.54712424E-03 
+Proc[0]: Received norm from processor 39 
+Sample[408]: Expectation = 5.22939530E+00	Variance = 2.63485170E-03	Tol = 2.54125360E-03 
+Proc[0]: Received norm from processor 9 
+Sample[409]: Expectation = 5.22926555E+00	Variance = 2.63527821E-03	Tol = 2.53835045E-03 
+Proc[0]: Received norm from processor 57 
+Sample[410]: Expectation = 5.22922585E+00	Variance = 2.62949531E-03	Tol = 2.53246978E-03 
+Proc[0]: Received norm from processor 5 
+Sample[411]: Expectation = 5.22924461E+00	Variance = 2.62324188E-03	Tol = 2.52637758E-03 
+Proc[0]: Received norm from processor 31 
+Sample[412]: Expectation = 5.22927754E+00	Variance = 2.61732029E-03	Tol = 2.52046011E-03 
+Proc[0]: Received norm from processor 17 
+Sample[413]: Expectation = 5.22920848E+00	Variance = 2.61294786E-03	Tol = 2.51530322E-03 
+Proc[0]: Received norm from processor 53 
+Sample[414]: Expectation = 5.22921180E+00	Variance = 2.60664095E-03	Tol = 2.50922980E-03 
+Proc[0]: Received norm from processor 3 
+Sample[415]: Expectation = 5.22924762E+00	Variance = 2.60089128E-03	Tol = 2.50343921E-03 
+Proc[0]: Received norm from processor 61 
+Sample[416]: Expectation = 5.22943210E+00	Variance = 2.60876269E-03	Tol = 2.50420929E-03 
+Proc[0]: Received norm from processor 37 
+Sample[417]: Expectation = 5.22967264E+00	Variance = 2.62657599E-03	Tol = 2.50972974E-03 
+Proc[0]: Received norm from processor 25 
+Sample[418]: Expectation = 5.22971050E+00	Variance = 2.62089003E-03	Tol = 2.50401115E-03 
+Proc[0]: Received norm from processor 49 
+Sample[419]: Expectation = 5.22971591E+00	Variance = 2.61464713E-03	Tol = 2.49804082E-03 
+Proc[0]: Received norm from processor 59 
+Sample[420]: Expectation = 5.22950773E+00	Variance = 2.62658019E-03	Tol = 2.50075236E-03 
+Proc[0]: Received norm from processor 1 
+Sample[421]: Expectation = 5.22969569E+00	Variance = 2.63517888E-03	Tol = 2.50186576E-03 
+Proc[0]: Received norm from processor 7 
+Sample[422]: Expectation = 5.22966802E+00	Variance = 2.62925672E-03	Tol = 2.49609017E-03 
+Proc[0]: Received norm from processor 11 
+Sample[423]: Expectation = 5.22954914E+00	Variance = 2.62900408E-03	Tol = 2.49301819E-03 
+Proc[0]: Received norm from processor 21 
+Sample[424]: Expectation = 5.22953272E+00	Variance = 2.62291772E-03	Tol = 2.48719253E-03 
+Proc[0]: Received norm from processor 13 
+Sample[425]: Expectation = 5.22961669E+00	Variance = 2.61973597E-03	Tol = 2.48275747E-03 
+Proc[0]: Received norm from processor 55 
+Sample[426]: Expectation = 5.22970487E+00	Variance = 2.61689123E-03	Tol = 2.47849494E-03 
+Proc[0]: Received norm from processor 51 
+Sample[427]: Expectation = 5.22954338E+00	Variance = 2.62187337E-03	Tol = 2.47794646E-03 
+Proc[0]: Received norm from processor 33 
+Sample[428]: Expectation = 5.22959125E+00	Variance = 2.61672591E-03	Tol = 2.47261918E-03 
+Proc[0]: Received norm from processor 23 
+Sample[429]: Expectation = 5.22947771E+00	Variance = 2.61614375E-03	Tol = 2.46946091E-03 
+Proc[0]: Received norm from processor 19 
+Sample[430]: Expectation = 5.22949645E+00	Variance = 2.61021043E-03	Tol = 2.46378912E-03 
+Proc[0]: Received norm from processor 43 
+Sample[431]: Expectation = 5.22956339E+00	Variance = 2.60608119E-03	Tol = 2.45898192E-03 
+Proc[0]: Received norm from processor 29 
+Sample[432]: Expectation = 5.22963466E+00	Variance = 2.60223743E-03	Tol = 2.45432226E-03 
+Proc[0]: Received norm from processor 27 
+Sample[433]: Expectation = 5.22952852E+00	Variance = 2.60109385E-03	Tol = 2.45094781E-03 
+Proc[0]: Received norm from processor 47 
+Sample[434]: Expectation = 5.22955582E+00	Variance = 2.59542327E-03	Tol = 2.44545251E-03 
+Proc[0]: Received norm from processor 45 
+Sample[435]: Expectation = 5.22946689E+00	Variance = 2.59288944E-03	Tol = 2.44144740E-03 
+Proc[0]: Received norm from processor 61 
+Sample[436]: Expectation = 5.22926573E+00	Variance = 2.60454498E-03	Tol = 2.44412091E-03 
+Proc[0]: Received norm from processor 41 
+Sample[437]: Expectation = 5.22902117E+00	Variance = 2.62466068E-03	Tol = 2.45073224E-03 
+Proc[0]: Received norm from processor 35 
+Sample[438]: Expectation = 5.22899858E+00	Variance = 2.61889132E-03	Tol = 2.44524108E-03 
+Proc[0]: Received norm from processor 15 
+Sample[439]: Expectation = 5.22888891E+00	Variance = 2.61819377E-03	Tol = 2.44212918E-03 
+Proc[0]: Received norm from processor 5 
+Sample[440]: Expectation = 5.22876319E+00	Variance = 2.61918201E-03	Tol = 2.43981278E-03 
+Proc[0]: Received norm from processor 9 
+Sample[441]: Expectation = 5.22890468E+00	Variance = 2.62205137E-03	Tol = 2.43837952E-03 
+Proc[0]: Received norm from processor 57 
+Sample[442]: Expectation = 5.22902210E+00	Variance = 2.62219912E-03	Tol = 2.43568824E-03 
+Proc[0]: Received norm from processor 39 
+Sample[443]: Expectation = 5.22916573E+00	Variance = 2.62539888E-03	Tol = 2.43442156E-03 
+Proc[0]: Received norm from processor 17 
+Sample[444]: Expectation = 5.22907372E+00	Variance = 2.62323681E-03	Tol = 2.43067707E-03 
+Proc[0]: Received norm from processor 31 
+Sample[445]: Expectation = 5.22903541E+00	Variance = 2.61799347E-03	Tol = 2.42551673E-03 
+Proc[0]: Received norm from processor 3 
+Sample[446]: Expectation = 5.22904198E+00	Variance = 2.61214275E-03	Tol = 2.42008725E-03 
+Proc[0]: Received norm from processor 53 
+Sample[447]: Expectation = 5.22914846E+00	Variance = 2.61135599E-03	Tol = 2.41701463E-03 
+Proc[0]: Received norm from processor 37 
+Sample[448]: Expectation = 5.22909495E+00	Variance = 2.60680701E-03	Tol = 2.41221177E-03 
+Proc[0]: Received norm from processor 25 
+Sample[449]: Expectation = 5.22924405E+00	Variance = 2.61095973E-03	Tol = 2.41144253E-03 
+Proc[0]: Received norm from processor 49 
+Sample[450]: Expectation = 5.22928576E+00	Variance = 2.60593877E-03	Tol = 2.40644448E-03 
+Proc[0]: Received norm from processor 59 
+Sample[451]: Expectation = 5.22930960E+00	Variance = 2.60041638E-03	Tol = 2.40122677E-03 
+Proc[0]: Received norm from processor 1 
+Sample[452]: Expectation = 5.22946006E+00	Variance = 2.60487352E-03	Tol = 2.40062378E-03 
+Proc[0]: Received norm from processor 21 
+Sample[453]: Expectation = 5.22957406E+00	Variance = 2.60499769E-03	Tol = 2.39802977E-03 
+Proc[0]: Received norm from processor 7 
+Sample[454]: Expectation = 5.22959513E+00	Variance = 2.59946092E-03	Tol = 2.39284033E-03 
+Proc[0]: Received norm from processor 13 
+Sample[455]: Expectation = 5.22969258E+00	Variance = 2.59805884E-03	Tol = 2.38956469E-03 
+Proc[0]: Received norm from processor 11 
+Sample[456]: Expectation = 5.22962781E+00	Variance = 2.59426990E-03	Tol = 2.38520196E-03 
+Proc[0]: Received norm from processor 55 
+Sample[457]: Expectation = 5.22960385E+00	Variance = 2.58885500E-03	Tol = 2.38010306E-03 
+Proc[0]: Received norm from processor 61 
+Sample[458]: Expectation = 5.22953165E+00	Variance = 2.58558499E-03	Tol = 2.37600128E-03 
+Proc[0]: Received norm from processor 51 
+Sample[459]: Expectation = 5.22955867E+00	Variance = 2.58028626E-03	Tol = 2.37097843E-03 
+Proc[0]: Received norm from processor 33 
+Sample[460]: Expectation = 5.22949725E+00	Variance = 2.57640822E-03	Tol = 2.36661941E-03 
+Proc[0]: Received norm from processor 23 
+Sample[461]: Expectation = 5.22968019E+00	Variance = 2.58621467E-03	Tol = 2.36854600E-03 
+Proc[0]: Received norm from processor 43 
+Sample[462]: Expectation = 5.22979707E+00	Variance = 2.58691454E-03	Tol = 2.36630136E-03 
+Proc[0]: Received norm from processor 19 
+Sample[463]: Expectation = 5.22954395E+00	Variance = 2.61092805E-03	Tol = 2.37469018E-03 
+Proc[0]: Received norm from processor 29 
+Sample[464]: Expectation = 5.22953587E+00	Variance = 2.60533128E-03	Tol = 2.36958606E-03 
+Proc[0]: Received norm from processor 27 
+Sample[465]: Expectation = 5.22966301E+00	Variance = 2.60722881E-03	Tol = 2.36789858E-03 
+Proc[0]: Received norm from processor 47 
+Sample[466]: Expectation = 5.22996330E+00	Variance = 2.64356499E-03	Tol = 2.38178216E-03 
+Proc[0]: Received norm from processor 41 
+Sample[467]: Expectation = 5.22977407E+00	Variance = 2.65459021E-03	Tol = 2.38418694E-03 
+Proc[0]: Received norm from processor 45 
+Sample[468]: Expectation = 5.22966531E+00	Variance = 2.65444285E-03	Tol = 2.38157226E-03 
+Proc[0]: Received norm from processor 5 
+Sample[469]: Expectation = 5.22950964E+00	Variance = 2.66012397E-03	Tol = 2.38157639E-03 
+Proc[0]: Received norm from processor 9 
+Sample[470]: Expectation = 5.22946606E+00	Variance = 2.65535490E-03	Tol = 2.37690792E-03 
+Proc[0]: Received norm from processor 57 
+Sample[471]: Expectation = 5.22939696E+00	Variance = 2.65196131E-03	Tol = 2.37286559E-03 
+Proc[0]: Received norm from processor 35 
+Sample[472]: Expectation = 5.22941956E+00	Variance = 2.64658341E-03	Tol = 2.36794600E-03 
+Proc[0]: Received norm from processor 15 
+Sample[473]: Expectation = 5.22952160E+00	Variance = 2.64590235E-03	Tol = 2.36513718E-03 
+Proc[0]: Received norm from processor 39 
+Sample[474]: Expectation = 5.22947259E+00	Variance = 2.64145640E-03	Tol = 2.36065517E-03 
+Proc[0]: Received norm from processor 17 
+Sample[475]: Expectation = 5.22943599E+00	Variance = 2.63653039E-03	Tol = 2.35596908E-03 
+Proc[0]: Received norm from processor 3 
+Sample[476]: Expectation = 5.22928691E+00	Variance = 2.64154796E-03	Tol = 2.35573141E-03 
+Proc[0]: Received norm from processor 53 
+Sample[477]: Expectation = 5.22929655E+00	Variance = 2.63605430E-03	Tol = 2.35081247E-03 
+Proc[0]: Received norm from processor 31 
+Sample[478]: Expectation = 5.22916257E+00	Variance = 2.63910195E-03	Tol = 2.34970930E-03 
+Proc[0]: Received norm from processor 25 
+Sample[479]: Expectation = 5.22908069E+00	Variance = 2.63679674E-03	Tol = 2.34622993E-03 
+Proc[0]: Received norm from processor 37 
+Sample[480]: Expectation = 5.22912038E+00	Variance = 2.63205814E-03	Tol = 2.34167770E-03 
+Proc[0]: Received norm from processor 61 
+Sample[481]: Expectation = 5.22917555E+00	Variance = 2.62804696E-03	Tol = 2.33745911E-03 
+Proc[0]: Received norm from processor 49 
+Sample[482]: Expectation = 5.22927785E+00	Variance = 2.62762807E-03	Tol = 2.33484700E-03 
+Proc[0]: Received norm from processor 59 
+Sample[483]: Expectation = 5.22924748E+00	Variance = 2.62263243E-03	Tol = 2.33021046E-03 
+Proc[0]: Received norm from processor 21 
+Sample[484]: Expectation = 5.22925463E+00	Variance = 2.61723849E-03	Tol = 2.32540696E-03 
+Proc[0]: Received norm from processor 1 
+Sample[485]: Expectation = 5.22943416E+00	Variance = 2.62744148E-03	Tol = 2.32753198E-03 
+Proc[0]: Received norm from processor 7 
+Sample[486]: Expectation = 5.22934860E+00	Variance = 2.62558533E-03	Tol = 2.32431473E-03 
+Proc[0]: Received norm from processor 13 
+Sample[487]: Expectation = 5.22920158E+00	Variance = 2.63069972E-03	Tol = 2.32418749E-03 
+Proc[0]: Received norm from processor 11 
+Sample[488]: Expectation = 5.22923302E+00	Variance = 2.62579056E-03	Tol = 2.31963755E-03 
+Proc[0]: Received norm from processor 55 
+Sample[489]: Expectation = 5.22901260E+00	Variance = 2.64413014E-03	Tol = 2.32534279E-03 
+Proc[0]: Received norm from processor 51 
+Sample[490]: Expectation = 5.22899536E+00	Variance = 2.63887935E-03	Tol = 2.32066113E-03 
+Proc[0]: Received norm from processor 33 
+Sample[491]: Expectation = 5.22905878E+00	Variance = 2.63547590E-03	Tol = 2.31680125E-03 
+Proc[0]: Received norm from processor 23 
+Sample[492]: Expectation = 5.22913679E+00	Variance = 2.63310656E-03	Tol = 2.31340498E-03 
+Proc[0]: Received norm from processor 43 
+Sample[493]: Expectation = 5.22914890E+00	Variance = 2.62783775E-03	Tol = 2.30874418E-03 
+Proc[0]: Received norm from processor 19 
+Sample[494]: Expectation = 5.22907673E+00	Variance = 2.62508546E-03	Tol = 2.30519808E-03 
+Proc[0]: Received norm from processor 29 
+Sample[495]: Expectation = 5.22908260E+00	Variance = 2.61979926E-03	Tol = 2.30054858E-03 
+Proc[0]: Received norm from processor 57 
+Sample[496]: Expectation = 5.22920474E+00	Variance = 2.62190161E-03	Tol = 2.29915027E-03 
+Proc[0]: Received norm from processor 27 
+Sample[497]: Expectation = 5.22923407E+00	Variance = 2.61705280E-03	Tol = 2.29471127E-03 
+Proc[0]: Received norm from processor 9 
+Sample[498]: Expectation = 5.22921684E+00	Variance = 2.61194517E-03	Tol = 2.29016808E-03 
+Proc[0]: Received norm from processor 41 
+Sample[499]: Expectation = 5.22944483E+00	Variance = 2.63259669E-03	Tol = 2.29689897E-03 
+Proc[0]: Received norm from processor 5 
+Sample[500]: Expectation = 5.22936632E+00	Variance = 2.63040728E-03	Tol = 2.29364656E-03 
+Proc[0]: Received norm from processor 35 
+Sample[501]: Expectation = 5.22950289E+00	Variance = 2.63448202E-03	Tol = 2.29313043E-03 
+Proc[0]: Received norm from processor 47 
+Sample[502]: Expectation = 5.22956771E+00	Variance = 2.63133905E-03	Tol = 2.28947838E-03 
+Proc[0]: Received norm from processor 45 
+Sample[503]: Expectation = 5.22964655E+00	Variance = 2.62922865E-03	Tol = 2.28628404E-03 
+Proc[0]: Received norm from processor 39 
+Sample[504]: Expectation = 5.22976392E+00	Variance = 2.63094127E-03	Tol = 2.28475854E-03 
+Proc[0]: Received norm from processor 17 
+Sample[505]: Expectation = 5.22982073E+00	Variance = 2.62735790E-03	Tol = 2.28094036E-03 
+Proc[0]: Received norm from processor 61 
+Sample[506]: Expectation = 5.22996068E+00	Variance = 2.63205684E-03	Tol = 2.28072211E-03 
+Proc[0]: Received norm from processor 15 
+Sample[507]: Expectation = 5.22999252E+00	Variance = 2.62737824E-03	Tol = 2.27644583E-03 
+Proc[0]: Received norm from processor 3 
+Sample[508]: Expectation = 5.22986545E+00	Variance = 2.63039254E-03	Tol = 2.27550831E-03 
+Proc[0]: Received norm from processor 53 
+Sample[509]: Expectation = 5.22973488E+00	Variance = 2.63388497E-03	Tol = 2.27478058E-03 
+Proc[0]: Received norm from processor 31 
+Sample[510]: Expectation = 5.22989492E+00	Variance = 2.64175721E-03	Tol = 2.27594290E-03 
+Proc[0]: Received norm from processor 37 
+Sample[511]: Expectation = 5.22964653E+00	Variance = 2.66805286E-03	Tol = 2.28500295E-03 
+Proc[0]: Received norm from processor 25 
+Sample[512]: Expectation = 5.22946020E+00	Variance = 2.68058428E-03	Tol = 2.28812503E-03 
+Proc[0]: Received norm from processor 21 
+Sample[513]: Expectation = 5.22952825E+00	Variance = 2.67773030E-03	Tol = 2.28467660E-03 
+Proc[0]: Received norm from processor 49 
+Sample[514]: Expectation = 5.22973798E+00	Variance = 2.69508535E-03	Tol = 2.28983771E-03 
+Proc[0]: Received norm from processor 1 
+Sample[515]: Expectation = 5.22967339E+00	Variance = 2.69199641E-03	Tol = 2.28630215E-03 
+Proc[0]: Received norm from processor 59 
+Sample[516]: Expectation = 5.22962827E+00	Variance = 2.68782769E-03	Tol = 2.28231645E-03 
+Proc[0]: Received norm from processor 13 
+Sample[517]: Expectation = 5.22962418E+00	Variance = 2.68263743E-03	Tol = 2.27790558E-03 
+Proc[0]: Received norm from processor 7 
+Sample[518]: Expectation = 5.22953401E+00	Variance = 2.68166272E-03	Tol = 2.27529230E-03 
+Proc[0]: Received norm from processor 11 
+Sample[519]: Expectation = 5.22945607E+00	Variance = 2.67964186E-03	Tol = 2.27224260E-03 
+Proc[0]: Received norm from processor 55 
+Sample[520]: Expectation = 5.22960185E+00	Variance = 2.68551747E-03	Tol = 2.27254410E-03 
+Proc[0]: Received norm from processor 51 
+Sample[521]: Expectation = 5.22948757E+00	Variance = 2.68715430E-03	Tol = 2.27105389E-03 
+Proc[0]: Received norm from processor 33 
+Sample[522]: Expectation = 5.22956556E+00	Variance = 2.68517577E-03	Tol = 2.26804208E-03 
+Proc[0]: Received norm from processor 61 
+Sample[523]: Expectation = 5.22963513E+00	Variance = 2.68256798E-03	Tol = 2.26477219E-03 
+Proc[0]: Received norm from processor 23 
+Sample[524]: Expectation = 5.22963817E+00	Variance = 2.67745340E-03	Tol = 2.26045214E-03 
+Proc[0]: Received norm from processor 43 
+Sample[525]: Expectation = 5.22961324E+00	Variance = 2.67267902E-03	Tol = 2.25628393E-03 
+Proc[0]: Received norm from processor 19 
+Sample[526]: Expectation = 5.22983345E+00	Variance = 2.69305583E-03	Tol = 2.26271474E-03 
+Proc[0]: Received norm from processor 9 
+Sample[527]: Expectation = 5.22978934E+00	Variance = 2.68896890E-03	Tol = 2.25885099E-03 
+Proc[0]: Received norm from processor 57 
+Sample[528]: Expectation = 5.22983720E+00	Variance = 2.68508314E-03	Tol = 2.25507976E-03 
+Proc[0]: Received norm from processor 29 
+Sample[529]: Expectation = 5.22988757E+00	Variance = 2.68134680E-03	Tol = 2.25137925E-03 
+Proc[0]: Received norm from processor 27 
+Sample[530]: Expectation = 5.22989411E+00	Variance = 2.67631030E-03	Tol = 2.24714086E-03 
+Proc[0]: Received norm from processor 5 
+Sample[531]: Expectation = 5.22986184E+00	Variance = 2.67182191E-03	Tol = 2.24314058E-03 
+Proc[0]: Received norm from processor 41 
+Sample[532]: Expectation = 5.22989514E+00	Variance = 2.66738838E-03	Tol = 2.23917126E-03 
+Proc[0]: Received norm from processor 47 
+Sample[533]: Expectation = 5.22983779E+00	Variance = 2.66413389E-03	Tol = 2.23570459E-03 
+Proc[0]: Received norm from processor 17 
+Sample[534]: Expectation = 5.23003034E+00	Variance = 2.67890777E-03	Tol = 2.23979490E-03 
+Proc[0]: Received norm from processor 35 
+Sample[535]: Expectation = 5.22994480E+00	Variance = 2.67780813E-03	Tol = 2.23724135E-03 
+Proc[0]: Received norm from processor 39 
+Sample[536]: Expectation = 5.22987198E+00	Variance = 2.67564903E-03	Tol = 2.23425212E-03 
+Proc[0]: Received norm from processor 3 
+Sample[537]: Expectation = 5.23000803E+00	Variance = 2.68058722E-03	Tol = 2.23422974E-03 
+Proc[0]: Received norm from processor 15 
+Sample[538]: Expectation = 5.23014189E+00	Variance = 2.68522741E-03	Tol = 2.23408349E-03 
+Proc[0]: Received norm from processor 45 
+Sample[539]: Expectation = 5.23016367E+00	Variance = 2.68050059E-03	Tol = 2.23004472E-03 
+Proc[0]: Received norm from processor 53 
+Sample[540]: Expectation = 5.23013862E+00	Variance = 2.67587470E-03	Tol = 2.22605560E-03 
+Proc[0]: Received norm from processor 31 
+Sample[541]: Expectation = 5.23022793E+00	Variance = 2.67523532E-03	Tol = 2.22373157E-03 
+Proc[0]: Received norm from processor 37 
+Sample[542]: Expectation = 5.23014557E+00	Variance = 2.67396884E-03	Tol = 2.22115327E-03 
+Proc[0]: Received norm from processor 25 
+Sample[543]: Expectation = 5.23018036E+00	Variance = 2.66970020E-03	Tol = 2.21733510E-03 
+Proc[0]: Received norm from processor 21 
+Sample[544]: Expectation = 5.23042406E+00	Variance = 2.69704291E-03	Tol = 2.22661166E-03 
+Proc[0]: Received norm from processor 49 
+Sample[545]: Expectation = 5.23034265E+00	Variance = 2.69569978E-03	Tol = 2.22401397E-03 
+Proc[0]: Received norm from processor 1 
+Sample[546]: Expectation = 5.23037052E+00	Variance = 2.69118578E-03	Tol = 2.22011524E-03 
+Proc[0]: Received norm from processor 61 
+Sample[547]: Expectation = 5.23061692E+00	Variance = 2.71941465E-03	Tol = 2.22968778E-03 
+Proc[0]: Received norm from processor 13 
+Sample[548]: Expectation = 5.23063881E+00	Variance = 2.71471447E-03	Tol = 2.22572652E-03 
+Proc[0]: Received norm from processor 59 
+Sample[549]: Expectation = 5.23064697E+00	Variance = 2.70980609E-03	Tol = 2.22168731E-03 
+Proc[0]: Received norm from processor 7 
+Sample[550]: Expectation = 5.23075087E+00	Variance = 2.71080558E-03	Tol = 2.22007599E-03 
+Proc[0]: Received norm from processor 11 
+Sample[551]: Expectation = 5.23069772E+00	Variance = 2.70743951E-03	Tol = 2.21668295E-03 
+Proc[0]: Received norm from processor 55 
+Sample[552]: Expectation = 5.23063824E+00	Variance = 2.70448408E-03	Tol = 2.21346508E-03 
+Proc[0]: Received norm from processor 51 
+Sample[553]: Expectation = 5.23053528E+00	Variance = 2.70544502E-03	Tol = 2.21185570E-03 
+Proc[0]: Received norm from processor 33 
+Sample[554]: Expectation = 5.23053878E+00	Variance = 2.70056832E-03	Tol = 2.20786595E-03 
+Proc[0]: Received norm from processor 23 
+Sample[555]: Expectation = 5.23042393E+00	Variance = 2.70300940E-03	Tol = 2.20687272E-03 
+Proc[0]: Received norm from processor 43 
+Sample[556]: Expectation = 5.23043991E+00	Variance = 2.69828958E-03	Tol = 2.20296137E-03 
+Proc[0]: Received norm from processor 19 
+Sample[557]: Expectation = 5.23027200E+00	Variance = 2.70912051E-03	Tol = 2.20539591E-03 
+Proc[0]: Received norm from processor 57 
+Sample[558]: Expectation = 5.23013588E+00	Variance = 2.71458656E-03	Tol = 2.20564060E-03 
+Proc[0]: Received norm from processor 9 
+Sample[559]: Expectation = 5.23024623E+00	Variance = 2.71652564E-03	Tol = 2.20445379E-03 
+Proc[0]: Received norm from processor 29 
+Sample[560]: Expectation = 5.23021621E+00	Variance = 2.71217865E-03	Tol = 2.20072174E-03 
+Proc[0]: Received norm from processor 27 
+Sample[561]: Expectation = 5.23014762E+00	Variance = 2.70997871E-03	Tol = 2.19786751E-03 
+Proc[0]: Received norm from processor 5 
+Sample[562]: Expectation = 5.23014239E+00	Variance = 2.70517203E-03	Tol = 2.19396293E-03 
+Proc[0]: Received norm from processor 47 
+Sample[563]: Expectation = 5.23008340E+00	Variance = 2.70232273E-03	Tol = 2.19085891E-03 
+Proc[0]: Received norm from processor 17 
+Sample[564]: Expectation = 5.23006988E+00	Variance = 2.69763425E-03	Tol = 2.18701611E-03 
+Proc[0]: Received norm from processor 41 
+Sample[565]: Expectation = 5.23010008E+00	Variance = 2.69337419E-03	Tol = 2.18335383E-03 
+Proc[0]: Received norm from processor 35 
+Sample[566]: Expectation = 5.22997605E+00	Variance = 2.69730695E-03	Tol = 2.18301626E-03 
+Proc[0]: Received norm from processor 39 
+Sample[567]: Expectation = 5.23002439E+00	Variance = 2.69387210E-03	Tol = 2.17970117E-03 
+Proc[0]: Received norm from processor 3 
+Sample[568]: Expectation = 5.22998318E+00	Variance = 2.69009228E-03	Tol = 2.17625319E-03 
+Proc[0]: Received norm from processor 15 
+Sample[569]: Expectation = 5.23021655E+00	Variance = 2.71629795E-03	Tol = 2.18490506E-03 
+Proc[0]: Received norm from processor 53 
+Sample[570]: Expectation = 5.23032506E+00	Variance = 2.71823255E-03	Tol = 2.18376488E-03 
+Proc[0]: Received norm from processor 45 
+Sample[571]: Expectation = 5.23033816E+00	Variance = 2.71356993E-03	Tol = 2.17997973E-03 
+Proc[0]: Received norm from processor 61 
+Sample[572]: Expectation = 5.23042855E+00	Variance = 2.71349137E-03	Tol = 2.17804179E-03 
+Proc[0]: Received norm from processor 31 
+Sample[573]: Expectation = 5.23044213E+00	Variance = 2.70886120E-03	Tol = 2.17428298E-03 
+Proc[0]: Received norm from processor 37 
+Sample[574]: Expectation = 5.23037995E+00	Variance = 2.70635706E-03	Tol = 2.17138384E-03 
+Proc[0]: Received norm from processor 25 
+Sample[575]: Expectation = 5.23029913E+00	Variance = 2.70540019E-03	Tol = 2.16911130E-03 
+Proc[0]: Received norm from processor 21 
+Sample[576]: Expectation = 5.23039594E+00	Variance = 2.70609256E-03	Tol = 2.16750487E-03 
+Proc[0]: Received norm from processor 1 
+Sample[577]: Expectation = 5.23031333E+00	Variance = 2.70533336E-03	Tol = 2.16532199E-03 
+Proc[0]: Received norm from processor 49 
+Sample[578]: Expectation = 5.23024999E+00	Variance = 2.70296792E-03	Tol = 2.16250204E-03 
+Proc[0]: Received norm from processor 13 
+Sample[579]: Expectation = 5.23028732E+00	Variance = 2.69910521E-03	Tol = 2.15908940E-03 
+Proc[0]: Received norm from processor 59 
+Sample[580]: Expectation = 5.23020805E+00	Variance = 2.69808981E-03	Tol = 2.15682150E-03 
+Proc[0]: Received norm from processor 7 
+Sample[581]: Expectation = 5.23030480E+00	Variance = 2.69887457E-03	Tol = 2.15527794E-03 
+Proc[0]: Received norm from processor 11 
+Sample[582]: Expectation = 5.23044179E+00	Variance = 2.70514104E-03	Tol = 2.15592408E-03 
+Proc[0]: Received norm from processor 55 
+Sample[583]: Expectation = 5.23055322E+00	Variance = 2.70772772E-03	Tol = 2.15510392E-03 
+Proc[0]: Received norm from processor 51 
+Sample[584]: Expectation = 5.23051448E+00	Variance = 2.70396612E-03	Tol = 2.15176183E-03 
+Proc[0]: Received norm from processor 33 
+Sample[585]: Expectation = 5.23047708E+00	Variance = 2.70016109E-03	Tol = 2.14840871E-03 
+Proc[0]: Received norm from processor 23 
+Sample[586]: Expectation = 5.23042359E+00	Variance = 2.69722670E-03	Tol = 2.14540810E-03 
+Proc[0]: Received norm from processor 43 
+Sample[587]: Expectation = 5.23037345E+00	Variance = 2.69410546E-03	Tol = 2.14233925E-03 
+Proc[0]: Received norm from processor 19 
+Sample[588]: Expectation = 5.23029590E+00	Variance = 2.69305369E-03	Tol = 2.14009890E-03 
+Proc[0]: Received norm from processor 57 
+Sample[589]: Expectation = 5.23031372E+00	Variance = 2.68866826E-03	Tol = 2.13653968E-03 
+Proc[0]: Received norm from processor 61 
+Sample[590]: Expectation = 5.23019527E+00	Variance = 2.69237521E-03	Tol = 2.13619939E-03 
+Proc[0]: Received norm from processor 9 
+Sample[591]: Expectation = 5.23021291E+00	Variance = 2.68800309E-03	Tol = 2.13265763E-03 
+Proc[0]: Received norm from processor 5 
+Sample[592]: Expectation = 5.23020823E+00	Variance = 2.68347546E-03	Tol = 2.12906029E-03 
+Proc[0]: Received norm from processor 27 
+Sample[593]: Expectation = 5.23023765E+00	Variance = 2.67946242E-03	Tol = 2.12567316E-03 
+Proc[0]: Received norm from processor 29 
+Sample[594]: Expectation = 5.23027223E+00	Variance = 2.67566075E-03	Tol = 2.12237588E-03 
+Proc[0]: Received norm from processor 17 
+Sample[595]: Expectation = 5.23028522E+00	Variance = 2.67126412E-03	Tol = 2.11884863E-03 
+Proc[0]: Received norm from processor 47 
+Sample[596]: Expectation = 5.23035261E+00	Variance = 2.66948385E-03	Tol = 2.11636475E-03 
+Proc[0]: Received norm from processor 3 
+Sample[597]: Expectation = 5.23041636E+00	Variance = 2.66743475E-03	Tol = 2.11377977E-03 
+Proc[0]: Received norm from processor 39 
+Sample[598]: Expectation = 5.23044371E+00	Variance = 2.66342065E-03	Tol = 2.11042192E-03 
+Proc[0]: Received norm from processor 53 
+Sample[599]: Expectation = 5.23044553E+00	Variance = 2.65897619E-03	Tol = 2.10689946E-03 
+Proc[0]: Received norm from processor 41 
+Sample[600]: Expectation = 5.23049313E+00	Variance = 2.65590167E-03	Tol = 2.10392556E-03 
+Proc[0]: Received norm from processor 15 
+Sample[601]: Expectation = 5.23048533E+00	Variance = 2.65151896E-03	Tol = 2.10043929E-03 
+Proc[0]: Received norm from processor 35 
+Sample[602]: Expectation = 5.23046915E+00	Variance = 2.64727182E-03	Tol = 2.09701252E-03 
+Proc[0]: Received norm from processor 45 
+Sample[603]: Expectation = 5.23038775E+00	Variance = 2.64687098E-03	Tol = 2.09511434E-03 
+Proc[0]: Received norm from processor 31 
+Sample[604]: Expectation = 5.23053750E+00	Variance = 2.65601122E-03	Tol = 2.09699060E-03 
+Proc[0]: Received norm from processor 25 
+Sample[605]: Expectation = 5.23050767E+00	Variance = 2.65215863E-03	Tol = 2.09373668E-03 
+Proc[0]: Received norm from processor 37 
+Sample[606]: Expectation = 5.23053639E+00	Variance = 2.64828143E-03	Tol = 2.09047874E-03 
+Proc[0]: Received norm from processor 21 
+Sample[607]: Expectation = 5.23046434E+00	Variance = 2.64706439E-03	Tol = 2.08827605E-03 
+Proc[0]: Received norm from processor 1 
+Sample[608]: Expectation = 5.23042078E+00	Variance = 2.64386266E-03	Tol = 2.08529574E-03 
+Proc[0]: Received norm from processor 49 
+Sample[609]: Expectation = 5.23041539E+00	Variance = 2.63953898E-03	Tol = 2.08187856E-03 
+Proc[0]: Received norm from processor 13 
+Sample[610]: Expectation = 5.23050979E+00	Variance = 2.64063834E-03	Tol = 2.08060455E-03 
+Proc[0]: Received norm from processor 59 
+Sample[611]: Expectation = 5.23057728E+00	Variance = 2.63909539E-03	Tol = 2.07829379E-03 
+Proc[0]: Received norm from processor 11 
+Sample[612]: Expectation = 5.23046715E+00	Variance = 2.64219388E-03	Tol = 2.07781382E-03 
+Proc[0]: Received norm from processor 7 
+Sample[613]: Expectation = 5.23045336E+00	Variance = 2.63800000E-03	Tol = 2.07447000E-03 
+Proc[0]: Received norm from processor 61 
+Sample[614]: Expectation = 5.23043136E+00	Variance = 2.63400044E-03	Tol = 2.07120810E-03 
+Proc[0]: Received norm from processor 55 
+Sample[615]: Expectation = 5.23037461E+00	Variance = 2.63169492E-03	Tol = 2.06861759E-03 
+Proc[0]: Received norm from processor 33 
+Sample[616]: Expectation = 5.23036030E+00	Variance = 2.62754863E-03	Tol = 2.06530894E-03 
+Proc[0]: Received norm from processor 51 
+Sample[617]: Expectation = 5.23038582E+00	Variance = 2.62369134E-03	Tol = 2.06211931E-03 
+Proc[0]: Received norm from processor 43 
+Sample[618]: Expectation = 5.23025547E+00	Variance = 2.62993020E-03	Tol = 2.06289856E-03 
+Proc[0]: Received norm from processor 23 
+Sample[619]: Expectation = 5.23033580E+00	Variance = 2.62966971E-03	Tol = 2.06112949E-03 
+Proc[0]: Received norm from processor 19 
+Sample[620]: Expectation = 5.23025221E+00	Variance = 2.62975359E-03	Tol = 2.05949947E-03 
+Proc[0]: Received norm from processor 57 
+Sample[621]: Expectation = 5.23026488E+00	Variance = 2.62561849E-03	Tol = 2.05622205E-03 
+Proc[0]: Received norm from processor 9 
+Sample[622]: Expectation = 5.23024930E+00	Variance = 2.62154795E-03	Tol = 2.05297524E-03 
+Proc[0]: Received norm from processor 5 
+Sample[623]: Expectation = 5.23026189E+00	Variance = 2.61743859E-03	Tol = 2.04971853E-03 
+Proc[0]: Received norm from processor 27 
+Sample[624]: Expectation = 5.23048801E+00	Variance = 2.64509779E-03	Tol = 2.05886832E-03 
+Proc[0]: Received norm from processor 29 
+Sample[625]: Expectation = 5.23054457E+00	Variance = 2.64286176E-03	Tol = 2.05635085E-03 
+Proc[0]: Received norm from processor 17 
+Sample[626]: Expectation = 5.23054744E+00	Variance = 2.63864509E-03	Tol = 2.05306795E-03 
+Proc[0]: Received norm from processor 3 
+Sample[627]: Expectation = 5.23052301E+00	Variance = 2.63481051E-03	Tol = 2.04993893E-03 
+Proc[0]: Received norm from processor 39 
+Sample[628]: Expectation = 5.23061694E+00	Variance = 2.63614696E-03	Tol = 2.04882558E-03 
+Proc[0]: Received norm from processor 47 
+Sample[629]: Expectation = 5.23060663E+00	Variance = 2.63202265E-03	Tol = 2.04559422E-03 
+Proc[0]: Received norm from processor 53 
+Sample[630]: Expectation = 5.23067700E+00	Variance = 2.63095948E-03	Tol = 2.04355723E-03 
+Proc[0]: Received norm from processor 41 
+Sample[631]: Expectation = 5.23073388E+00	Variance = 2.62882800E-03	Tol = 2.04110998E-03 
+Proc[0]: Received norm from processor 35 
+Sample[632]: Expectation = 5.23077215E+00	Variance = 2.62559287E-03	Tol = 2.03823921E-03 
+Proc[0]: Received norm from processor 15 
+Sample[633]: Expectation = 5.23079847E+00	Variance = 2.62188275E-03	Tol = 2.03518915E-03 
+Proc[0]: Received norm from processor 45 
+Sample[634]: Expectation = 5.23070177E+00	Variance = 2.62366674E-03	Tol = 2.03427521E-03 
+Proc[0]: Received norm from processor 25 
+Sample[635]: Expectation = 5.23065567E+00	Variance = 2.62088225E-03	Tol = 2.03159386E-03 
+Proc[0]: Received norm from processor 61 
+Sample[636]: Expectation = 5.23060468E+00	Variance = 2.61841213E-03	Tol = 2.02903923E-03 
+Proc[0]: Received norm from processor 37 
+Sample[637]: Expectation = 5.23058882E+00	Variance = 2.61446168E-03	Tol = 2.02591595E-03 
+Proc[0]: Received norm from processor 31 
+Sample[638]: Expectation = 5.23059932E+00	Variance = 2.61043401E-03	Tol = 2.02276775E-03 
+Proc[0]: Received norm from processor 21 
+Sample[639]: Expectation = 5.23055462E+00	Variance = 2.60762331E-03	Tol = 2.02009595E-03 
+Proc[0]: Received norm from processor 1 
+Sample[640]: Expectation = 5.23038055E+00	Variance = 2.62291121E-03	Tol = 2.02442554E-03 
+Proc[0]: Received norm from processor 13 
+Sample[641]: Expectation = 5.23033577E+00	Variance = 2.62010292E-03	Tol = 2.02176261E-03 
+Proc[0]: Received norm from processor 49 
+Sample[642]: Expectation = 5.23019115E+00	Variance = 2.62942804E-03	Tol = 2.02377922E-03 
+Proc[0]: Received norm from processor 59 
+Sample[643]: Expectation = 5.23029245E+00	Variance = 2.63192638E-03	Tol = 2.02316537E-03 
+Proc[0]: Received norm from processor 11 
+Sample[644]: Expectation = 5.23032921E+00	Variance = 2.62870859E-03	Tol = 2.02035780E-03 
+Proc[0]: Received norm from processor 7 
+Sample[645]: Expectation = 5.23026500E+00	Variance = 2.62728830E-03	Tol = 2.01824557E-03 
+Proc[0]: Received norm from processor 55 
+Sample[646]: Expectation = 5.23015170E+00	Variance = 2.63150107E-03	Tol = 2.01829905E-03 
+Proc[0]: Received norm from processor 33 
+Sample[647]: Expectation = 5.23018420E+00	Variance = 2.62811616E-03	Tol = 2.01544123E-03 
+Proc[0]: Received norm from processor 51 
+Sample[648]: Expectation = 5.22989938E+00	Variance = 2.67654776E-03	Tol = 2.03235699E-03 
+Proc[0]: Received norm from processor 23 
+Sample[649]: Expectation = 5.22984836E+00	Variance = 2.67411009E-03	Tol = 2.02986564E-03 
+Proc[0]: Received norm from processor 43 
+Sample[650]: Expectation = 5.22991039E+00	Variance = 2.67249357E-03	Tol = 2.02769045E-03 
+Proc[0]: Received norm from processor 57 
+Sample[651]: Expectation = 5.23000344E+00	Variance = 2.67401625E-03	Tol = 2.02670961E-03 
+Proc[0]: Received norm from processor 19 
+Sample[652]: Expectation = 5.22992049E+00	Variance = 2.67439455E-03	Tol = 2.02529804E-03 
+Proc[0]: Received norm from processor 9 
+Sample[653]: Expectation = 5.22998108E+00	Variance = 2.67269254E-03	Tol = 2.02310261E-03 
+Proc[0]: Received norm from processor 5 
+Sample[654]: Expectation = 5.22994808E+00	Variance = 2.66931713E-03	Tol = 2.02027836E-03 
+Proc[0]: Received norm from processor 27 
+Sample[655]: Expectation = 5.22984948E+00	Variance = 2.67160006E-03	Tol = 2.01959865E-03 
+Proc[0]: Received norm from processor 29 
+Sample[656]: Expectation = 5.22994423E+00	Variance = 2.67340791E-03	Tol = 2.01874143E-03 
+Proc[0]: Received norm from processor 61 
+Sample[657]: Expectation = 5.22992147E+00	Variance = 2.66967849E-03	Tol = 2.01579701E-03 
+Proc[0]: Received norm from processor 3 
+Sample[658]: Expectation = 5.22984187E+00	Variance = 2.66978464E-03	Tol = 2.01430471E-03 
+Proc[0]: Received norm from processor 17 
+Sample[659]: Expectation = 5.22992381E+00	Variance = 2.67015165E-03	Tol = 2.01291417E-03 
+Proc[0]: Received norm from processor 53 
+Sample[660]: Expectation = 5.23000088E+00	Variance = 2.67002020E-03	Tol = 2.01133914E-03 
+Proc[0]: Received norm from processor 39 
+Sample[661]: Expectation = 5.22986318E+00	Variance = 2.67849453E-03	Tol = 2.01300407E-03 
+Proc[0]: Received norm from processor 47 
+Sample[662]: Expectation = 5.22994432E+00	Variance = 2.67880024E-03	Tol = 2.01159788E-03 
+Proc[0]: Received norm from processor 41 
+Sample[663]: Expectation = 5.23003525E+00	Variance = 2.68023238E-03	Tol = 2.01061751E-03 
+Proc[0]: Received norm from processor 35 
+Sample[664]: Expectation = 5.23012734E+00	Variance = 2.68181944E-03	Tol = 2.00969766E-03 
+Proc[0]: Received norm from processor 15 
+Sample[665]: Expectation = 5.23004191E+00	Variance = 2.68263310E-03	Tol = 2.00849066E-03 
+Proc[0]: Received norm from processor 45 
+Sample[666]: Expectation = 5.23008495E+00	Variance = 2.67983712E-03	Tol = 2.00593606E-03 
+Proc[0]: Received norm from processor 25 
+Sample[667]: Expectation = 5.23011372E+00	Variance = 2.67637074E-03	Tol = 2.00313500E-03 
+Proc[0]: Received norm from processor 37 
+Sample[668]: Expectation = 5.22997465E+00	Variance = 2.68526432E-03	Tol = 2.00495805E-03 
+Proc[0]: Received norm from processor 31 
+Sample[669]: Expectation = 5.22994820E+00	Variance = 2.68171810E-03	Tol = 2.00213567E-03 
+Proc[0]: Received norm from processor 21 
+Sample[670]: Expectation = 5.22998558E+00	Variance = 2.67865046E-03	Tol = 1.99949638E-03 
+Proc[0]: Received norm from processor 1 
+Sample[671]: Expectation = 5.23005083E+00	Variance = 2.67751076E-03	Tol = 1.99758079E-03 
+Proc[0]: Received norm from processor 13 
+Sample[672]: Expectation = 5.23023338E+00	Variance = 2.69588900E-03	Tol = 2.00293275E-03 
+Proc[0]: Received norm from processor 49 
+Sample[673]: Expectation = 5.23022177E+00	Variance = 2.69197384E-03	Tol = 1.99999028E-03 
+Proc[0]: Received norm from processor 11 
+Sample[674]: Expectation = 5.23017849E+00	Variance = 2.68924082E-03	Tol = 1.99749131E-03 
+Proc[0]: Received norm from processor 7 
+Sample[675]: Expectation = 5.23012292E+00	Variance = 2.68733815E-03	Tol = 1.99530491E-03 
+Proc[0]: Received norm from processor 59 
+Sample[676]: Expectation = 5.23013072E+00	Variance = 2.68340388E-03	Tol = 1.99236853E-03 
+Proc[0]: Received norm from processor 55 
+Sample[677]: Expectation = 5.23017976E+00	Variance = 2.68106585E-03	Tol = 1.99002901E-03 
+Proc[0]: Received norm from processor 61 
+Sample[678]: Expectation = 5.23016904E+00	Variance = 2.67718925E-03	Tol = 1.98712272E-03 
+Proc[0]: Received norm from processor 51 
+Sample[679]: Expectation = 5.23021471E+00	Variance = 2.67466045E-03	Tol = 1.98472089E-03 
+Proc[0]: Received norm from processor 33 
+Sample[680]: Expectation = 5.23012892E+00	Variance = 2.67572416E-03	Tol = 1.98365533E-03 
+Proc[0]: Received norm from processor 23 
+Sample[681]: Expectation = 5.23002652E+00	Variance = 2.67892489E-03	Tol = 1.98338358E-03 
+Proc[0]: Received norm from processor 43 
+Sample[682]: Expectation = 5.23015344E+00	Variance = 2.68596631E-03	Tol = 1.98453194E-03 
+Proc[0]: Received norm from processor 19 
+Sample[683]: Expectation = 5.23013946E+00	Variance = 2.68216705E-03	Tol = 1.98167559E-03 
+Proc[0]: Received norm from processor 57 
+Sample[684]: Expectation = 5.23011336E+00	Variance = 2.67871098E-03	Tol = 1.97895026E-03 
+Proc[0]: Received norm from processor 5 
+Sample[685]: Expectation = 5.23021560E+00	Variance = 2.68195061E-03	Tol = 1.97870068E-03 
+Proc[0]: Received norm from processor 9 
+Sample[686]: Expectation = 5.23009906E+00	Variance = 2.68734441E-03	Tol = 1.97924523E-03 
+Proc[0]: Received norm from processor 27 
+Sample[687]: Expectation = 5.23019540E+00	Variance = 2.68980050E-03	Tol = 1.97870780E-03 
+Proc[0]: Received norm from processor 3 
+Sample[688]: Expectation = 5.23022492E+00	Variance = 2.68648920E-03	Tol = 1.97605183E-03 
+Proc[0]: Received norm from processor 29 
+Sample[689]: Expectation = 5.23027766E+00	Variance = 2.68450418E-03	Tol = 1.97388766E-03 
+Proc[0]: Received norm from processor 17 
+Sample[690]: Expectation = 5.23037806E+00	Variance = 2.68755923E-03	Tol = 1.97357883E-03 
+Proc[0]: Received norm from processor 53 
+Sample[691]: Expectation = 5.23034835E+00	Variance = 2.68427900E-03	Tol = 1.97094635E-03 
+Proc[0]: Received norm from processor 39 
+Sample[692]: Expectation = 5.23036747E+00	Variance = 2.68065246E-03	Tol = 1.96819085E-03 
+Proc[0]: Received norm from processor 47 
+Sample[693]: Expectation = 5.23025570E+00	Variance = 2.68542911E-03	Tol = 1.96852180E-03 
+Proc[0]: Received norm from processor 15 
+Sample[694]: Expectation = 5.23030328E+00	Variance = 2.68312857E-03	Tol = 1.96626028E-03 
+Proc[0]: Received norm from processor 41 
+Sample[695]: Expectation = 5.23031074E+00	Variance = 2.67930659E-03	Tol = 1.96344529E-03 
+Proc[0]: Received norm from processor 35 
+Sample[696]: Expectation = 5.23037184E+00	Variance = 2.67805149E-03	Tol = 1.96157465E-03 
+Proc[0]: Received norm from processor 45 
+Sample[697]: Expectation = 5.23042325E+00	Variance = 2.67604884E-03	Tol = 1.95943395E-03 
+Proc[0]: Received norm from processor 25 
+Sample[698]: Expectation = 5.23039650E+00	Variance = 2.67271373E-03	Tol = 1.95680933E-03 
+Proc[0]: Received norm from processor 37 
+Sample[699]: Expectation = 5.23029276E+00	Variance = 2.67640158E-03	Tol = 1.95675770E-03 
+Proc[0]: Received norm from processor 21 
+Sample[700]: Expectation = 5.23031877E+00	Variance = 2.67305109E-03	Tol = 1.95413521E-03 
+Proc[0]: Received norm from processor 31 
+Sample[701]: Expectation = 5.23032479E+00	Variance = 2.66926327E-03	Tol = 1.95135685E-03 
+Proc[0]: Received norm from processor 61 
+Sample[702]: Expectation = 5.23041388E+00	Variance = 2.67102390E-03	Tol = 1.95060948E-03 
+Proc[0]: Received norm from processor 13 
+Sample[703]: Expectation = 5.23048826E+00	Variance = 2.67110876E-03	Tol = 1.94925261E-03 
+Proc[0]: Received norm from processor 1 
+Sample[704]: Expectation = 5.23037565E+00	Variance = 2.67622923E-03	Tol = 1.94973382E-03 
+Proc[0]: Received norm from processor 11 
+Sample[705]: Expectation = 5.23038264E+00	Variance = 2.67246750E-03	Tol = 1.94698075E-03 
+Proc[0]: Received norm from processor 49 
+Sample[706]: Expectation = 5.23036134E+00	Variance = 2.66900204E-03	Tol = 1.94433951E-03 
+Proc[0]: Received norm from processor 7 
+Sample[707]: Expectation = 5.23033119E+00	Variance = 2.66586846E-03	Tol = 1.94182305E-03 
+Proc[0]: Received norm from processor 55 
+Sample[708]: Expectation = 5.23041154E+00	Variance = 2.66666703E-03	Tol = 1.94074183E-03 
+Proc[0]: Received norm from processor 59 
+Sample[709]: Expectation = 5.23031214E+00	Variance = 2.66990097E-03	Tol = 1.94054831E-03 
+Proc[0]: Received norm from processor 51 
+Sample[710]: Expectation = 5.23039669E+00	Variance = 2.67120895E-03	Tol = 1.93965619E-03 
+Proc[0]: Received norm from processor 33 
+Sample[711]: Expectation = 5.23050862E+00	Variance = 2.67634707E-03	Tol = 1.94015495E-03 
+Proc[0]: Received norm from processor 23 
+Sample[712]: Expectation = 5.23052356E+00	Variance = 2.67274692E-03	Tol = 1.93748756E-03 
+Proc[0]: Received norm from processor 43 
+Sample[713]: Expectation = 5.23048419E+00	Variance = 2.67010183E-03	Tol = 1.93517011E-03 
+Proc[0]: Received norm from processor 57 
+Sample[714]: Expectation = 5.23036168E+00	Variance = 2.67706381E-03	Tol = 1.93633393E-03 
+Proc[0]: Received norm from processor 5 
+Sample[715]: Expectation = 5.23048020E+00	Variance = 2.68334910E-03	Tol = 1.93724955E-03 
+Proc[0]: Received norm from processor 19 
+Sample[716]: Expectation = 5.23054957E+00	Variance = 2.68304196E-03	Tol = 1.93578545E-03 
+Proc[0]: Received norm from processor 9 
+Sample[717]: Expectation = 5.23057608E+00	Variance = 2.67980304E-03	Tol = 1.93326710E-03 
+Proc[0]: Received norm from processor 27 
+Sample[718]: Expectation = 5.23063169E+00	Variance = 2.67828830E-03	Tol = 1.93137426E-03 
+Proc[0]: Received norm from processor 3 
+Sample[719]: Expectation = 5.23065087E+00	Variance = 2.67482726E-03	Tol = 1.92878325E-03 
+Proc[0]: Received norm from processor 17 
+Sample[720]: Expectation = 5.23071866E+00	Variance = 2.67441702E-03	Tol = 1.92729553E-03 
+Proc[0]: Received norm from processor 53 
+Sample[721]: Expectation = 5.23057375E+00	Variance = 2.68582736E-03	Tol = 1.93006269E-03 
+Proc[0]: Received norm from processor 29 
+Sample[722]: Expectation = 5.23058525E+00	Variance = 2.68220270E-03	Tol = 1.92742372E-03 
+Proc[0]: Received norm from processor 39 
+Sample[723]: Expectation = 5.23055607E+00	Variance = 2.67910767E-03	Tol = 1.92497873E-03 
+Proc[0]: Received norm from processor 61 
+Sample[724]: Expectation = 5.23055263E+00	Variance = 2.67541579E-03	Tol = 1.92232299E-03 
+Proc[0]: Received norm from processor 47 
+Sample[725]: Expectation = 5.23053512E+00	Variance = 2.67194761E-03	Tol = 1.91975128E-03 
+Proc[0]: Received norm from processor 15 
+Sample[726]: Expectation = 5.23052311E+00	Variance = 2.66837180E-03	Tol = 1.91714456E-03 
+Proc[0]: Received norm from processor 41 
+Sample[727]: Expectation = 5.23054874E+00	Variance = 2.66517848E-03	Tol = 1.91467886E-03 
+Proc[0]: Received norm from processor 25 
+Sample[728]: Expectation = 5.23056381E+00	Variance = 2.66168253E-03	Tol = 1.91210808E-03 
+Proc[0]: Received norm from processor 35 
+Sample[729]: Expectation = 5.23053505E+00	Variance = 2.65863347E-03	Tol = 1.90970141E-03 
+Proc[0]: Received norm from processor 45 
+Sample[730]: Expectation = 5.23039969E+00	Variance = 2.66834769E-03	Tol = 1.91187625E-03 
+Proc[0]: Received norm from processor 21 
+Sample[731]: Expectation = 5.23033218E+00	Variance = 2.66802453E-03	Tol = 1.91045240E-03 
+Proc[0]: Received norm from processor 37 
+Sample[732]: Expectation = 5.23034316E+00	Variance = 2.66446782E-03	Tol = 1.90787404E-03 
+Proc[0]: Received norm from processor 31 
+Sample[733]: Expectation = 5.23032729E+00	Variance = 2.66101719E-03	Tol = 1.90533723E-03 
+Proc[0]: Received norm from processor 13 
+Sample[734]: Expectation = 5.23027064E+00	Variance = 2.65974442E-03	Tol = 1.90358346E-03 
+Proc[0]: Received norm from processor 1 
+Sample[735]: Expectation = 5.23014851E+00	Variance = 2.66707368E-03	Tol = 1.90490726E-03 
+Proc[0]: Received norm from processor 11 
+Sample[736]: Expectation = 5.23021660E+00	Variance = 2.66685808E-03	Tol = 1.90353578E-03 
+Proc[0]: Received norm from processor 49 
+Sample[737]: Expectation = 5.23020900E+00	Variance = 2.66328210E-03	Tol = 1.90096815E-03 
+Proc[0]: Received norm from processor 59 
+Sample[738]: Expectation = 5.23010129E+00	Variance = 2.66822368E-03	Tol = 1.90144136E-03 
+Proc[0]: Received norm from processor 7 
+Sample[739]: Expectation = 5.23007549E+00	Variance = 2.66510435E-03	Tol = 1.89904340E-03 
+Proc[0]: Received norm from processor 55 
+Sample[740]: Expectation = 5.23004225E+00	Variance = 2.66231960E-03	Tol = 1.89676809E-03 
+Proc[0]: Received norm from processor 51 
+Sample[741]: Expectation = 5.22998859E+00	Variance = 2.66085716E-03	Tol = 1.89496711E-03 
+Proc[0]: Received norm from processor 23 
+Sample[742]: Expectation = 5.22999502E+00	Variance = 2.65730172E-03	Tol = 1.89242415E-03 
+Proc[0]: Received norm from processor 33 
+Sample[743]: Expectation = 5.23007933E+00	Variance = 2.65899935E-03	Tol = 1.89175421E-03 
+Proc[0]: Received norm from processor 57 
+Sample[744]: Expectation = 5.23017694E+00	Variance = 2.66250449E-03	Tol = 1.89172806E-03 
+Proc[0]: Received norm from processor 5 
+Sample[745]: Expectation = 5.23014354E+00	Variance = 2.65976064E-03	Tol = 1.88948366E-03 
+Proc[0]: Received norm from processor 43 
+Sample[746]: Expectation = 5.23009414E+00	Variance = 2.65801325E-03	Tol = 1.88759647E-03 
+Proc[0]: Received norm from processor 61 
+Sample[747]: Expectation = 5.23003057E+00	Variance = 2.65746987E-03	Tol = 1.88613977E-03 
+Proc[0]: Received norm from processor 9 
+Sample[748]: Expectation = 5.23002920E+00	Variance = 2.65391848E-03	Tol = 1.88361869E-03 
+Proc[0]: Received norm from processor 19 
+Sample[749]: Expectation = 5.23011559E+00	Variance = 2.65595771E-03	Tol = 1.88308390E-03 
+Proc[0]: Received norm from processor 3 
+Sample[750]: Expectation = 5.23005065E+00	Variance = 2.65557517E-03	Tol = 1.88169256E-03 
+Proc[0]: Received norm from processor 27 
+Sample[751]: Expectation = 5.23006045E+00	Variance = 2.65211113E-03	Tol = 1.87921249E-03 
+Proc[0]: Received norm from processor 53 
+Sample[752]: Expectation = 5.23011795E+00	Variance = 2.65106713E-03	Tol = 1.87759294E-03 
+Proc[0]: Received norm from processor 29 
+Sample[753]: Expectation = 5.23027706E+00	Variance = 2.66658437E-03	Tol = 1.88182908E-03 
+Proc[0]: Received norm from processor 17 
+Sample[754]: Expectation = 5.23014089E+00	Variance = 2.67701012E-03	Tol = 1.88425351E-03 
+Proc[0]: Received norm from processor 39 
+Sample[755]: Expectation = 5.23017477E+00	Variance = 2.67433002E-03	Tol = 1.88206242E-03 
+Proc[0]: Received norm from processor 41 
+Sample[756]: Expectation = 5.23025551E+00	Variance = 2.67571425E-03	Tol = 1.88130395E-03 
+Proc[0]: Received norm from processor 15 
+Sample[757]: Expectation = 5.23037612E+00	Variance = 2.68317642E-03	Tol = 1.88268072E-03 
+Proc[0]: Received norm from processor 47 
+Sample[758]: Expectation = 5.23038750E+00	Variance = 2.67973461E-03	Tol = 1.88023135E-03 
+Proc[0]: Received norm from processor 35 
+Sample[759]: Expectation = 5.23038425E+00	Variance = 2.67621198E-03	Tol = 1.87775690E-03 
+Proc[0]: Received norm from processor 25 
+Sample[760]: Expectation = 5.23040633E+00	Variance = 2.67306073E-03	Tol = 1.87541600E-03 
+Proc[0]: Received norm from processor 45 
+Sample[761]: Expectation = 5.23038996E+00	Variance = 2.66975197E-03	Tol = 1.87302308E-03 
+Proc[0]: Received norm from processor 21 
+Sample[762]: Expectation = 5.23047026E+00	Variance = 2.67115591E-03	Tol = 1.87228575E-03 
+Proc[0]: Received norm from processor 1 
+Sample[763]: Expectation = 5.23052854E+00	Variance = 2.67024317E-03	Tol = 1.87073873E-03 
+Proc[0]: Received norm from processor 13 
+Sample[764]: Expectation = 5.23051013E+00	Variance = 2.66700659E-03	Tol = 1.86838067E-03 
+Proc[0]: Received norm from processor 37 
+Sample[765]: Expectation = 5.23054258E+00	Variance = 2.66432455E-03	Tol = 1.86622003E-03 
+Proc[0]: Received norm from processor 11 
+Sample[766]: Expectation = 5.23052977E+00	Variance = 2.66097181E-03	Tol = 1.86382766E-03 
+Proc[0]: Received norm from processor 31 
+Sample[767]: Expectation = 5.23049731E+00	Variance = 2.65830956E-03	Tol = 1.86168026E-03 
+Proc[0]: Received norm from processor 61 
+Sample[768]: Expectation = 5.23033701E+00	Variance = 2.67455841E-03	Tol = 1.86614521E-03 
+Proc[0]: Received norm from processor 49 
+Sample[769]: Expectation = 5.23040854E+00	Variance = 2.67501048E-03	Tol = 1.86508906E-03 
+Proc[0]: Received norm from processor 7 
+Sample[770]: Expectation = 5.23038448E+00	Variance = 2.67198174E-03	Tol = 1.86282209E-03 
+Proc[0]: Received norm from processor 55 
+Sample[771]: Expectation = 5.23045329E+00	Variance = 2.67216217E-03	Tol = 1.86167650E-03 
+Proc[0]: Received norm from processor 59 
+Sample[772]: Expectation = 5.23033651E+00	Variance = 2.67921595E-03	Tol = 1.86292431E-03 
+Proc[0]: Received norm from processor 51 
+Sample[773]: Expectation = 5.23041906E+00	Variance = 2.68101117E-03	Tol = 1.86234254E-03 
+Proc[0]: Received norm from processor 33 
+Sample[774]: Expectation = 5.23040988E+00	Variance = 2.67761241E-03	Tol = 1.85995902E-03 
+Proc[0]: Received norm from processor 23 
+Sample[775]: Expectation = 5.23062990E+00	Variance = 2.71162436E-03	Tol = 1.87052670E-03 
+Proc[0]: Received norm from processor 43 
+Sample[776]: Expectation = 5.23066271E+00	Variance = 2.70896442E-03	Tol = 1.86840401E-03 
+Proc[0]: Received norm from processor 5 
+Sample[777]: Expectation = 5.23059344E+00	Variance = 2.70920172E-03	Tol = 1.86728308E-03 
+Proc[0]: Received norm from processor 57 
+Sample[778]: Expectation = 5.23049678E+00	Variance = 2.71297903E-03	Tol = 1.86738308E-03 
+Proc[0]: Received norm from processor 9 
+Sample[779]: Expectation = 5.23050625E+00	Variance = 2.70956612E-03	Tol = 1.86500993E-03 
+Proc[0]: Received norm from processor 19 
+Sample[780]: Expectation = 5.23055679E+00	Variance = 2.70808226E-03	Tol = 1.86330361E-03 
+Proc[0]: Received norm from processor 3 
+Sample[781]: Expectation = 5.23053440E+00	Variance = 2.70500586E-03	Tol = 1.86105234E-03 
+Proc[0]: Received norm from processor 27 
+Sample[782]: Expectation = 5.23055311E+00	Variance = 2.70182030E-03	Tol = 1.85876657E-03 
+Proc[0]: Received norm from processor 53 
+Sample[783]: Expectation = 5.23050657E+00	Variance = 2.70006345E-03	Tol = 1.85697520E-03 
+Proc[0]: Received norm from processor 29 
+Sample[784]: Expectation = 5.23046919E+00	Variance = 2.69771355E-03	Tol = 1.85498279E-03 
+Proc[0]: Received norm from processor 39 
+Sample[785]: Expectation = 5.23035703E+00	Variance = 2.70414028E-03	Tol = 1.85600773E-03 
+Proc[0]: Received norm from processor 17 
+Sample[786]: Expectation = 5.23043678E+00	Variance = 2.70569251E-03	Tol = 1.85535896E-03 
+Proc[0]: Received norm from processor 61 
+Sample[787]: Expectation = 5.23053084E+00	Variance = 2.70920914E-03	Tol = 1.85538440E-03 
+Proc[0]: Received norm from processor 47 
+Sample[788]: Expectation = 5.23049181E+00	Variance = 2.70697027E-03	Tol = 1.85344044E-03 
+Proc[0]: Received norm from processor 15 
+Sample[789]: Expectation = 5.23057558E+00	Variance = 2.70906941E-03	Tol = 1.85298355E-03 
+Proc[0]: Received norm from processor 41 
+Sample[790]: Expectation = 5.23054767E+00	Variance = 2.70625497E-03	Tol = 1.85084824E-03 
+Proc[0]: Received norm from processor 21 
+Sample[791]: Expectation = 5.23058788E+00	Variance = 2.70411106E-03	Tol = 1.84894512E-03 
+Proc[0]: Received norm from processor 25 
+Sample[792]: Expectation = 5.23060497E+00	Variance = 2.70092774E-03	Tol = 1.84668955E-03 
+Proc[0]: Received norm from processor 35 
+Sample[793]: Expectation = 5.23049280E+00	Variance = 2.70748686E-03	Tol = 1.84776436E-03 
+Proc[0]: Received norm from processor 45 
+Sample[794]: Expectation = 5.23061709E+00	Variance = 2.71632804E-03	Tol = 1.84961295E-03 
+Proc[0]: Received norm from processor 1 
+Sample[795]: Expectation = 5.23060170E+00	Variance = 2.71309930E-03	Tol = 1.84735041E-03 
+Proc[0]: Received norm from processor 13 
+Sample[796]: Expectation = 5.23067588E+00	Variance = 2.71406507E-03	Tol = 1.84651821E-03 
+Proc[0]: Received norm from processor 11 
+Sample[797]: Expectation = 5.23068205E+00	Variance = 2.71069008E-03	Tol = 1.84421170E-03 
+Proc[0]: Received norm from processor 37 
+Sample[798]: Expectation = 5.23079132E+00	Variance = 2.71680917E-03	Tol = 1.84513489E-03 
+Proc[0]: Received norm from processor 31 
+Sample[799]: Expectation = 5.23082070E+00	Variance = 2.71409749E-03	Tol = 1.84305940E-03 
+Proc[0]: Received norm from processor 49 
+Sample[800]: Expectation = 5.23083245E+00	Variance = 2.71081524E-03	Tol = 1.84079305E-03 
+Proc[0]: Received norm from processor 7 
+Sample[801]: Expectation = 5.23088014E+00	Variance = 2.70925010E-03	Tol = 1.83911248E-03 
+Proc[0]: Received norm from processor 59 
+Sample[802]: Expectation = 5.23094041E+00	Variance = 2.70878170E-03	Tol = 1.83780665E-03 
+Proc[0]: Received norm from processor 55 
+Sample[803]: Expectation = 5.23094400E+00	Variance = 2.70541872E-03	Tol = 1.83552149E-03 
+Proc[0]: Received norm from processor 51 
+Sample[804]: Expectation = 5.23088666E+00	Variance = 2.70469367E-03	Tol = 1.83413381E-03 
+Proc[0]: Received norm from processor 33 
+Sample[805]: Expectation = 5.23078365E+00	Variance = 2.70986503E-03	Tol = 1.83474575E-03 
+Proc[0]: Received norm from processor 23 
+Sample[806]: Expectation = 5.23078738E+00	Variance = 2.70651413E-03	Tol = 1.83247319E-03 
+Proc[0]: Received norm from processor 5 
+Sample[807]: Expectation = 5.23086575E+00	Variance = 2.70811049E-03	Tol = 1.83187747E-03 
+Proc[0]: Received norm from processor 57 
+Sample[808]: Expectation = 5.23079824E+00	Variance = 2.70843755E-03	Tol = 1.83085408E-03 
+Proc[0]: Received norm from processor 43 
+Sample[809]: Expectation = 5.23082043E+00	Variance = 2.70548751E-03	Tol = 1.82872544E-03 
+Proc[0]: Received norm from processor 9 
+Sample[810]: Expectation = 5.23082871E+00	Variance = 2.70220288E-03	Tol = 1.82648650E-03 
+Proc[0]: Received norm from processor 19 
+Sample[811]: Expectation = 5.23089067E+00	Variance = 2.70198074E-03	Tol = 1.82528505E-03 
+Proc[0]: Received norm from processor 3 
+Sample[812]: Expectation = 5.23085410E+00	Variance = 2.69973763E-03	Tol = 1.82340342E-03 
+Proc[0]: Received norm from processor 61 
+Sample[813]: Expectation = 5.23086176E+00	Variance = 2.69646454E-03	Tol = 1.82117669E-03 
+Proc[0]: Received norm from processor 27 
+Sample[814]: Expectation = 5.23088271E+00	Variance = 2.69350876E-03	Tol = 1.81905987E-03 
+Proc[0]: Received norm from processor 53 
+Sample[815]: Expectation = 5.23098215E+00	Variance = 2.69825374E-03	Tol = 1.81954411E-03 
+Proc[0]: Received norm from processor 29 
+Sample[816]: Expectation = 5.23094282E+00	Variance = 2.69620826E-03	Tol = 1.81773947E-03 
+Proc[0]: Received norm from processor 39 
+Sample[817]: Expectation = 5.23094564E+00	Variance = 2.69291464E-03	Tol = 1.81551677E-03 
+Proc[0]: Received norm from processor 17 
+Sample[818]: Expectation = 5.23089331E+00	Variance = 2.69185964E-03	Tol = 1.81405126E-03 
+Proc[0]: Received norm from processor 47 
+Sample[819]: Expectation = 5.23092716E+00	Variance = 2.68951007E-03	Tol = 1.81215206E-03 
+Proc[0]: Received norm from processor 41 
+Sample[820]: Expectation = 5.23098142E+00	Variance = 2.68864101E-03	Tol = 1.81075413E-03 
+Proc[0]: Received norm from processor 25 
+Sample[821]: Expectation = 5.23092376E+00	Variance = 2.68809239E-03	Tol = 1.80946638E-03 
+Proc[0]: Received norm from processor 1 
+Sample[822]: Expectation = 5.23098489E+00	Variance = 2.68789012E-03	Tol = 1.80829735E-03 
+Proc[0]: Received norm from processor 15 
+Sample[823]: Expectation = 5.23093255E+00	Variance = 2.68687524E-03	Tol = 1.80685721E-03 
+Proc[0]: Received norm from processor 21 
+Sample[824]: Expectation = 5.23097685E+00	Variance = 2.68522898E-03	Tol = 1.80520720E-03 
+Proc[0]: Received norm from processor 35 
+Sample[825]: Expectation = 5.23096004E+00	Variance = 2.68220684E-03	Tol = 1.80309728E-03 
+Proc[0]: Received norm from processor 45 
+Sample[826]: Expectation = 5.23089353E+00	Variance = 2.68260895E-03	Tol = 1.80214056E-03 
+Proc[0]: Received norm from processor 13 
+Sample[827]: Expectation = 5.23087346E+00	Variance = 2.67969809E-03	Tol = 1.80007325E-03 
+Proc[0]: Received norm from processor 11 
+Sample[828]: Expectation = 5.23081000E+00	Variance = 2.67979199E-03	Tol = 1.79901744E-03 
+Proc[0]: Received norm from processor 37 
+Sample[829]: Expectation = 5.23068301E+00	Variance = 2.68991228E-03	Tol = 1.80132383E-03 
+Proc[0]: Received norm from processor 49 
+Sample[830]: Expectation = 5.23052528E+00	Variance = 2.70729508E-03	Tol = 1.80604576E-03 
+Proc[0]: Received norm from processor 7 
+Sample[831]: Expectation = 5.23054206E+00	Variance = 2.70427079E-03	Tol = 1.80395034E-03 
+Proc[0]: Received norm from processor 31 
+Sample[832]: Expectation = 5.23046506E+00	Variance = 2.70594658E-03	Tol = 1.80342442E-03 
+Proc[0]: Received norm from processor 61 
+Sample[833]: Expectation = 5.23057770E+00	Variance = 2.71325301E-03	Tol = 1.80477325E-03 
+Proc[0]: Received norm from processor 59 
+Sample[834]: Expectation = 5.23064537E+00	Variance = 2.71381484E-03	Tol = 1.80387767E-03 
+Proc[0]: Received norm from processor 55 
+Sample[835]: Expectation = 5.23060257E+00	Variance = 2.71209300E-03	Tol = 1.80222517E-03 
+Proc[0]: Received norm from processor 51 
+Sample[836]: Expectation = 5.23055506E+00	Variance = 2.71073316E-03	Tol = 1.80069536E-03 
+Proc[0]: Received norm from processor 9 
+Sample[837]: Expectation = 5.23042061E+00	Variance = 2.72260615E-03	Tol = 1.80355621E-03 
+Proc[0]: Received norm from processor 33 
+Sample[838]: Expectation = 5.23033451E+00	Variance = 2.72556215E-03	Tol = 1.80345801E-03 
+Proc[0]: Received norm from processor 23 
+Sample[839]: Expectation = 5.23030772E+00	Variance = 2.72291536E-03	Tol = 1.80150757E-03 
+Proc[0]: Received norm from processor 5 
+Sample[840]: Expectation = 5.23025688E+00	Variance = 2.72184215E-03	Tol = 1.80008008E-03 
+Proc[0]: Received norm from processor 43 
+Sample[841]: Expectation = 5.23019997E+00	Variance = 2.72132644E-03	Tol = 1.79883912E-03 
+Proc[0]: Received norm from processor 57 
+Sample[842]: Expectation = 5.23021834E+00	Variance = 2.71837841E-03	Tol = 1.79679657E-03 
+Proc[0]: Received norm from processor 19 
+Sample[843]: Expectation = 5.23030728E+00	Variance = 2.72181345E-03	Tol = 1.79686476E-03 
+Proc[0]: Received norm from processor 3 
+Sample[844]: Expectation = 5.23042058E+00	Variance = 2.72941011E-03	Tol = 1.79830427E-03 
+Proc[0]: Received norm from processor 27 
+Sample[845]: Expectation = 5.23043643E+00	Variance = 2.72639224E-03	Tol = 1.79624600E-03 
+Proc[0]: Received norm from processor 53 
+Sample[846]: Expectation = 5.23040832E+00	Variance = 2.72383715E-03	Tol = 1.79434268E-03 
+Proc[0]: Received norm from processor 29 
+Sample[847]: Expectation = 5.23046941E+00	Variance = 2.72377770E-03	Tol = 1.79326357E-03 
+Proc[0]: Received norm from processor 39 
+Sample[848]: Expectation = 5.23063625E+00	Variance = 2.74414325E-03	Tol = 1.79889354E-03 
+Proc[0]: Received norm from processor 17 
+Sample[849]: Expectation = 5.23067700E+00	Variance = 2.74231912E-03	Tol = 1.79723617E-03 
+Proc[0]: Received norm from processor 47 
+Sample[850]: Expectation = 5.23068139E+00	Variance = 2.73910925E-03	Tol = 1.79512715E-03 
+Proc[0]: Received norm from processor 25 
+Sample[851]: Expectation = 5.23078245E+00	Variance = 2.74457145E-03	Tol = 1.79586005E-03 
+Proc[0]: Received norm from processor 41 
+Sample[852]: Expectation = 5.23083258E+00	Variance = 2.74348856E-03	Tol = 1.79445173E-03 
+Proc[0]: Received norm from processor 61 
+Sample[853]: Expectation = 5.23081728E+00	Variance = 2.74047160E-03	Tol = 1.79241322E-03 
+Proc[0]: Received norm from processor 1 
+Sample[854]: Expectation = 5.23077561E+00	Variance = 2.73874403E-03	Tol = 1.79079877E-03 
+Proc[0]: Received norm from processor 21 
+Sample[855]: Expectation = 5.23082714E+00	Variance = 2.73780825E-03	Tol = 1.78944542E-03 
+Proc[0]: Received norm from processor 11 
+Sample[856]: Expectation = 5.23090048E+00	Variance = 2.73920935E-03	Tol = 1.78885744E-03 
+Proc[0]: Received norm from processor 45 
+Sample[857]: Expectation = 5.23091821E+00	Variance = 2.73628227E-03	Tol = 1.78685798E-03 
+Proc[0]: Received norm from processor 15 
+Sample[858]: Expectation = 5.23097351E+00	Variance = 2.73571300E-03	Tol = 1.78563061E-03 
+Proc[0]: Received norm from processor 13 
+Sample[859]: Expectation = 5.23092881E+00	Variance = 2.73424259E-03	Tol = 1.78411128E-03 
+Proc[0]: Received norm from processor 35 
+Sample[860]: Expectation = 5.23084750E+00	Variance = 2.73674101E-03	Tol = 1.78388817E-03 
+Proc[0]: Received norm from processor 49 
+Sample[861]: Expectation = 5.23087171E+00	Variance = 2.73406635E-03	Tol = 1.78198051E-03 
+Proc[0]: Received norm from processor 37 
+Sample[862]: Expectation = 5.23092033E+00	Variance = 2.73292977E-03	Tol = 1.78057636E-03 
+Proc[0]: Received norm from processor 7 
+Sample[863]: Expectation = 5.23092675E+00	Variance = 2.72979854E-03	Tol = 1.77852470E-03 
+Proc[0]: Received norm from processor 31 
+Sample[864]: Expectation = 5.23089241E+00	Variance = 2.72765687E-03	Tol = 1.77679776E-03 
+Proc[0]: Received norm from processor 59 
+Sample[865]: Expectation = 5.23088083E+00	Variance = 2.72461930E-03	Tol = 1.77478137E-03 
+Proc[0]: Received norm from processor 9 
+Sample[866]: Expectation = 5.23097282E+00	Variance = 2.72879237E-03	Tol = 1.77511421E-03 
+Proc[0]: Received norm from processor 55 
+Sample[867]: Expectation = 5.23109746E+00	Variance = 2.73909852E-03	Tol = 1.77743725E-03 
+Proc[0]: Received norm from processor 51 
+Sample[868]: Expectation = 5.23111529E+00	Variance = 2.73621853E-03	Tol = 1.77547895E-03 
+Proc[0]: Received norm from processor 23 
+Sample[869]: Expectation = 5.23117349E+00	Variance = 2.73601035E-03	Tol = 1.77438958E-03 
+Proc[0]: Received norm from processor 5 
+Sample[870]: Expectation = 5.23125400E+00	Variance = 2.73849818E-03	Tol = 1.77417560E-03 
+Proc[0]: Received norm from processor 33 
+Sample[871]: Expectation = 5.23129448E+00	Variance = 2.73677941E-03	Tol = 1.77260030E-03 
+Proc[0]: Received norm from processor 57 
+Sample[872]: Expectation = 5.23128978E+00	Variance = 2.73366013E-03	Tol = 1.77057373E-03 
+Proc[0]: Received norm from processor 43 
+Sample[873]: Expectation = 5.23135374E+00	Variance = 2.73409592E-03	Tol = 1.76970041E-03 
+Proc[0]: Received norm from processor 3 
+Sample[874]: Expectation = 5.23144892E+00	Variance = 2.73887641E-03	Tol = 1.77023328E-03 
+Proc[0]: Received norm from processor 19 
+Sample[875]: Expectation = 5.23141773E+00	Variance = 2.73659636E-03	Tol = 1.76848486E-03 
+Proc[0]: Received norm from processor 53 
+Sample[876]: Expectation = 5.23154822E+00	Variance = 2.74837082E-03	Tol = 1.77127344E-03 
+Proc[0]: Received norm from processor 27 
+Sample[877]: Expectation = 5.23154401E+00	Variance = 2.74525248E-03	Tol = 1.76925874E-03 
+Proc[0]: Received norm from processor 29 
+Sample[878]: Expectation = 5.23160373E+00	Variance = 2.74525350E-03	Tol = 1.76825123E-03 
+Proc[0]: Received norm from processor 61 
+Sample[879]: Expectation = 5.23160577E+00	Variance = 2.74213400E-03	Tol = 1.76624074E-03 
+Proc[0]: Received norm from processor 39 
+Sample[880]: Expectation = 5.23170201E+00	Variance = 2.74715928E-03	Tol = 1.76685368E-03 
+Proc[0]: Received norm from processor 17 
+Sample[881]: Expectation = 5.23167670E+00	Variance = 2.74460494E-03	Tol = 1.76502949E-03 
+Proc[0]: Received norm from processor 41 
+Sample[882]: Expectation = 5.23153335E+00	Variance = 2.75959691E-03	Tol = 1.76883993E-03 
+Proc[0]: Received norm from processor 47 
+Sample[883]: Expectation = 5.23153227E+00	Variance = 2.75647269E-03	Tol = 1.76683704E-03 
+Proc[0]: Received norm from processor 1 
+Sample[884]: Expectation = 5.23148372E+00	Variance = 2.75543567E-03	Tol = 1.76550522E-03 
+Proc[0]: Received norm from processor 25 
+Sample[885]: Expectation = 5.23143622E+00	Variance = 2.75431690E-03	Tol = 1.76414922E-03 
+Proc[0]: Received norm from processor 11 
+Sample[886]: Expectation = 5.23141519E+00	Variance = 2.75159953E-03	Tol = 1.76228341E-03 
+Proc[0]: Received norm from processor 21 
+Sample[887]: Expectation = 5.23139732E+00	Variance = 2.74878027E-03	Tol = 1.76038720E-03 
+Proc[0]: Received norm from processor 49 
+Sample[888]: Expectation = 5.23136518E+00	Variance = 2.74660132E-03	Tol = 1.75869824E-03 
+Proc[0]: Received norm from processor 35 
+Sample[889]: Expectation = 5.23140484E+00	Variance = 2.74490905E-03	Tol = 1.75716724E-03 
+Proc[0]: Received norm from processor 13 
+Sample[890]: Expectation = 5.23136018E+00	Variance = 2.74359859E-03	Tol = 1.75576053E-03 
+Proc[0]: Received norm from processor 45 
+Sample[891]: Expectation = 5.23136484E+00	Variance = 2.74053869E-03	Tol = 1.75379617E-03 
+Proc[0]: Received norm from processor 15 
+Sample[892]: Expectation = 5.23131626E+00	Variance = 2.73956896E-03	Tol = 1.75250268E-03 
+Proc[0]: Received norm from processor 37 
+Sample[893]: Expectation = 5.23139585E+00	Variance = 2.74215140E-03	Tol = 1.75234650E-03 
+Proc[0]: Received norm from processor 7 
+Sample[894]: Expectation = 5.23139131E+00	Variance = 2.73910249E-03	Tol = 1.75039225E-03 
+Proc[0]: Received norm from processor 31 
+Sample[895]: Expectation = 5.23147188E+00	Variance = 2.74184577E-03	Tol = 1.75028993E-03 
+Proc[0]: Received norm from processor 59 
+Sample[896]: Expectation = 5.23147225E+00	Variance = 2.73878579E-03	Tol = 1.74833652E-03 
+Proc[0]: Received norm from processor 9 
+Sample[897]: Expectation = 5.23150088E+00	Variance = 2.73646671E-03	Tol = 1.74662175E-03 
+Proc[0]: Received norm from processor 5 
+Sample[898]: Expectation = 5.23141688E+00	Variance = 2.73974741E-03	Tol = 1.74669507E-03 
+Proc[0]: Received norm from processor 55 
+Sample[899]: Expectation = 5.23136051E+00	Variance = 2.73955364E-03	Tol = 1.74566160E-03 
+Proc[0]: Received norm from processor 61 
+Sample[900]: Expectation = 5.23131583E+00	Variance = 2.73830440E-03	Tol = 1.74429368E-03 
+Proc[0]: Received norm from processor 33 
+Sample[901]: Expectation = 5.23125269E+00	Variance = 2.73885385E-03	Tol = 1.74350033E-03 
+Proc[0]: Received norm from processor 23 
+Sample[902]: Expectation = 5.23117419E+00	Variance = 2.74136957E-03	Tol = 1.74333370E-03 
+Proc[0]: Received norm from processor 51 
+Sample[903]: Expectation = 5.23116443E+00	Variance = 2.73841962E-03	Tol = 1.74143041E-03 
+Proc[0]: Received norm from processor 3 
+Sample[904]: Expectation = 5.23115864E+00	Variance = 2.73542067E-03	Tol = 1.73951367E-03 
+Proc[0]: Received norm from processor 57 
+Sample[905]: Expectation = 5.23110691E+00	Variance = 2.73481658E-03	Tol = 1.73836037E-03 
+Proc[0]: Received norm from processor 43 
+Sample[906]: Expectation = 5.23111026E+00	Variance = 2.73180816E-03	Tol = 1.73644487E-03 
+Proc[0]: Received norm from processor 19 
+Sample[907]: Expectation = 5.23116581E+00	Variance = 2.73159176E-03	Tol = 1.73541862E-03 
+Proc[0]: Received norm from processor 53 
+Sample[908]: Expectation = 5.23115875E+00	Variance = 2.72862855E-03	Tol = 1.73352171E-03 
+Proc[0]: Received norm from processor 27 
+Sample[909]: Expectation = 5.23101862E+00	Variance = 2.74345835E-03	Tol = 1.73726970E-03 
+Proc[0]: Received norm from processor 29 
+Sample[910]: Expectation = 5.23105036E+00	Variance = 2.74135946E-03	Tol = 1.73565058E-03 
+Proc[0]: Received norm from processor 39 
+Sample[911]: Expectation = 5.23107734E+00	Variance = 2.73901297E-03	Tol = 1.73395513E-03 
+Proc[0]: Received norm from processor 17 
+Sample[912]: Expectation = 5.23111825E+00	Variance = 2.73753423E-03	Tol = 1.73253637E-03 
+Proc[0]: Received norm from processor 47 
+Sample[913]: Expectation = 5.23108723E+00	Variance = 2.73541363E-03	Tol = 1.73091649E-03 
+Proc[0]: Received norm from processor 1 
+Sample[914]: Expectation = 5.23105087E+00	Variance = 2.73362783E-03	Tol = 1.72940454E-03 
+Proc[0]: Received norm from processor 25 
+Sample[915]: Expectation = 5.23110517E+00	Variance = 2.73333482E-03	Tol = 1.72836662E-03 
+Proc[0]: Received norm from processor 41 
+Sample[916]: Expectation = 5.23109356E+00	Variance = 2.73047404E-03	Tol = 1.72651871E-03 
+Proc[0]: Received norm from processor 11 
+Sample[917]: Expectation = 5.23115040E+00	Variance = 2.73045537E-03	Tol = 1.72557116E-03 
+Proc[0]: Received norm from processor 13 
+Sample[918]: Expectation = 5.23126007E+00	Variance = 2.73851118E-03	Tol = 1.72717331E-03 
+Proc[0]: Received norm from processor 49 
+Sample[919]: Expectation = 5.23129621E+00	Variance = 2.73672999E-03	Tol = 1.72567187E-03 
+Proc[0]: Received norm from processor 21 
+Sample[920]: Expectation = 5.23122039E+00	Variance = 2.73903783E-03	Tol = 1.72546082E-03 
+Proc[0]: Received norm from processor 35 
+Sample[921]: Expectation = 5.23116328E+00	Variance = 2.73906441E-03	Tol = 1.72453220E-03 
+Proc[0]: Received norm from processor 61 
+Sample[922]: Expectation = 5.23117430E+00	Variance = 2.73620534E-03	Tol = 1.72269694E-03 
+Proc[0]: Received norm from processor 45 
+Sample[923]: Expectation = 5.23122980E+00	Variance = 2.73608142E-03	Tol = 1.72172449E-03 
+Proc[0]: Received norm from processor 37 
+Sample[924]: Expectation = 5.23123961E+00	Variance = 2.73320919E-03	Tol = 1.71988912E-03 
+Proc[0]: Received norm from processor 15 
+Sample[925]: Expectation = 5.23134305E+00	Variance = 2.74014074E-03	Tol = 1.72113751E-03 
+Proc[0]: Received norm from processor 7 
+Sample[926]: Expectation = 5.23139495E+00	Variance = 2.73967277E-03	Tol = 1.72006102E-03 
+Proc[0]: Received norm from processor 59 
+Sample[927]: Expectation = 5.23147254E+00	Variance = 2.74229217E-03	Tol = 1.71995464E-03 
+Proc[0]: Received norm from processor 9 
+Sample[928]: Expectation = 5.23149752E+00	Variance = 2.73991567E-03	Tol = 1.71828267E-03 
+Proc[0]: Received norm from processor 5 
+Sample[929]: Expectation = 5.23151033E+00	Variance = 2.73711858E-03	Tol = 1.71648080E-03 
+Proc[0]: Received norm from processor 31 
+Sample[930]: Expectation = 5.23155225E+00	Variance = 2.73580775E-03	Tol = 1.71514686E-03 
+Proc[0]: Received norm from processor 23 
+Sample[931]: Expectation = 5.23157269E+00	Variance = 2.73325786E-03	Tol = 1.71342643E-03 
+Proc[0]: Received norm from processor 3 
+Sample[932]: Expectation = 5.23166034E+00	Variance = 2.73747831E-03	Tol = 1.71382861E-03 
+Proc[0]: Received norm from processor 55 
+Sample[933]: Expectation = 5.23175291E+00	Variance = 2.74253018E-03	Tol = 1.71448972E-03 
+Proc[0]: Received norm from processor 51 
+Sample[934]: Expectation = 5.23176729E+00	Variance = 2.73978670E-03	Tol = 1.71271436E-03 
+Proc[0]: Received norm from processor 33 
+Sample[935]: Expectation = 5.23172103E+00	Variance = 2.73885542E-03	Tol = 1.71150727E-03 
+Proc[0]: Received norm from processor 19 
+Sample[936]: Expectation = 5.23168677E+00	Variance = 2.73702642E-03	Tol = 1.71002150E-03 
+Proc[0]: Received norm from processor 43 
+Sample[937]: Expectation = 5.23167517E+00	Variance = 2.73423140E-03	Tol = 1.70823587E-03 
+Proc[0]: Received norm from processor 57 
+Sample[938]: Expectation = 5.23160517E+00	Variance = 2.73590760E-03	Tol = 1.70784831E-03 
+Proc[0]: Received norm from processor 53 
+Sample[939]: Expectation = 5.23154510E+00	Variance = 2.73637861E-03	Tol = 1.70708559E-03 
+Proc[0]: Received norm from processor 39 
+Sample[940]: Expectation = 5.23153556E+00	Variance = 2.73355290E-03	Tol = 1.70529616E-03 
+Proc[0]: Received norm from processor 27 
+Sample[941]: Expectation = 5.23147480E+00	Variance = 2.73411881E-03	Tol = 1.70456623E-03 
+Proc[0]: Received norm from processor 29 
+Sample[942]: Expectation = 5.23161610E+00	Variance = 2.75000416E-03	Tol = 1.70860323E-03 
+Proc[0]: Received norm from processor 61 
+Sample[943]: Expectation = 5.23164368E+00	Variance = 2.74780439E-03	Tol = 1.70701391E-03 
+Proc[0]: Received norm from processor 17 
+Sample[944]: Expectation = 5.23159270E+00	Variance = 2.74734463E-03	Tol = 1.70596679E-03 
+Proc[0]: Received norm from processor 1 
+Sample[945]: Expectation = 5.23168831E+00	Variance = 2.75306725E-03	Tol = 1.70683880E-03 
+Proc[0]: Received norm from processor 47 
+Sample[946]: Expectation = 5.23173195E+00	Variance = 2.75195659E-03	Tol = 1.70559228E-03 
+Proc[0]: Received norm from processor 25 
+Sample[947]: Expectation = 5.23173270E+00	Variance = 2.74905115E-03	Tol = 1.70379140E-03 
+Proc[0]: Received norm from processor 11 
+Sample[948]: Expectation = 5.23167806E+00	Variance = 2.74897889E-03	Tol = 1.70287016E-03 
+Proc[0]: Received norm from processor 41 
+Sample[949]: Expectation = 5.23163487E+00	Variance = 2.74785058E-03	Tol = 1.70162340E-03 
+Proc[0]: Received norm from processor 13 
+Sample[950]: Expectation = 5.23166936E+00	Variance = 2.74608681E-03	Tol = 1.70018166E-03 
+Proc[0]: Received norm from processor 21 
+Sample[951]: Expectation = 5.23167519E+00	Variance = 2.74323161E-03	Tol = 1.69840391E-03 
+Proc[0]: Received norm from processor 49 
+Sample[952]: Expectation = 5.23177805E+00	Variance = 2.75041043E-03	Tol = 1.69973133E-03 
+Proc[0]: Received norm from processor 35 
+Sample[953]: Expectation = 5.23177178E+00	Variance = 2.74756181E-03	Tol = 1.69795934E-03 
+Proc[0]: Received norm from processor 45 
+Sample[954]: Expectation = 5.23171146E+00	Variance = 2.74814924E-03	Tol = 1.69725059E-03 
+Proc[0]: Received norm from processor 37 
+Sample[955]: Expectation = 5.23172728E+00	Variance = 2.74551050E-03	Tol = 1.69554714E-03 
+Proc[0]: Received norm from processor 59 
+Sample[956]: Expectation = 5.23169798E+00	Variance = 2.74345859E-03	Tol = 1.69402673E-03 
+Proc[0]: Received norm from processor 15 
+Sample[957]: Expectation = 5.23162185E+00	Variance = 2.74613224E-03	Tol = 1.69396625E-03 
+Proc[0]: Received norm from processor 7 
+Sample[958]: Expectation = 5.23156974E+00	Variance = 2.74586451E-03	Tol = 1.69299937E-03 
+Proc[0]: Received norm from processor 9 
+Sample[959]: Expectation = 5.23149008E+00	Variance = 2.74908039E-03	Tol = 1.69310704E-03 
+Proc[0]: Received norm from processor 31 
+Sample[960]: Expectation = 5.23158202E+00	Variance = 2.75432330E-03	Tol = 1.69383788E-03 
+Proc[0]: Received norm from processor 23 
+Sample[961]: Expectation = 5.23150922E+00	Variance = 2.75654582E-03	Tol = 1.69363927E-03 
+Proc[0]: Received norm from processor 5 
+Sample[962]: Expectation = 5.23150260E+00	Variance = 2.75372240E-03	Tol = 1.69189163E-03 
+Proc[0]: Received norm from processor 3 
+Sample[963]: Expectation = 5.23154804E+00	Variance = 2.75284909E-03	Tol = 1.69074479E-03 
+Proc[0]: Received norm from processor 55 
+Sample[964]: Expectation = 5.23157546E+00	Variance = 2.75071746E-03	Tol = 1.68921323E-03 
+Proc[0]: Received norm from processor 33 
+Sample[965]: Expectation = 5.23163084E+00	Variance = 2.75082284E-03	Tol = 1.68837011E-03 
+Proc[0]: Received norm from processor 51 
+Sample[966]: Expectation = 5.23155380E+00	Variance = 2.75370230E-03	Tol = 1.68837896E-03 
+Proc[0]: Received norm from processor 19 
+Sample[967]: Expectation = 5.23157905E+00	Variance = 2.75147065E-03	Tol = 1.68682180E-03 
+Proc[0]: Received norm from processor 61 
+Sample[968]: Expectation = 5.23145515E+00	Variance = 2.76347436E-03	Tol = 1.68962389E-03 
+Proc[0]: Received norm from processor 57 
+Sample[969]: Expectation = 5.23149369E+00	Variance = 2.76206083E-03	Tol = 1.68831987E-03 
+Proc[0]: Received norm from processor 43 
+Sample[970]: Expectation = 5.23142578E+00	Variance = 2.76368307E-03	Tol = 1.68794485E-03 
+Proc[0]: Received norm from processor 53 
+Sample[971]: Expectation = 5.23147077E+00	Variance = 2.76280089E-03	Tol = 1.68680616E-03 
+Proc[0]: Received norm from processor 29 
+Sample[972]: Expectation = 5.23153963E+00	Variance = 2.76456230E-03	Tol = 1.68647558E-03 
+Proc[0]: Received norm from processor 27 
+Sample[973]: Expectation = 5.23149857E+00	Variance = 2.76335960E-03	Tol = 1.68524203E-03 
+Proc[0]: Received norm from processor 39 
+Sample[974]: Expectation = 5.23142714E+00	Variance = 2.76548683E-03	Tol = 1.68502488E-03 
+Proc[0]: Received norm from processor 17 
+Sample[975]: Expectation = 5.23127143E+00	Variance = 2.78626534E-03	Tol = 1.69047568E-03 
+Proc[0]: Received norm from processor 1 
+Sample[976]: Expectation = 5.23133286E+00	Variance = 2.78708953E-03	Tol = 1.68985932E-03 
+Proc[0]: Received norm from processor 11 
+Sample[977]: Expectation = 5.23130703E+00	Variance = 2.78488811E-03	Tol = 1.68832711E-03 
+Proc[0]: Received norm from processor 25 
+Sample[978]: Expectation = 5.23140111E+00	Variance = 2.79068833E-03	Tol = 1.68922010E-03 
+Proc[0]: Received norm from processor 41 
+Sample[979]: Expectation = 5.23142456E+00	Variance = 2.78837548E-03	Tol = 1.68765738E-03 
+Proc[0]: Received norm from processor 47 
+Sample[980]: Expectation = 5.23143924E+00	Variance = 2.78574119E-03	Tol = 1.68599913E-03 
+Proc[0]: Received norm from processor 13 
+Sample[981]: Expectation = 5.23140105E+00	Variance = 2.78433043E-03	Tol = 1.68471283E-03 
+Proc[0]: Received norm from processor 49 
+Sample[982]: Expectation = 5.23136888E+00	Variance = 2.78251032E-03	Tol = 1.68330436E-03 
+Proc[0]: Received norm from processor 21 
+Sample[983]: Expectation = 5.23138670E+00	Variance = 2.77999135E-03	Tol = 1.68168621E-03 
+Proc[0]: Received norm from processor 35 
+Sample[984]: Expectation = 5.23142815E+00	Variance = 2.77885526E-03	Tol = 1.68048799E-03 
+Proc[0]: Received norm from processor 45 
+Sample[985]: Expectation = 5.23147591E+00	Variance = 2.77827875E-03	Tol = 1.67946050E-03 
+Proc[0]: Received norm from processor 37 
+Sample[986]: Expectation = 5.23146978E+00	Variance = 2.77549801E-03	Tol = 1.67776837E-03 
+Proc[0]: Received norm from processor 61 
+Sample[987]: Expectation = 5.23142458E+00	Variance = 2.77470080E-03	Tol = 1.67667737E-03 
+Proc[0]: Received norm from processor 59 
+Sample[988]: Expectation = 5.23146188E+00	Variance = 2.77326585E-03	Tol = 1.67539525E-03 
+Proc[0]: Received norm from processor 15 
+Sample[989]: Expectation = 5.23141829E+00	Variance = 2.77233927E-03	Tol = 1.67426825E-03 
+Proc[0]: Received norm from processor 7 
+Sample[990]: Expectation = 5.23144439E+00	Variance = 2.77021250E-03	Tol = 1.67278045E-03 
+Proc[0]: Received norm from processor 9 
+Sample[991]: Expectation = 5.23137949E+00	Variance = 2.77158628E-03	Tol = 1.67235077E-03 
+Proc[0]: Received norm from processor 3 
+Sample[992]: Expectation = 5.23134239E+00	Variance = 2.77015638E-03	Tol = 1.67107640E-03 
+Proc[0]: Received norm from processor 23 
+Sample[993]: Expectation = 5.23142423E+00	Variance = 2.77401061E-03	Tol = 1.67139629E-03 
+Proc[0]: Received norm from processor 31 
+Sample[994]: Expectation = 5.23134447E+00	Variance = 2.77753679E-03	Tol = 1.67161676E-03 
+Proc[0]: Received norm from processor 5 
+Sample[995]: Expectation = 5.23133362E+00	Variance = 2.77486232E-03	Tol = 1.66997196E-03 
+Proc[0]: Received norm from processor 55 
+Sample[996]: Expectation = 5.23132317E+00	Variance = 2.77218504E-03	Tol = 1.66832800E-03 
+Proc[0]: Received norm from processor 33 
+Sample[997]: Expectation = 5.23133365E+00	Variance = 2.76951392E-03	Tol = 1.66668757E-03 
+Proc[0]: Received norm from processor 19 
+Sample[998]: Expectation = 5.23131873E+00	Variance = 2.76696081E-03	Tol = 1.66508433E-03 
+Proc[0]: Received norm from processor 51 
+Sample[999]: Expectation = 5.23125904E+00	Variance = 2.76774694E-03	Tol = 1.66448715E-03 
+Proc[0]: Received norm from processor 43 
+Sample[1000]: Expectation = 5.23124060E+00	Variance = 2.76531880E-03	Tol = 1.66292477E-03 
+Proc[0]: Received norm from processor 57 
+Sample[1001]: Expectation = 5.23119912E+00	Variance = 2.76427699E-03	Tol = 1.66178081E-03 
+Proc[0]: Sending kill signal to proc 1
+Proc[0]: Sending kill signal to proc 3
+Proc[0]: Sending kill signal to proc 5
+Proc[0]: Sending kill signal to proc 7
+Proc[0]: Sending kill signal to proc 9
+Proc[0]: Sending kill signal to proc 11
+Proc[0]: Sending kill signal to proc 13
+Proc[0]: Sending kill signal to proc 15
+Proc[0]: Sending kill signal to proc 17
+Proc[0]: Sending kill signal to proc 19
+Proc[0]: Sending kill signal to proc 21
+Proc[0]: Sending kill signal to proc 23
+Proc[0]: Sending kill signal to proc 25
+Proc[0]: Sending kill signal to proc 27
+Proc[0]: Sending kill signal to proc 29
+Proc[0]: Sending kill signal to proc 31
+Proc[0]: Sending kill signal to proc 33
+Proc[0]: Sending kill signal to proc 35
+Proc[0]: Sending kill signal to proc 37
+Proc[0]: Sending kill signal to proc 39
+Proc[0]: Sending kill signal to proc 41
+Proc[0]: Sending kill signal to proc 43
+Proc[0]: Sending kill signal to proc 45
+Proc[0]: Sending kill signal to proc 47
+Proc[0]: Sending kill signal to proc 49
+Proc[0]: Sending kill signal to proc 51
+Proc[0]: Sending kill signal to proc 53
+Proc[0]: Sending kill signal to proc 55
+Proc[0]: Sending kill signal to proc 57
+Proc[0]: Sending kill signal to proc 59
+Proc[0]: Sending kill signal to proc 61
+Proc[53]: We did 32 samples 
+Proc[39]: We did 31 samples 
+Proc[27]: We did 31 samples 
+Proc[29]: We did 31 samples 
+Proc[17]: We did 32 samples 
+Proc[61]: We did 46 samples 
+Proc[25]: We did 32 samples 
+Proc[1]: We did 32 samples 
+Proc[41]: We did 31 samples 
+Proc[49]: We did 32 samples 
+Proc[11]: We did 32 samples 
+Proc[21]: We did 32 samples 
+Proc[47]: We did 31 samples 
+Proc[13]: We did 32 samples 
+Proc[35]: We did 31 samples 
+Proc[45]: We did 31 samples 
+Proc[59]: We did 32 samples 
+Proc[37]: We did 32 samples 
+Proc[15]: We did 31 samples 
+Proc[7]: We did 32 samples 
+Proc[9]: We did 33 samples 
+Proc[23]: We did 32 samples 
+Proc[3]: We did 33 samples 
+Proc[55]: We did 32 samples 
+Proc[5]: We did 33 samples 
+Proc[31]: We did 31 samples 
+Proc[33]: We did 32 samples 
+Proc[19]: We did 32 samples 
+Proc[43]: We did 32 samples 
+Proc[51]: We did 32 samples 
+Expectation of ||U|| = 5.23119912E+00
+Communication GMRF (s) = 0.00000000E+00
+Setup GMRF (s) = 7.06614971E-01
+Solving GMRF (s) = 3.03325341E+01
+Communication SPDE (s) = 3.78648281E-01
+Setup SPDE (s) = 2.64828420E+00
+Solving SPDE (s) = 3.96011558E+01
+Communication root (s) = 7.03830786E+01
+Computation root (s) = 1.92236900E-02
+Proc[0]: All done! 
+Elapsed wall-clock time (sec)= 70.624374 
+NGhost = 27 and I am Processor[0] 
+tau2 = 0.001247 
+kappa = 28.284271 
+nu = 1.000000 
+Proc[57]: We did 33 samples 
+Finished job script on mother superior node i10hpc5...
+Finished user epilogue on all sister nodes...
+Starting user epilogue on mother superior node i10hpc5...
+Exiting user epilogue on mother superior node i10hpc5...

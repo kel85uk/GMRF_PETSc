@@ -1,15 +1,15 @@
 #!/bin/sh
-#PBS -l nodes=2:ppn=32
+#PBS -l nodes=1:ppn=32
 #PBS -l walltime=01:00:00
 #PBS -q express
 #PBS -M <login>@i10.informatik.uni-erlangen.de -m abe
-#PBS -N Test5_32SLMC_100x100_1000s
+#PBS -N Test6_32SLMC_500x500_10000s
 
 . /etc/profile.d/modules.sh
 module load gcc openmpi cuda boost cmake
-
+#export OMP_NUM_THREADS=1
 cd /home/stud/ug30owag/Documents/GMRF_PETSc
 #mpirun -np 32 ./Test3 -mat_type mpiaij -vec_type mpi -Nsamples 1000 -m 500 -n 500 -pc_type hypre -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-10
 #mpirun -np 32 ./test_PDE -mat_type mpiaij -vec_type mpi -ksp_monitor_short -pc_type hypre -ksp_type fgmres -ksp_gmres_modifiedgramschmidt -m 200 -n 200
-mpirun -np 32 ./Test5 -mat_type mpiaij -vec_type mpi -Nsamples 1000 -m 100 -n 100 -pc_type hypre -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-10
+mpirun -np 32 ./Test6 -mat_type mpiaij -vec_type mpi -Nsamples 10000 -m 500 -n 500 -pc_type hypre -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-10
 #mpirun -np 32 ./test_Chol -mat_type seqaij -vec_type seq -Nsamples 1000 -m 200 -n 200 -pc_type hypre -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-3

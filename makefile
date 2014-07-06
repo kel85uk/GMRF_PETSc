@@ -1,7 +1,8 @@
-
-CCFLAGS	         = -std=c++11 -O -I./src/ -D VEC_OUTPUT
+#CC = mpecc
+#CXX = mpecc
+CCFLAGS	         = -std=c++11 -O -I./src/
 FFLAGS	         = -Wall -Wconversion -Wshadow
-CPPFLAGS         = -std=c++11 -O -I./src/ -D VEC_OUTPUT
+CPPFLAGS         = -std=c++11 -O -I./src/
 FPPFLAGS         =
 #LOCDIR           = ./
 #EXAMPLESC        = ex29.c Test.cc test_serial.cc test_serial2.cc Functions.cc

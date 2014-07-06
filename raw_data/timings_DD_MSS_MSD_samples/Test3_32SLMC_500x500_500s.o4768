@@ -1,0 +1,83 @@
+Finished user prologue on all sister nodes...
+Starting user prologue on mother superior node i10hpc4...
+Exiting user prologue on mother superior node i10hpc4...
+Starting job script on mother superior node i10hpc4...
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+I am processor 0 
+Sample[1]: Expectation = 5.19773057E+00	Variance = 6.95332060E-310	Tol = 5.19773057E+00 
+Sample[2]: Expectation = 5.19219566E+00	Variance = 3.06352893E-05	Tol = 3.91377626E-03 
+Sample[3]: Expectation = 5.20495009E+00	Variance = 3.45774547E-04	Tol = 1.07358364E-02 
+Sample[4]: Expectation = 5.20826339E+00	Variance = 2.92264773E-04	Tol = 8.54787654E-03 
+Sample[5]: Expectation = 5.21399329E+00	Variance = 3.65139021E-04	Tol = 8.54563071E-03 
+Sample[6]: Expectation = 5.22333326E+00	Variance = 7.40457526E-04	Tol = 1.11089868E-02 
+Sample[7]: Expectation = 5.23262260E+00	Variance = 1.15242915E-03	Tol = 1.28309289E-02 
+Sample[8]: Expectation = 5.22824243E+00	Variance = 1.14267673E-03	Tol = 1.19513427E-02 
+Sample[9]: Expectation = 5.23303750E+00	Variance = 1.19965412E-03	Tol = 1.15453411E-02 
+Sample[10]: Expectation = 5.22922233E+00	Variance = 1.21068858E-03	Tol = 1.10031295E-02 
+Sample[11]: Expectation = 5.23477829E+00	Variance = 1.40931254E-03	Tol = 1.13189806E-02 
+Sample[12]: Expectation = 5.22939963E+00	Variance = 1.61009894E-03	Tol = 1.15833895E-02 
+Sample[13]: Expectation = 5.22530642E+00	Variance = 1.68729757E-03	Tol = 1.13926345E-02 
+Sample[14]: Expectation = 5.22951729E+00	Variance = 1.79728413E-03	Tol = 1.13303768E-02 
+Sample[15]: Expectation = 5.23288855E+00	Variance = 1.83658110E-03	Tol = 1.10652040E-02 
+Sample[16]: Expectation = 5.23779370E+00	Variance = 2.08270259E-03	Tol = 1.14091591E-02 
+Sample[17]: Expectation = 5.23646702E+00	Variance = 1.98835211E-03	Tol = 1.08148920E-02 
+Sample[18]: Expectation = 5.23715228E+00	Variance = 1.88587092E-03	Tol = 1.02357514E-02 
+Sample[19]: Expectation = 5.23720100E+00	Variance = 1.78665729E-03	Tol = 9.69714362E-03 
+Sample[20]: Expectation = 5.23758686E+00	Variance = 1.70015323E-03	Tol = 9.21995994E-03 
+Sample[21]: Expectation = 5.23416205E+00	Variance = 1.85377956E-03	Tol = 9.39548918E-03 
+Sample[22]: Expectation = 5.23635939E+00	Variance = 1.87091098E-03	Tol = 9.22178986E-03 
+Sample[23]: Expectation = 5.23425660E+00	Variance = 1.88684482E-03	Tol = 9.05741306E-03 
+Sample[24]: Expectation = 5.23006340E+00	Variance = 2.21263405E-03	Tol = 9.60172305E-03 
+Sample[25]: Expectation = 5.23121440E+00	Variance = 2.15592395E-03	Tol = 9.28638563E-03 
+Sample[26]: Expectation = 5.23102339E+00	Variance = 2.07391593E-03	Tol = 8.93118117E-03 
+Sample[27]: Expectation = 5.23265341E+00	Variance = 2.06618517E-03	Tol = 8.74787840E-03 
+Sample[28]: Expectation = 5.23317692E+00	Variance = 1.99979257E-03	Tol = 8.45110426E-03 
+Sample[29]: Expectation = 5.23188304E+00	Variance = 1.97770937E-03	Tol = 8.25813992E-03 
+Sample[30]: Expectation = 5.23073408E+00	Variance = 1.95006915E-03	Tol = 8.06240069E-03 
+Sample[31]: Expectation = 5.23374422E+00	Variance = 2.15899235E-03	Tol = 8.34535286E-03 
+Sample[32]: Expectation = 5.23606452E+00	Variance = 2.25842115E-03	Tol = 8.40093215E-03 
+Sample[33]: Expectation = 5.23455387E+00	Variance = 2.26301013E-03	Tol = 8.28106663E-03 
+Sample[34]: Expectation = 5.23425306E+00	Variance = 2.19943716E-03	Tol = 8.04296763E-03 
+Sample[35]: Expectation = 5.23261369E+00	Variance = 2.22797183E-03	Tol = 7.97849222E-03 
+I did 35 samples 
+Total colors = 16 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+I did 35 samples 
+Total samples = 560 
+Expectation of ||U|| = 5.2346755E+00 
+Elapsed wall-clock time (sec)= 76.967931 
+NGhost = 27 and I am Processor[0] 
+tau2 = 0.001247 
+kappa = 28.284271 
+nu = 1.000000 
+Finished job script on mother superior node i10hpc4...
+Finished user epilogue on all sister nodes...
+Starting user epilogue on mother superior node i10hpc4...
+Exiting user epilogue on mother superior node i10hpc4...
