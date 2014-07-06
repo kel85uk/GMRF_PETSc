@@ -21,11 +21,6 @@ int main(int argc,char **argv)
 	Vec* Wrapalla[12] = {&rho, &ErhoNm1, &ErhoN, &VrhoN, &N01, &M2Nr, &resR, &gmrf, &EgmrfN, &EgmrfNm1, &VgmrfN, &M2Ng};
 	Vec* Wrapallb[7] = {&U, &EUNm1, &EUN, &VUN, &b, &M2N, &resU};
 	Mat A, L;
-	PetscScalar* timings = new PetscScalar[7];
-	PetscScalar* buffer_timings = new PetscScalar[7];
-	for (int i = 0; i < 7; ++i) timings[i] = 0;
-	for (int i = 0; i < 7; ++i) buffer_timings[i] = 0;
-	PetscScalar temp_time;
 	KSP kspSPDE, kspGMRF;
 	PetscInt		Ns = 0, bufferInt;
 	UserCTX		users;
@@ -59,46 +54,50 @@ int main(int argc,char **argv)
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	PetscLogBegin();
 	MPI_Comm_rank(petsc_comm_slaves,&lrank); // Get the processor local rank
-	
+	PetscLogEvent COMMS, COMPS;
+	PetscClassId communications, computations;
+	PetscClassIdRegister("All Comms",&communications);
+  PetscLogEventRegister("Communications",communications,&COMMS);
+  PetscClassIdRegister("All Comps",&computations);
+  PetscLogEventRegister("Computations",computations,&COMPS);
+  std::vector<PetscLogEvent> events;
+  events.push_back(COMMS);
+  events.push_back(COMPS);
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
 	std::default_random_engine generator(rand());
-	ierr = PetscLogStageRegister("Get options and create all vectors", &stage);CHKERRQ(ierr);
-	ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 	ierr = GetOptions(users);CHKERRQ(ierr);
 	/* Create all the vectors and matrices needed for calculation */
+	PetscLogEventBegin(events[1],0,0,0,0);
 	ierr = CreateVectors(*Wrapalla,12,users.NT,petsc_comm_slaves);CHKERRQ(ierr);
 	ierr = CreateVectors(*Wrapallb,7,users.NI,petsc_comm_slaves);CHKERRQ(ierr);
 	/* Create Matrices and Solver contexts */
 	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE,petsc_comm_slaves);CHKERRQ(ierr);
-  ierr = PetscLogStagePop();CHKERRQ(ierr);
-	PetscScalar normU = 0.,EnormUN = 0.,VnormUN = 0.,EnormUNm1 = 0.,M2NnU = 0.,tol = 1.0;
-  
-  ierr = PetscLogStageRegister("Set GMRF operator", &stage);CHKERRQ(ierr);
-	ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
-	ierr = SetGMRFOperatorT(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa,timings);CHKERRQ(ierr);
-	temp_time = MPI_Wtime();
+  	PetscScalar normU = 0.,EnormUN = 0.,VnormUN = 0.,EnormUNm1 = 0.,M2NnU = 0.,tol = 1.0;
+  PetscLogEventEnd(events[1],0,0,0,0);
+	ierr = SetGMRFOperatorT(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa,events);CHKERRQ(ierr);
+	PetscLogEventBegin(events[1],0,0,0,0);
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
-	temp_time = MPI_Wtime() - temp_time;
-	timings[1] += temp_time;
-  ierr = PetscLogStagePop();CHKERRQ(ierr);
+	PetscLogEventEnd(events[1],0,0,0,0);
 	// Managers report duty to the root processor
-	if(lrank == 0) MPI_Isend(&grank,1,MPI_INT,0,lrank,MPI_COMM_WORLD,&request);
+	if(lrank == 0) {
+	  PetscLogEventBegin(events[0],0,0,0,0);
+	  MPI_Isend(&grank,1,MPI_INT,0,lrank,MPI_COMM_WORLD,&request);
+	  PetscLogEventEnd(events[0],0,0,0,0);
+  }
 	// Start the ball rolling
 	if(grank == 0){
 		PetscInt Nmanagers = 0;std::vector<PetscMPIInt> masters;
-		PetscScalar root_times[2] = {0.,0.};
 		PetscInt received_answers = 1, who, whomax;
 		// Receive all the managers and place in a list
-		temp_time = MPI_Wtime();
 		while(Nmanagers <= ncolors){
+		  PetscLogEventBegin(events[0],0,0,0,0);
 			MPI_Recv(&bufferRank,1,MPI_INT,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
+			PetscLogEventEnd(events[0],0,0,0,0);
 			masters.push_back(bufferRank);
 			++Nmanagers;
 		}
-		temp_time = MPI_Wtime() - temp_time;
-	  root_times[0] += temp_time;
 		std::sort(masters.begin(),masters.end(),[](PetscMPIInt a,PetscMPIInt b){return (a<b);});
 		std::for_each(masters.begin(),masters.end(),[](PetscMPIInt s){std::cout << s << std::endl;});
 		PetscInt total_work = users.Nsamples;
@@ -110,114 +109,88 @@ int main(int argc,char **argv)
 		#if DEBUG
 			PetscPrintf(MPI_COMM_WORLD,"I am processor %d in world, %d in petsc \n",grank,lrank);
 		#endif
-    ierr = PetscLogStageRegister("Start distributing work", &stage);CHKERRQ(ierr);
-    ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
-    temp_time = MPI_Wtime();
 		for(who = 1; who <= whomax; ++who){
+		  PetscLogEventBegin(events[0],0,0,0,0);
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
+			PetscLogEventEnd(events[0],0,0,0,0);
 		}
-		temp_time = MPI_Wtime() - temp_time;
-	  root_times[0] += temp_time;
 		while ((received_answers <= total_work) && (tol > users.TOL)){
-		  temp_time = MPI_Wtime();
+		  PetscLogEventBegin(events[0],0,0,0,0);
 			MPI_Recv(&bufferNormU,1,MPI_DOUBLE,MPI_ANY_SOURCE,WORKTAG,MPI_COMM_WORLD,&status);
+			PetscLogEventEnd(events[0],0,0,0,0);
 			who = status.MPI_SOURCE;
 			#if 1
 				PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Received norm from processor %d \n",grank,who);
 			#endif
-			temp_time = MPI_Wtime() - temp_time;
-	    root_times[0] += temp_time;
 			normU = bufferNormU;
-			temp_time = MPI_Wtime();
+			PetscLogEventBegin(events[1],0,0,0,0);
 			update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,received_answers);
-			temp_time = MPI_Wtime() - temp_time;
-	    root_times[1] += temp_time;
+			PetscLogEventEnd(events[1],0,0,0,0);
 			++received_answers;
-			temp_time = MPI_Wtime();
 			if (Ns < users.Nsamples || tol > users.TOL){
+			  PetscLogEventBegin(events[0],0,0,0,0);
 				MPI_Isend(&bufferBool,1,MPI_C_BOOL,who,WORKTAG,MPI_COMM_WORLD,&request);
+				PetscLogEventEnd(events[0],0,0,0,0);
 				++Ns;
 			}
-      temp_time = MPI_Wtime() - temp_time;
-      root_times[0] += temp_time;
 		}
-		temp_time = MPI_Wtime();
 		for (who = 1; who <= whomax; ++who){
 			bufferBool = false;
+			PetscLogEventBegin(events[0],0,0,0,0);
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],DIETAG,MPI_COMM_WORLD,&request);
+			PetscLogEventEnd(events[0],0,0,0,0);
 			PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Sending kill signal to proc %d\n",grank,masters[who]);
 		}
-		MPI_Reduce(timings,buffer_timings,7,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
-		temp_time = MPI_Wtime() - temp_time;
-	  root_times[0] += temp_time;
-		ierr = PetscLogStagePop();CHKERRQ(ierr);
 		PetscPrintf(MPI_COMM_WORLD,"Expectation of ||U|| = %4.8E\n",EnormUN);
-		PetscPrintf(MPI_COMM_WORLD,"Communication GMRF (s) = %4.8E\n",buffer_timings[0]);
-		PetscPrintf(MPI_COMM_WORLD,"Setup GMRF (s) = %4.8E\n",buffer_timings[1]);
-		PetscPrintf(MPI_COMM_WORLD,"Solving GMRF (s) = %4.8E\n",buffer_timings[2]);
-		PetscPrintf(MPI_COMM_WORLD,"Communication SPDE (s) = %4.8E\n",buffer_timings[3]);
-		PetscPrintf(MPI_COMM_WORLD,"Setup SPDE (s) = %4.8E\n",buffer_timings[4]);
-		PetscPrintf(MPI_COMM_WORLD,"Solving SPDE (s) = %4.8E\n",buffer_timings[5]);
-		PetscPrintf(MPI_COMM_WORLD,"Communication root (s) = %4.8E\n",root_times[0]);
-		PetscPrintf(MPI_COMM_WORLD,"Computation root (s) = %4.8E\n",root_times[1]);
 	}
 	if (grank != 0){
 		int work_status = DIETAG;
-		ierr = PetscLogStageRegister("Receive and work on jobs", &stage);CHKERRQ(ierr);
-    ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 		if(lrank == 0) {
-		  temp_time = MPI_Wtime();
+		  PetscLogEventBegin(events[0],0,0,0,0);
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
-			temp_time = MPI_Wtime() - temp_time;
-			timings[7] += temp_time;
+			PetscLogEventEnd(events[0],0,0,0,0);
 			work_status = status.MPI_TAG;
-			temp_time = MPI_Wtime();
+			PetscLogEventBegin(events[0],0,0,0,0);
 			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-			temp_time = MPI_Wtime() - temp_time;
-			timings[7] += temp_time;
+			PetscLogEventEnd(events[0],0,0,0,0);
 			#if DEBUG
 				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates\n",grank);
 			#endif
 		}
 		else {
-		  temp_time = MPI_Wtime();
+      	PetscLogEventBegin(events[0],0,0,0,0);
 			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-			temp_time = MPI_Wtime() - temp_time;
-			timings[7] += temp_time;
+			PetscLogEventEnd(events[0],0,0,0,0);
 			#if DEBUG
 				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast\n",grank);
 			#endif
 		}
 		if(work_status != DIETAG){
 			while(true){
-        ierr = UnitSolverTimings(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,timings,petsc_comm_slaves); CHKERRQ(ierr);
+        ierr = UnitSolverTimings(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,events,petsc_comm_slaves); CHKERRQ(ierr);
 				++Ns;				
 				if(lrank == 0){
-				  temp_time = MPI_Wtime();
+				  PetscLogEventBegin(events[0],0,0,0,0);
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
-					temp_time = MPI_Wtime() - temp_time;
-			    timings[7] += temp_time;
+					PetscLogEventEnd(events[0],0,0,0,0);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: Waiting for work\n",grank);
 					#endif
-					temp_time = MPI_Wtime();
+					PetscLogEventBegin(events[0],0,0,0,0);
 					MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
-					temp_time = MPI_Wtime() - temp_time;
-			    timings[7] += temp_time;
+					PetscLogEventEnd(events[0],0,0,0,0);
 					work_status = status.MPI_TAG;
-					temp_time = MPI_Wtime();
+					PetscLogEventBegin(events[0],0,0,0,0);
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-					temp_time = MPI_Wtime() - temp_time;
-			    timings[7] += temp_time;
+					PetscLogEventEnd(events[0],0,0,0,0);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates with tag = %d\n",grank,work_status);
 					#endif
 				}
 				else{
-					temp_time = MPI_Wtime();
+				  PetscLogEventBegin(events[0],0,0,0,0);
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-					temp_time = MPI_Wtime() - temp_time;
-			    timings[7] += temp_time;
+					PetscLogEventEnd(events[0],0,0,0,0);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast with tag = %d\n",grank,work_status);
 					#endif
@@ -226,11 +199,9 @@ int main(int argc,char **argv)
 					#if DEBUG
 					PetscPrintf(petsc_comm_slaves,"Proc[%d]: We finished all work \n",grank);	
 					#endif
-					MPI_Reduce(timings,buffer_timings,7,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
 					break;
 				}
 			}
-		  ierr = PetscLogStagePop();CHKERRQ(ierr);
 		}
 	}
 

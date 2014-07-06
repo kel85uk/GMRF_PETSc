@@ -6,7 +6,7 @@ PetscErrorCode UnitSolver(Vec*&,Vec*&,Mat*&,KSP*&,UserCTX&,std::default_random_e
 
 PetscErrorCode UnitSolver(Vec&,Vec&,Vec&,KSP&,Vec&,Vec&,Mat&,KSP&,UserCTX&,std::default_random_engine&,const PetscMPIInt&,const PetscInt&,PetscScalar&);
 
-PetscErrorCode UnitSolverTimings(Vec&,Vec&,Vec&,KSP&,Vec&,Vec&,Mat&,KSP&,UserCTX&,std::default_random_engine&,const PetscMPIInt&,const PetscInt&,PetscScalar&,PetscScalar*&,const MPI_Comm&);
+PetscErrorCode UnitSolverTimings(Vec&,Vec&,Vec&,KSP&,Vec&,Vec&,Mat&,KSP&,UserCTX&,std::default_random_engine&,const PetscMPIInt&,const PetscInt&,PetscScalar&,std::vector<PetscLogEvent>&,const MPI_Comm&);
 
 PetscErrorCode UnitSolver(Vec&,Vec&,Vec&,KSP&,Vec&,Vec&,Mat&,KSP&,UserCTX&,std::default_random_engine&,const PetscMPIInt&,const PetscInt&);
 
