@@ -58,7 +58,7 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 	return ierr;
 }
 
-PetscErrorCode UnitSolverTimings(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU,PetscScalar*& timings){
+PetscErrorCode UnitSolverTimings(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU,PetscScalar*& timings,const MPI_Comm& petsc_comm){
 	PetscErrorCode ierr;
 	// timings = {comm_gmrf,setup_gmrf,solve_gmrf,comm_spde,setup_spde,solve_spde};
 	PetscScalar startTime1;
@@ -75,8 +75,8 @@ PetscErrorCode UnitSolverTimings(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Ve
 	ierr = VecScale(rho,1.0/sqrt(users.tau2));CHKERRQ(ierr);
 	ierr = VecCopy(rho,gmrf);CHKERRQ(ierr);
 	ierr = VecExp(rho);CHKERRQ(ierr);
-	ierr = SetOperatorT(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy,timings[3]);CHKERRQ(ierr);
-	ierr = SetSourceT(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb,timings[3]);CHKERRQ(ierr);
+	ierr = SetOperatorT(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy,timings[3],petsc_comm);CHKERRQ(ierr);
+	ierr = SetSourceT(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb,timings[3],petsc_comm);CHKERRQ(ierr);
 	ierr = KSPSetOperators(kspSPDE,A,A,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
 	startTime1 = MPI_Wtime() - startTime1;
 	timings[4] += startTime1;

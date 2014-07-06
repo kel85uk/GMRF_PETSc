@@ -10,6 +10,16 @@ PetscErrorCode CreateVectors(Vec*& Wrapall,const PetscInt& N,const PetscInt& vec
 	return ierr;
 }
 
+PetscErrorCode CreateVectors(Vec*& Wrapall,const PetscInt& N,const PetscInt& veclen, const MPI_Comm& petsc_comm){
+	PetscErrorCode ierr;
+	ierr = VecCreate(petsc_comm,&Wrapall[0]);CHKERRQ(ierr);
+	ierr = VecSetSizes(Wrapall[0],PETSC_DECIDE,veclen);CHKERRQ(ierr);
+	ierr = VecSetFromOptions(Wrapall[0]);CHKERRQ(ierr);
+	for (int NN = 1; NN < N; ++NN)
+		ierr = VecDuplicate(Wrapall[0],&Wrapall[NN]);CHKERRQ(ierr);
+	return ierr;
+}
+
 PetscErrorCode DestroyVectors(Vec*& Wrapall,const PetscInt& N){
 	PetscErrorCode ierr;
 	for (int NN = 0; NN < N; ++NN)
@@ -36,6 +46,30 @@ PetscErrorCode CreateSolvers(Mat& L, const PetscInt& NT, KSP& kspGMRF, Mat& A,co
 	ierr = MatSeqAIJSetPreallocation(A,5,NULL);CHKERRQ(ierr);
 	ierr = MatSetUp(A);CHKERRQ(ierr);			
 	ierr = KSPCreate(PETSC_COMM_WORLD,&kspSPDE);CHKERRQ(ierr);
+	ierr = KSPSetTolerances(kspSPDE,1.e-7/(NI),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+	ierr = KSPSetFromOptions(kspSPDE);CHKERRQ(ierr);
+	return ierr;
+}
+
+PetscErrorCode CreateSolvers(Mat& L, const PetscInt& NT, KSP& kspGMRF, Mat& A,const PetscInt& NI, KSP& kspSPDE,const MPI_Comm& petsc_comm){
+	PetscErrorCode ierr;
+	ierr = MatCreate(petsc_comm,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
+	ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,NT,NT);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
+	ierr = MatSetFromOptions(L);CHKERRQ(ierr);
+	ierr = MatMPIAIJSetPreallocation(L,5,NULL,5,NULL);CHKERRQ(ierr);
+	ierr = MatSeqAIJSetPreallocation(L,5,NULL);CHKERRQ(ierr);
+	ierr = MatSetUp(L);CHKERRQ(ierr);	
+	ierr = KSPCreate(petsc_comm,&kspGMRF);CHKERRQ(ierr);
+	ierr = KSPSetTolerances(kspGMRF,1.e-7/(NT),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+	ierr = KSPSetFromOptions(kspGMRF);CHKERRQ(ierr);
+
+	ierr = MatCreate(petsc_comm,&A);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
+	ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,NI,NI);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
+	ierr = MatSetFromOptions(A);CHKERRQ(ierr);
+	ierr = MatMPIAIJSetPreallocation(A,5,NULL,5,NULL);CHKERRQ(ierr);
+	ierr = MatSeqAIJSetPreallocation(A,5,NULL);CHKERRQ(ierr);
+	ierr = MatSetUp(A);CHKERRQ(ierr);			
+	ierr = KSPCreate(petsc_comm,&kspSPDE);CHKERRQ(ierr);
 	ierr = KSPSetTolerances(kspSPDE,1.e-7/(NI),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
 	ierr = KSPSetFromOptions(kspSPDE);CHKERRQ(ierr);
 	return ierr;
@@ -250,7 +284,7 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	return ierr;
 }
 
-PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy,PetscScalar& comm_time){
+PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy,PetscScalar& comm_time,const MPI_Comm& petsc_comm){
 	PetscInt			i,j,Ii,II,Ji,JJ,Istart,Iend, Nrhol,ILs,ILe;
 	IS					local_indices, global_indices;
 	VecScatter		rho_scatter_ctx;
@@ -267,7 +301,7 @@ PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const Pets
 	ierr = VecSetSizes(rhol_vec,PETSC_DECIDE,Nrhol);CHKERRQ(ierr);
 	ierr = VecSetFromOptions(rhol_vec);CHKERRQ(ierr);	
 
-	ierr = ISCreateStride(PETSC_COMM_WORLD,Nrhol,ILs,1,&global_indices);CHKERRQ(ierr); // Get the indices for global rho vector
+	ierr = ISCreateStride(petsc_comm,Nrhol,ILs,1,&global_indices);CHKERRQ(ierr); // Get the indices for global rho vector
 	ierr = ISCreateStride(PETSC_COMM_SELF,Nrhol,0,1,&local_indices);CHKERRQ(ierr); // Indices for local rhol vector
 	ierr = VecScatterCreate(rho,global_indices,rhol_vec,local_indices,&rho_scatter_ctx);
 	// Copy elements from rho to rhol_vec
@@ -481,7 +515,7 @@ PetscErrorCode SetSource(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt&
 	return ierr;
 }
 
-PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt& n,const PetscInt& NGhost,const PetscReal& dx,const PetscReal& dy,const PetscReal& UN,const PetscReal& US,const PetscReal& UE,const PetscReal& UW,const PetscReal& lamb,PetscScalar& comm_time){
+PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt& n,const PetscInt& NGhost,const PetscReal& dx,const PetscReal& dy,const PetscReal& UN,const PetscReal& US,const PetscReal& UE,const PetscReal& UW,const PetscReal& lamb,PetscScalar& comm_time,const MPI_Comm& petsc_comm){
 	PetscErrorCode ierr;
 	PetscInt Ii, II, JJ, Istart, Iend, i, j, Nrhol,ILs,ILe;
 	PetscScalar userb, rhoII, rhoJJ;
@@ -500,7 +534,7 @@ PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt
 	ierr = VecSetSizes(rhol_vec,PETSC_DECIDE,Nrhol);CHKERRQ(ierr);
 	ierr = VecSetFromOptions(rhol_vec);CHKERRQ(ierr);	
 
-	ierr = ISCreateStride(PETSC_COMM_WORLD,Nrhol,ILs,1,&global_indices);CHKERRQ(ierr); // Get the indices for global rho vector
+	ierr = ISCreateStride(petsc_comm,Nrhol,ILs,1,&global_indices);CHKERRQ(ierr); // Get the indices for global rho vector
 	ierr = ISCreateStride(PETSC_COMM_SELF,Nrhol,0,1,&local_indices);CHKERRQ(ierr); // Indices for local rhol vector
 	ierr = VecScatterCreate(rho,global_indices,rhol_vec,local_indices,&rho_scatter_ctx);
 	// Copy elements from rho to rhol_vec
@@ -516,32 +550,32 @@ PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt
 		j = (PetscInt) Ii/m; i = Ii - j*m;
 		II = (i + NGhost) + (m+2*NGhost)*(j + NGhost);
 		rhoII = rhol_arr[II-ILs];
-		if (rhoII == 0) SETERRQ(PETSC_COMM_WORLD,1,"Something wrong b with rhoII");
+		if (rhoII == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoII");
 		if (i == 0){
 			JJ = II - 1;
 			rhoJJ = rhol_arr[JJ-ILs];
-			if (rhoJJ == 0) SETERRQ(PETSC_COMM_WORLD,1,"Something wrong b with rhoJJ-1");
+			if (rhoJJ == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoJJ-1");
 			userb = (0.5)*(rhoII + rhoJJ)*UW*2*ihx2;
 			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
 		}
 		else if (i == (m-1)){
 			JJ = II + 1;
 			rhoJJ = rhol_arr[JJ-ILs];
-			if (rhoJJ == 0) SETERRQ(PETSC_COMM_WORLD,1,"Something wrong b with rhoJJ+1");
+			if (rhoJJ == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoJJ+1");
 			userb = (0.5)*(rhoII + rhoJJ)*UE*2*ihx2;
 			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
 		}
 		else if (j == 0){
 			JJ = II - (m + 2*NGhost);
 			rhoJJ = rhol_arr[JJ-ILs];
-			if (rhoJJ == 0) SETERRQ(PETSC_COMM_WORLD,1,"Something wrong b with rhoJJ-m");
+			if (rhoJJ == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoJJ-m");
 			userb = (0.5)*(rhoII + rhoJJ)*US*2*ihy2;
 			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
 		}
 		else if (j == (n-1)){
 			JJ = II + (m + 2*NGhost);
 			rhoJJ = rhol_arr[JJ-ILs];
-			if (rhoJJ == 0) SETERRQ(PETSC_COMM_WORLD,1,"Something wrong b with rhoJJ+m");
+			if (rhoJJ == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoJJ+m");
 			userb = (0.5)*(rhoII + rhoJJ)*UN*2*ihy2;
 			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
 		}

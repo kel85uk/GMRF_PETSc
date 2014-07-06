@@ -52,7 +52,11 @@ TestV5: ./src/Functions.o ./src/Solver.o Test5.o  chkopts
 	
 TestV6: ./src/Functions.o ./src/Solver.o Test6.o  chkopts
 	-${CLINKER} -o Test6 ./src/Functions.o ./src/Solver.o Test6.o  ${PETSC_SNES_LIB} ${SLEPC_LIB}
-	${RM} Test6.o	 ./src/Functions.o	 ./src/Solver.o	
+	${RM} Test6.o	 ./src/Functions.o	 ./src/Solver.o
+	
+TestV8: ./src/Functions.o ./src/Solver.o Test8.o  chkopts
+	-${CLINKER} -o Test8 ./src/Functions.o ./src/Solver.o Test8.o  ${PETSC_SNES_LIB} ${SLEPC_LIB}
+	${RM} Test8.o	 ./src/Functions.o	 ./src/Solver.o		
 	
 #mpiexec -np 4 ./test_PDE -mat_type mpiaij -vec_type mpi -ksp_monitor_short -pc_type gamg -ksp_type fgmres -ksp_gmres_modifiedgramschmidt -m 100 -n 100
 

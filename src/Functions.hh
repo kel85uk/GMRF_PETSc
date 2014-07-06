@@ -23,8 +23,10 @@ typedef struct{
 
 PetscErrorCode GetOptions(UserCTX&);
 PetscErrorCode CreateVectors(Vec*&,const PetscInt&,const PetscInt&);
+PetscErrorCode CreateVectors(Vec*&,const PetscInt&,const PetscInt&,const MPI_Comm&);
 PetscErrorCode DestroyVectors(Vec*&,const PetscInt&);
 PetscErrorCode CreateSolvers(Mat&,const PetscInt&,KSP&,Mat&,const PetscInt&,KSP&);
+PetscErrorCode CreateSolvers(Mat&,const PetscInt&,KSP&,Mat&,const PetscInt&,KSP&,const MPI_Comm&);
 
 PetscErrorCode Interp2D(Vec&,const Vec&);
 
@@ -32,13 +34,13 @@ PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const Pet
 
 PetscErrorCode SetOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetOperator(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
-PetscErrorCode SetOperatorT(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&,PetscScalar&);
+PetscErrorCode SetOperatorT(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&,PetscScalar&,const MPI_Comm&);
 
 PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&, const PetscMPIInt&,std::default_random_engine&);
 
 PetscErrorCode SetSource(Vec&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscBool&);
 PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&);
-PetscErrorCode SetSourceT(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,PetscScalar&);
+PetscErrorCode SetSourceT(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,PetscScalar&,const MPI_Comm&);
 
 void VecPostProcs(const std::vector<PetscScalar>&, const char*, const PetscMPIInt&);
 PetscErrorCode VecPostProcs(const Vec&, const char*);

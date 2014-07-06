@@ -55,10 +55,10 @@ int main(int argc,char **argv)
 	#endif
 	MPI_Comm_split(MPI_COMM_WORLD, color, grank, &petsc_comm_slaves);
 	
-	PETSC_COMM_WORLD = petsc_comm_slaves;
+	//PETSC_COMM_WORLD = petsc_comm_slaves;
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	PetscLogBegin();
-	MPI_Comm_rank(PETSC_COMM_WORLD,&lrank); // Get the processor local rank
+	MPI_Comm_rank(petsc_comm_slaves,&lrank); // Get the processor local rank
 	
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
@@ -68,10 +68,10 @@ int main(int argc,char **argv)
 	ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
 	ierr = GetOptions(users);CHKERRQ(ierr);
 	/* Create all the vectors and matrices needed for calculation */
-	ierr = CreateVectors(*Wrapalla,12,users.NT);CHKERRQ(ierr);
-	ierr = CreateVectors(*Wrapallb,7,users.NI);CHKERRQ(ierr);
+	ierr = CreateVectors(*Wrapalla,12,users.NT,petsc_comm_slaves);CHKERRQ(ierr);
+	ierr = CreateVectors(*Wrapallb,7,users.NI,petsc_comm_slaves);CHKERRQ(ierr);
 	/* Create Matrices and Solver contexts */
-	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE);CHKERRQ(ierr);
+	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE,petsc_comm_slaves);CHKERRQ(ierr);
   ierr = PetscLogStagePop();CHKERRQ(ierr);
 	PetscScalar normU = 0.,EnormUN = 0.,VnormUN = 0.,EnormUNm1 = 0.,M2NnU = 0.,tol = 1.0;
   
@@ -172,7 +172,7 @@ int main(int argc,char **argv)
 			timings[7] += temp_time;
 			work_status = status.MPI_TAG;
 			temp_time = MPI_Wtime();
-			MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 			temp_time = MPI_Wtime() - temp_time;
 			timings[7] += temp_time;
 			#if DEBUG
@@ -181,7 +181,7 @@ int main(int argc,char **argv)
 		}
 		else {
 		  temp_time = MPI_Wtime();
-			MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 			temp_time = MPI_Wtime() - temp_time;
 			timings[7] += temp_time;
 			#if DEBUG
@@ -190,7 +190,7 @@ int main(int argc,char **argv)
 		}
 		if(work_status != DIETAG){
 			while(true){
-        ierr = UnitSolverTimings(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,timings); CHKERRQ(ierr);
+        ierr = UnitSolverTimings(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,timings,petsc_comm_slaves); CHKERRQ(ierr);
 				++Ns;				
 				if(lrank == 0){
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
@@ -199,20 +199,20 @@ int main(int argc,char **argv)
 					#endif
 					MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 					work_status = status.MPI_TAG;
-					MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates with tag = %d\n",grank,work_status);
 					#endif
 				}
 				else{
-					MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast with tag = %d\n",grank,work_status);
 					#endif
 				}
 				if(work_status == DIETAG){
 					#if DEBUG
-					PetscPrintf(PETSC_COMM_WORLD,"Proc[%d]: We finished all work \n",grank);	
+					PetscPrintf(petsc_comm_slaves,"Proc[%d]: We finished all work \n",grank);	
 					#endif
 					MPI_Reduce(timings,buffer_timings,6,MPI_DOUBLE,MPI_MAX,0,MPI_COMM_WORLD);
 					break;
@@ -224,7 +224,7 @@ int main(int argc,char **argv)
 
 	endTime = MPI_Wtime();
 	PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: All done! \n",grank);
-	if (grank != 0) PetscPrintf(PETSC_COMM_WORLD,"Proc[%d]: We did %d samples \n",grank,(Ns-1));
+	if (grank != 0) PetscPrintf(petsc_comm_slaves,"Proc[%d]: We did %d samples \n",grank,(Ns-1));
 	PetscPrintf(MPI_COMM_WORLD,"Elapsed wall-clock time (sec)= %f \n",endTime - startTime);
 	PetscPrintf(MPI_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,lrank);
 	PetscPrintf(MPI_COMM_WORLD,"tau2 = %f \n",users.tau2);
