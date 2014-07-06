@@ -101,7 +101,7 @@ int main(int argc,char **argv)
 	  root_times[0] += temp_time;
 		std::sort(masters.begin(),masters.end(),[](PetscMPIInt a,PetscMPIInt b){return (a<b);});
 		std::for_each(masters.begin(),masters.end(),[](PetscMPIInt s){std::cout << s << std::endl;});
-		PetscInt total_work = users.Nsamples + 1;
+		PetscInt total_work = users.Nsamples;
 		PetscScalar bufferNormU;
 		whomax = ncolors;
 		if(whomax > total_work)
