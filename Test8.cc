@@ -77,8 +77,8 @@ int main(int argc,char **argv)
   
   ierr = PetscLogStageRegister("Set GMRF operator", &stage);CHKERRQ(ierr);
 	ierr = PetscLogStagePush(stage);CHKERRQ(ierr);
+	ierr = SetGMRFOperatorT(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa,timings);CHKERRQ(ierr);
 	temp_time = MPI_Wtime();
-	ierr = SetGMRFOperator(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa);CHKERRQ(ierr);
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
 	temp_time = MPI_Wtime() - temp_time;
 	timings[1] += temp_time;

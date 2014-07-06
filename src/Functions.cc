@@ -151,6 +151,45 @@ PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const
 	return ierr;
 }
 
+PetscErrorCode SetGMRFOperatorT(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa,PetscScalar*& timings){
+	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
+	PetscReal			dxdy = 1.0, dxidy = 1.0/dy/dy, dyidx = 1.0/dx/dx;
+	PetscReal			vD, vN = -dxidy, vS = -dxidy, vE = -dyidx, vW = -dyidx;
+	PetscErrorCode ierr;
+	PetscScalar temp_time;
+	ierr = MatGetOwnershipRange(L,&Istart,&Iend);CHKERRQ(ierr);
+  temp_time = MPI_Wtime();
+	for (Ii=Istart; Ii<Iend; Ii++) {
+		vD = 0.; j = (PetscInt) Ii/M; i = Ii - j*M;
+		if (i>0)   {J = Ii - 1; ierr = MatSetValues(L,1,&Ii,1,&J,&vW,INSERT_VALUES);CHKERRQ(ierr);}
+		if (i<M-1) {J = Ii + 1; ierr = MatSetValues(L,1,&Ii,1,&J,&vE,INSERT_VALUES);CHKERRQ(ierr);}
+		if (j>0)   {J = Ii - M; ierr = MatSetValues(L,1,&Ii,1,&J,&vS,INSERT_VALUES);CHKERRQ(ierr);}
+		if (j<N-1) {J = Ii + M; ierr = MatSetValues(L,1,&Ii,1,&J,&vN,INSERT_VALUES);CHKERRQ(ierr);}
+		vD = -(vW + vE + vS + vN) + kappa*kappa;
+		if (j == 0){
+      			vD			+=		vS;
+			}
+      if (j == N-1){
+				vD			+=		vN;
+			}
+      if (i == 0){
+				vD			+=		vW;
+			}
+      if (i == M-1){
+				vD			+=		vE;
+			}		
+		ierr = MatSetValues(L,1,&Ii,1,&Ii,&vD,INSERT_VALUES);CHKERRQ(ierr);
+	}
+	temp_time = MPI_Wtime() - temp_time;
+	timings[1] += temp_time;
+	temp_time = MPI_Wtime();
+	ierr = MatAssemblyBegin(L,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
+	ierr = MatAssemblyEnd(L,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
+	temp_time = MPI_Wtime() - temp_time;
+	timings[0] += temp_time;
+	return ierr;
+}
+
 PetscErrorCode SetOperator(Mat& A, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy){
 	PetscInt			i,j,Ii,J,Istart,Iend;
 	PetscReal			idx2, idy2;
