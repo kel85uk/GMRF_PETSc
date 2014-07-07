@@ -126,7 +126,7 @@ int main(int argc,char **argv)
 			#endif
 			normU = bufferNormU;
 			PetscLogEventBegin(events[1],0,0,0,0);
-			MPE_Log_event(MPE_events[0],0,"start-comp");
+			MPE_Log_event(MPE_events[2],0,"start-comp");
 			update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,received_answers);
 			MPE_Log_event(MPE_events[3],0,"end-comp");
 			PetscLogEventEnd(events[1],0,0,0,0);
@@ -135,7 +135,7 @@ int main(int argc,char **argv)
 			  PetscLogEventBegin(events[0],0,0,0,0);
 			  MPE_Log_event(MPE_events[0],0,"start-comm");
 				MPI_Isend(&bufferBool,1,MPI_C_BOOL,who,WORKTAG,MPI_COMM_WORLD,&request);
-				MPE_Log_event(MPE_events[0],0,"end-comm");
+				MPE_Log_event(MPE_events[1],0,"end-comm");
 				PetscLogEventEnd(events[0],0,0,0,0);
 				++Ns;
 			}
