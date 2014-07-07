@@ -16,6 +16,8 @@ Input parameters include:\n\
 #define WORKTAG 1
 #define DIETAG 2
 
+void CreateEvents(std::vector<PetscLogEvent>&,std::vector<int>&);
+
 int main(int argc,char **argv)
 {
 	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR, gmrf, EgmrfN, EgmrfNm1, VgmrfN, M2Ng;
@@ -40,7 +42,7 @@ int main(int argc,char **argv)
 	MPE_Init_log();
 	MPI_Comm_rank(MPI_COMM_WORLD,&grank); // Get the processor global rank
 	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
-	/* Split the communicator into PETSC_COMM_WORLD */
+	/* Split the communicator into petsc_comm_slaves */
 	int ncolors = (numprocs-1)/procpercolor;
 	int color = (grank-1)/procpercolor;
 	if(grank == 0) color = std::numeric_limits<PetscInt>::max();
@@ -51,26 +53,12 @@ int main(int argc,char **argv)
 	#endif
 	MPI_Comm_split(MPI_COMM_WORLD, color, grank, &petsc_comm_slaves);
 	
-	//PETSC_COMM_WORLD = petsc_comm_slaves;
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	PetscLogBegin();
 	MPI_Comm_rank(petsc_comm_slaves,&lrank); // Get the processor local rank
-	PetscLogEvent COMMS, COMPS;
-	PetscClassId communications, computations;
-	PetscClassIdRegister("All Comms",&communications);
-  PetscLogEventRegister("Communications",communications,&COMMS);
-  PetscClassIdRegister("All Comps",&computations);
-  PetscLogEventRegister("Computations",computations,&COMPS);
   std::vector<PetscLogEvent> events;
-  events.push_back(COMMS);
-  events.push_back(COMPS);
-  
-  int start_comp = MPE_Log_get_event_number();
-  int end_comp = MPE_Log_get_event_number();
-  int start_comm = MPE_Log_get_event_number();
-  int end_comm = MPE_Log_get_event_number();
-  MPE_Describe_state(start_comp,end_comp,"Comp","green:gray");
-  MPE_Describe_state(start_comm,end_comm,"Comm","red:white");
+  std::vector<int> MPE_events (6,0);
+  CreateEvents(events,MPE_events);
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
@@ -101,9 +89,9 @@ int main(int argc,char **argv)
 		// Receive all the managers and place in a list
 		while(Nmanagers <= ncolors){
 		  PetscLogEventBegin(events[0],0,0,0,0);
-		  MPE_Log_event(start_comm,0,"start-comm");
+		  MPE_Log_event(MPE_event[0],0,"start-comm");
 			MPI_Recv(&bufferRank,1,MPI_INT,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
-			MPE_Log_event(end_comm,0,"end-comm");
+			MPE_Log_event(MPE_event[1],0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 			masters.push_back(bufferRank);
 			++Nmanagers;
@@ -121,16 +109,16 @@ int main(int argc,char **argv)
 		#endif
 		for(who = 1; who <= whomax; ++who){
 		  PetscLogEventBegin(events[0],0,0,0,0);
-		  MPE_Log_event(start_comm,0,"start-comm");
+		  MPE_Log_event(MPE_event[0],0,"start-comm");
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
-			MPE_Log_event(end_comm,0,"end-comm");
+			MPE_Log_event(MPE_event[1],0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 		}
 		while ((received_answers <= total_work) && (tol > users.TOL)){
 		  PetscLogEventBegin(events[0],0,0,0,0);
-		  MPE_Log_event(start_comm,0,"start-comm");
+		  MPE_Log_event(MPE_event[0],0,"start-comm");
 			MPI_Recv(&bufferNormU,1,MPI_DOUBLE,MPI_ANY_SOURCE,WORKTAG,MPI_COMM_WORLD,&status);
-			MPE_Log_event(end_comm,0,"end-comm");
+			MPE_Log_event(MPE_event[1],0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 			who = status.MPI_SOURCE;
 			#if 1
@@ -138,16 +126,16 @@ int main(int argc,char **argv)
 			#endif
 			normU = bufferNormU;
 			PetscLogEventBegin(events[1],0,0,0,0);
-			MPE_Log_event(start_comp,0,"start-comp");
+			MPE_Log_event(MPE_event[0],0,"start-comp");
 			update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,received_answers);
-			MPE_Log_event(end_comp,0,"end-comp");
+			MPE_Log_event(MPE_event[3],0,"end-comp");
 			PetscLogEventEnd(events[1],0,0,0,0);
 			++received_answers;
 			if (Ns < users.Nsamples || tol > users.TOL){
 			  PetscLogEventBegin(events[0],0,0,0,0);
-			  MPE_Log_event(start_comm,0,"start-comm");
+			  MPE_Log_event(MPE_event[0],0,"start-comm");
 				MPI_Isend(&bufferBool,1,MPI_C_BOOL,who,WORKTAG,MPI_COMM_WORLD,&request);
-				MPE_Log_event(start_comm,0,"end-comm");
+				MPE_Log_event(MPE_event[0],0,"end-comm");
 				PetscLogEventEnd(events[0],0,0,0,0);
 				++Ns;
 			}
@@ -155,9 +143,9 @@ int main(int argc,char **argv)
 		for (who = 1; who <= whomax; ++who){
 			bufferBool = false;
 			PetscLogEventBegin(events[0],0,0,0,0);
-			MPE_Log_event(start_comm,0,"start-comm");
+			MPE_Log_event(MPE_event[0],0,"start-comm");
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],DIETAG,MPI_COMM_WORLD,&request);
-			MPE_Log_event(end_comm,0,"end-comm");
+			MPE_Log_event(MPE_event[1],0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 			PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Sending kill signal to proc %d\n",grank,masters[who]);
 		}
@@ -166,16 +154,16 @@ int main(int argc,char **argv)
 	if (grank != 0){
 		int work_status = DIETAG;
 		if(lrank == 0) {
-      MPE_Log_event(start_comm,0,"start-comm");
+      MPE_Log_event(MPE_event[0],0,"start-comm");
 		  PetscLogEventBegin(events[0],0,0,0,0);
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 			PetscLogEventEnd(events[0],0,0,0,0);
-			MPE_Log_event(end_comm,0,"end-comm");
+			MPE_Log_event(MPE_event[1],0,"end-comm");
 			work_status = status.MPI_TAG;
 			PetscLogEventBegin(events[0],0,0,0,0);
-			MPE_Log_event(start_comm,0,"start-comm");
+			MPE_Log_event(MPE_event[0],0,"start-comm");
 			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-			MPE_Log_event(end_comm,0,"end-comm");
+			MPE_Log_event(MPE_event[1],0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 			#if DEBUG
 				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates\n",grank);
@@ -183,9 +171,9 @@ int main(int argc,char **argv)
 		}
 		else {
       	PetscLogEventBegin(events[0],0,0,0,0);
-      	MPE_Log_event(start_comm,0,"start-comm");
+      	MPE_Log_event(MPE_event[0],0,"start-comm");
 			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-			MPE_Log_event(end_comm,0,"end-comm");
+			MPE_Log_event(MPE_event[1],0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 			#if DEBUG
 				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast\n",grank);
@@ -193,29 +181,29 @@ int main(int argc,char **argv)
 		}
 		if(work_status != DIETAG){
 			while(true){
-			  	MPE_Log_event(start_comp,0,"start-comp");
+			  	MPE_Log_event(MPE_event[2],0,"start-comp");
         ierr = UnitSolverTimings(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,events,petsc_comm_slaves); CHKERRQ(ierr);
-        	MPE_Log_event(end_comp,0,"end-comp");
+        	MPE_Log_event(MPE_event[3],0,"end-comp");
 				++Ns;				
 				if(lrank == 0){
 				  PetscLogEventBegin(events[0],0,0,0,0);
-				  MPE_Log_event(start_comm,0,"start-comm");
+				  MPE_Log_event(MPE_event[0],0,"start-comm");
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
-					MPE_Log_event(end_comm,0,"start-comm");
+					MPE_Log_event(MPE_event[1],0,"start-comm");
 					PetscLogEventEnd(events[0],0,0,0,0);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: Waiting for work\n",grank);
 					#endif
 					PetscLogEventBegin(events[0],0,0,0,0);
-					MPE_Log_event(start_comm,0,"start-comm");
+					MPE_Log_event(MPE_event[0],0,"start-comm");
 					MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
-					MPE_Log_event(end_comm,0,"end-comm");
+					MPE_Log_event(MPE_event[1],0,"end-comm");
 					PetscLogEventEnd(events[0],0,0,0,0);
 					work_status = status.MPI_TAG;
 					PetscLogEventBegin(events[0],0,0,0,0);
-					MPE_Log_event(start_comm,0,"start-comm");
+					MPE_Log_event(MPE_event[0],0,"start-comm");
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-					MPE_Log_event(end_comm,0,"end-comm");
+					MPE_Log_event(MPE_event[1],0,"end-comm");
 					PetscLogEventEnd(events[0],0,0,0,0);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates with tag = %d\n",grank,work_status);
@@ -223,9 +211,9 @@ int main(int argc,char **argv)
 				}
 				else{
 				  PetscLogEventBegin(events[0],0,0,0,0);
-				  MPE_Log_event(start_comm,0,"start-comm");
+				  MPE_Log_event(MPE_event[0],0,"start-comm");
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-					MPE_Log_event(end_comm,0,"end-comm");
+					MPE_Log_event(MPE_event[1],0,"end-comm");
 					PetscLogEventEnd(events[0],0,0,0,0);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast with tag = %d\n",grank,work_status);
@@ -268,4 +256,20 @@ int main(int argc,char **argv)
 	ierr = PetscFinalize();
 	MPI_Finalize();
 	return 0;
+}
+
+void CreateEvents(std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events){
+	PetscLogEvent COMMS, COMPS;
+	PetscClassId communications, computations;
+	PetscClassIdRegister("All Comms",&communications);
+  PetscLogEventRegister("Communications",communications,&COMMS);
+  PetscClassIdRegister("All Comps",&computations);
+  PetscLogEventRegister("Computations",computations,&COMPS);
+  petscevents.resize(2);
+  petscevents.push_back(COMMS);
+  petscevents.push_back(COMPS);
+  MPE_events.resize(4);
+  for_each(MPE_events.begin(),MPE_events.end(),[](int& s){s = MPE_Log_get_event_number();});
+  MPE_Describe_state(MPE_events[0],MPE_events[1],"Comp","green:gray");
+  MPE_Describe_state(MPE_events[2],MPE_events[3],"Comm","red:white");
 }
