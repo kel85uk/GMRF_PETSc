@@ -230,7 +230,7 @@ int main(int argc,char **argv)
 					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 					work_status = status.MPI_TAG;
 					PetscLogEventBegin(petscevents[6],0,0,0,0);
-					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
+					MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 					PetscLogEventEnd(petscevents[6],0,0,0,0);
 					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
@@ -240,7 +240,7 @@ int main(int argc,char **argv)
 				}
 				else{
 				  PetscLogEventBegin(petscevents[6],0,0,0,0);
-          MPE_Log_event(MPE_events[13],0,"MS Comm-end");
+          MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 					PetscLogEventEnd(petscevents[6],0,0,0,0);
 					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
