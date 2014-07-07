@@ -7,14 +7,14 @@ Input parameters include:\n\
   -m <mesh_x>       : number of mesh points in x-direction\n\
   -n <mesh_n>       : number of mesh points in y-direction\n\n";
 
-#include <Functions.hh>
-#include <Solver.hh>
-#include <climits>
 #define MPE_log
 #define DEBUG 0
 #define MPI_WTIME_IS_GLOBAL 1
 #define WORKTAG 1
 #define DIETAG 2
+#include <Functions.hh>
+#include <Solver.hh>
+#include <climits>
 
 void CreateMPEEvents(std::vector<int>&);
 
