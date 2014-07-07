@@ -120,12 +120,12 @@ int main(int argc,char **argv)
 		PetscInt received_answers = 1, who, whomax;
 		// Receive all the managers and place in a list
 		while(Nmanagers <= ncolors){
-		  MPE_Log_receive(MPI_ANY_SOURCE,MPI_ANY_TAG,1);
 		  PetscLogEventBegin(petscevents[6],0,0,0,0);
 		  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Recv(&bufferRank,1,MPI_INT,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 			PetscLogEventEnd(petscevents[6],0,0,0,0);
 			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
+			MPE_Log_receive(status.MPI_SOURCE,status.MPI_TAG,1);
 			masters.push_back(bufferRank);
 			++Nmanagers;
 		}
@@ -141,6 +141,7 @@ int main(int argc,char **argv)
 			PetscPrintf(MPI_COMM_WORLD,"I am processor %d in world, %d in petsc \n",grank,lrank);
 		#endif
 		for(who = 1; who <= whomax; ++who){
+      MPE_Log_send(masters[who],WORKTAG,1);
 		  PetscLogEventBegin(petscevents[6],0,0,0,0);
 		  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
@@ -153,6 +154,7 @@ int main(int argc,char **argv)
 			MPI_Recv(&bufferNormU,1,MPI_DOUBLE,MPI_ANY_SOURCE,WORKTAG,MPI_COMM_WORLD,&status);
 			PetscLogEventEnd(petscevents[6],0,0,0,0);
 			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
+			MPE_Log_receive(status.MPI_SOURCE,status.MPI_TAG,1);
 			who = status.MPI_SOURCE;
 			#if 1
 				PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Received norm from processor %d \n",grank,who);
@@ -175,6 +177,7 @@ int main(int argc,char **argv)
 		}
 		for (who = 1; who <= whomax; ++who){
 			bufferBool = false;
+			MPE_Log_send(masters[who],DIETAG,1);
 			PetscLogEventBegin(petscevents[6],0,0,0,0);
 			MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],DIETAG,MPI_COMM_WORLD,&request);
@@ -192,6 +195,7 @@ int main(int argc,char **argv)
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 			PetscLogEventEnd(petscevents[6],0,0,0,0);
 			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
+			MPE_Log_receive(status.MPI_SOURCE,status.MPI_TAG,1);
 			work_status = status.MPI_TAG;
 			PetscLogEventBegin(petscevents[6],0,0,0,0);
 			MPE_Log_event(MPE_events[12],0,"MS Comm-start");
@@ -222,6 +226,7 @@ int main(int argc,char **argv)
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
 					PetscLogEventEnd(petscevents[6],0,0,0,0);
 					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
+					MPE_Log_send(0,WORKTAG,1);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: Waiting for work\n",grank);
 					#endif
@@ -230,6 +235,7 @@ int main(int argc,char **argv)
 					MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 					PetscLogEventEnd(petscevents[6],0,0,0,0);
 					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
+					MPE_Log_receive(status.MPI_SOURCE,status.MPI_TAG,1);
 					work_status = status.MPI_TAG;
 					PetscLogEventBegin(petscevents[6],0,0,0,0);
 					MPE_Log_event(MPE_events[12],0,"MS Comm-start");
