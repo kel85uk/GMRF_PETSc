@@ -150,7 +150,7 @@ PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const
 	ierr = MatAssemblyEnd(L,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 	return ierr;
 }
-
+#ifdef MPE_log
 PetscErrorCode SetGMRFOperatorT(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events){
 	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
 	PetscReal			dxdy = 1.0, dxidy = 1.0/dy/dy, dyidx = 1.0/dx/dx;
@@ -191,7 +191,7 @@ PetscErrorCode SetGMRFOperatorT(Mat& L, const PetscInt& m,const PetscInt& n,cons
 	MPE_Log_event(MPE_events[1],0,"GMRF Comm-start");
 	return ierr;
 }
-
+#endif
 PetscErrorCode SetOperator(Mat& A, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy){
 	PetscInt			i,j,Ii,J,Istart,Iend;
 	PetscReal			idx2, idy2;
@@ -324,7 +324,7 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 	return ierr;
 }
-
+#ifdef MPE_log
 PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events,const MPI_Comm& petsc_comm){
 	PetscInt			i,j,Ii,II,Ji,JJ,Istart,Iend, Nrhol,ILs,ILe;
 	IS					local_indices, global_indices;
@@ -430,7 +430,7 @@ PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const Pets
 	MPE_Log_event(MPE_events[7],0,"SPDE Comm-end");
 	return ierr;
 }
-
+#endif
 PetscErrorCode SetRandSource(Vec& Z,const PetscInt& NT, const PetscReal& dx, const PetscReal& dy, const PetscMPIInt& rank, std::default_random_engine& generator){
 	PetscErrorCode ierr;
 	PetscInt Ii = 0, Istart = 0, Iend = 0;
@@ -563,7 +563,7 @@ PetscErrorCode SetSource(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt&
 	
 	return ierr;
 }
-
+#ifdef MPE_log
 PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt& n,const PetscInt& NGhost,const PetscReal& dx,const PetscReal& dy,const PetscReal& UN,const PetscReal& US,const PetscReal& UE,const PetscReal& UW,const PetscReal& lamb,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events,const MPI_Comm& petsc_comm){
 	PetscErrorCode ierr;
 	PetscInt Ii, II, JJ, Istart, Iend, i, j, Nrhol,ILs,ILe;
@@ -651,7 +651,7 @@ PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt
 	MPE_Log_event(MPE_events[7],0,"SPDE Comm-end");
 	return ierr;
 }
-
+#endif
 PetscErrorCode GetOptions(UserCTX& users){ // Not sure if it's also affecting MPI_COMM_WORLD. See if errors
 	PetscErrorCode ierr;
 	ierr = PetscOptionsGetInt(NULL,"-m",&users.m,NULL);CHKERRQ(ierr);

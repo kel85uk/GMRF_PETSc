@@ -57,7 +57,7 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 //	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d] from Processor %d: 2-Norm = %f \n",Ns,rank,normU);
 	return ierr;
 }
-
+#ifdef MPE_log
 PetscErrorCode UnitSolverTimings(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events,const MPI_Comm& petsc_comm){
 	PetscErrorCode ierr;
 	// timings = {comm_gmrf,setup_gmrf,solve_gmrf,comm_spde,setup_spde,solve_spde};
@@ -97,7 +97,7 @@ PetscErrorCode UnitSolverTimings(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Ve
 //	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d] from Processor %d: 2-Norm = %f \n",Ns,rank,normU);
 	return ierr;
 }
-
+#endif
 PetscErrorCode UnitSolverChol(Vec& rho, Vec& normrnds,const PC& Chol_fac,const Mat& Covar, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU){
 	PetscErrorCode ierr;
 	PetscScalar x;
