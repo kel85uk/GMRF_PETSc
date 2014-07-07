@@ -3,7 +3,9 @@
 
 #include <slepc.h>
 #include <petsc.h>
+#ifdef MPE_log
 #include <mpe.h>
+#endif
 #include <fstream>
 #include <vector>
 #include <new>

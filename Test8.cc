@@ -10,6 +10,7 @@ Input parameters include:\n\
 #include <Functions.hh>
 #include <Solver.hh>
 #include <climits>
+#define MPE_log
 #define DEBUG 0
 #define MPI_WTIME_IS_GLOBAL 1
 #define WORKTAG 1
