@@ -10,6 +10,7 @@ Input parameters include:\n\
 #include <Functions.hh>
 #include <Solver.hh>
 #include <climits>
+#include <mpe>
 #define DEBUG 0
 #define MPI_WTIME_IS_GLOBAL 1
 #define WORKTAG 1
@@ -63,6 +64,8 @@ int main(int argc,char **argv)
   std::vector<PetscLogEvent> events;
   events.push_back(COMMS);
   events.push_back(COMPS);
+  
+  int start_comp = MPE_Log_get_event_number();
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
