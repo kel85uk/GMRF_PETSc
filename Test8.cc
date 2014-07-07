@@ -7,14 +7,13 @@ Input parameters include:\n\
   -m <mesh_x>       : number of mesh points in x-direction\n\
   -n <mesh_n>       : number of mesh points in y-direction\n\n";
 
-#define MPE_log
+#include <Functions.hh>
+#include <Solver.hh>
+#include <climits>
 #define DEBUG 0
 #define MPI_WTIME_IS_GLOBAL 1
 #define WORKTAG 1
 #define DIETAG 2
-#include <Functions.hh>
-#include <Solver.hh>
-#include <climits>
 
 void CreateMPEEvents(std::vector<int>&);
 
@@ -33,7 +32,7 @@ int main(int argc,char **argv)
 	bool bufferBool = false;
 	PetscScalar startTime, endTime, bufferScalar;
 	int numprocs;
-	int procpercolor = 2;
+	int procpercolor = 1;
 	MPI_Status status;MPI_Request request;
 	int ranks[] = {0};
 	MPI_Comm petsc_comm_slaves;
@@ -108,6 +107,7 @@ int main(int argc,char **argv)
 	MPE_Log_event(MPE_events[3],0,"GMRF Set-end");
 	// Managers report duty to the root processor
 	if(lrank == 0) {
+	  MPE_Log_send(0,lrank,1);
 	  PetscLogEventBegin(petscevents[6],0,0,0,0);
 	  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 	  MPI_Isend(&grank,1,MPI_INT,0,lrank,MPI_COMM_WORLD,&request);
@@ -120,6 +120,7 @@ int main(int argc,char **argv)
 		PetscInt received_answers = 1, who, whomax;
 		// Receive all the managers and place in a list
 		while(Nmanagers <= ncolors){
+		  MPE_Log_receive(MPI_ANY_SOURCE,MPI_ANY_TAG,1);
 		  PetscLogEventBegin(petscevents[6],0,0,0,0);
 		  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Recv(&bufferRank,1,MPI_INT,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
