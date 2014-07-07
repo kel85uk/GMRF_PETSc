@@ -69,6 +69,8 @@ int main(int argc,char **argv)
   int end_comp = MPE_Log_get_event_number();
   int start_comm = MPE_Log_get_event_number();
   int end_comm = MPE_Log_get_event_number();
+  MPE_Describe_state(start_comp,end_comp,"Comp","green:gray");
+  MPE_Describe_state(start_comm,end_comm,"Comm","red:white");
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
@@ -94,14 +96,14 @@ int main(int argc,char **argv)
   }
 	// Start the ball rolling
 	if(grank == 0){
-    MPE_Describe_state(start_comp,end_comp,"Comp","green:gray");
-    MPE_Describe_state(start_comm,end_comm,"Comm","red:white");
 		PetscInt Nmanagers = 0;std::vector<PetscMPIInt> masters;
 		PetscInt received_answers = 1, who, whomax;
 		// Receive all the managers and place in a list
 		while(Nmanagers <= ncolors){
 		  PetscLogEventBegin(events[0],0,0,0,0);
+		  MPE_Log_event(start_comm,0,"start-comm");
 			MPI_Recv(&bufferRank,1,MPI_INT,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
+			MPE_Log_event(end_comm,0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 			masters.push_back(bufferRank);
 			++Nmanagers;
@@ -119,12 +121,16 @@ int main(int argc,char **argv)
 		#endif
 		for(who = 1; who <= whomax; ++who){
 		  PetscLogEventBegin(events[0],0,0,0,0);
+		  MPE_Log_event(start_comm,0,"start-comm");
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
+			MPE_Log_event(end_comm,0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 		}
 		while ((received_answers <= total_work) && (tol > users.TOL)){
 		  PetscLogEventBegin(events[0],0,0,0,0);
+		  MPE_Log_event(start_comm,0,"start-comm");
 			MPI_Recv(&bufferNormU,1,MPI_DOUBLE,MPI_ANY_SOURCE,WORKTAG,MPI_COMM_WORLD,&status);
+			MPE_Log_event(end_comm,0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 			who = status.MPI_SOURCE;
 			#if 1
@@ -132,12 +138,16 @@ int main(int argc,char **argv)
 			#endif
 			normU = bufferNormU;
 			PetscLogEventBegin(events[1],0,0,0,0);
+			MPE_Log_event(start_comp,0,"start-comp");
 			update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,received_answers);
+			MPE_Log_event(end_comp,0,"end-comp");
 			PetscLogEventEnd(events[1],0,0,0,0);
 			++received_answers;
 			if (Ns < users.Nsamples || tol > users.TOL){
 			  PetscLogEventBegin(events[0],0,0,0,0);
+			  MPE_Log_event(start_comm,0,"start-comm");
 				MPI_Isend(&bufferBool,1,MPI_C_BOOL,who,WORKTAG,MPI_COMM_WORLD,&request);
+				MPE_Log_event(start_comm,0,"end-comm");
 				PetscLogEventEnd(events[0],0,0,0,0);
 				++Ns;
 			}
@@ -145,7 +155,9 @@ int main(int argc,char **argv)
 		for (who = 1; who <= whomax; ++who){
 			bufferBool = false;
 			PetscLogEventBegin(events[0],0,0,0,0);
+			MPE_Log_event(start_comm,0,"start-comm");
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],DIETAG,MPI_COMM_WORLD,&request);
+			MPE_Log_event(end_comm,0,"end-comm");
 			PetscLogEventEnd(events[0],0,0,0,0);
 			PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Sending kill signal to proc %d\n",grank,masters[who]);
 		}
