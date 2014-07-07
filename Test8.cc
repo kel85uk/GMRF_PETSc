@@ -22,7 +22,7 @@ int main(int argc,char **argv)
 	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR, gmrf, EgmrfN, EgmrfNm1, VgmrfN, M2Ng;
 	Vec* Wrapalla[12] = {&rho, &ErhoNm1, &ErhoN, &VrhoN, &N01, &M2Nr, &resR, &gmrf, &EgmrfN, &EgmrfNm1, &VgmrfN, &M2Ng};
 	Vec* Wrapallb[7] = {&U, &EUNm1, &EUN, &VUN, &b, &M2N, &resU};
-	char *MPE_log_name;
+	char *MPE_log_name = new char[PETSC_MAX_PATH_LEN];
 	Mat A, L;
 	KSP kspSPDE, kspGMRF;
 	PetscInt		Ns = 0, bufferInt;
@@ -90,7 +90,7 @@ int main(int argc,char **argv)
 	srand(grank);
 	std::default_random_engine generator(rand());
 	ierr = GetOptions(users);CHKERRQ(ierr);
-	ierr = PetscOptionsGetString(NULL,"-MPE_log_path",&MPE_log_name,PETSC_MAX_PATH_LEN,NULL);CHKERRQ(ierr);
+	ierr = PetscOptionsGetString(NULL,"-MPE_log_path",MPE_log_name,PETSC_MAX_PATH_LEN,NULL);CHKERRQ(ierr);
 	/* Create all the vectors and matrices needed for calculation */
 	PetscLogEventBegin(petscevents[7],0,0,0,0);
 	MPE_Log_event(MPE_events[14],0,"Misc Comp-start");
