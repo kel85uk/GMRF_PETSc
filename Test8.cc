@@ -16,7 +16,7 @@ Input parameters include:\n\
 #define WORKTAG 1
 #define DIETAG 2
 
-void CreateEvents(std::vector<PetscLogEvent>&,std::vector<int>&);
+void CreateMPEEvents(std::vector<int>&);
 
 int main(int argc,char **argv)
 {
@@ -36,10 +36,9 @@ int main(int argc,char **argv)
 	int procpercolor = 2;
 	MPI_Status status;MPI_Request request;
 	int ranks[] = {0};
-  PetscLogStage stage;
 	MPI_Comm petsc_comm_slaves;
 	MPI_Init(&argc,&argv);
-	MPE_Init_log();
+
 	MPI_Comm_rank(MPI_COMM_WORLD,&grank); // Get the processor global rank
 	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
 	/* Split the communicator into petsc_comm_slaves */
@@ -54,33 +53,66 @@ int main(int argc,char **argv)
 	MPI_Comm_split(MPI_COMM_WORLD, color, grank, &petsc_comm_slaves);
 	
 	PetscInitialize(&argc,&argv,(char*)0,help);
-	PetscLogBegin();
 	MPI_Comm_rank(petsc_comm_slaves,&lrank); // Get the processor local rank
-  std::vector<PetscLogEvent> events;
-  std::vector<int> MPE_events (6,0);
-  CreateEvents(events,MPE_events);
+  std::vector<PetscLogEvent> petscevents;
+	PetscLogEvent gmrf_COMMS, gmrf_SET, gmrf_SOLVE, spde_COMMS, spde_SET, spde_SOLVE, internode_COMMS, update_COMPS;
+	PetscClassId gmrf_Comms, gmrf_Set, gmrf_Solve, spde_Comms, spde_Set, spde_Solve, internode_Comms, update_Comps;
+	PetscClassIdRegister("GMRF Comms",&gmrf_Comms);
+  PetscLogEventRegister("GMRF Communications",gmrf_Comms,&gmrf_COMMS);
+  PetscClassIdRegister("GMRF Set",&gmrf_Set);
+  PetscLogEventRegister("GMRF Setup",gmrf_Set,&gmrf_SET);
+  PetscClassIdRegister("GMRF Sol",&gmrf_Solve);
+  PetscLogEventRegister("GMRF Solve",gmrf_Solve,&gmrf_SOLVE);
+  PetscClassIdRegister("SPDE Comms",&spde_Comms);
+  PetscLogEventRegister("SPDE Communications",spde_Comms,&spde_COMMS);
+  PetscClassIdRegister("SPDE Set",&spde_Set);
+  PetscLogEventRegister("SPDE Setup",spde_Set,&spde_SET);
+  PetscClassIdRegister("SPDE Sol",&spde_Solve);
+  PetscLogEventRegister("SPDE Solve",spde_Solve,&spde_SOLVE);
+  PetscClassIdRegister("MS Comms",&internode_Comms);
+  PetscLogEventRegister("MS Communications",internode_Comms,&internode_COMMS);
+  PetscClassIdRegister("Misc Comps",&update_Comps);
+  PetscLogEventRegister("Misc Computations",update_Comps,&update_COMPS);
+  petscevents.push_back(gmrf_COMMS);
+  petscevents.push_back(gmrf_SET);
+  petscevents.push_back(gmrf_SOLVE);
+  petscevents.push_back(spde_COMMS);
+  petscevents.push_back(spde_SET);
+  petscevents.push_back(spde_SOLVE);
+  petscevents.push_back(internode_COMMS);
+  petscevents.push_back(update_COMPS);
+  std::vector<int> MPE_events;
+  	MPE_Init_log();
+	PetscLogBegin();
+  CreateMPEEvents(MPE_events);
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
 	std::default_random_engine generator(rand());
 	ierr = GetOptions(users);CHKERRQ(ierr);
 	/* Create all the vectors and matrices needed for calculation */
-	PetscLogEventBegin(events[1],0,0,0,0);
+	PetscLogEventBegin(petscevents[7],0,0,0,0);
+	MPE_Log_event(MPE_events[14],0,"Misc Comp-start");
 	ierr = CreateVectors(*Wrapalla,12,users.NT,petsc_comm_slaves);CHKERRQ(ierr);
 	ierr = CreateVectors(*Wrapallb,7,users.NI,petsc_comm_slaves);CHKERRQ(ierr);
 	/* Create Matrices and Solver contexts */
 	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE,petsc_comm_slaves);CHKERRQ(ierr);
   	PetscScalar normU = 0.,EnormUN = 0.,VnormUN = 0.,EnormUNm1 = 0.,M2NnU = 0.,tol = 1.0;
-  PetscLogEventEnd(events[1],0,0,0,0);
-	ierr = SetGMRFOperatorT(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa,events);CHKERRQ(ierr);
-	PetscLogEventBegin(events[1],0,0,0,0);
+  PetscLogEventEnd(petscevents[7],0,0,0,0);
+  MPE_Log_event(MPE_events[15],0,"Misc Comp-end");
+	ierr = SetGMRFOperatorT(L,users.m,users.n,users.NGhost,users.dx,users.dy,users.kappa,petscevents,MPE_events);CHKERRQ(ierr);
+	PetscLogEventBegin(petscevents[1],0,0,0,0);
+	MPE_Log_event(MPE_events[2],0,"GMRF Set-start");
 	ierr = KSPSetOperators(kspGMRF,L,L,SAME_PRECONDITIONER);CHKERRQ(ierr);
-	PetscLogEventEnd(events[1],0,0,0,0);
+	PetscLogEventEnd(petscevents[1],0,0,0,0);
+	MPE_Log_event(MPE_events[3],0,"GMRF Set-end");
 	// Managers report duty to the root processor
 	if(lrank == 0) {
-	  PetscLogEventBegin(events[0],0,0,0,0);
+	  PetscLogEventBegin(petscevents[6],0,0,0,0);
+	  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 	  MPI_Isend(&grank,1,MPI_INT,0,lrank,MPI_COMM_WORLD,&request);
-	  PetscLogEventEnd(events[0],0,0,0,0);
+	  PetscLogEventEnd(petscevents[6],0,0,0,0);
+	  MPE_Log_event(MPE_events[13],0,"MS Comm-end");
   }
 	// Start the ball rolling
 	if(grank == 0){
@@ -88,11 +120,11 @@ int main(int argc,char **argv)
 		PetscInt received_answers = 1, who, whomax;
 		// Receive all the managers and place in a list
 		while(Nmanagers <= ncolors){
-		  PetscLogEventBegin(events[0],0,0,0,0);
-		  MPE_Log_event(MPE_events[0],0,"start-comm");
+		  PetscLogEventBegin(petscevents[6],0,0,0,0);
+		  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Recv(&bufferRank,1,MPI_INT,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
-			MPE_Log_event(MPE_events[1],0,"end-comm");
-			PetscLogEventEnd(events[0],0,0,0,0);
+			PetscLogEventEnd(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 			masters.push_back(bufferRank);
 			++Nmanagers;
 		}
@@ -108,45 +140,45 @@ int main(int argc,char **argv)
 			PetscPrintf(MPI_COMM_WORLD,"I am processor %d in world, %d in petsc \n",grank,lrank);
 		#endif
 		for(who = 1; who <= whomax; ++who){
-		  PetscLogEventBegin(events[0],0,0,0,0);
-		  MPE_Log_event(MPE_events[0],0,"start-comm");
+		  PetscLogEventBegin(petscevents[6],0,0,0,0);
+		  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
-			MPE_Log_event(MPE_events[1],0,"end-comm");
-			PetscLogEventEnd(events[0],0,0,0,0);
+			PetscLogEventEnd(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 		}
 		while ((received_answers <= total_work) && (tol > users.TOL)){
-		  PetscLogEventBegin(events[0],0,0,0,0);
-		  MPE_Log_event(MPE_events[0],0,"start-comm");
+		  PetscLogEventBegin(petscevents[6],0,0,0,0);
+		  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Recv(&bufferNormU,1,MPI_DOUBLE,MPI_ANY_SOURCE,WORKTAG,MPI_COMM_WORLD,&status);
-			MPE_Log_event(MPE_events[1],0,"end-comm");
-			PetscLogEventEnd(events[0],0,0,0,0);
+			PetscLogEventEnd(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 			who = status.MPI_SOURCE;
 			#if 1
 				PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Received norm from processor %d \n",grank,who);
 			#endif
 			normU = bufferNormU;
-			PetscLogEventBegin(events[1],0,0,0,0);
-			MPE_Log_event(MPE_events[2],0,"start-comp");
+			PetscLogEventBegin(petscevents[7],0,0,0,0);
+			MPE_Log_event(MPE_events[14],0,"Misc Comp-start");
 			update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,received_answers);
-			MPE_Log_event(MPE_events[3],0,"end-comp");
-			PetscLogEventEnd(events[1],0,0,0,0);
+			PetscLogEventEnd(petscevents[7],0,0,0,0);
+			MPE_Log_event(MPE_events[15],0,"Misc Comp-end");
 			++received_answers;
 			if (Ns < users.Nsamples || tol > users.TOL){
-			  PetscLogEventBegin(events[0],0,0,0,0);
-			  MPE_Log_event(MPE_events[0],0,"start-comm");
+			  PetscLogEventBegin(petscevents[6],0,0,0,0);
+			  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 				MPI_Isend(&bufferBool,1,MPI_C_BOOL,who,WORKTAG,MPI_COMM_WORLD,&request);
-				MPE_Log_event(MPE_events[1],0,"end-comm");
-				PetscLogEventEnd(events[0],0,0,0,0);
+				PetscLogEventEnd(petscevents[6],0,0,0,0);
+				MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 				++Ns;
 			}
 		}
 		for (who = 1; who <= whomax; ++who){
 			bufferBool = false;
-			PetscLogEventBegin(events[0],0,0,0,0);
-			MPE_Log_event(MPE_events[0],0,"start-comm");
+			PetscLogEventBegin(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],DIETAG,MPI_COMM_WORLD,&request);
-			MPE_Log_event(MPE_events[1],0,"end-comm");
-			PetscLogEventEnd(events[0],0,0,0,0);
+			PetscLogEventEnd(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 			PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Sending kill signal to proc %d\n",grank,masters[who]);
 		}
 		PetscPrintf(MPI_COMM_WORLD,"Expectation of ||U|| = %4.8E\n",EnormUN);
@@ -154,67 +186,65 @@ int main(int argc,char **argv)
 	if (grank != 0){
 		int work_status = DIETAG;
 		if(lrank == 0) {
-      MPE_Log_event(MPE_events[0],0,"start-comm");
-		  PetscLogEventBegin(events[0],0,0,0,0);
+		  PetscLogEventBegin(petscevents[6],0,0,0,0);
+		  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
-			PetscLogEventEnd(events[0],0,0,0,0);
-			MPE_Log_event(MPE_events[1],0,"end-comm");
+			PetscLogEventEnd(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 			work_status = status.MPI_TAG;
-			PetscLogEventBegin(events[0],0,0,0,0);
-			MPE_Log_event(MPE_events[0],0,"start-comm");
+			PetscLogEventBegin(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-			MPE_Log_event(MPE_events[1],0,"end-comm");
-			PetscLogEventEnd(events[0],0,0,0,0);
+			PetscLogEventEnd(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 			#if DEBUG
 				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates\n",grank);
 			#endif
 		}
 		else {
-      	PetscLogEventBegin(events[0],0,0,0,0);
-      	MPE_Log_event(MPE_events[0],0,"start-comm");
+      	PetscLogEventBegin(petscevents[6],0,0,0,0);
+      	MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-			MPE_Log_event(MPE_events[1],0,"end-comm");
-			PetscLogEventEnd(events[0],0,0,0,0);
+			PetscLogEventEnd(petscevents[6],0,0,0,0);
+			MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 			#if DEBUG
 				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast\n",grank);
 			#endif
 		}
 		if(work_status != DIETAG){
 			while(true){
-			  	MPE_Log_event(MPE_events[2],0,"start-comp");
-        ierr = UnitSolverTimings(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,events,petsc_comm_slaves); CHKERRQ(ierr);
-        	MPE_Log_event(MPE_events[3],0,"end-comp");
+        ierr = UnitSolverTimings(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,petscevents,MPE_events,petsc_comm_slaves); CHKERRQ(ierr);
 				++Ns;				
 				if(lrank == 0){
-				  PetscLogEventBegin(events[0],0,0,0,0);
-				  MPE_Log_event(MPE_events[0],0,"start-comm");
+				  PetscLogEventBegin(petscevents[6],0,0,0,0);
+				  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
-					MPE_Log_event(MPE_events[1],0,"start-comm");
-					PetscLogEventEnd(events[0],0,0,0,0);
+					PetscLogEventEnd(petscevents[6],0,0,0,0);
+					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: Waiting for work\n",grank);
 					#endif
-					PetscLogEventBegin(events[0],0,0,0,0);
-					MPE_Log_event(MPE_events[0],0,"start-comm");
+					PetscLogEventBegin(petscevents[6],0,0,0,0);
+					MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 					MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
-					MPE_Log_event(MPE_events[1],0,"end-comm");
-					PetscLogEventEnd(events[0],0,0,0,0);
+					PetscLogEventEnd(petscevents[6],0,0,0,0);
+					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 					work_status = status.MPI_TAG;
-					PetscLogEventBegin(events[0],0,0,0,0);
-					MPE_Log_event(MPE_events[0],0,"start-comm");
+					PetscLogEventBegin(petscevents[6],0,0,0,0);
+					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-					MPE_Log_event(MPE_events[1],0,"end-comm");
-					PetscLogEventEnd(events[0],0,0,0,0);
+					PetscLogEventEnd(petscevents[6],0,0,0,0);
+					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates with tag = %d\n",grank,work_status);
 					#endif
 				}
 				else{
-				  PetscLogEventBegin(events[0],0,0,0,0);
-				  MPE_Log_event(MPE_events[0],0,"start-comm");
+				  PetscLogEventBegin(petscevents[6],0,0,0,0);
+          MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
-					MPE_Log_event(MPE_events[1],0,"end-comm");
-					PetscLogEventEnd(events[0],0,0,0,0);
+					PetscLogEventEnd(petscevents[6],0,0,0,0);
+					MPE_Log_event(MPE_events[13],0,"MS Comm-end");
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast with tag = %d\n",grank,work_status);
 					#endif
@@ -258,18 +288,15 @@ int main(int argc,char **argv)
 	return 0;
 }
 
-void CreateEvents(std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events){
-	PetscLogEvent COMMS, COMPS;
-	PetscClassId communications, computations;
-	PetscClassIdRegister("All Comms",&communications);
-  PetscLogEventRegister("Communications",communications,&COMMS);
-  PetscClassIdRegister("All Comps",&computations);
-  PetscLogEventRegister("Computations",computations,&COMPS);
-  petscevents.resize(2);
-  petscevents.push_back(COMMS);
-  petscevents.push_back(COMPS);
-  MPE_events.resize(4);
+void CreateMPEEvents(std::vector<int>& MPE_events){
+  MPE_events.resize(16);
   for_each(MPE_events.begin(),MPE_events.end(),[](int& s){s = MPE_Log_get_event_number();});
-  MPE_Describe_state(MPE_events[0],MPE_events[1],"Comp","green:gray");
-  MPE_Describe_state(MPE_events[2],MPE_events[3],"Comm","red:white");
+  MPE_Describe_state(MPE_events[0],MPE_events[1],"GMRF Comm","purple4");
+  MPE_Describe_state(MPE_events[2],MPE_events[3],"GMRF Setup","orange3");
+  MPE_Describe_state(MPE_events[4],MPE_events[5],"GMRF Solve","cyan");
+  MPE_Describe_state(MPE_events[6],MPE_events[7],"SPDE Comm","red");
+  MPE_Describe_state(MPE_events[8],MPE_events[9],"SPDE Setup","yellow");
+  MPE_Describe_state(MPE_events[10],MPE_events[11],"SPDE Solve","green");
+  MPE_Describe_state(MPE_events[12],MPE_events[13],"MS Comm","maroon");
+  MPE_Describe_state(MPE_events[14],MPE_events[15],"Misc Comp","blue");
 }

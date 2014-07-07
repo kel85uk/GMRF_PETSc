@@ -151,7 +151,7 @@ PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const
 	return ierr;
 }
 
-PetscErrorCode SetGMRFOperatorT(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa,std::vector<PetscLogEvent>& petscevents){
+PetscErrorCode SetGMRFOperatorT(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events){
 	PetscInt			i,j,Ii,J,Istart,Iend, M = (m + 2*NGhost), N = (n + 2*NGhost);
 	PetscReal			dxdy = 1.0, dxidy = 1.0/dy/dy, dyidx = 1.0/dx/dx;
 	PetscReal			vD, vN = -dxidy, vS = -dxidy, vE = -dyidx, vW = -dyidx;
@@ -159,6 +159,7 @@ PetscErrorCode SetGMRFOperatorT(Mat& L, const PetscInt& m,const PetscInt& n,cons
 
 	ierr = MatGetOwnershipRange(L,&Istart,&Iend);CHKERRQ(ierr);
   PetscLogEventBegin(petscevents[1],0,0,0,0);
+  MPE_Log_event(MPE_events[2],0,"GMRF Setup-start");
 	for (Ii=Istart; Ii<Iend; Ii++) {
 		vD = 0.; j = (PetscInt) Ii/M; i = Ii - j*M;
 		if (i>0)   {J = Ii - 1; ierr = MatSetValues(L,1,&Ii,1,&J,&vW,INSERT_VALUES);CHKERRQ(ierr);}
@@ -181,10 +182,13 @@ PetscErrorCode SetGMRFOperatorT(Mat& L, const PetscInt& m,const PetscInt& n,cons
 		ierr = MatSetValues(L,1,&Ii,1,&Ii,&vD,INSERT_VALUES);CHKERRQ(ierr);
 	}
 	PetscLogEventEnd(petscevents[1],0,0,0,0);
+	MPE_Log_event(MPE_events[3],0,"GMRF Setup-end");
 	PetscLogEventBegin(petscevents[0],0,0,0,0);
+	MPE_Log_event(MPE_events[0],0,"GMRF Comm-start");
 	ierr = MatAssemblyBegin(L,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 	ierr = MatAssemblyEnd(L,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 	PetscLogEventEnd(petscevents[0],0,0,0,0);
+	MPE_Log_event(MPE_events[1],0,"GMRF Comm-start");
 	return ierr;
 }
 
@@ -321,7 +325,7 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	return ierr;
 }
 
-PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy,std::vector<PetscLogEvent>& petscevents,const MPI_Comm& petsc_comm){
+PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events,const MPI_Comm& petsc_comm){
 	PetscInt			i,j,Ii,II,Ji,JJ,Istart,Iend, Nrhol,ILs,ILe;
 	IS					local_indices, global_indices;
 	VecScatter		rho_scatter_ctx;
@@ -330,7 +334,8 @@ PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const Pets
 	PetscScalar*	   rhol_arr;
 	Vec					rhol_vec;
 	PetscErrorCode ierr;
-	PetscLogEventBegin(petscevents[1],0,0,0,0);
+	PetscLogEventBegin(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[8],0,"SPDE Setup-start");
 	ierr = MatGetOwnershipRange(A,&Istart,&Iend);CHKERRQ(ierr);
 	global_local_Nelements(Nrhol,ILs,ILe,Istart,Iend,NGhost,m);
 	ierr = VecCreate(PETSC_COMM_SELF,&rhol_vec);CHKERRQ(ierr);
@@ -339,13 +344,17 @@ PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const Pets
 	ierr = ISCreateStride(petsc_comm,Nrhol,ILs,1,&global_indices);CHKERRQ(ierr); // Get the indices for global rho vector
 	ierr = ISCreateStride(PETSC_COMM_SELF,Nrhol,0,1,&local_indices);CHKERRQ(ierr); // Indices for local rhol vector
 	ierr = VecScatterCreate(rho,global_indices,rhol_vec,local_indices,&rho_scatter_ctx);
-	PetscLogEventEnd(petscevents[1],0,0,0,0);
+	PetscLogEventEnd(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[9],0,"SPDE Setup-end");
 	// Copy elements from rho to rhol_vec
-  PetscLogEventBegin(petscevents[0],0,0,0,0);
+  PetscLogEventBegin(petscevents[3],0,0,0,0);
+  MPE_Log_event(MPE_events[6],0,"SPDE Comm-start");
 	ierr = VecScatterBegin(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
 	ierr = VecScatterEnd(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
-  PetscLogEventEnd(petscevents[0],0,0,0,0);
-  PetscLogEventBegin(petscevents[1],0,0,0,0);
+  PetscLogEventEnd(petscevents[3],0,0,0,0);
+  MPE_Log_event(MPE_events[7],0,"SPDE Comm-end");
+  PetscLogEventBegin(petscevents[4],0,0,0,0);
+  MPE_Log_event(MPE_events[8],0,"SPDE Setup-start");
 	ierr = VecGetArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);
 	
 	idx2 = 1.0/(dx*dx);
@@ -406,8 +415,10 @@ PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const Pets
 		}		
 		ierr = MatSetValues(A,1,&Ii,1,&Ii,&vD,INSERT_VALUES);CHKERRQ(ierr);
 	}
-  PetscLogEventEnd(petscevents[1],0,0,0,0);
-  PetscLogEventBegin(petscevents[0],0,0,0,0);
+  PetscLogEventEnd(petscevents[4],0,0,0,0);
+  MPE_Log_event(MPE_events[9],0,"SPDE Setup-end");
+  PetscLogEventBegin(petscevents[3],0,0,0,0);
+  MPE_Log_event(MPE_events[6],0,"SPDE Comm-start");
 	ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 		ierr = VecRestoreArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);	
 		ierr = VecDestroy(&rhol_vec);CHKERRQ(ierr);
@@ -415,7 +426,8 @@ PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const Pets
 		ierr = ISDestroy(&local_indices);CHKERRQ(ierr);
 		ierr = ISDestroy(&global_indices);CHKERRQ(ierr);		
 	ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
-	PetscLogEventEnd(petscevents[0],0,0,0,0);
+	PetscLogEventEnd(petscevents[3],0,0,0,0);
+	MPE_Log_event(MPE_events[7],0,"SPDE Comm-end");
 	return ierr;
 }
 
@@ -552,7 +564,7 @@ PetscErrorCode SetSource(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt&
 	return ierr;
 }
 
-PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt& n,const PetscInt& NGhost,const PetscReal& dx,const PetscReal& dy,const PetscReal& UN,const PetscReal& US,const PetscReal& UE,const PetscReal& UW,const PetscReal& lamb,std::vector<PetscLogEvent>& petscevents,const MPI_Comm& petsc_comm){
+PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt& n,const PetscInt& NGhost,const PetscReal& dx,const PetscReal& dy,const PetscReal& UN,const PetscReal& US,const PetscReal& UE,const PetscReal& UW,const PetscReal& lamb,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events,const MPI_Comm& petsc_comm){
 	PetscErrorCode ierr;
 	PetscInt Ii, II, JJ, Istart, Iend, i, j, Nrhol,ILs,ILe;
 	PetscScalar userb, rhoII, rhoJJ;
@@ -564,7 +576,8 @@ PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt
 	PetscReal ihx2,ihy2;
 	ihx2 = 1.0/dx/dx;
 	ihy2 = 1.0/dy/dy;
-	PetscLogEventBegin(petscevents[1],0,0,0,0);
+	PetscLogEventBegin(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[8],0,"SPDE Setup-start");
 	ierr = VecGetOwnershipRange(b,&Istart,&Iend);CHKERRQ(ierr);
 	ierr = VecSet(b,0.);CHKERRQ(ierr);
 	global_local_Nelements(Nrhol,ILs,ILe,Istart,Iend,NGhost,m);
@@ -576,12 +589,16 @@ PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt
 	ierr = ISCreateStride(PETSC_COMM_SELF,Nrhol,0,1,&local_indices);CHKERRQ(ierr); // Indices for local rhol vector
 	ierr = VecScatterCreate(rho,global_indices,rhol_vec,local_indices,&rho_scatter_ctx);
 	// Copy elements from rho to rhol_vec
-	PetscLogEventEnd(petscevents[1],0,0,0,0);
-	PetscLogEventBegin(petscevents[0],0,0,0,0);
+	PetscLogEventEnd(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[9],0,"SPDE Setup-end");
+	PetscLogEventBegin(petscevents[3],0,0,0,0);
+	MPE_Log_event(MPE_events[6],0,"SPDE Comm-start");
 	ierr = VecScatterBegin(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
 	ierr = VecScatterEnd(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
-	PetscLogEventEnd(petscevents[0],0,0,0,0);
-	PetscLogEventBegin(petscevents[1],0,0,0,0);
+	PetscLogEventEnd(petscevents[3],0,0,0,0);
+	MPE_Log_event(MPE_events[7],0,"SPDE Comm-end");
+	PetscLogEventBegin(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[8],0,"SPDE Setup-start");
 	ierr = VecGetArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);	
 	
 	
@@ -619,8 +636,10 @@ PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt
 			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
 		}
 	}
-	PetscLogEventEnd(petscevents[1],0,0,0,0);
-	PetscLogEventBegin(petscevents[0],0,0,0,0);
+	PetscLogEventEnd(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[9],0,"SPDE Setup-end");
+	PetscLogEventBegin(petscevents[3],0,0,0,0);
+	MPE_Log_event(MPE_events[6],0,"SPDE Comm-start");
 	ierr = VecAssemblyBegin(b);CHKERRQ(ierr);
 		ierr = VecRestoreArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);	
 		ierr = VecDestroy(&rhol_vec);CHKERRQ(ierr);
@@ -628,7 +647,8 @@ PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt
 		ierr = ISDestroy(&local_indices);CHKERRQ(ierr);
 		ierr = ISDestroy(&global_indices);CHKERRQ(ierr);
 	ierr = VecAssemblyEnd(b);CHKERRQ(ierr);
-	PetscLogEventBegin(petscevents[0],0,0,0,0);
+	PetscLogEventBegin(petscevents[3],0,0,0,0);
+	MPE_Log_event(MPE_events[7],0,"SPDE Comm-end");
 	return ierr;
 }
 

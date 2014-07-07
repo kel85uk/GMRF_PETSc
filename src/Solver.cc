@@ -58,28 +58,42 @@ PetscErrorCode UnitSolver(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, V
 	return ierr;
 }
 
-PetscErrorCode UnitSolverTimings(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU,std::vector<PetscLogEvent>& petscevents,const MPI_Comm& petsc_comm){
+PetscErrorCode UnitSolverTimings(Vec& rho, Vec& gmrf, Vec& N01, KSP& kspGMRF, Vec& U, Vec& b, Mat& A, KSP& kspSPDE, UserCTX& users, std::default_random_engine& generator, const PetscMPIInt& rank, const PetscInt& Ns, PetscScalar& normU,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events,const MPI_Comm& petsc_comm){
 	PetscErrorCode ierr;
 	// timings = {comm_gmrf,setup_gmrf,solve_gmrf,comm_spde,setup_spde,solve_spde};
 	PetscLogEventBegin(petscevents[1],0,0,0,0);
+	MPE_Log_event(MPE_events[2],0,"GMRF Setup-start");
 	ierr = SetRandSource(N01,users.NT,users.dx,users.dy,rank,generator);CHKERRQ(ierr);
-	ierr = KSPSolve(kspGMRF,N01,rho);CHKERRQ(ierr);
 	PetscLogEventEnd(petscevents[1],0,0,0,0);
-	PetscLogEventBegin(petscevents[1],0,0,0,0);
+	MPE_Log_event(MPE_events[3],0,"GMRF Setup-end");
+	PetscLogEventBegin(petscevents[2],0,0,0,0);
+	MPE_Log_event(MPE_events[4],0,"GMRF Solve-start");
+	ierr = KSPSolve(kspGMRF,N01,rho);CHKERRQ(ierr);
+	PetscLogEventEnd(petscevents[2],0,0,0,0);
+	MPE_Log_event(MPE_events[5],0,"GMRF Solve-end");
+	PetscLogEventBegin(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[8],0,"SPDE Setup-start");
 	ierr = KSPGetIterationNumber(kspGMRF,&users.its);CHKERRQ(ierr);
 	ierr = VecScale(rho,1.0/sqrt(users.tau2));CHKERRQ(ierr);
 	ierr = VecCopy(rho,gmrf);CHKERRQ(ierr);
 	ierr = VecExp(rho);CHKERRQ(ierr);
-	PetscLogEventEnd(petscevents[1],0,0,0,0);
-	ierr = SetOperatorT(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy,petscevents,petsc_comm);CHKERRQ(ierr);
-	ierr = SetSourceT(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb,petscevents,petsc_comm);CHKERRQ(ierr);
-	PetscLogEventBegin(petscevents[1],0,0,0,0);
+	PetscLogEventEnd(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[9],0,"SPDE Setup-end");
+	ierr = SetOperatorT(A,rho,users.m,users.n,users.NGhost,users.dx,users.dy,petscevents,MPE_events,petsc_comm);CHKERRQ(ierr);
+	ierr = SetSourceT(b,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb,petscevents,MPE_events,petsc_comm);CHKERRQ(ierr);
+	PetscLogEventBegin(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[8],0,"SPDE Setup-start");
 	ierr = KSPSetOperators(kspSPDE,A,A,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
+	PetscLogEventEnd(petscevents[4],0,0,0,0);
+	MPE_Log_event(MPE_events[9],0,"SPDE Setup-end");
+	PetscLogEventBegin(petscevents[5],0,0,0,0);
+	MPE_Log_event(MPE_events[10],0,"SPDE Solve-start");
 	ierr = KSPSolve(kspSPDE,b,U);CHKERRQ(ierr);
 	ierr = KSPGetIterationNumber(kspSPDE,&users.its);CHKERRQ(ierr);
 	ierr = VecNorm(U,NORM_2,&normU);CHKERRQ(ierr);
 	normU /= sqrt(users.NI);
-	PetscLogEventEnd(petscevents[1],0,0,0,0);
+	PetscLogEventEnd(petscevents[5],0,0,0,0);
+	MPE_Log_event(MPE_events[11],0,"SPDE Solve-end");
 //	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d] from Processor %d: 2-Norm = %f \n",Ns,rank,normU);
 	return ierr;
 }

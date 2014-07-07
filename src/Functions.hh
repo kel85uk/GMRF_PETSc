@@ -31,17 +31,17 @@ PetscErrorCode CreateSolvers(Mat&,const PetscInt&,KSP&,Mat&,const PetscInt&,KSP&
 PetscErrorCode Interp2D(Vec&,const Vec&);
 
 PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&);
-PetscErrorCode SetGMRFOperatorT(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&,std::vector<PetscLogEvent>&);
+PetscErrorCode SetGMRFOperatorT(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&,std::vector<PetscLogEvent>&,std::vector<int>&);
 
 PetscErrorCode SetOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetOperator(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
-PetscErrorCode SetOperatorT(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&,std::vector<PetscLogEvent>&,const MPI_Comm&);
+PetscErrorCode SetOperatorT(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&,std::vector<PetscLogEvent>&,std::vector<int>&,const MPI_Comm&);
 
 PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const PetscReal&, const PetscMPIInt&,std::default_random_engine&);
 
 PetscErrorCode SetSource(Vec&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscBool&);
 PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&);
-PetscErrorCode SetSourceT(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,std::vector<PetscLogEvent>&,const MPI_Comm&);
+PetscErrorCode SetSourceT(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,std::vector<PetscLogEvent>&,std::vector<int>&,const MPI_Comm&);
 
 void VecPostProcs(const std::vector<PetscScalar>&, const char*, const PetscMPIInt&);
 PetscErrorCode VecPostProcs(const Vec&, const char*);
