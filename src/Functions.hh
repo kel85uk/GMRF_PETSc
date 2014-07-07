@@ -3,6 +3,7 @@
 
 #include <slepc.h>
 #include <petsc.h>
+#include <mpe.h>
 #include <fstream>
 #include <vector>
 #include <new>
