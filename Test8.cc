@@ -167,6 +167,7 @@ int main(int argc,char **argv)
 			MPE_Log_event(MPE_events[15],0,"Misc Comp-end");
 			++received_answers;
 			if (Ns < users.Nsamples || tol > users.TOL){
+			  MPE_Log_send(who,WORKTAG,1);
 			  PetscLogEventBegin(petscevents[6],0,0,0,0);
 			  MPE_Log_event(MPE_events[12],0,"MS Comm-start");
 				MPI_Isend(&bufferBool,1,MPI_C_BOOL,who,WORKTAG,MPI_COMM_WORLD,&request);
