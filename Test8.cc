@@ -22,7 +22,7 @@ int main(int argc,char **argv)
 	Vec U, EUNm1, EUN, VUN, b, M2N, resU, rho, ErhoNm1, ErhoN, VrhoN, N01, M2Nr, resR, gmrf, EgmrfN, EgmrfNm1, VgmrfN, M2Ng;
 	Vec* Wrapalla[12] = {&rho, &ErhoNm1, &ErhoN, &VrhoN, &N01, &M2Nr, &resR, &gmrf, &EgmrfN, &EgmrfNm1, &VgmrfN, &M2Ng};
 	Vec* Wrapallb[7] = {&U, &EUNm1, &EUN, &VUN, &b, &M2N, &resU};
-	char MPE_log_name[PETSC_MAX_PATH_LEN];
+	char *MPE_log_name;
 	Mat A, L;
 	KSP kspSPDE, kspGMRF;
 	PetscInt		Ns = 0, bufferInt;
