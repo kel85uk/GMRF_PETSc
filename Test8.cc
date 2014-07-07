@@ -171,7 +171,7 @@ int main(int argc,char **argv)
 				++Ns;
 			}
 		}
-		for (who = 1; who < whomax; ++who){
+		for (who = 1; who <= whomax; ++who){
 			bufferBool = false;
 			PetscLogEventBegin(petscevents[6],0,0,0,0);
 			MPE_Log_event(MPE_events[12],0,"MS Comm-start");
