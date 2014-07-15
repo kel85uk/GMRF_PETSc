@@ -1,7 +1,9 @@
 #ifndef FUNCTION_S
 #define FUNCTION_S
 
+#ifdef SLEPC
 #include <slepc.h>
+#endif
 #include <petsc.h>
 #ifdef MPE_log
 #include <mpe.h>

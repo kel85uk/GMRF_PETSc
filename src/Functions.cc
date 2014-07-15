@@ -836,7 +836,7 @@ PetscErrorCode VecSetMean(Vec&,const Vec&){
 	PetscErrorCode ierr;
 	return ierr;
 }
-
+#ifdef SLEPC
 PetscErrorCode SVD_Decomp(Mat& Ut, Mat& Vt, Mat& S, const Mat& A){
 	PetscErrorCode ierr;
 	Vec            u,v;             /* left and right singular vectors */
@@ -899,7 +899,7 @@ PetscErrorCode SVD_Decomp(Mat& Ut, Mat& Vt, Mat& S, const Mat& A){
   ierr = VecDestroy(&v);CHKERRQ(ierr);  
   return ierr;
 }
-
+#endif
 void global_local_Nelements(PetscInt& Nel, PetscInt& ILs, PetscInt& ILe, const PetscInt& Istart, const PetscInt& Iend, const PetscInt& NGhost, const PetscInt& m){
 	PetscInt j_start, i_start, j_end, i_end, Iendm1 = Iend-1, IIe, IIs;
 	j_start = (PetscInt) Istart/m; i_start = Istart - j_start*m;
