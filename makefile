@@ -1,14 +1,14 @@
 #CC = mpecc
 #CXX = mpecc
-CCFLAGS	         =  -std=c++11 -O -I./src/
+NP               = 4
+CCFLAGS	         =  -std=c++11 -O -I./src/ -DPROCS=${NP}#-DMPE_log
 FFLAGS	         = -Wall -Wconversion -Wshadow
-CPPFLAGS         =  -std=c++11 -O -I./src/
+CPPFLAGS         =  -std=c++11 -O -I./src/ -DPROCS=${NP}#-DMPE_log
 FPPFLAGS         =
 #LOCDIR           = ./
 #EXAMPLESC        = ex29.c Test.cc test_serial.cc test_serial2.cc Functions.cc
 #MANSEC           = KSP
 #CLEANFILES       = rhs.vtk solution.vtk
-NP               = 1
 ALL: test_MC test_PDE Test TestV2
 include ${PETSC_DIR}/conf/variables
 include ${PETSC_DIR}/conf/rules

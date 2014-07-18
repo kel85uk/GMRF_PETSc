@@ -29,8 +29,7 @@ int main(int argc,char **argv)
 	PetscBool      flg = PETSC_FALSE;
 	bool bufferBool = false;
 	PetscScalar startTime, endTime, bufferScalar;
-	int numprocs;
-	int procpercolor = 1;
+	int numprocs, ncolors;
 	MPI_Status status;MPI_Request request;
 	int ranks[] = {0};
 
@@ -39,32 +38,21 @@ int main(int argc,char **argv)
 	MPI_Init(&argc,&argv);
 	MPI_Comm_rank(MPI_COMM_WORLD,&grank); // Get the processor global rank
 	MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
-	/* Split the communicator into PETSC_COMM_WORLD */
-	int ncolors = (numprocs-1)/procpercolor;
-	int color = (grank-1)/procpercolor;
-	if(grank == 0) color = std::numeric_limits<PetscInt>::max();
-	if ((color+1) > ncolors)
-		color--;
-	#if DEBUG
-		printf("I am processor %d with color %d \n",grank,color);
-	#endif
-	MPI_Comm_split(MPI_COMM_WORLD, color, grank, &petsc_comm_slaves);
 	
-	PETSC_COMM_WORLD = petsc_comm_slaves;
 	PetscInitialize(&argc,&argv,(char*)0,help);
-
-	MPI_Comm_rank(PETSC_COMM_WORLD,&lrank); // Get the processor local rank
-	
+	ierr = GetOptions(users);CHKERRQ(ierr);
+	recolor(petsc_comm_slaves,ncolors,numprocs,users.procpercolor,grank);
+	MPI_Comm_rank(petsc_comm_slaves,&lrank); // Get the processor local rank in petsc_comm_slaves [Logically must be after recolor!]
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
 	std::default_random_engine generator(rand());	
-	ierr = GetOptions(users);CHKERRQ(ierr);
+
 	/* Create all the vectors and matrices needed for calculation */
-	ierr = CreateVectors(*Wrapalla,12,users.NT);CHKERRQ(ierr);
-	ierr = CreateVectors(*Wrapallb,7,users.NI);CHKERRQ(ierr);
+	ierr = CreateVectors(*Wrapalla,12,users.NT,petsc_comm_slaves);CHKERRQ(ierr);
+	ierr = CreateVectors(*Wrapallb,7,users.NI,petsc_comm_slaves);CHKERRQ(ierr);
 	/* Create Matrices and Solver contexts */
-	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE);CHKERRQ(ierr);
+	ierr = CreateSolvers(L,users.NT,kspGMRF,A,users.NI,kspSPDE,petsc_comm_slaves);CHKERRQ(ierr);
 
 	PetscScalar normU = 0.,EnormUN = 0.,VnormUN = 0.,EnormUNm1 = 0.,M2NnU = 0.,tol = 1.0;
 
@@ -123,20 +111,20 @@ int main(int argc,char **argv)
 		if(lrank == 0) {
 			MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 			work_status = status.MPI_TAG;
-			MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 			#if DEBUG
 				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates\n",grank);
 			#endif
 		}
 		else {
-			MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+			MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 			#if DEBUG
 				PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast\n",grank);
 			#endif
 		}
 		if(work_status != DIETAG){
 			while(true){
-				ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar); CHKERRQ(ierr);
+				ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,petsc_comm_slaves); CHKERRQ(ierr);
 				++Ns;				
 				if(lrank == 0){
 					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
@@ -145,20 +133,20 @@ int main(int argc,char **argv)
 					#endif
 					MPI_Recv(&bufferBool,1,MPI_C_BOOL,0,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
 					work_status = status.MPI_TAG;
-					MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am broadcasting to my subordinates with tag = %d\n",grank,work_status);
 					#endif
 				}
 				else{
-					MPI_Bcast(&work_status,1,MPI_INT,0,PETSC_COMM_WORLD);
+					MPI_Bcast(&work_status,1,MPI_INT,0,petsc_comm_slaves);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: I am receiving broadcast with tag = %d\n",grank,work_status);
 					#endif
 				}
 				if(work_status == DIETAG){
 					#if DEBUG
-					PetscPrintf(PETSC_COMM_WORLD,"Proc[%d]: We finished all work \n",grank);	
+					PetscPrintf(petsc_comm_slaves,"Proc[%d]: We finished all work \n",grank);	
 					#endif
 					break;
 				}
@@ -168,7 +156,7 @@ int main(int argc,char **argv)
 
 	endTime = MPI_Wtime();
 	PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: All done! \n",grank);
-	if (grank != 0) PetscPrintf(PETSC_COMM_WORLD,"Proc[%d]: We did %d samples \n",grank,(Ns-1));
+	if (grank != 0) PetscPrintf(petsc_comm_slaves,"Proc[%d]: We did %d samples \n",grank,(Ns-1));
 	PetscPrintf(MPI_COMM_WORLD,"Elapsed wall-clock time (sec)= %f \n",endTime - startTime);
 	PetscPrintf(MPI_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,lrank);
 	PetscPrintf(MPI_COMM_WORLD,"tau2 = %f \n",users.tau2);

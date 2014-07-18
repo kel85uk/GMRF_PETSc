@@ -75,7 +75,7 @@ PetscErrorCode CreateSolvers(Mat& L, const PetscInt& NT, KSP& kspGMRF, Mat& A,co
 	return ierr;
 }
 
-PetscErrorCode Interp2D(Vec&,const Vec&)
+PetscErrorCode Interp2D(Vec& output,const Vec& input)
 {
 	PetscErrorCode ierr;
 /*   if ( newWidth == size_[0]  && newHeight == size_[1] )
@@ -324,6 +324,101 @@ PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const Petsc
 	ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
 	return ierr;
 }
+
+PetscErrorCode SetOperator(Mat& A, const Vec& rho, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy,const MPI_Comm& petsc_comm){
+	PetscInt			i,j,Ii,II,Ji,JJ,Istart,Iend, Nrhol,ILs,ILe;
+	IS					local_indices, global_indices;
+	VecScatter		rho_scatter_ctx;
+	PetscReal			idx2, idy2;
+	PetscScalar		vN, vS, vE, vW, vD, rhoII, rhoJJ, rhoN, rhoS, rhoE, rhoW;
+	PetscScalar*	   rhol_arr;
+	Vec					rhol_vec;
+	PetscErrorCode ierr;
+	
+	ierr = MatGetOwnershipRange(A,&Istart,&Iend);CHKERRQ(ierr);
+	
+	global_local_Nelements(Nrhol,ILs,ILe,Istart,Iend,NGhost,m);
+	ierr = VecCreate(PETSC_COMM_SELF,&rhol_vec);CHKERRQ(ierr);
+	ierr = VecSetSizes(rhol_vec,PETSC_DECIDE,Nrhol);CHKERRQ(ierr);
+	ierr = VecSetFromOptions(rhol_vec);CHKERRQ(ierr);	
+
+	ierr = ISCreateStride(petsc_comm,Nrhol,ILs,1,&global_indices);CHKERRQ(ierr); // Get the indices for global rho vector
+	ierr = ISCreateStride(PETSC_COMM_SELF,Nrhol,0,1,&local_indices);CHKERRQ(ierr); // Indices for local rhol vector
+	ierr = VecScatterCreate(rho,global_indices,rhol_vec,local_indices,&rho_scatter_ctx);
+	// Copy elements from rho to rhol_vec
+	ierr = VecScatterBegin(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
+	ierr = VecScatterEnd(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
+	ierr = VecGetArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);
+	
+	idx2 = 1.0/(dx*dx);
+	idy2 = 1.0/(dy*dy);
+	for (Ii=Istart; Ii<Iend; Ii++) {
+		vD = 0.; j = (PetscInt) Ii/m; i = Ii - j*m;
+		II = (i + NGhost) + (m+2*NGhost)*(j + NGhost);
+		rhoII = rhol_arr[II-ILs];
+		vW = 0.; vE = 0.; vS = 0.; vN = 0.; rhoW = 0.; rhoE = 0.; rhoS = 0.; rhoN = 0.;
+		JJ = II - 1;
+		rhoJJ = rhol_arr[JJ-ILs];
+		rhoW = .5*(rhoII + rhoJJ);
+		if (i>0)   {
+			Ji = Ii - 1;
+			vW = -rhoW*idx2;
+			ierr = MatSetValues(A,1,&Ii,1,&Ji,&vW,INSERT_VALUES);CHKERRQ(ierr);
+		}
+		JJ = II + 1;
+		rhoJJ = rhol_arr[JJ-ILs];
+		rhoE = .5*(rhoII + rhoJJ);
+		if (i<m-1) {
+			Ji = Ii + 1; 
+			vE = -rhoE*idx2;
+			ierr = MatSetValues(A,1,&Ii,1,&Ji,&vE,INSERT_VALUES);CHKERRQ(ierr);
+		}
+		JJ = II - (m + 2*NGhost);
+		rhoJJ = rhol_arr[JJ-ILs];
+		rhoS = .5*(rhoII + rhoJJ);
+		if (j>0)   {
+			Ji = Ii - m;
+			vS = -rhoS*idy2;
+			ierr = MatSetValues(A,1,&Ii,1,&Ji,&vS,INSERT_VALUES);CHKERRQ(ierr);
+		}
+		JJ = II + (m + 2*NGhost);
+		rhoJJ = rhol_arr[JJ-ILs];
+		rhoN = .5*(rhoII + rhoJJ);
+		if (j<n-1) {
+			Ji = Ii + m; 
+			vN = -rhoN*idy2;
+			ierr = MatSetValues(A,1,&Ii,1,&Ji,&vN,INSERT_VALUES);CHKERRQ(ierr);
+		}
+		vW = rhoW*idx2;
+		vE = rhoE*idx2;
+		vS = rhoS*idy2;
+		vN = rhoN*idy2;
+		vD = vW + vE + vS + vN;
+		if (j == 0){
+      			vD			+=		vS;
+		}
+      if (j == n-1){
+				vD			+=		vN;
+		}
+      if (i == 0){
+				vD			+=		vW;
+		}
+      if (i == m-1){
+				vD			+=		vE;
+		}		
+		ierr = MatSetValues(A,1,&Ii,1,&Ii,&vD,INSERT_VALUES);CHKERRQ(ierr);
+	}
+
+	ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
+		ierr = VecRestoreArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);	
+		ierr = VecDestroy(&rhol_vec);CHKERRQ(ierr);
+		ierr = VecScatterDestroy(&rho_scatter_ctx);CHKERRQ(ierr);
+		ierr = ISDestroy(&local_indices);CHKERRQ(ierr);
+		ierr = ISDestroy(&global_indices);CHKERRQ(ierr);		
+	ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
+	return ierr;
+}
+
 #ifdef MPE_log
 PetscErrorCode SetOperatorT(Mat& A, const Vec& rho, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events,const MPI_Comm& petsc_comm){
 	PetscInt			i,j,Ii,II,Ji,JJ,Istart,Iend, Nrhol,ILs,ILe;
@@ -563,6 +658,77 @@ PetscErrorCode SetSource(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt&
 	
 	return ierr;
 }
+PetscErrorCode SetSource(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt& n,const PetscInt& NGhost,const PetscReal& dx,const PetscReal& dy,const PetscReal& UN,const PetscReal& US,const PetscReal& UE,const PetscReal& UW,const PetscReal& lamb,const MPI_Comm& petsc_comm){
+	PetscErrorCode ierr;
+	PetscInt Ii, II, JJ, Istart, Iend, i, j, Nrhol,ILs,ILe;
+	PetscScalar userb, rhoII, rhoJJ;
+	Vec					rhol_vec;
+	PetscScalar*		rhol_arr;
+	IS					local_indices, global_indices;
+	VecScatter		rho_scatter_ctx;
+	PetscReal ihx2,ihy2;
+	ihx2 = 1.0/dx/dx;
+	ihy2 = 1.0/dy/dy;
+	ierr = VecGetOwnershipRange(b,&Istart,&Iend);CHKERRQ(ierr);
+	ierr = VecSet(b,0.);CHKERRQ(ierr);
+	global_local_Nelements(Nrhol,ILs,ILe,Istart,Iend,NGhost,m);
+	ierr = VecCreate(PETSC_COMM_SELF,&rhol_vec);CHKERRQ(ierr);
+	ierr = VecSetSizes(rhol_vec,PETSC_DECIDE,Nrhol);CHKERRQ(ierr);
+	ierr = VecSetFromOptions(rhol_vec);CHKERRQ(ierr);	
+
+	ierr = ISCreateStride(petsc_comm,Nrhol,ILs,1,&global_indices);CHKERRQ(ierr); // Get the indices for global rho vector
+	ierr = ISCreateStride(PETSC_COMM_SELF,Nrhol,0,1,&local_indices);CHKERRQ(ierr); // Indices for local rhol vector
+	ierr = VecScatterCreate(rho,global_indices,rhol_vec,local_indices,&rho_scatter_ctx);
+	// Copy elements from rho to rhol_vec
+	ierr = VecScatterBegin(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
+	ierr = VecScatterEnd(rho_scatter_ctx,rho,rhol_vec,INSERT_VALUES,SCATTER_FORWARD);
+	ierr = VecGetArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);	
+	
+	
+	for (Ii = Istart; Ii < Iend; ++Ii){
+		j = (PetscInt) Ii/m; i = Ii - j*m;
+		II = (i + NGhost) + (m+2*NGhost)*(j + NGhost);
+		rhoII = rhol_arr[II-ILs];
+		if (rhoII == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoII");
+		if (i == 0){
+			JJ = II - 1;
+			rhoJJ = rhol_arr[JJ-ILs];
+			if (rhoJJ == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoJJ-1");
+			userb = (0.5)*(rhoII + rhoJJ)*UW*2*ihx2;
+			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
+		}
+		else if (i == (m-1)){
+			JJ = II + 1;
+			rhoJJ = rhol_arr[JJ-ILs];
+			if (rhoJJ == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoJJ+1");
+			userb = (0.5)*(rhoII + rhoJJ)*UE*2*ihx2;
+			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
+		}
+		else if (j == 0){
+			JJ = II - (m + 2*NGhost);
+			rhoJJ = rhol_arr[JJ-ILs];
+			if (rhoJJ == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoJJ-m");
+			userb = (0.5)*(rhoII + rhoJJ)*US*2*ihy2;
+			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
+		}
+		else if (j == (n-1)){
+			JJ = II + (m + 2*NGhost);
+			rhoJJ = rhol_arr[JJ-ILs];
+			if (rhoJJ == 0) SETERRQ(petsc_comm,1,"Something wrong b with rhoJJ+m");
+			userb = (0.5)*(rhoII + rhoJJ)*UN*2*ihy2;
+			ierr = VecSetValues(b,1,&Ii,&userb,ADD_VALUES);CHKERRQ(ierr);
+		}
+	}
+	ierr = VecAssemblyBegin(b);CHKERRQ(ierr);
+		ierr = VecRestoreArray(rhol_vec,&rhol_arr);CHKERRQ(ierr);	
+		ierr = VecDestroy(&rhol_vec);CHKERRQ(ierr);
+		ierr = VecScatterDestroy(&rho_scatter_ctx);CHKERRQ(ierr);
+		ierr = ISDestroy(&local_indices);CHKERRQ(ierr);
+		ierr = ISDestroy(&global_indices);CHKERRQ(ierr);
+	ierr = VecAssemblyEnd(b);CHKERRQ(ierr);
+	
+	return ierr;
+}
 #ifdef MPE_log
 PetscErrorCode SetSourceT(Vec& b,const Vec& rho,const PetscInt& m,const PetscInt& n,const PetscInt& NGhost,const PetscReal& dx,const PetscReal& dy,const PetscReal& UN,const PetscReal& US,const PetscReal& UE,const PetscReal& UW,const PetscReal& lamb,std::vector<PetscLogEvent>& petscevents,std::vector<int>& MPE_events,const MPI_Comm& petsc_comm){
 	PetscErrorCode ierr;
@@ -670,6 +836,7 @@ PetscErrorCode GetOptions(UserCTX& users){ // Not sure if it's also affecting MP
 	ierr = PetscOptionsGetReal(NULL,"-alpha",&users.alpha,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-dim",&users.dim,NULL);CHKERRQ(ierr);
 	ierr = PetscOptionsGetReal(NULL,"-sigma",&users.sigma,NULL);CHKERRQ(ierr);
+	ierr = PetscOptionsGetInt(NULL,"-ppc",&	users.procpercolor,NULL);CHKERRQ(ierr);
 	users.dx = (users.x1 - users.x0)/(PetscReal)users.m;
 	users.dy = (users.y1 - users.y0)/(PetscReal)users.n;
 	users.nu = users.alpha - users.dim/2.0;
@@ -900,6 +1067,22 @@ PetscErrorCode SVD_Decomp(Mat& Ut, Mat& Vt, Mat& S, const Mat& A){
   return ierr;
 }
 #endif
+
+void recolor(MPI_Comm& petsc_comm,int& ncolors,const int& numprocs,const int& procpercolor,const int& grank){
+//  PetscErrorCode ierr;
+  /* Split the communicator into petsc_comm_slaves */
+	ncolors = (numprocs-1)/procpercolor;
+	int color = (grank-1)/procpercolor;
+	if(grank == 0) color = std::numeric_limits<PetscInt>::max();
+	if ((color+1) > ncolors)
+		color--;
+	#if DEBUG
+		printf("I am processor %d with color %d \n",grank,color);
+	#endif
+	MPI_Comm_split(MPI_COMM_WORLD, color, grank, &petsc_comm);
+//  return ierr;
+}
+
 void global_local_Nelements(PetscInt& Nel, PetscInt& ILs, PetscInt& ILe, const PetscInt& Istart, const PetscInt& Iend, const PetscInt& NGhost, const PetscInt& m){
 	PetscInt j_start, i_start, j_end, i_end, Iendm1 = Iend-1, IIe, IIs;
 	j_start = (PetscInt) Istart/m; i_start = Istart - j_start*m;

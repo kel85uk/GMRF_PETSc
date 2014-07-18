@@ -22,6 +22,7 @@ typedef struct{
 	PetscReal		UN = 1, US = 10, UE = 5, UW = 3;
 	PetscReal		dim = 2, alpha = 2, sigma = 0.3, lamb = 0.1, nu, kappa, tau2, tol = 1, TOL = 1e-4, tolU, tolr;
 	PetscInt		m = 8, n = 7, its, NGhost = 2, NI = 0, NT = 0, Nsamples = 100, Ns = 1;
+	int procpercolor = PROCS;
 } UserCTX;
 
 #define nint(a) ((a) >= 0.0 ? (PetscInt)((a)+0.5) : (PetscInt)((a)-0.5))
@@ -42,6 +43,7 @@ PetscErrorCode SetGMRFOperatorT(Mat&, const PetscInt&, const PetscInt&, const Pe
 
 PetscErrorCode SetOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
 PetscErrorCode SetOperator(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&);
+PetscErrorCode SetOperator(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&,const MPI_Comm&);
 #ifdef MPE_log
 PetscErrorCode SetOperatorT(Mat&, const Vec&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&,std::vector<PetscLogEvent>&,std::vector<int>&,const MPI_Comm&);
 #endif
@@ -50,6 +52,7 @@ PetscErrorCode SetRandSource(Vec&,const PetscInt&, const PetscReal&, const Petsc
 
 PetscErrorCode SetSource(Vec&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscBool&);
 PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&);
+PetscErrorCode SetSource(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const MPI_Comm&);
 #ifdef MPE_log
 PetscErrorCode SetSourceT(Vec&,const Vec&,const PetscInt&,const PetscInt&,const PetscInt&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,const PetscReal&,std::vector<PetscLogEvent>&,std::vector<int>&,const MPI_Comm&);
 #endif
@@ -68,6 +71,8 @@ PetscErrorCode VecSetMean(Vec&,const Vec&);
 
 /** Function which generates the SVD decomposition into orthogonal basis vector matrices U, and V, and diagonal matrix of singular values (Requires Slepc) **/
 PetscErrorCode SVD_Decomp(Mat&,Mat&,Mat&,const Mat&);
+
+void recolor(MPI_Comm&,int&,const int&,const int&,const int&);
 
 void global_local_Nelements(PetscInt&, PetscInt&, PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&);
 
