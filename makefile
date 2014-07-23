@@ -61,6 +61,6 @@ TestV8: ./src/Functions.o ./src/Solver.o Test8.o  chkopts
 
 #mpiexec -np 3 ./Test2 -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 50 -n 50 -pc_type ksp -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-2 -log_summary  
 
-#mpiexec -np 3 ./Test5 -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 50 -n 50 -pc_type hypre -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-6
+#mpiexec -np 16 ./Test5 -ppc 1 -mat_type mpiaij -vec_type mpi -Nsamples 100000 -m 50 -n 50 -pc_type hypre -ksp_type cg -dim 2 -alpha 2 -lamb 0.25 -sigma 1 -TOL 1e-6
 
 #mpirun -np 16 ./test_Chol -mat_type seqaij -vec_type seq -Nsamples 100000 -m 50 -n 50 -pc_type hypre -ksp_type fgmres -dim 2 -alpha 2 -lamb 0.1 -sigma 0.3 -TOL 1e-6
