@@ -25,6 +25,11 @@ typedef struct{
 	int procpercolor = PROCS;
 } UserCTX;
 
+typedef struct {
+  PetscScalar normU;
+  PetscInt    gmrf_iter, spde_iter;
+} Buffer_messages;
+
 #define nint(a) ((a) >= 0.0 ? (PetscInt)((a)+0.5) : (PetscInt)((a)-0.5))
 
 PetscErrorCode GetOptions(UserCTX&);
@@ -66,13 +71,14 @@ PetscErrorCode MatPostProcs(const Mat&, const char*);
 PetscErrorCode update_stats(Vec&,Vec&,Vec&,Vec&,PetscReal&,const Vec&,const PetscInt&);
 PetscErrorCode update_stats(Vec&,Vec&,Vec&,Vec&,const Vec&,const PetscInt&);
 PetscErrorCode update_stats(PetscScalar&,PetscScalar&,PetscScalar&,PetscScalar&,PetscScalar&,const PetscScalar&,const PetscInt&);
+void update_iters(PetscScalar* &, PetscInt* &, PetscInt* &, PetscInt* &,const PetscInt&);
 
 PetscErrorCode VecSetMean(Vec&,const Vec&);
 
 /** Function which generates the SVD decomposition into orthogonal basis vector matrices U, and V, and diagonal matrix of singular values (Requires Slepc) **/
 PetscErrorCode SVD_Decomp(Mat&,Mat&,Mat&,const Mat&);
 
-void recolor(MPI_Comm&,int&,const int&,const int&,const int&);
+void recolor(MPI_Comm&,int&,const int&,const int&,const int&,int &);
 
 void global_local_Nelements(PetscInt&, PetscInt&, PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscInt&);
 

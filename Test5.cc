@@ -23,7 +23,9 @@ int main(int argc,char **argv)
 	Mat A, L;
 	KSP kspSPDE, kspGMRF;
 	PetscInt		Ns = 0, bufferInt;
+	PetscInt  *buffer_iterations = new PetscInt[2];
 	UserCTX		users;
+	Buffer_messages sendrecvbuff;
 	PetscMPIInt    grank, lrank, bufferRank;
 	PetscErrorCode ierr;
 	PetscBool      flg = PETSC_FALSE;
@@ -32,6 +34,19 @@ int main(int argc,char **argv)
 	int numprocs, ncolors;
 	MPI_Status status;MPI_Request request;
 	int ranks[] = {0};
+	MPI_Aint extent, offsets[2];
+  MPI_Type_extent(MPI_DOUBLE,&extent);
+  offsets[0] = 0;
+  offsets[1] = extent;
+  int blockcounts[2];
+  blockcounts[0] = 1;
+  blockcounts[1] = 2;
+  MPI_Datatype oldtypes[2],RESULT_SND_RECV;
+  oldtypes[0] = MPI_DOUBLE;
+  oldtypes[1] = MPI_INT;
+  MPI_Type_create_struct(2,blockcounts,offsets,oldtypes,&RESULT_SND_RECV);
+  MPI_Type_commit(&RESULT_SND_RECV);
+  
 
 	MPI_Comm petsc_comm_slaves;
 
@@ -41,8 +56,7 @@ int main(int argc,char **argv)
 	
 	PetscInitialize(&argc,&argv,(char*)0,help);
 	ierr = GetOptions(users);CHKERRQ(ierr);
-	recolor(petsc_comm_slaves,ncolors,numprocs,users.procpercolor,grank);
-	MPI_Comm_rank(petsc_comm_slaves,&lrank); // Get the processor local rank in petsc_comm_slaves [Logically must be after recolor!]
+	recolor(petsc_comm_slaves,ncolors,numprocs,users.procpercolor,grank,lrank);
 	/* Split the different communicators between root and workers */
 	startTime = MPI_Wtime();
 	srand(grank);
@@ -65,6 +79,13 @@ int main(int argc,char **argv)
 	if(grank == 0){
 		PetscInt Nmanagers = 0;std::vector<PetscMPIInt> masters;
 		PetscInt received_answers = 1, who, whomax;
+		PetscScalar *avg_iter = new PetscScalar[2];
+		PetscInt *max_iter = new PetscInt[2], *min_iter = new PetscInt[2];
+		for (int ii = 0; ii < (sizeof(max_iter)/sizeof(PetscInt)); ++ii){
+      avg_iter[ii] = 0.;
+      max_iter[ii] = 0;
+      min_iter[ii] = 299792458;
+	  }
 		// Receive all the managers and place in a list
 		while(Nmanagers <= ncolors){
 			MPI_Recv(&bufferRank,1,MPI_INT,MPI_ANY_SOURCE,MPI_ANY_TAG,MPI_COMM_WORLD,&status);
@@ -86,13 +107,18 @@ int main(int argc,char **argv)
 			MPI_Isend(&bufferBool,1,MPI_C_BOOL,masters[who],WORKTAG,MPI_COMM_WORLD,&request);
 		}
 		while ((received_answers <= total_work) && (tol > users.TOL)){
-			MPI_Recv(&bufferNormU,1,MPI_DOUBLE,MPI_ANY_SOURCE,WORKTAG,MPI_COMM_WORLD,&status);
+			MPI_Recv(&sendrecvbuff,1,RESULT_SND_RECV,MPI_ANY_SOURCE,WORKTAG,MPI_COMM_WORLD,&status);
 			who = status.MPI_SOURCE;
 			#if 1
 				PetscPrintf(MPI_COMM_WORLD,"Proc[%d]: Received norm from processor %d \n",grank,who);
 			#endif
-			normU = bufferNormU;
+			normU = sendrecvbuff.normU;
 			update_stats(EnormUN,VnormUN,EnormUNm1,M2NnU,tol,normU,received_answers);
+			buffer_iterations[0] = sendrecvbuff.gmrf_iter;
+			buffer_iterations[1] = sendrecvbuff.spde_iter;
+			update_iters(avg_iter,max_iter,min_iter,buffer_iterations,Ns);
+			for (int ii = 0; ii < sizeof(max_iter)/sizeof(PetscInt); ++ii)
+        PetscPrintf(MPI_COMM_WORLD,"Iters[%d]: Avg(%g), Max(%d), Min(%d) \n",ii,avg_iter[ii],max_iter[ii],min_iter[ii]);
 			++received_answers;
 			if (Ns < users.Nsamples || tol > users.TOL){
 				MPI_Isend(&bufferBool,1,MPI_C_BOOL,who,WORKTAG,MPI_COMM_WORLD,&request);
@@ -124,10 +150,16 @@ int main(int argc,char **argv)
 		}
 		if(work_status != DIETAG){
 			while(true){
-				ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,petsc_comm_slaves); CHKERRQ(ierr);
-				++Ns;				
+				ierr = UnitSolver(rho,gmrf,N01,kspGMRF,U,b,A,kspSPDE,users,generator,lrank,Ns,bufferScalar,buffer_iterations,petsc_comm_slaves); CHKERRQ(ierr);
+				++Ns;
+				sendrecvbuff.normU = bufferScalar;
+				sendrecvbuff.gmrf_iter = buffer_iterations[0];
+				sendrecvbuff.spde_iter = buffer_iterations[1];
+				#if DEBUG
+				PetscPrintf(petsc_comm_slaves,"Proc[%d]: GMRF iter = %d, SPDE iter = %d\n",grank,buffer_iterations[0],buffer_iterations[1]);
+				#endif
 				if(lrank == 0){
-					MPI_Send(&bufferScalar,1,MPI_DOUBLE,0,WORKTAG,MPI_COMM_WORLD);
+					MPI_Send(&sendrecvbuff,1,RESULT_SND_RECV,0,WORKTAG,MPI_COMM_WORLD);
 					#if DEBUG
 					PetscPrintf(PETSC_COMM_SELF,"Proc[%d]: Waiting for work\n",grank);
 					#endif

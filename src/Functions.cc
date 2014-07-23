@@ -999,6 +999,17 @@ PetscErrorCode update_stats(PetscScalar& EUN,PetscScalar& VUN,PetscScalar& EUNm1
 	return ierr;
 }
 
+void update_iters(PetscScalar* & avg_iter, PetscInt* & max_iter, PetscInt* & min_iter, PetscInt* & iter,const PetscInt& Ns){
+  int N = sizeof(iter)/sizeof(PetscInt);
+  int *avg_iterm1 = new PetscInt[2];
+  for (int i = 0; i< N; ++i){
+    avg_iterm1[i] = avg_iter[i];
+    avg_iter[i] = avg_iterm1[i] + ((PetscScalar)iter[i] - avg_iterm1[i])/(PetscScalar) Ns;
+    max_iter[i] = (max_iter[i] < iter[i])? iter[i] : max_iter[i];
+    min_iter[i] = (min_iter[i] > iter[i])? iter[i] : min_iter[i];
+  }
+}
+
 PetscErrorCode VecSetMean(Vec&,const Vec&){
 	PetscErrorCode ierr;
 	return ierr;
@@ -1068,7 +1079,7 @@ PetscErrorCode SVD_Decomp(Mat& Ut, Mat& Vt, Mat& S, const Mat& A){
 }
 #endif
 
-void recolor(MPI_Comm& petsc_comm,int& ncolors,const int& numprocs,const int& procpercolor,const int& grank){
+void recolor(MPI_Comm& petsc_comm,int& ncolors,const int& numprocs,const int& procpercolor,const int& grank,int& lrank){
 //  PetscErrorCode ierr;
   /* Split the communicator into petsc_comm_slaves */
 	ncolors = (numprocs-1)/procpercolor;
@@ -1080,6 +1091,7 @@ void recolor(MPI_Comm& petsc_comm,int& ncolors,const int& numprocs,const int& pr
 		printf("I am processor %d with color %d \n",grank,color);
 	#endif
 	MPI_Comm_split(MPI_COMM_WORLD, color, grank, &petsc_comm);
+	MPI_Comm_rank(petsc_comm,&lrank); // Get the processor local rank in petsc_comm_slaves [Logically must be after recolor!]
 //  return ierr;
 }
 
