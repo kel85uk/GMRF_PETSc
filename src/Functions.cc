@@ -75,45 +75,56 @@ PetscErrorCode CreateSolvers(Mat& L, const PetscInt& NT, KSP& kspGMRF, Mat& A,co
 	return ierr;
 }
 
-PetscErrorCode Interp2D(Vec& output,const Vec& input)
+PetscErrorCode Interp2D(Vec& output,const Vec& input,const int& m_new,const int& m_old)
 {
 	PetscErrorCode ierr;
-/*   if ( newWidth == size_[0]  && newHeight == size_[1] )
-      return *this;
+	PetscInt Nout, Nin;
+	PetscScalar *Inputl_arr;
+	ierr = VecGetSize(output,&Nout); CHKERRQ(ierr);
+	ierr = VecGetSize(input,&Nin); CHKERRQ(ierr);
+	PetscInt n_new = Nout/m_new;
+	PetscInt n_old = Nin/m_old;
+  if ( n_new == n_old  && m_new == m_old ){
+    ierr = VecCopy(input,output); CHKERRQ(ierr);
+  }
+  VecScatter sc_ctx;
+  Vec Input_loc;
+  ierr = VecScatterCreateToAll(input,&sc_ctx,&Input_loc); CHKERRQ(ierr);
+  VecScatterBegin(sc_ctx,input,Input_loc,INSERT_VALUES,SCATTER_FORWARD);
+  PetscScalar scaleX = PetscScalar( m_old ) / PetscScalar(m_new);
+  PetscScalar scaleY = PetscScalar( n_old ) / PetscScalar(n_new);
+  PetscInt Ii, Istart, Iend, oind, oindp1, oindpm, oindp1m, x, y;
+  VecScatterEnd(sc_ctx,input,Input_loc,INSERT_VALUES,SCATTER_FORWARD);
+  VecGetArray(Input_loc,&Inputl_arr);
+  
+  ierr = VecGetOwnershipRange(output,&Istart,&Iend);CHKERRQ(ierr);
+	for (Ii = Istart; Ii < Iend; ++Ii){
+    y = (PetscInt) Ii/m_new; x = Ii - y*m_new;
+    PetscScalar oldX = x * scaleX;
+    PetscScalar oldY = y * scaleY;
+    PetscInt oldXi = static_cast<PetscInt>( oldX );
+    PetscInt oldYi = static_cast<PetscInt>( oldY );
+    PetscScalar xDiff = oldX - oldXi;
+    PetscScalar yDiff = oldY - oldYi;
 
-
-   GrayScaleImage resizedImage;
-
-   resizedImage.size_[0] = newWidth;
-   resizedImage.size_[1] = newHeight;
-
-   resizedImage.image_.resize( newWidth * newHeight );
-
-   real scaleX = real( size_[0] ) / real( newWidth );
-   real scaleY = real( size_[1] ) / real( newHeight);
-
-   for( int y = 0; y <  newHeight; ++y )
-      for( int x = 0; x <  newWidth; ++x )
-      {
-         real oldX = x * scaleX;
-         real oldY = y * scaleY;
-         int oldXi = static_cast<int>( oldX );
-         int oldYi = static_cast<int>( oldY );
-         real xDiff = oldX - oldXi;
-         real yDiff = oldY - oldYi;
-
-         // bilinear interpolation
-
-         resizedImage.getElement( x, y ) =
-                  static_cast<unsigned char> (
-                  (1 - xDiff) * (1 - yDiff ) * getElement( oldXi    , oldYi    ) +
-                       xDiff  * (1 - yDiff ) * getElement( oldXi + 1, oldYi    ) +
-                  (1 - xDiff) *      yDiff   * getElement( oldXi    , oldYi + 1) +
-                       xDiff  *      yDiff   * getElement( oldXi + 1, oldYi + 1) );
-      }
-
-   return resizedImage; */
-   return ierr;
+    // bilinear interpolation
+    oind   = oldXi + oldYi*m_old;
+    oindp1 = (oldXi + 1) + oldYi*m_old;
+    oindpm = (oldXi) + (oldYi + 1)*m_old;
+    oindp1m = (oldXi + 1) + (oldYi + 1)*m_old;
+    PetscScalar value =
+            (1 - xDiff) * (1 - yDiff ) * Inputl_arr[oind] /*getElement( oldXi    , oldYi    )*/ +
+                 xDiff  * (1 - yDiff ) * Inputl_arr[oindp1] /*getElement( oldXi + 1, oldYi    )*/ +
+            (1 - xDiff) *      yDiff   * Inputl_arr[oindpm] /*getElement( oldXi    , oldYi + 1)*/ +
+                 xDiff  *      yDiff   * Inputl_arr[oindp1m]; //getElement( oldXi + 1, oldYi + 1)
+    ierr = VecSetValue(output,Ii,value,INSERT_VALUES); CHKERRQ(ierr);
+  }
+  ierr = VecAssemblyBegin(output); CHKERRQ(ierr);
+    ierr = VecDestroy(&Input_loc); CHKERRQ(ierr);
+    ierr = VecRestoreArray(Input_loc,&Inputl_arr);CHKERRQ(ierr);	
+		ierr = VecScatterDestroy(&sc_ctx);CHKERRQ(ierr);
+  ierr = VecAssemblyEnd(output);
+  return ierr;
 }
 
 PetscErrorCode SetGMRFOperator(Mat& L, const PetscInt& m,const PetscInt& n,const PetscInt& NGhost, const PetscReal& dx,const PetscReal& dy, const PetscReal& kappa){

@@ -39,7 +39,7 @@ PetscErrorCode DestroyVectors(Vec*&,const PetscInt&);
 PetscErrorCode CreateSolvers(Mat&,const PetscInt&,KSP&,Mat&,const PetscInt&,KSP&);
 PetscErrorCode CreateSolvers(Mat&,const PetscInt&,KSP&,Mat&,const PetscInt&,KSP&,const MPI_Comm&);
 
-PetscErrorCode Interp2D(Vec&,const Vec&);
+PetscErrorCode Interp2D(Vec&,const Vec&,const int&, const int&);
 
 PetscErrorCode SetGMRFOperator(Mat&, const PetscInt&, const PetscInt&, const PetscInt&, const PetscReal&, const PetscReal&, const PetscReal&);
 #ifdef MPE_log
