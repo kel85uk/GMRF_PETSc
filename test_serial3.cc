@@ -1,89 +1,137 @@
-/*
-   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-   SLEPc - Scalable Library for Eigenvalue Problem Computations
-   Copyright (c) 2002-2013, Universitat Politecnica de Valencia, Spain
+/* Test Program for PDE routines */
 
-   This file is part of SLEPc.
+static char help[] = "Solves a linear system in parallel with KSP.\n\
+Input parameters include:\n\
+  -random_exact_sol : use a random exact solution vector\n\
+  -view_exact_sol   : write exact solution vector to stdout\n\
+  -m <mesh_x>       : number of mesh points in x-direction\n\
+  -n <mesh_n>       : number of mesh points in y-direction\n\n";
 
-   SLEPc is free software: you can redistribute it and/or modify it under  the
-   terms of version 3 of the GNU Lesser General Public License as published by
-   the Free Software Foundation.
-
-   SLEPc  is  distributed in the hope that it will be useful, but WITHOUT  ANY
-   WARRANTY;  without even the implied warranty of MERCHANTABILITY or  FITNESS
-   FOR  A  PARTICULAR PURPOSE. See the GNU Lesser General Public  License  for
-   more details.
-
-   You  should have received a copy of the GNU Lesser General  Public  License
-   along with SLEPc. If not, see <http://www.gnu.org/licenses/>.
-   - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-*/
-
-static char help[] = "Singular value decomposition of the Lauchli matrix.\n"
-  "The command line options are:\n"
-  "  -n <n>, where <n> = matrix dimension.\n"
-  "  -mu <mu>, where <mu> = subdiagonal value.\n\n";
-
-#include <slepc.h>
 #include <Functions.hh>
 #include <vector>
-#include <new>
 
-#undef __FUNCT__
-#define __FUNCT__ "main"
+#define nint(a) ((a) >= 0.0 ? (PetscInt)((a)+0.5) : (PetscInt)((a)-0.5))
+
+
+PetscScalar	rho_calculate(const PetscScalar& radius,const PetscScalar& RE){
+	PetscScalar rho_mean = 0.;
+	if(radius <= RE){
+		rho_mean = (1.0 - 100.0)*radius/RE + 100.0;	//PetscSinScalar(2.*PETSC_PI*xr)*PetscSinScalar(2.*PETSC_PI*yr);
+	}
+	else{
+		rho_mean = 1.0;
+	}
+	return rho_mean;
+}
+
+void set_coordinates(std::vector<PetscScalar>& XR,std::vector<PetscScalar>& YR,const UserCTX& users){
+	PetscScalar yr,xr;
+	PetscInt II;
+	XR.resize(users.NT,0.);
+	YR.resize(users.NT,0.);
+	/* Set grid coordinates (with ghost cells)*/
+	yr = users.y0 + (0.5-(PetscScalar)users.NGhost)*users.dy;
+	for (int j=0; j < users.n + 2*users.NGhost; ++j) {
+		xr = users.x0 + (0.5-(PetscScalar)users.NGhost)*users.dx;
+	for (int i=0; i < users.m + 2*users.NGhost; ++i) {
+		II = i + (users.m + 2*users.NGhost)*j;
+		XR[II] = xr;
+		YR[II] = yr;
+		xr += users.dx;
+	}
+		yr += users.dy;
+	}
+}
+
+
 int main(int argc,char **argv)
 {
-  Mat            A, S, Vt, Ut, U, result, resultf;               /* operator matrix */
-  //UserCTX        users;
-  //std::vector<PetscScalar>		XR,YR;
-  PetscInt       i,j,Istart,Iend,n;
-  PetscErrorCode ierr;
-  PetscScalar    mu = 0.1;
-  SlepcInitialize(&argc,&argv,(char*)0,help);
-  //ierr = GetOptions(users);CHKERRQ(ierr);
-  //set_coordinates(XR,YR,users);
+	Vec U, Z, rho;
+	Mat L;
+	PetscInt Ns, Istart, Iend;
+	PetscScalar xr,yr, rho_mean, radius, RE = 0.25;
+	std::vector<PetscScalar>		XR,YR; // Physical Coordinates reside in all processors
+	UserCTX users;
+	KSP kspPDE;
+	PetscScalar	result, normU, startTime, endTime;
+	PetscErrorCode ierr;
+	PetscBool      flg = PETSC_FALSE;
+	PetscMPIInt rank;	
+	PetscInitialize(&argc,&argv,(char*)0,help);
+	MPI_Comm_rank(PETSC_COMM_WORLD,&rank);
+  startTime = MPI_Wtime();
 
-  /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-                          Build the Covariance matrix
-     - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-  ierr = PetscOptionsGetInt(NULL,"-n",&n,NULL);CHKERRQ(ierr);
-  ierr = PetscOptionsGetReal(NULL,"-mu",&mu,NULL);CHKERRQ(ierr);
-  ierr = PetscPrintf(PETSC_COMM_WORLD,"\nLauchli singular value decomposition, (%D x %D) mu=%G\n\n",n+1,n,mu);CHKERRQ(ierr);
-  ierr = MatCreate(PETSC_COMM_WORLD,&A);CHKERRQ(ierr);
-  ierr = MatSetSizes(A,PETSC_DECIDE,PETSC_DECIDE,n+1,n);CHKERRQ(ierr);
-  ierr = MatSetFromOptions(A);CHKERRQ(ierr);
-  ierr = MatSetUp(A);CHKERRQ(ierr);
+	ierr = GetOptions(users);CHKERRQ(ierr);
+	set_coordinates(XR,YR,users);
+	
+	ierr = VecCreate(PETSC_COMM_WORLD,&U);CHKERRQ(ierr);
+	ierr = VecSetSizes(U,PETSC_DECIDE,users.NI);CHKERRQ(ierr);
+	ierr = VecSetFromOptions(U);CHKERRQ(ierr);
+	ierr = VecSet(U,0.);CHKERRQ(ierr);
+	ierr = VecDuplicate(U,&Z);CHKERRQ(ierr);
+	ierr = VecCopy(U,Z);CHKERRQ(ierr);
+	
+	ierr = VecCreate(PETSC_COMM_WORLD,&rho);CHKERRQ(ierr);
+	ierr = VecSetSizes(rho,PETSC_DECIDE,users.NT);CHKERRQ(ierr);
+	ierr = VecSetFromOptions(rho);CHKERRQ(ierr);
+	ierr = VecSet(rho,1.);CHKERRQ(ierr);
+	
+	ierr = VecGetOwnershipRange(rho,&Istart,&Iend);CHKERRQ(ierr);
+	for (int II = Istart; II < Iend; ++II){
+		radius = std::sqrt((XR[II] - 0.5)*(XR[II] - 0.5) + (YR[II] - 0.5)*(YR[II] - 0.5));
+		rho_mean = 1.0;//rho_calculate(radius,RE);
+		ierr = VecSetValues(rho,1,&II,&rho_mean,INSERT_VALUES);CHKERRQ(ierr);
+	}
+	ierr = VecAssemblyBegin(rho);CHKERRQ(ierr);
+		ierr = MatCreate(PETSC_COMM_WORLD,&L);CHKERRQ(ierr); // Create matrix A residing in PETSC_COMM_WORLD
+		ierr = MatSetSizes(L,PETSC_DECIDE,PETSC_DECIDE,users.NI,users.NI);CHKERRQ(ierr); // Set the size of the matrix A, and let PETSC decide the decomposition
+		ierr = MatSetFromOptions(L);CHKERRQ(ierr);
+		ierr = MatMPIAIJSetPreallocation(L,5,NULL,5,NULL);CHKERRQ(ierr);
+		ierr = MatSeqAIJSetPreallocation(L,5,NULL);CHKERRQ(ierr);
+		ierr = MatSetUp(L);CHKERRQ(ierr);	
+		ierr = KSPCreate(PETSC_COMM_WORLD,&kspPDE);CHKERRQ(ierr);
+		ierr = KSPSetTolerances(kspPDE,1.e-7/(users.NI),1.e-50,PETSC_DEFAULT,PETSC_DEFAULT);CHKERRQ(ierr);
+		ierr = KSPSetFromOptions(kspPDE);CHKERRQ(ierr);
+	ierr = VecAssemblyEnd(rho);CHKERRQ(ierr);
+	
+	ierr = SetOperator(L,rho,users.m,users.n,users.NGhost,users.dx,users.dy);CHKERRQ(ierr);
+	ierr = SetSource(Z,rho,users.m,users.n,users.NGhost,users.dx,users.dy,users.UN,users.US,users.UE,users.UW,users.lamb);CHKERRQ(ierr);
+	ierr = KSPSetOperators(kspPDE,L,L,DIFFERENT_NONZERO_PATTERN);CHKERRQ(ierr);
+	ierr = KSPSolve(kspPDE,Z,U);CHKERRQ(ierr);
+	ierr = KSPGetIterationNumber(kspPDE,&users.its);CHKERRQ(ierr);
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Sample[%d]: SPDE solved in %d iterations \n",Ns,users.its);CHKERRQ(ierr);
+	ierr = VecNorm(U,NORM_2,&normU);CHKERRQ(ierr);
+	normU /= sqrt(users.NI);
+	endTime = MPI_Wtime();
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Norm-2 of U = %4.8E \n",normU);CHKERRQ(ierr);
+	ierr = PetscPrintf(PETSC_COMM_WORLD,"Time taken = %4.8E s\n",endTime - startTime);CHKERRQ(ierr);
+	
+	if(false){
+	ierr = VecPostProcs(U,"sol_mean.dat",rank);CHKERRQ(ierr);
+	ierr = VecPostProcs(rho,"rho_mean.dat",rank);CHKERRQ(ierr);
+	VecPostProcs(XR,"XR.dat",rank);
+	VecPostProcs(YR,"YR.dat",rank);
+	}
+	PetscPrintf(PETSC_COMM_WORLD,"NGhost = %d and I am Processor[%d] \n",users.NGhost,rank);
+	PetscPrintf(PETSC_COMM_WORLD,"tau2 = %f \n",users.tau2);
+	PetscPrintf(PETSC_COMM_WORLD,"kappa = %f \n",users.kappa);
+	PetscPrintf(PETSC_COMM_WORLD,"nu = %f \n",users.nu);
+	PetscPrintf(PETSC_COMM_WORLD,"dx = %f \n",users.dx);
+	PetscPrintf(PETSC_COMM_WORLD,"dy = %f \n",users.dy);	
 
-  ierr = MatGetOwnershipRange(A,&Istart,&Iend);CHKERRQ(ierr);
-  for (i=Istart;i<Iend;i++) {
-    if (i == 0) {
-      for (j=0;j<n;j++) {
-        ierr = MatSetValue(A,0,j,1.0,INSERT_VALUES);CHKERRQ(ierr);
-      }
-    } else {
-      ierr = MatSetValue(A,i,i-1,mu,INSERT_VALUES);CHKERRQ(ierr);
-    }
-  }
+	ierr = VecDestroy(&U);CHKERRQ(ierr);
+	ierr = VecDestroy(&rho);CHKERRQ(ierr);
+	ierr = VecDestroy(&Z);CHKERRQ(ierr);
+	
+	ierr = KSPDestroy(&kspPDE);CHKERRQ(ierr);
+	ierr = MatDestroy(&L);CHKERRQ(ierr);
 
-  ierr = MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
-  ierr = MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY);CHKERRQ(ierr);
-  ierr = SVD_Decomp(Ut,Vt,S,A);CHKERRQ(ierr);
-  PetscPrintf(PETSC_COMM_WORLD,"All good 3\n");
-  MatMatMult(S,Vt,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&result);
-  MatTransposeMatMult(Ut,result,MAT_INITIAL_MATRIX,PETSC_DEFAULT,&resultf);
-  MatView(resultf,PETSC_VIEWER_STDOUT_WORLD);
-  PetscPrintf(PETSC_COMM_WORLD,"All good 7\n");
-  MatView(A,PETSC_VIEWER_STDOUT_WORLD);
-  MatType a,b;
-  MatGetType(A,&a);
-  MatGetType(resultf,&b);
-  if(a != b)
-    PetscPrintf(PETSC_COMM_WORLD,"All good! Finally!\n");
-  ierr = MatDestroy(&A);CHKERRQ(ierr);
- // ierr = MatDestroy(&U);CHKERRQ(ierr);
-  ierr = MatDestroy(&S);CHKERRQ(ierr);
-  ierr = MatDestroy(&Ut);CHKERRQ(ierr);
-  ierr = MatDestroy(&Vt);CHKERRQ(ierr);
-  ierr = SlepcFinalize();
-  return 0;
+	/*
+	  Always call PetscFinalize() before exiting a program.  This routine
+		 - finalizes the PETSc libraries as well as MPI
+		 - provides summary and diagnostic information if certain runtime
+		   options are chosen (e.g., -log_summary).
+	*/
+	ierr = PetscFinalize();	
+	return 0;
 }

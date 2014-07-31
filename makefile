@@ -25,6 +25,10 @@ test_PDE: ./src/Functions.o test_serial2.o  chkopts
 	-${CLINKER} -o test_PDE ./src/Functions.o test_serial2.o  ${PETSC_SNES_LIB}
 	${RM} test_serial2.o ./src/Functions.o	
 	
+test_INTERP: ./src/Functions.o test_serial3.o  chkopts
+	-${CLINKER} -o test_INTERP ./src/Functions.o test_serial3.o  ${PETSC_SNES_LIB}
+	${RM} test_serial3.o ./src/Functions.o	
+	
 Test: ./src/Functions.o Test.o  chkopts
 	-${CLINKER} -o Test ./src/Functions.o Test.o  ${PETSC_SNES_LIB}
 	${RM} Test.o	 ./src/Functions.o

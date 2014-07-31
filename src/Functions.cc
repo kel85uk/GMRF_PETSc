@@ -853,7 +853,7 @@ PetscErrorCode GetOptions(UserCTX& users){ // Not sure if it's also affecting MP
 	users.nu = users.alpha - users.dim/2.0;
 	users.kappa = sqrt(8.0*users.nu)/(users.lamb);
 	users.tau2 = (tgamma(users.nu)/(tgamma(users.nu + 0.5)*pow((4.0*M_PI),(users.dim/2.0))*pow(users.kappa,(2.0*users.nu))*users.sigma*users.sigma));	
-	users.NGhost += PetscMax(PetscMax(nint(0.5*users.lamb/users.dx),nint(0.5*users.lamb/users.dy)),nint(0.5*users.lamb/(sqrt(users.dx*users.dx + users.dy*users.dy))));
+	users.NGhost += PetscMax(PetscMax(nint(users.lamb/users.dx),nint(users.lamb/users.dy)),nint(users.lamb/(sqrt(users.dx*users.dx + users.dy*users.dy))));
 	users.NI = users.m*users.n;
 	users.NT = (users.m+2*users.NGhost)*(users.n+2*users.NGhost);	
 	return ierr;
