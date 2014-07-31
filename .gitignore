@@ -10,5 +10,6 @@ test_MC
 test_PDE
 test_SVD
 test_Chol
+test_INTERP
 *.[oa]
 *.dat
