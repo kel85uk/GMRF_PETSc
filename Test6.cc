@@ -21,10 +21,10 @@ int main(int argc,char **argv)
 	Vec* Wrapalla[12] = {&rho, &ErhoNm1, &ErhoN, &VrhoN, &N01, &M2Nr, &resR, &gmrf, &EgmrfN, &EgmrfNm1, &VgmrfN, &M2Ng};
 	Vec* Wrapallb[7] = {&U, &EUNm1, &EUN, &VUN, &b, &M2N, &resU};
 	Mat A, L;
-	PetscScalar* timings = new PetscScalar[7];
-	PetscScalar* buffer_timings = new PetscScalar[7];
-	for (int i = 0; i < 7; ++i) timings[i] = 0;
-	for (int i = 0; i < 7; ++i) buffer_timings[i] = 0;
+	PetscScalar* timings = new PetscScalar[8];
+	PetscScalar* buffer_timings = new PetscScalar[8];
+	for (int i = 0; i < 8; ++i) timings[i] = 0;
+	for (int i = 0; i < 8; ++i) buffer_timings[i] = 0;
 	PetscScalar temp_time;
 	KSP kspSPDE, kspGMRF;
 	PetscInt		Ns = 0, bufferInt;
